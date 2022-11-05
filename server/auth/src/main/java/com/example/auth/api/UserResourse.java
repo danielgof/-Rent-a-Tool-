@@ -13,6 +13,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,8 +33,8 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 public class UserResourse {
     private final UserService userService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
-//    @PreAuthorise("has role")
     public ResponseEntity<List<AuthUser>> getUser() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
