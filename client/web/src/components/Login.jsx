@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
     const body = JSON.stringify({
-      login: login,
+      username: login,
       password: password})
 
     const headers = new Headers({
@@ -30,24 +30,31 @@ const Login = () => {
         let res = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         mode: "cors",
-        headers: headers,
+        // headers: headers,
         body: body
-      });
+      })
+      .then((response) => response.json()
+      )
+      .then(data => {
+      console.log(data["access_token"]);
+      console.log(data)
+    })
       // let resJson = await res.json();
-      if (res.status === 200) 
-      {
+      if (res.status === 200) {
         setLogin("");
         setPassword("");
         setMessage("User login successfully");
         // var isAuth = true;
         // ProtectedRouts({isAuth})
         navigate("/home");
+        var data = res.json()
+        console.log(data["access_token"]);
       } 
-      else 
-      {
+      else {
         setMessage("Wrong login or password");
       }
-    } catch (err) {
+    }
+    catch (err) {
       console.log(err);
     }
   };
