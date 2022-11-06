@@ -4,7 +4,17 @@ const HomePage = () => {
     return(
         <div>
             <p>Home Page</p>
-        </div>
+            <a href="/offers">
+            <button>
+                Offers
+            </button>
+            </a> 
+            <a href="/requests">
+            <button>
+                Requests
+            </button>
+            </a> 
+        </div>        
     )
 }
 export default HomePage;
