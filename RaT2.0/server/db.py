@@ -83,7 +83,7 @@ class User(Base):
 #     .filter(User.username == "test")
 # for user in users:
 #     print(user.email)    
-"""add some test data"""
+# """add some test data"""
 # request1 = Request("hammer", "ordinary hammer", "Nikolino", date(2023, 10, 11), 
 #             date(2023, 10, 15), "Volodya", "+7**********")
 # request2 = Request("stair", "stair for repairment", "Nikolino", date(2023, 11, 11), 

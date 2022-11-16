@@ -70,24 +70,51 @@ def add_request():
  
 @app.route("/api/v1/request/update", methods=["PUT"])
 def upd_request():
-    res = request.get_json(force=True)
-    print(res)
-    return "see data to upd"
-
+    try:
+        """get data from request"""
+        data = request.get_json(force=True)
+        """create session to isert data into Request table"""
+        session.add(Request(data["toolName"], data["toolDescription"], 
+        data["location"], datetime.strptime(data["dateStart"], "%m/%d/%Y") , datetime.strptime(data["dateFinish"], "%m/%d/%Y"), 
+        data["ownerName"], data["phoneNumber"]))
+        """add data to db"""
+        session.commit()
+        session.close()
+        return jsonify(200, "OK")
+    except Exception as e:
+        return jsonify(403, f"Error occured in {e}")
 @app.route("/api/v1/request/delete", methods=["DELETE"])
 def delete_request():
-    res = request.get_json(force=True)
-    print(res.get("id"))
-    return "should be deleting request with id"
-
+    try:
+        """get data from request"""
+        data = request.get_json(force=True)
+        """delete user by username"""
+        session.query(User) \
+            .filter(User.username == data["username"]).delete()
+        """add data to db"""
+        session.commit()
+        session.close()
+        return jsonify(200, "OK")
+    except Exception as e:
+        return jsonify(403, f"Error occured in {e}")
 """
 rent offer api
 """
 @app.route("/api/v1/offer/add", methods=["POST"])
 def add_offer():
-    data = request.get_json(force=True)
-    print(data)
-    return "see console log"
+    try:
+        """get data from request"""
+        data = request.get_json(force=True)
+        """create session to isert data into Offer table"""
+        session.add(Request(data["toolName"], data["toolDescription"], 
+        data["location"], data["price"], datetime.strptime(data["dateStart"], "%m/%d/%Y") , datetime.strptime(data["dateFinish"], "%m/%d/%Y"), 
+        data["ownerName"], data["phoneNumber"]))
+        """add data to db"""
+        session.commit()
+        session.close()
+        return jsonify(200, "OK")
+    except Exception as e:
+        return jsonify(403, f"Error occured in {e}")
 
 @app.route("/api/v1/offer/update", methods=["PUT"])
 def upd_offer():
