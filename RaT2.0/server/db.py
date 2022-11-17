@@ -1,8 +1,9 @@
-from sqlalchemy import Column, ForeignKey, String, Integer, Date, CHAR
+from sqlalchemy import Column, ForeignKey, String, Integer, Date, CHAR, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from datetime import date
 from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
 
 from config import *
 
@@ -79,27 +80,29 @@ class User(Base):
 
 # Base.metadata.create_all(engine)
 # session = Session()
-# users = session.query(User) \
-#     .filter(User.username == "test")
-# for user in users:
-#     print(user.email)    
+# # users = session.query(User) \
+# #     .filter(User.username == "test")
+# # for user in users:
+# #     print(user.email)    
+
+# # datetime.strptime('18/09/2019', "%m/%d/%Y")
 # """add some test data"""
 # request1 = Request("hammer", "ordinary hammer", "Nikolino", date(2023, 10, 11), 
-#             date(2023, 10, 15), "Volodya", "+7**********")
+#             datetime.strptime('08/09/2019', "%m/%d/%Y").date(), "Volodya", "+7**********")
 # request2 = Request("stair", "stair for repairment", "Nikolino", date(2023, 11, 11), 
 #             date(2023, 12, 15), "Boris", "+7**********")
 
-# offer1 = Offer("car washer", "car washer", "Nikolino", "200", date(2023, 10, 11), 
-#             date(2023, 10, 15), "-", "+7**********")
-# offer2 = Offer("bike", "bike stels", "Nikolino", "800", date(2023, 10, 11), 
-#             date(2023, 10, 15), "Mikhail", "+7**********")
+# # offer1 = Offer("car washer", "car washer", "Nikolino", "200", date(2023, 10, 11), 
+# #             date(2023, 10, 15), "-", "+7**********")
+# # offer2 = Offer("bike", "bike stels", "Nikolino", "800", date(2023, 10, 11), 
+# #             date(2023, 10, 15), "Mikhail", "+7**********")
 
 # user1 = User("JL", "+1***********", "picard@gmail.com", "NCC-1701-D")
 
 # session.add(request1)
 # session.add(request2)
-# session.add(offer1)
-# session.add(offer2)
+# # session.add(offer1)
+# # session.add(offer2)
 # session.add(user1)
 # session.commit()
 # session.close()
