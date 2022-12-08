@@ -31,8 +31,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedScreenIndex = 0;
   final List _screens = [
-    {"screen": const RentOffer(), "title": "Screen RentOffer Title"},
-    {"screen": const RentRequest(), "title": "Screen RentRequest Title"}
+    {"screen": const RentOffer(), "title": "Screen RentOffer"},
+    {"screen": const RentRequest(), "title": "Screen RentRequest"}
   ];
 
   void _selectScreen(int index) {

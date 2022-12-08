@@ -1,27 +1,26 @@
 from os import abort
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 from flask_login import LoginManager
 from flask_login.utils import logout_user
 from flask_cors import CORS
 from flask_mail import Mail, Message
 import jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from functools import wraps
 import logging
-
-logging.basicConfig(filename='record.log', level=logging.DEBUG)
-
 from db import *
 
+
+logging.basicConfig(filename=f'./log/{date.today()}.log', level=logging.DEBUG)
 
 Base.metadata.create_all(engine)
 session = Session()
 
 app = Flask(__name__)
 CORS(app)
-app.config["SECRET_KEY"] = "supersecretkey"
 login_manager = LoginManager(app)
 
+app.config["SECRET_KEY"] = "supersecretkey"
 app.config["MAIL_SERVER"] = "smtp.googlemail.com"
 app.config["MAIL_PORT"] = 465
 app.config['MAIL_USERNAME'] = 'daniilgofman1701@gmail.com'
@@ -66,6 +65,11 @@ def login():
         app.logger.info('%s failed to log in', user.username)
         abort(401)
 
+
+@app.route("/", methods=["GET"])
+@token_required
+def index(current_user):
+    return jsonify({"result": "worked"})
 
 @app.route("/api/v1/auth/register", methods=["POST"])
 def register_user():
