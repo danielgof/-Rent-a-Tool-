@@ -1,0 +1,22 @@
+database:
+  dbname:
+    requests
+  username: 
+    daniel
+  password:
+    admin
+auth:
+  secret_key:
+    supersecretkey
+  mail_server:
+    smtp.googlemail.com
+  mail_port:
+    465
+  mail_username:
+    daniilgofman1701@gmail.com
+  mail_password:
+    btkobeixtkdjfgde
+  mail_use_tls:
+    False
+  mail_use_ssl:
+    True
