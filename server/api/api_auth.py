@@ -8,8 +8,9 @@ import jwt
 import os
 import logging
 
-from auth.auth_db import *
-from auth.config import *
+from models.create import *
+from config import *
+from server.models.db_auth import User
 
 
 if not os.path.isdir("./log"):

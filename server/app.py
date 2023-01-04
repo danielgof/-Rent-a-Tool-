@@ -1,5 +1,6 @@
 from flask import Flask
-from auth.api import auth
+from models.create import *
+from api.api_auth import auth
 
 app = Flask(__name__)
 app.register_blueprint(auth)
