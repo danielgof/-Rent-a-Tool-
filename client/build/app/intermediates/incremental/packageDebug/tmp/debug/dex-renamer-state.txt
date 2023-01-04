@@ -1,0 +1,4 @@
+#Tue Jan 03 23:47:38 MSK 2023
+base.0=/home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
