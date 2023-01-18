@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, String, Integer, Date, CHAR
+from sqlalchemy import Column, String, Integer, CHAR
 from sqlalchemy.orm import relationship
 from db_offer import *
 from db_request import *

@@ -2,15 +2,15 @@ from flask import Blueprint, request, jsonify, abort
 from flask_cors import CORS
 from flask_mail import Mail, Message
 from functools import wraps
-from datetime import datetime, timedelta
+from datetime import date
 from flask import current_app
 import jwt
 import os
 import logging
 
-from models.create import *
-from config import *
-from server.models.db_auth import User
+# from models.create import *
+# from config import *
+# from models.db_auth import User
 
 
 if not os.path.isdir("./log"):
@@ -23,9 +23,9 @@ def index():
     return "This is an example app"
 
 CORS(auth)
-Base.metadata.create_all(engine)
-session = Session()
-SECRET_KEY, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_USE_TLS, MAIL_USE_SSL = config_auth("./auth/config.yaml")
+# Base.metadata.create_all(engine)
+# session = Session()
+# SECRET_KEY, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_USE_TLS, MAIL_USE_SSL = config_auth("./auth/config.yaml")
 
 
 # mail = Mail(Auth)

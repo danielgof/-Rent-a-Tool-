@@ -1,6 +1,6 @@
 database:
   dbname:
-    requests
+    rt
   username: 
     daniel
   password:
