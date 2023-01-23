@@ -274,3 +274,136 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:52:05] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:13:34] "POST /api/v1/offer/save HTTP/1.1" 200 -
+ERROR:app:Exception on /api/v1/offer/save [POST]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/daniel/Documents/CS/Projects/RT/server/api_offer.py", line 20, in decorated
+    token = head["Authorization"]
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/werkzeug/datastructures.py", line 1381, in __getitem__
+    return _unicodify_header_value(self.environ[f"HTTP_{key}"])
+KeyError: 'HTTP_AUTHORIZATION'
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:13:51] "[35m[1mPOST /api/v1/offer/save HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:13:56] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:15:40] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:16:12] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:18:06] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:35:46] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/save [POST]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2636, in add
+    state = attributes.instance_state(instance)
+AttributeError: 'InstrumentedList' object has no attribute '_sa_instance_state'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/daniel/Documents/CS/Projects/RT/server/api_offer.py", line 28, in decorated
+    return f(current_user, *args, **kwargs)
+  File "/home/daniel/Documents/CS/Projects/RT/server/api_offer.py", line 74, in save_offer
+    session.add(user_offers)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2638, in add
+    util.raise_(
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+sqlalchemy.orm.exc.UnmappedInstanceError: Class 'sqlalchemy.orm.collections.InstrumentedList' is not mapped
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:40:23] "[35m[1mPOST /api/v1/offer/save HTTP/1.1[0m" 500 -
+ERROR:app:Exception on /api/v1/offer/save [POST]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2636, in add
+    state = attributes.instance_state(instance)
+AttributeError: 'InstrumentedList' object has no attribute '_sa_instance_state'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/daniel/Documents/CS/Projects/RT/server/api_offer.py", line 28, in decorated
+    return f(current_user, *args, **kwargs)
+  File "/home/daniel/Documents/CS/Projects/RT/server/api_offer.py", line 74, in save_offer
+    session.add(user_offers)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2638, in add
+    util.raise_(
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+sqlalchemy.orm.exc.UnmappedInstanceError: Class 'sqlalchemy.orm.collections.InstrumentedList' is not mapped
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:41:39] "[35m[1mPOST /api/v1/offer/save HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:42:20] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:43:16] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:50:59] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:51:08] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:51:13] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 20:58:36] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 21:01:01] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 21:01:07] "POST /api/v1/offer/save HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 21:01:10] "GET /api/v1/offer/all HTTP/1.1" 200 -
