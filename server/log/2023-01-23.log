@@ -1,0 +1,276 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:app:JL logged in successfully
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 05:27:21] "POST /api/v1/auth/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 05:27:28] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 05:28:00] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 05:28:11] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:39:40] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:40:05] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:40:56] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:41:16] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:42:23] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2134, in make_response
+    raise TypeError(
+TypeError: The view function for 'offer.get_all_offers' did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:42:58] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:43:51] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:43:52] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:44:46] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:45:52] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:45:54] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:46:18] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:46:41] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:47:08] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:47:28] "GET /api/v1/offer/all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:47:57] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:48:46] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+ERROR:app:Exception on /api/v1/offer/all [GET]
+Traceback (most recent call last):
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 1842, in finalize_request
+    response = self.make_response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/app.py", line 2153, in make_response
+    rv = self.json.response(rv)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 309, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=mimetype
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 230, in dumps
+    return json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/daniel/Documents/CS/Projects/RT/server/venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Offer is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:48:47] "[35m[1mGET /api/v1/offer/all HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [23/Jan/2023 06:52:05] "GET /api/v1/offer/all HTTP/1.1" 200 -
