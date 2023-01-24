@@ -36,7 +36,6 @@ def token_required(f):
         except:
             return jsonify({"message":"token is invalid"}), 402
         return f(current_user, *args, **kwargs)
-
     return decorated
 """
 auth api
