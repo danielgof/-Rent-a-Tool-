@@ -1,8 +1,15 @@
 from flask import Flask
 from flask_cors import CORS
-
-from api_auth import auth
+import os
+import logging
+from datetime import date
+from api.api_auth import auth
 from api_offer import offer
+
+
+if not os.path.isdir("./log"):
+    os.mkdir("./log")
+logging.basicConfig(filename=f"./log/{date.today()}.log", level=logging.DEBUG)
 
 
 app = Flask(__name__)

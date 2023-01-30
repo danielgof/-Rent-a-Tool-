@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from datetime import date
 from db_auth import *
 import db_offer
-from config_db import *
+from config import *
 from base import *
 
 
