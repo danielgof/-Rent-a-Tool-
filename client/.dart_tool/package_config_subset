@@ -1,7 +1,7 @@
 mobile
 2.18
-file:///home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/
-file:///home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/lib/
+file:///home/daniel/Documents/CS/Projects/RT/client/
+file:///home/daniel/Documents/CS/Projects/RT/client/lib/
 async
 2.14
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/
@@ -14,6 +14,10 @@ characters
 2.12
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.1/
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.1/lib/
+charcode
+2.12
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1/
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1/lib/
 clock
 2.12
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.1/
@@ -34,6 +38,14 @@ flutter_lints
 2.17
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/lib/
+http
+2.4
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2/
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2/lib/
+http_parser
+2.3
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4/
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4/lib/
 lints
 2.17
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/lints-2.0.1/
@@ -54,6 +66,10 @@ path
 2.12
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.2/
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.2/lib/
+pedantic
+2.12
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib/
 source_span
 2.14
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.9.0/
@@ -78,6 +94,10 @@ test_api
 2.12
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.12/
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.12/lib/
+typed_data
+2.12
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.1/
+file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.1/lib/
 vector_math
 2.14
 file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.2/
