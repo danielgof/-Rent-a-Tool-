@@ -20,12 +20,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "charcode",
-      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "clock",
       "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.1",
       "packageUri": "lib/",
@@ -69,15 +63,21 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2",
+      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.5",
       "packageUri": "lib/",
-      "languageVersion": "2.4"
+      "languageVersion": "2.14"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4",
+      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.3"
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "http_status_code",
+      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_status_code-0.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "lints",
@@ -106,12 +106,6 @@
     {
       "name": "path",
       "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "pedantic",
-      "rootUri": "file:///home/daniel/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -176,7 +170,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-02T00:40:29.761826Z",
+  "generated": "2023-02-02T13:39:14.860517Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }

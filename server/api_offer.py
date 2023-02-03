@@ -78,6 +78,7 @@ def get_all_user_offers(current_user):
         responce  = []
         for offer in user_offers:
             responce.append({
+                "id": offer.id,
                 "tool_name": offer.tool_name,
                 "tool_description": offer.tool_description,
                 "location": offer.location,
