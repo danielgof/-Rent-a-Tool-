@@ -48,7 +48,7 @@ def save_offer(current_user):
     try:
         if not request.json:
             abort(400)
-        token = request.json["Authorization"]
+        token = request.headers["Authorization"]
         data = request.json
         user_info = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])["username"]
         user = session.query(User).filter(User.username == user_info).first()
@@ -63,7 +63,8 @@ def save_offer(current_user):
         session.commit()
         return {"status": "success"}
     except Exception as e:
-        current_app.logger.info("%s failed to log in", user.username)
+        current_app.logger.info(f"exeption {e}")
+        abort(500)
         # return jsonify(500, f"Error occured in {e}")
 
 

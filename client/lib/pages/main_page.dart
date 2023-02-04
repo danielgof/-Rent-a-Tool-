@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
 		final response = await http.get(Uri.parse(url));
 
 		var responseData = json.decode(response.body);
+		print(responseData);
 
 		//Creating a list to store input data;
 		List<User> users = [];
@@ -25,7 +26,6 @@ class _HomePageState extends State<HomePage> {
 					userId: singleUser["userId"],
 					title: singleUser["title"],
 					body: singleUser["body"]);
-
 			//Adding user to the list.
 			users.add(user);
 		}
@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
 					child: FutureBuilder(
 						future: getRequest(),
 						builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+
 							if (snapshot.data == null) {
 								return Container(
 									child: Center(

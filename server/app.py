@@ -4,7 +4,7 @@ import os
 import logging
 from datetime import date
 from api.api_auth import auth
-from api_offer import offer
+from api.api_offer import offer
 
 
 if not os.path.isdir("./log"):

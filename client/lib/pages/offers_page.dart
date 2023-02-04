@@ -28,10 +28,10 @@ class _OfferPageState extends State<OfferPage> {
 		List<Offer> offers = [];
 		for (var offer in responseData['result']) {
 			Offer offerTmp = Offer(
-					id: offer["id"],
-					toolName: offer["tool_name"],
-					toolDescription: offer["tool_description"],
-					price: offer["price"]);
+        id: offer["id"],
+        toolName: offer["tool_name"],
+        toolDescription: offer["tool_description"],
+        price: offer["price"]);
 			//Adding user to the list.
 			offers.add(offerTmp);
 		}
@@ -43,9 +43,9 @@ class _OfferPageState extends State<OfferPage> {
 		return SafeArea(
 			child: Scaffold(
 				appBar: AppBar(
-					title: Text("Http Get Request."),
+					title: Text("Offers"),
 					leading: Icon(
-						Icons.get_app,
+						Icons.account_tree_sharp,
 					),
 				),
 				body: Container(
@@ -53,6 +53,7 @@ class _OfferPageState extends State<OfferPage> {
 					child: FutureBuilder(
 						future: getRequest(),
 						builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+
 							if (snapshot.data == null) {
 								return Container(
 									child: Center(
@@ -64,7 +65,7 @@ class _OfferPageState extends State<OfferPage> {
 									itemCount: snapshot.data.length,
 									itemBuilder: (ctx, index) => ListTile(
 										// title: Text(snapshot.data[index].title),
-										subtitle: Text(snapshot.data[index].body),
+										subtitle: Text(snapshot.data[index].toolName),
 										contentPadding: EdgeInsets.only(bottom: 20.0),
 									),
 								);
