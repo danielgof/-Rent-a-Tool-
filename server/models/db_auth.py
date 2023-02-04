@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Integer, CHAR
 from sqlalchemy.orm import relationship
-from db_offer import *
+from models.db_offer import *
 from base import *
 
 """Users table"""

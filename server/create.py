@@ -1,8 +1,8 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from datetime import date
-from db_auth import *
-import db_offer
+from models.db_auth import *
+import models.db_offer as db_offer
 from config import *
 from base import *
 

@@ -5,9 +5,9 @@ import os
 import jwt
 from functools import wraps
 import logging
-from db_offer import *
 from create import session
-from db_auth import *
+from models.db_offer import *
+from models.db_auth import *
 from create import *
 from config import *
 from setup import *
