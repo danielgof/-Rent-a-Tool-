@@ -14,11 +14,11 @@ from setup import *
 from security import *
 
 
-offer = Blueprint("offer", __name__)
+offer = Blueprint("offer", __name__, url_prefix="/api/v1/offer")
 """
 api offer
 """
-@offer.route("/api/v1/offer/all_all", methods=["GET"])
+@offer.route("/all_all", methods=["GET"])
 @token_required
 def get_all_offers(current_user):
     try:
@@ -39,10 +39,10 @@ def get_all_offers(current_user):
         return responce
     except Exception as e:
         current_app.logger.info("exception: ", e)
-        # return jsonify(500, f"Error occured in {e}")
+        return {"message": "error"}, 500
 
 
-@offer.route("/api/v1/offer/save", methods=["POST"])
+@offer.route("/save", methods=["POST"])
 @token_required
 def save_offer(current_user):
     try:
@@ -64,11 +64,10 @@ def save_offer(current_user):
         return {"status": "success"}
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
-        abort(500)
-        # return jsonify(500, f"Error occured in {e}")
+        return {"message": "error"}, 500
 
 
-@offer.route("/api/v1/offer/all", methods=["GET"])
+@offer.route("/all", methods=["GET"])
 @token_required
 def get_all_user_offers(current_user):
     try:
@@ -92,4 +91,4 @@ def get_all_user_offers(current_user):
         return {"result": responce}
     except Exception as e:
         current_app.logger.info("%s failed to log in", user.username)
-        # return jsonify(500, f"Error occured in {e}")
+        return {"message": "error"}, 500
