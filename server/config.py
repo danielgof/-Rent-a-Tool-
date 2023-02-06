@@ -1,5 +1,7 @@
 import yaml
-
+"""
+ger credits for data base
+"""
 def config_db(path):
     with open(path, "r") as stream:
         try:
@@ -11,7 +13,9 @@ def config_db(path):
             print(exc)
     return db_name, username, password
 
-
+"""
+get credits for registration
+"""
 def config_auth(path):
     with open(path, "r") as stream:
         try:

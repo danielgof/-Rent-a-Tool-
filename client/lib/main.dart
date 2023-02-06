@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:js';
 import './pages/offers_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +20,7 @@ void main() {
 
 class HomeRoute extends StatelessWidget {
 	const HomeRoute({Key? key}) : super(key: key);
-	Future<LoginUser> getRequest() async {
+	Future<int> getRequest() async {
 		//replace your restFull API here.
 		String url = "http://localhost:5000/api/v1/auth/login";
 		Map credits = {
@@ -28,17 +29,16 @@ class HomeRoute extends StatelessWidget {
 		};
 		var body_data = json.encode(credits);
 		final response = await http.post(Uri.parse(url), body: body_data);
-			// Send authorization headers to the backend.
-			// headers: {
-			// 	HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
-			// },);
-
 		var responseData = json.decode(response.body);
 		print(responseData);
-		// var offersResponce = responseData["responce"];
-		// print(offersResponce);
-		//Creating a list to store input data;
-		var data = json.decode(response.body);
+		print(response.statusCode);
+		if (200 == response.statusCode) {
+			print("this works");
+			// builder: (context) {
+			// 	Navigator.pushNamed(context, '/second');
+			// };
+		}
+		var data = response.statusCode;
 		return data;
 	}
 
@@ -61,8 +61,15 @@ class HomeRoute extends StatelessWidget {
 						), // ElevatedButton
 						ElevatedButton(
 							child: const Text('Tap Me!'),
-							onPressed: () {
-								getRequest();
+							onPressed: () async {
+								var status = await getRequest();
+								print("status");
+								print(status);
+								if (200 == status) {
+									Navigator.pushNamed(context, '/second');
+								} else {
+									print("incorrect data");
+								}
 							},
 						), // ElevatedButton
 					], // <Widget>[]
