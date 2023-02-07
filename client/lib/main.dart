@@ -13,7 +13,7 @@ void main() {
 	runApp(MaterialApp(
 		initialRoute: '/',
 		routes: {
-			'/': (context) => const HomeRoute(),
+			'/': (context) => HomeRoute(),
 			'/second': (context) => OfferPage(),
 			'/third': (context) => AllOffersPage(),
 		},
@@ -21,21 +21,28 @@ void main() {
 }
 
 class HomeRoute extends StatelessWidget {
-	const HomeRoute({Key? key}) : super(key: key);
-	Future<int> getRequest() async {
+	HomeRoute({Key? key}) : super(key: key);
+
+  // get loginController => null;
+	Future<int> getRequest(login, pass) async {
 		//replace your restFull API here.
 		String url = "http://localhost:5000/api/v1/auth/login";
 		Map credits = {
-			"username": "JL",
-			"password": "NCC-1701-D"
+			"username": login,
+			"password": pass
 		};
+		// Map credits = {
+		// 	"username": "JL",
+		// 	"password": "NCC-1701-D"
+		// };
 		var body_data = json.encode(credits);
 		final response = await http.post(Uri.parse(url), body: body_data);
 		var responseData = json.decode(response.body);
 		var data = response.statusCode;
 		return data;
 	}
-
+	TextEditingController loginController = TextEditingController();
+	TextEditingController passwordController = TextEditingController();
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -53,13 +60,41 @@ class HomeRoute extends StatelessWidget {
 								print("test");
 								Navigator.pushNamed(context, '/third');
 							},
-						), // ElevatedButton
+						),
+						Padding(
+							//padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+							padding: EdgeInsets.symmetric(horizontal: 15),
+							child: TextField(
+								controller: loginController,
+								decoration: InputDecoration(
+										border: OutlineInputBorder(),
+										labelText: 'Login',
+										hintText: 'Enter valid login'),
+							),
+						),
+						Padding(
+							padding: const EdgeInsets.only(
+									left: 15.0, right: 15.0, top: 15, bottom: 0),
+							//padding: EdgeInsets.symmetric(horizontal: 15),
+							child: TextField(
+								controller: passwordController,
+								obscureText: true,
+								decoration: InputDecoration(
+									
+										border: OutlineInputBorder(),
+										labelText: 'Password',
+										hintText: 'Enter secure password'),
+							),
+						),
 						ElevatedButton(
 							child: const Text('Login'),
 							onPressed: () async {
-								var status = await getRequest();
+								var login = loginController.text;
+								var pass = passwordController.text;
+								var status = await getRequest(login, pass);
 								// print("status");
 								// print(status);
+								print(loginController.text);
 								if (200 == status) {
 									Navigator.pushNamed(context, '/second');
 								} else {
