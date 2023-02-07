@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:js';
+import 'package:mobile/pages/alloffers_page.dart';
+
 import './pages/offers_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +15,7 @@ void main() {
 		routes: {
 			'/': (context) => const HomeRoute(),
 			'/second': (context) => OfferPage(),
-			'/third': (context) => const ThirdRoute(),
+			'/third': (context) => AllOffersPage(),
 		},
 	)); //MaterialApp
 }
@@ -30,14 +32,6 @@ class HomeRoute extends StatelessWidget {
 		var body_data = json.encode(credits);
 		final response = await http.post(Uri.parse(url), body: body_data);
 		var responseData = json.decode(response.body);
-		print(responseData);
-		print(response.statusCode);
-		if (200 == response.statusCode) {
-			print("this works");
-			// builder: (context) {
-			// 	Navigator.pushNamed(context, '/second');
-			// };
-		}
 		var data = response.statusCode;
 		return data;
 	}
@@ -46,25 +40,26 @@ class HomeRoute extends StatelessWidget {
 	Widget build(BuildContext context) {
 		return Scaffold(
 			appBar: AppBar(
-				title: const Text('Geeks for Geeks'),
-				backgroundColor: Colors.green,
+				title: const Text('Rent a Tool'),
+				backgroundColor: Color.fromARGB(255, 76, 173, 175),
 			), // AppBar
 			body: Center(
 				child: Column(
 					mainAxisAlignment: MainAxisAlignment.center,
 					children: <Widget>[
 						ElevatedButton(
-							child: const Text('Click Me!'),
+							child: const Text('All offers'),
 							onPressed: () {
-								Navigator.pushNamed(context, '/second');
+								print("test");
+								Navigator.pushNamed(context, '/third');
 							},
 						), // ElevatedButton
 						ElevatedButton(
-							child: const Text('Tap Me!'),
+							child: const Text('Login'),
 							onPressed: () async {
 								var status = await getRequest();
-								print("status");
-								print(status);
+								// print("status");
+								// print(status);
 								if (200 == status) {
 									Navigator.pushNamed(context, '/second');
 								} else {
@@ -114,27 +109,3 @@ class ThirdRoute extends StatelessWidget {
 		); // Scaffold
 	}
 }
-
-
-// void main() => runApp(MyApp());
-
-// class MyApp extends StatelessWidget {
-// 	@override
-// 	Widget build(BuildContext context) {
-// 		return MaterialApp(
-// 			home: OfferPage(),
-// 		);
-// 	}
-// }
-
-// class MyApp extends StatelessWidget {
-// 	@override
-// 	Widget build(BuildContext context) {
-// 		return MaterialApp(
-// 			home: HomePage(),
-// 		);
-// 	}
-// }
-
-
-
