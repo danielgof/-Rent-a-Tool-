@@ -1,35 +1,36 @@
 import 'dart:convert';
-import '../models/user.dart';
+import 'dart:io';
+import '../models/offer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class HomePage extends StatefulWidget {
+class MainPage extends StatefulWidget {
 	@override
-	_HomePageState createState() => _HomePageState();
+	_MainPageState createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
 //Applying get request.
-	Future<List<User>> getRequest() async {
+	Future<List<Offer>> getOffersRequest() async {
 		//replace your restFull API here.
-		String url = "https://jsonplaceholder.typicode.com/posts";
-		final response = await http.get(Uri.parse(url));
-
+		String url = "http://localhost:5000/api/v1/offer/all_all";
+		final response = await http.get(Uri.parse(url),
+    headers: {
+      HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+    },);
 		var responseData = json.decode(response.body);
-		print(responseData);
-
-		//Creating a list to store input data;
-		List<User> users = [];
-		for (var singleUser in responseData) {
-			User user = User(
-					id: singleUser["id"],
-					userId: singleUser["userId"],
-					title: singleUser["title"],
-					body: singleUser["body"]);
+    print(responseData);
+		List<Offer> offers = [];
+		for (var offer in responseData) {
+			Offer offerTmp = Offer(
+        id: offer["id"],
+        toolName: offer["tool_name"],
+        toolDescription: offer["tool_description"],
+        price: offer["price"]);
 			//Adding user to the list.
-			users.add(user);
+			offers.add(offerTmp);
 		}
-		return users;
+		return offers;
 	}
 
 	@override
@@ -37,15 +38,24 @@ class _HomePageState extends State<HomePage> {
 		return SafeArea(
 			child: Scaffold(
 				appBar: AppBar(
-					title: Text("Http Get Request."),
-					leading: Icon(
-						Icons.get_app,
-					),
+					title: Text('Rent a Tool'),
+					backgroundColor: Color.fromARGB(255, 76, 173, 175),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.login,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+            )
+          ],
 				),
 				body: Container(
 					padding: EdgeInsets.all(16.0),
 					child: FutureBuilder(
-						future: getRequest(),
+						future: getOffersRequest(),
 						builder: (BuildContext ctx, AsyncSnapshot snapshot) {
 
 							if (snapshot.data == null) {
@@ -58,8 +68,8 @@ class _HomePageState extends State<HomePage> {
 								return ListView.builder(
 									itemCount: snapshot.data.length,
 									itemBuilder: (ctx, index) => ListTile(
-										title: Text(snapshot.data[index].title),
-										subtitle: Text(snapshot.data[index].body),
+										// title: Text(snapshot.data[index].title),
+										subtitle: Text(snapshot.data[index].toolName),
 										contentPadding: EdgeInsets.only(bottom: 20.0),
 									),
 								);

@@ -44,9 +44,17 @@ class _OfferPageState extends State<OfferPage> {
 			child: Scaffold(
 				appBar: AppBar(
 					title: Text("Offers"),
-					leading: Icon(
-						Icons.account_tree_sharp,
-					),
+					actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
+            )
+          ],
 				),
 				body: Container(
 					padding: EdgeInsets.all(16.0),
