@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 class LoginPage extends StatelessWidget {
 	LoginPage({Key? key}) : super(key: key);
 
-	Future<int> getRequest(login, pass) async {
+	Future<int> loginRequest(login, pass) async {
 		String url = "http://localhost:5000/api/v1/auth/login";
 		Map credits = {
 			"username": login,
@@ -49,15 +49,7 @@ class LoginPage extends StatelessWidget {
 				child: Column(
 					mainAxisAlignment: MainAxisAlignment.center,
 					children: <Widget>[
-						// ElevatedButton(
-						// 	child: const Text('All offers'),
-						// 	onPressed: () {
-						// 		print("test");
-						// 		Navigator.pushNamed(context, '/third');
-						// 	},
-						// ),
 						Padding(
-							//padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
 							padding: EdgeInsets.symmetric(horizontal: 15),
 							child: TextField(
 								controller: loginController,
@@ -70,7 +62,7 @@ class LoginPage extends StatelessWidget {
 						Padding(
 							padding: const EdgeInsets.only(
 									left: 15.0, right: 15.0, top: 15, bottom: 0),
-							//padding: EdgeInsets.symmetric(horizontal: 15),
+							// padding: EdgeInsets.symmetric(horizontal: 15),
 							child: TextField(
 								controller: passwordController,
 								obscureText: true,
@@ -85,9 +77,7 @@ class LoginPage extends StatelessWidget {
 							onPressed: () async {
 								var login = loginController.text;
 								var pass = passwordController.text;
-								var status = await getRequest(login, pass);
-								// print("status");
-								// print(status);
+								var status = await loginRequest(login, pass);
 								print(loginController.text);
 								if (200 == status) {
 									Navigator.pushNamed(context, '/user_offers');
@@ -95,8 +85,14 @@ class LoginPage extends StatelessWidget {
 									print("incorrect data");
 								}
 							},
+						),
+            ElevatedButton(
+							child: const Text('Register'),
+							onPressed: () {
+								Navigator.pushNamed(context, '/registration');
+							},
 						), // ElevatedButton
-					], // <Widget>[]
+					], 
 				), // Column
 			), // Center
 		); // Scaffold

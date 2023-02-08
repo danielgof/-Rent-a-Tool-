@@ -5,6 +5,7 @@ import 'package:mobile/pages/alloffers_page.dart';
 import 'package:mobile/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobile/pages/registration_page.dart';
 
 import './pages/offers_page.dart';
 import './pages/main_page.dart';
@@ -18,7 +19,7 @@ void main() {
 			'/': (context) => MainPage(),
       '/login': (context) => LoginPage(),
 			'/user_offers': (context) => OfferPage(),
-			// '/third': (context) => AllOffersPage(),
+			'/registration': (context) => RegistrationPage(),
 		},
 	)); //MaterialApp
 }
