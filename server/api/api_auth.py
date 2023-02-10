@@ -7,6 +7,7 @@ from flask import current_app
 import jwt
 import os
 import logging
+from controllers.auth_controller import *
 from create import *
 from config import *
 from security import *
@@ -43,10 +44,12 @@ def login():
 def register_user():
     try:
         data = request.get_json(force=True)
-        session.add(User(data["username"], data["phone"], 
-        data["email"], data["password"]))
-        session.commit()
-        session.close()
+        add_user(
+                data["username"], 
+                data["phone"], 
+                data["email"], 
+                data["password"]
+                )
         # msg = Message("Subject", sender="daniilgofman1701@gmail.com", recipients=["daniilgofman1701@gmail.com"])
         # msg.body = "Veryfication link must be here"
         # mail.send(msg)

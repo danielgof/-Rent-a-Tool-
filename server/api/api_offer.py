@@ -12,31 +12,22 @@ from create import *
 from config import *
 from setup import *
 from security import *
-
+from controllers.offer_controller import *
 
 offer = Blueprint("offer", __name__, url_prefix="/api/v1/offer")
 """
 api offer
 """
 @offer.route("/all_all", methods=["GET"])
-@token_required
-def get_all_offers(current_user):
+# @token_required
+# def get_all_offers(current_user):
+def get_all_offers():
     try:
-        offers = session.query(Offer).all()
-        responce = []
-        for offer in offers:
-            responce.append({
-                "id":offer.id,
-                "tool_name": offer.tool_name ,
-                "tool_description": offer.tool_description ,
-                "location": offer.location ,
-                "price": offer.price ,
-                "date_start": offer.date_start ,
-                "date_finish": offer.date_finish,
-                "owner_name": offer.owner_name,
-                "phone_number": offer.phone_number
-            })
-        return responce
+        responce = all_offers()
+        return {
+                "status": "success",
+                "data": responce
+                }, 200
     except Exception as e:
         current_app.logger.info("exception: ", e)
         return {"message": "error"}, 500
@@ -61,7 +52,7 @@ def save_offer(current_user):
         user_offers.append(offer)
         session.add(offer)
         session.commit()
-        return {"status": "success"}
+        return {"status": "success"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
         return {"message": "error"}, 500
