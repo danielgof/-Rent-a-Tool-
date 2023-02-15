@@ -22,7 +22,7 @@ rule CUSTOM_COMMAND
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__mobile
+rule CXX_COMPILER__client
   depfile = $DEP_FILE
   deps = gcc
   command = /snap/flutter/current/usr/bin/clang++  $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -32,9 +32,47 @@ rule CXX_COMPILER__mobile
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__mobile
+rule CXX_EXECUTABLE_LINKER__client
   command = $PRE_LINK && /snap/flutter/current/usr/bin/clang++  $FLAGS  $LINK_FLAGS $in  -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
   description = Linking CXX executable $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling CXX files.
+
+rule CXX_COMPILER__url_launcher_linux_plugin
+  depfile = $DEP_FILE
+  deps = gcc
+  command = /snap/flutter/current/usr/bin/clang++  $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building CXX object $out
+
+
+#############################################
+# Rule for linking CXX shared library.
+
+rule CXX_SHARED_LIBRARY_LINKER__url_launcher_linux_plugin
+  command = $PRE_LINK && /snap/flutter/current/usr/bin/clang++ -fPIC $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS $LINK_FLAGS -shared $SONAME_FLAG$SONAME -o $TARGET_FILE $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  description = Linking CXX shared library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling CXX files.
+
+rule CXX_COMPILER__window_size_plugin
+  depfile = $DEP_FILE
+  deps = gcc
+  command = /snap/flutter/current/usr/bin/clang++  $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building CXX object $out
+
+
+#############################################
+# Rule for linking CXX shared library.
+
+rule CXX_SHARED_LIBRARY_LINKER__window_size_plugin
+  command = $PRE_LINK && /snap/flutter/current/usr/bin/clang++ -fPIC $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS $LINK_FLAGS -shared $SONAME_FLAG$SONAME -o $TARGET_FILE $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  description = Linking CXX shared library $TARGET_FILE
   restat = $RESTAT
 
 
@@ -42,7 +80,7 @@ rule CXX_EXECUTABLE_LINKER__mobile
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /snap/flutter/130/usr/bin/cmake -S/home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/linux -B/home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/build/linux/x64/debug
+  command = /snap/flutter/130/usr/bin/cmake -S/home/daniel/Documents/CS/Projects/RT/client/linux -B/home/daniel/Documents/CS/Projects/RT/client/build/linux/x64/debug
   description = Re-running CMake...
   generator = 1
 

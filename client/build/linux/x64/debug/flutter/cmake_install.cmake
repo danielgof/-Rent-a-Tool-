@@ -1,8 +1,8 @@
-# Install script for directory: /home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/linux/flutter
+# Install script for directory: /home/daniel/Documents/CS/Projects/RT/client/linux/flutter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/daniel/Documents/CS/Projects/RaT/RaT2.0/client/build/linux/x64/debug/bundle")
+  set(CMAKE_INSTALL_PREFIX "/home/daniel/Documents/CS/Projects/RT/client/build/linux/x64/debug/bundle")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

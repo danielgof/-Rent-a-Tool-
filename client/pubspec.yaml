@@ -1,4 +1,4 @@
-name: mobile
+name: client
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -29,20 +29,26 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  adaptive_navigation: ^0.0.3
+  collection: ^1.15.0
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  path_to_regexp: ^0.4.0
+  quiver: ^3.1.0
+  url_launcher: ^6.1.1
+  url_strategy: ^0.2.0
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   http_status_code: ^0.0.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test: ^1.16.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -51,13 +57,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "images/logo.png"
-#  adaptive_icon_background: "images/logo.png"
-#  adaptive_icon_foreground: "images/christmas.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -69,10 +68,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-#   To add assets to your application, add an assets section, like this:
-#   assets:
-#     - images/a_dot_burr.jpeg
-#     - images/a_dot_ham.jpeg
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
