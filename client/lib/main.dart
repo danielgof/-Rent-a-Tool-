@@ -19,7 +19,7 @@ void main() {
   setHashUrlStrategy();
   setPathUrlStrategy();
 
-  setupWindow();
+  // setupWindow();
   runApp(const Bookstore());
 }
 

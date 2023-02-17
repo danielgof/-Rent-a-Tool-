@@ -98,7 +98,7 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                 var status = await loginRequest(login, pass);
                 // print(credentials.password);
                 if (200 == status) {
-                  print("login");
+                  // print("login");
                   await routeState.go('/books/popular');
                   // Navigator.pushNamed(context, '/user_offers');
                 } else {

@@ -56,6 +56,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: const Text('Sign in'),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: TextButton(
+                      onPressed: () async {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: const Text('New user? Click to register.'),
+                    ),
+                  ),
                 ],
               ),
             ),

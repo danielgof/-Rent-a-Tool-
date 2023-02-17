@@ -26,7 +26,7 @@ class _AllOffersPageState extends State<AllOffersPage> {
     // print(offersResponce);
 		//Creating a list to store input data;
 		List<Offer> offers = [];
-		for (var offer in responseData) {
+		for (var offer in responseData["data"]) {
 			Offer offerTmp = Offer(
         id: offer["id"],
         toolName: offer["tool_name"],

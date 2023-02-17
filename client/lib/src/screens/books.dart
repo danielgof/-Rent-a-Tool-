@@ -77,16 +77,17 @@ class _BooksScreenState extends State<BooksScreen>
               books: libraryInstance.popularBooks,
               onTap: _handleBookTapped,
             ),
+            OffersList(
+              offers: [Offer(id: 1, toolName: "test", toolDescription: "test", price: "test")],
+              // offers: offers.getOffersRequest(),
+              onTap: _handleOfferTapped,
+            ),
             AllOffersPage(),
             // BookList(
             //   books: libraryInstance.newBooks,
             //   onTap: _handleBookTapped,
             // ),
-            OffersList(
-              offers: [Offer(id: 1, toolName: "test", toolDescription: "test", price: "test")],
-              // offers: offers.getOffersRequest(),
-              onTap: _handleOfferTapped,
-            )
+
             // BookList(
             //   books: libraryInstance.allBooks,
             //   onTap: _handleBookTapped,

@@ -14,8 +14,16 @@ Session = sessionmaker(bind=engine)
 
 Base.metadata.create_all(engine)
 session = Session()
-# user1 = User("JL", "+19993459872", "picard@gmail.com", "NCC-1701-D", 1)
-# user2 = User("test", "+19993452342", "test@testmail.com", "test", 1)
+# user1 = User(username="JL", 
+#             phone="+19993459872",
+#             email="picard@gmail.com", 
+#             password="NCC-1701-D",
+#             confirmed=1)
+# user2 = User(username="test",
+#             phone="+19993452342",
+#             email="test@testmail.com",
+#             password="test",
+#             confirmed=1)
 
 # offer1 = db_offer.Offer(
 #     "tool_name",
