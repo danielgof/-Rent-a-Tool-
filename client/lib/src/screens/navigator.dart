@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../auth.dart';
 import '../data.dart';
+import '../models/offer.dart';
 import '../routing.dart';
 import '../screens/sign_in.dart';
 import '../widgets/fade_transition_page.dart';

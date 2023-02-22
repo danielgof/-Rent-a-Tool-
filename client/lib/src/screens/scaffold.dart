@@ -1,7 +1,3 @@
-// Copyright 2021, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -29,11 +25,11 @@ class BookstoreScaffold extends StatelessWidget {
         },
         destinations: const [
           AdaptiveScaffoldDestination(
-            title: 'Books',
+            title: 'Offers',
             icon: Icons.local_offer,
           ),
           AdaptiveScaffoldDestination(
-            title: 'Authors',
+            title: 'Profile',
             icon: Icons.person,
           ),
           AdaptiveScaffoldDestination(
@@ -47,7 +43,7 @@ class BookstoreScaffold extends StatelessWidget {
 
   int _getSelectedIndex(String pathTemplate) {
     if (pathTemplate.startsWith('/books')) return 0;
-    if (pathTemplate == '/authors') return 1;
+    if (pathTemplate == '/profile') return 1;
     if (pathTemplate == '/settings') return 2;
     return 0;
   }

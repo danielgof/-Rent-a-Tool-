@@ -33,18 +33,60 @@ session = Session()
 #     date(2023, 1, 1),
 #     date(2023, 2, 12),
 #     "owner name",
-#     "owner phone number"
+#     "+1893489384389"
 # )
 # offer2 = db_offer.Offer(
-#     "tool_name2",
-#     "some description2",
-#     "test location2",
-#     "1200",
-#     date(2022, 1, 1),
-#     date(2022, 2, 12),
-#     "owner name2",
-#     "owner phone number2"
+#     "screw driver",
+#     "screw driver description",
+#     "south gateway",
+#     "0",
+#     date(2023, 1, 1),
+#     date(2023, 2, 12),
+#     "Jack",
+#     "+1893489384389"
 # )
+# offer3 = db_offer.Offer(
+#     "hammer",
+#     "hammer some description",
+#     "Fl, Miami",
+#     "9000",
+#     date(2023, 1, 1),
+#     date(2023, 2, 12),
+#     "Alexander",
+#     "+1893489384389"
+# )
+# offer4 = db_offer.Offer(
+#     "bike",
+#     "bike some description",
+#     "Mos, Rus",
+#     "12",
+#     date(2023, 2, 1),
+#     date(2023, 2, 12),
+#     "Volodya",
+#     "+7893489384389"
+# )
+# offer5 = db_offer.Offer(
+#     "Fan",
+#     "fan descr.",
+#     "Tr, Selifke",
+#     "9",
+#     date(2023, 2, 11),
+#     date(2023, 3, 12),
+#     "Dmitry",
+#     "+90893489384389"
+# )
+# offer6 = db_offer.Offer(
+#     "printer",
+#     "printer descr.",
+#     "Mos, Rus",
+#     "100",
+#     date(2023, 2, 14),
+#     date(2023, 4, 12),
+#     "Feodr",
+#     "+78992839822938"
+# )
+
+
 
 # # request1 = db_request.Request(
 # #     "tool_name",

@@ -45,13 +45,11 @@ class TemplateRouteParser extends RouteInformationParser<ParsedRoute> {
         parsedRoute = ParsedRoute(path, pathTemplate, params, queryParams);
       }
     }
-
     // Redirect if a guard is present
     var guard = this.guard;
     if (guard != null) {
       return guard(parsedRoute);
     }
-
     return parsedRoute;
   }
 

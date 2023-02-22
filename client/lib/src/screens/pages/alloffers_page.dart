@@ -42,12 +42,24 @@ class _AllOffersPageState extends State<AllOffersPage> {
 	Widget build(BuildContext context) {
 		return SafeArea(
 			child: Scaffold(
-				// appBar: AppBar(
-				// 	title: Text("All Offers"),
-				// 	leading: Icon(
-				// 		Icons.account_tree_sharp,
-				// 	),
-				// ),
+				bottomNavigationBar: BottomAppBar(
+					child: new Row(
+						mainAxisSize: MainAxisSize.max,
+						// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+						children: <Widget>[
+							IconButton(icon: Icon(Icons.local_offer), onPressed: () {
+								Navigator.push(
+									context,
+									MaterialPageRoute(builder: (context) => AllOffersPage()
+									),
+								);
+							},),
+							IconButton(icon: Icon(Icons.login), onPressed: () {
+								Navigator.pop(context);
+							},),
+						],
+					),
+				),
 				body: Container(
 					padding: EdgeInsets.all(16.0),
 					child: FutureBuilder(

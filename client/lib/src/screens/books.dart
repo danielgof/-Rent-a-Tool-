@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:client/src/models/offer.dart';
 import 'package:client/src/models/offers.dart';
 import 'package:client/src/screens/pages/alloffers_page.dart';
 import 'package:client/src/widgets/offers_list.dart';
 import 'package:flutter/material.dart';
 
+import 'package:http/http.dart' as http;
 import '../data.dart';
 import '../routing.dart';
 import '../widgets/book_list.dart';
@@ -17,9 +21,35 @@ class BooksScreen extends StatefulWidget {
   State<BooksScreen> createState() => _BooksScreenState();
 }
 
-class _BooksScreenState extends State<BooksScreen>
-    with SingleTickerProviderStateMixin {
+class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
+  Future<List<Offer>> getOffersRequest() async {
+    //replace your restFull API here.
+    String url = "http://localhost:5000/api/v1/offer/all_all";
+    final response = await http.get(Uri.parse(url),
+      // Send authorization headers to the backend.
+      headers: {
+        HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+      },);
+
+    var responseData = json.decode(response.body);
+    print(responseData);
+    // var offersResponce = responseData["responce"];
+    // print(offersResponce);
+    //Creating a list to store input data;
+    List<Offer> offers = [];
+    for (var offer in responseData["data"]) {
+      Offer offerTmp = Offer(
+          id: offer["id"],
+          toolName: offer["tool_name"],
+          toolDescription: offer["tool_description"],
+          price: offer["price"]);
+      //Adding user to the list.
+      offers.add(offerTmp);
+    }
+    return offers;
+  }
 
   @override
   void initState() {
@@ -78,6 +108,7 @@ class _BooksScreenState extends State<BooksScreen>
               onTap: _handleBookTapped,
             ),
             OffersList(
+              // offers: getOffersRequest(),
               offers: [Offer(id: 1, toolName: "test", toolDescription: "test", price: "test")],
               // offers: offers.getOffersRequest(),
               onTap: _handleOfferTapped,
