@@ -102,9 +102,39 @@ class RegistrationPage extends StatelessWidget {
 								var status = await registrationRequest(username, pass, phone, email);
 								if (200 == status) {
                   print("user was registered");
+									showDialog<String>(
+										context: context,
+										builder: (context) => AlertDialog(
+											title: const Text('Succes!'),
+											content: const Text('The user was registered succesfully.'),
+											actions: [
+												// TextButton(
+												// 	onPressed: () => Navigator.pop(context, 'Cancel'),
+												// 	child: const Text('Cancel'),
+												// ),
+												TextButton(
+													onPressed: () => Navigator.pop(context, 'OK'),
+													child: const Text('OK'),
+												),
+											],
+										),
+									);
 									// Navigator.pushNamed(context, '/user_offers');
 								} else {
 									print("incorrect data");
+									showDialog<String>(
+										context: context,
+										builder: (context) => AlertDialog(
+											title: const Text('Error!'),
+											content: const Text('The error occured when register a user.'),
+											actions: [
+												TextButton(
+													onPressed: () => Navigator.pop(context, 'OK'),
+													child: const Text('OK'),
+												),
+											],
+										),
+									);
 								}
 							},
 						),

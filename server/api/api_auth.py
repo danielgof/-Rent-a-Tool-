@@ -18,6 +18,11 @@ auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 """
 auth api
 """
+
+"""
+requires: 
+ensures: 
+"""
 @auth.route("/login", methods=["POST", "GET"])
 def login():
     try:
@@ -39,7 +44,8 @@ def login():
         current_app.logger.info("%s failed to log in", user.username)
         return {"message": "error"}, 500
 
-
+"""
+"""
 @auth.route("/register", methods=["POST"])
 def register_user():
     try:

@@ -26,64 +26,64 @@ session = Session()
 #             confirmed=1)
 
 # offer1 = db_offer.Offer(
-#     "tool_name",
-#     "some description",
-#     "test location",
-#     "9000",
-#     date(2023, 1, 1),
-#     date(2023, 2, 12),
-#     "owner name",
-#     "+1893489384389"
+#     tool_name="tool_name",
+#     tool_description="some description",
+#     location="test location",
+#     price="9000",
+#     date_start=date(2023, 1, 1),
+#     date_finish=date(2023, 2, 12),
+#     owner_name="owner name",
+#     phone_number="+1893489384389"
 # )
 # offer2 = db_offer.Offer(
-#     "screw driver",
-#     "screw driver description",
-#     "south gateway",
-#     "0",
-#     date(2023, 1, 1),
-#     date(2023, 2, 12),
-#     "Jack",
-#     "+1893489384389"
+#     tool_name="screw driver",
+#     tool_description="screw driver description",
+#     location="south gateway",
+#     price="0",
+#     date_start=date(2023, 1, 1),
+#     date_finish=date(2023, 2, 12),
+#     owner_name="Jack",
+#     phone_number="+1893489384389"
 # )
 # offer3 = db_offer.Offer(
-#     "hammer",
-#     "hammer some description",
-#     "Fl, Miami",
-#     "9000",
-#     date(2023, 1, 1),
-#     date(2023, 2, 12),
-#     "Alexander",
-#     "+1893489384389"
+#     tool_name="hammer",
+#     tool_description="hammer some description",
+#     location="Fl, Miami",
+#     price="9000",
+#     date_start=date(2023, 1, 1),
+#     date_finish=date(2023, 2, 12),
+#     owner_name="Alexander",
+#     phone_number="+1893489384389"
 # )
 # offer4 = db_offer.Offer(
-#     "bike",
-#     "bike some description",
-#     "Mos, Rus",
-#     "12",
-#     date(2023, 2, 1),
-#     date(2023, 2, 12),
-#     "Volodya",
-#     "+7893489384389"
+#     tool_name="bike",
+#     tool_description="bike some description",
+#     location="Mos, Rus",
+#     price="12",
+#     date_start=date(2023, 2, 1),
+#     date_finish=date(2023, 2, 12),
+#     owner_name="Volodya",
+#     phone_number="+7893489384389"
 # )
 # offer5 = db_offer.Offer(
-#     "Fan",
-#     "fan descr.",
-#     "Tr, Selifke",
-#     "9",
-#     date(2023, 2, 11),
-#     date(2023, 3, 12),
-#     "Dmitry",
-#     "+90893489384389"
+#     tool_name="Fan",
+#     tool_description="fan descr.",
+#     location="Tr, Selifke",
+#     price="9",
+#     date_start=date(2023, 2, 11),
+#     date_finish=date(2023, 3, 12),
+#     owner_name="Dmitry",
+#     phone_number="+90893489384389"
 # )
 # offer6 = db_offer.Offer(
-#     "printer",
-#     "printer descr.",
-#     "Mos, Rus",
-#     "100",
-#     date(2023, 2, 14),
-#     date(2023, 4, 12),
-#     "Feodr",
-#     "+78992839822938"
+#     tool_name="printer",
+#     tool_description="printer descr.",
+#     location="Mos, Rus",
+#     price="100",
+#     date_start=date(2023, 2, 14),
+#     date_finish=date(2023, 4, 12),
+#     owner_name="Feodr",
+#     phone_number="+78992839822938"
 # )
 
 
@@ -107,8 +107,8 @@ session = Session()
 # #     "owner phone number2"
 # # )
 
-# user1.offers = [offer1]
-# user2.offers = [offer2]
+# user1.offers = [offer1, offer3]
+# user2.offers = [offer2, offer4, offer5, offer6]
 # # user2.requests = [request1, request2]
 
 # session = Session()

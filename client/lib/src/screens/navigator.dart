@@ -106,6 +106,23 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                   // Navigator.pushNamed(context, '/user_offers');
                 } else {
                   print("incorrect data");
+                  // showDialog<String>(
+                  //   context: context,
+                  //   builder: (context) => AlertDialog(
+                  //     title: const Text('Alert!'),
+                  //     content: const Text('The alert description goes here.'),
+                  //     actions: [
+                  //       TextButton(
+                  //         onPressed: () => Navigator.pop(context, 'Cancel'),
+                  //         child: const Text('Cancel'),
+                  //       ),
+                  //       TextButton(
+                  //         onPressed: () => Navigator.pop(context, 'OK'),
+                  //         child: const Text('OK'),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // );
                 }
               },
             ),

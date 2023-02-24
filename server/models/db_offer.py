@@ -15,17 +15,17 @@ class Offer(Base):
     phone_number = Column(String, nullable=False)
 
 
-    def __init__(self, tool_name, tool_description, 
-    location, price, date_start,  
-    date_finish, owner_name, phone_number):
-        self.tool_name = tool_name
-        self.tool_description = tool_description
-        self.location = location
-        self.price = price
-        self.date_start = date_start
-        self.date_finish = date_finish
-        self.owner_name = owner_name
-        self.phone_number = phone_number
+    # def __init__(self, tool_name, tool_description, 
+    # location, price, date_start,  
+    # date_finish, owner_name, phone_number):
+    #     self.tool_name = tool_name
+    #     self.tool_description = tool_description
+    #     self.location = location
+    #     self.price = price
+    #     self.date_start = date_start
+    #     self.date_finish = date_finish
+    #     self.owner_name = owner_name
+    #     self.phone_number = phone_number
 
 
 people_offers_association = Table(

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:client/src/models/offer.dart';
 import 'package:client/src/models/offers.dart';
 import 'package:client/src/screens/pages/alloffers_page.dart';
+import 'package:client/src/screens/pages/map_page.dart';
 import 'package:client/src/widgets/offers_list.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this)
+    _tabController = TabController(length: 4, vsync: this)
       ..addListener(_handleTabIndexChanged);
   }
 
@@ -69,6 +70,8 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
       _tabController.index = 1;
     } else if (newPath == '/books/all') {
       _tabController.index = 2;
+    } else if (newPath == '/books/map') {
+      _tabController.index = 3;
     }
   }
 
@@ -97,6 +100,10 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
                 text: 'All',
                 icon: Icon(Icons.list),
               ),
+              Tab(
+                text: 'Map',
+                icon: Icon(Icons.map),
+              ),
             ],
           ),
         ),
@@ -114,6 +121,8 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
               onTap: _handleOfferTapped,
             ),
             AllOffersPage(),
+            MapPage()
+            // AllOffersPage(),
             // BookList(
             //   books: libraryInstance.newBooks,
             //   onTap: _handleBookTapped,
