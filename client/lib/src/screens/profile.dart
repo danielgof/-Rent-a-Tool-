@@ -33,7 +33,7 @@ class AuthorsScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('New user? Click to register.'),
+              child: const Text('Create new offer.'),
             ),
           ),
         ],

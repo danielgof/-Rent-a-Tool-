@@ -50,21 +50,21 @@ class OfferRegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rent a Tool'),
-        backgroundColor: Color.fromARGB(255, 76, 173, 175),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.home,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, '/');
-            },
-          )
-        ],
-      ), // AppBar
+      // appBar: AppBar(
+      //   title: const Text('Rent a Tool'),
+      //   backgroundColor: Color.fromARGB(255, 76, 173, 175),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: Icon(
+      //         Icons.home,
+      //         color: Colors.white,
+      //       ),
+      //       onPressed: () {
+      //         Navigator.pushNamed(context, '/');
+      //       },
+      //     )
+      //   ],
+      // ), // AppBar
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -172,12 +172,11 @@ class OfferRegistrationPage extends StatelessWidget {
                 var phone_number = phone_numberController.text;
                 var status = await offerRegistrationRequest(tool_name, tool_description, location, price, date_start, date_finish, owner_name, phone_number);
                 if (200 == status) {
-                  print("user was registered");
                   showDialog<String>(
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Succes!'),
-                      content: const Text('The user was registered succesfully.'),
+                      content: const Text('Offer was added.'),
                       actions: [
                         // TextButton(
                         // 	onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -192,12 +191,11 @@ class OfferRegistrationPage extends StatelessWidget {
                   );
                   // Navigator.pushNamed(context, '/user_offers');
                 } else {
-                  print("incorrect data");
                   showDialog<String>(
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Error!'),
-                      content: const Text('The error occured when register a user.'),
+                      content: const Text('The error occured when register an offer.'),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, 'OK'),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../routing.dart';
 import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
-import 'authors.dart';
+import 'profile.dart';
 import 'books.dart';
 import 'scaffold.dart';
 

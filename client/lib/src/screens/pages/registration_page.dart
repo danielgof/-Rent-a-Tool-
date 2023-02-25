@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'alloffers_page.dart';
+
 
 class RegistrationPage extends StatelessWidget {
 	RegistrationPage({Key? key}) : super(key: key);
@@ -27,21 +29,24 @@ class RegistrationPage extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
-			appBar: AppBar(
-				title: const Text('Rent a Tool'),
-				backgroundColor: Color.fromARGB(255, 76, 173, 175),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.home,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, '/');
-            },
-          )
-        ],
-			), // AppBar
+			bottomNavigationBar: BottomAppBar(
+				child: new Row(
+					mainAxisSize: MainAxisSize.max,
+					// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+					children: <Widget>[
+						IconButton(icon: Icon(Icons.local_offer), onPressed: () {
+							Navigator.push(
+								context,
+								MaterialPageRoute(builder: (context) => AllOffersPage()
+								),
+							);
+						},),
+						IconButton(icon: Icon(Icons.login), onPressed: () {
+							Navigator.pop(context);
+						},),
+					],
+				),
+			),
 			body: Center(
 				child: Column(
 					mainAxisAlignment: MainAxisAlignment.center,

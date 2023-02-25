@@ -34,10 +34,12 @@ def get_all_offers():
 @token_required
 def save_offer(current_user):
     try:
-        if not request.json:
+        # if not request.json:
+        #     abort(400)
+        if not request.get_json(force=True):
             abort(400)
         token = request.headers["Authorization"]
-        data = request.get_json
+        data = request.get_json(force=True)
         user_info = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])["username"]
         user = session.query(User).filter(User.username == user_info).first()
         user_offers = user.offers
