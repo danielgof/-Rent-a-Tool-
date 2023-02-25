@@ -1,10 +1,7 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, abort
 from datetime import date
 from flask import current_app
-import os
 import jwt
-from functools import wraps
-import logging
 from create import session
 from models.db_offer import *
 from models.db_auth import *
@@ -40,14 +37,19 @@ def save_offer(current_user):
         if not request.json:
             abort(400)
         token = request.headers["Authorization"]
-        data = request.json
+        data = request.get_json
         user_info = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])["username"]
         user = session.query(User).filter(User.username == user_info).first()
         user_offers = user.offers
         offer = Offer(
-            data["tool_name"], data["tool_description"], 
-            data["location"], data["price"], data["date_start"],
-            data["date_finish"], data["owner_name"], data["phone_number"]
+            tool_name=data["tool_name"], 
+            tool_description=data["tool_description"], 
+            location=data["location"], 
+            price=data["price"], 
+            date_start=data["date_start"],
+            date_finish=data["date_finish"], 
+            owner_name=data["owner_name"], 
+            phone_number=data["phone_number"]
         )
         user_offers.append(offer)
         session.add(offer)
