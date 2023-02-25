@@ -1,4 +1,4 @@
-import 'package:client/src/models/offer.dart';
+import 'package:RT/src/models/offer.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;

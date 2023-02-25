@@ -327,7 +327,7 @@ void setupWindow() {
 // import 'dart:convert';
 // import 'dart:io';
 // import 'dart:js';
-// import 'package:mobile/pages/alloffers_page.dart';
+// import 'package:mobile/pages/alloffers_public_page.dart';
 // import 'package:mobile/pages/login_page.dart';
 // import 'package:flutter/material.dart';
 // import 'package:http/http.dart' as http;

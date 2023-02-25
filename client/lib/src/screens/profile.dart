@@ -1,10 +1,16 @@
-import 'package:client/src/screens/pages/offer_page.dart';
-import 'package:client/src/screens/pages/registration_page.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:RT/src/screens/pages/offer_page.dart';
+import 'package:RT/src/screens/pages/offers_page.dart';
+import 'package:RT/src/screens/pages/registration_page.dart';
 import 'package:flutter/material.dart';
 
 import '../models/library.dart';
+import '../models/offer.dart';
 import '../routing.dart';
 import '../widgets/author_list.dart';
+import 'package:http/http.dart' as http;
 
 class AuthorsScreen extends StatelessWidget {
   final String title = 'Profile';
@@ -34,6 +40,19 @@ class AuthorsScreen extends StatelessWidget {
                 );
               },
               child: const Text('Create new offer.'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OfferPage()
+                  ),
+                );
+              },
+              child: const Text('My offers.'),
             ),
           ),
         ],

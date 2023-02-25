@@ -1,5 +1,5 @@
-import 'package:client/src/screens/pages/alloffers_page.dart';
-import 'package:client/src/screens/pages/registration_page.dart';
+import 'package:RT/src/screens/public_pages/alloffers_public_page.dart';
+import 'package:RT/src/screens/pages/registration_page.dart';
 import 'package:flutter/material.dart';
 
 class Credentials {

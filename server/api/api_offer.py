@@ -41,21 +41,7 @@ def save_offer(current_user):
         token = request.headers["Authorization"]
         data = request.get_json(force=True)
         user_info = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])["username"]
-        user = session.query(User).filter(User.username == user_info).first()
-        user_offers = user.offers
-        offer = Offer(
-            tool_name=data["tool_name"], 
-            tool_description=data["tool_description"], 
-            location=data["location"], 
-            price=data["price"], 
-            date_start=data["date_start"],
-            date_finish=data["date_finish"], 
-            owner_name=data["owner_name"], 
-            phone_number=data["phone_number"]
-        )
-        user_offers.append(offer)
-        session.add(offer)
-        session.commit()
+        add_offer_to_user(username=user_info, data=data)
         return {"status": "success"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
@@ -86,4 +72,18 @@ def get_all_user_offers(current_user):
         return {"result": responce}
     except Exception as e:
         current_app.logger.info("%s failed to log in", user.username)
+        return {"message": "error"}, 500
+    
+
+@offer.route("/delete", methods=["DELETE"])
+@token_required
+def delete_offer(current_user) -> dict:
+    try:
+        if not request.get_json(force=True):
+            abort(400)
+        data_id = request.get_json(force=True)
+        delete_offer_by_id(data=data_id)
+        return {"status": "success"}, 200
+    except Exception as e:
+        current_app.logger.info(f"exeption {e}")
         return {"message": "error"}, 500

@@ -1,4 +1,4 @@
-import 'package:client/src/models/offer.dart';
+import 'package:RT/src/models/offer.dart';
 // import 'package:client/src/models/offers.dart';
 import 'package:flutter/material.dart';
 

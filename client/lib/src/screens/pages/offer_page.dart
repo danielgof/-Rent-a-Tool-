@@ -9,33 +9,33 @@ class OfferRegistrationPage extends StatelessWidget {
 
   Future<int> offerRegistrationRequest(tool_name, tool_description, location, price, date_start, date_finish, owner_name, phone_number) async {
     String url = "http://localhost:5000/api/v1/offer/save";
-    // Map credits = {
-    //   "tool_name": tool_name,
-    //   "tool_description": tool_description,
-    //   "location":location,
-    //   "price":price,
-    //   "date_start":date_start,
-    //   "date_finish":date_finish,
-    //   "owner_name":owner_name,
-    //   "phone_number":phone_number,
-    // };
     Map credits = {
-      "tool_name": "test",
-      "tool_description": "test test",
-      "location": "test, test",
-      "price": "test",
-      "date_start": "03/01/2001",
-      "date_finish": "03/02/2001",
-      "owner_name": "test",
-      "phone_number": "+1343452243"
+      "tool_name": tool_name,
+      "tool_description": tool_description,
+      "location":location,
+      "price":price,
+      "date_start":date_start,
+      "date_finish":date_finish,
+      "owner_name":owner_name,
+      "phone_number":phone_number,
     };
+    // Map credits = {
+    //   "tool_name": "test",
+    //   "tool_description": "test test",
+    //   "location": "test, test",
+    //   "price": "test",
+    //   "date_start": "03/01/2001",
+    //   "date_finish": "03/02/2001",
+    //   "owner_name": "test",
+    //   "phone_number": "+1343452243"
+    // };
     var body_data = json.encode(credits);
-    print(body_data);
+    // print(body_data);
     final response = await http.post(Uri.parse(url), body: body_data, headers: {
       HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
     });
     var responseData = json.decode(response.body);
-    print(responseData);
+    // print(responseData);
     var data = response.statusCode;
     return data;
   }
@@ -50,21 +50,20 @@ class OfferRegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Rent a Tool'),
-      //   backgroundColor: Color.fromARGB(255, 76, 173, 175),
-      //   actions: <Widget>[
-      //     IconButton(
-      //       icon: Icon(
-      //         Icons.home,
-      //         color: Colors.white,
-      //       ),
-      //       onPressed: () {
-      //         Navigator.pushNamed(context, '/');
-      //       },
-      //     )
-      //   ],
-      // ), // AppBar
+        appBar: AppBar(
+          title: Text("Offer registration."),
+          // actions: <Widget>[
+          //   // IconButton(
+          //   //   icon: Icon(
+          //   //     Icons.logout,
+          //   //     color: Colors.white,
+          //   //   ),
+          //   //   onPressed: () {
+          //   //     Navigator.pushNamed(context, '/');
+          //   //   },
+          //   // )
+          // ],
+        ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +85,7 @@ class OfferRegistrationPage extends StatelessWidget {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 controller: tool_descriptionController,
-                obscureText: true,
+                // obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'tool description',
@@ -176,7 +175,7 @@ class OfferRegistrationPage extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Succes!'),
-                      content: const Text('Offer was added.'),
+                      content: const Text('Offer was crated.'),
                       actions: [
                         // TextButton(
                         // 	onPressed: () => Navigator.pop(context, 'Cancel'),
