@@ -4,7 +4,7 @@ import '../routing.dart';
 import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
 import 'profile.dart';
-import 'books.dart';
+import 'main_page.dart';
 import 'scaffold.dart';
 
 /// Displays the contents of the body of [BookstoreScaffold]

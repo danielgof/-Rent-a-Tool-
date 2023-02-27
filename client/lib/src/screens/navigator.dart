@@ -99,31 +99,33 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                 var login = credentials.username;
                 var pass = credentials.password;
                 var status = await loginRequest(login, pass);
-                await routeState.go('/books/popular');
-                // if (200 == status) {
-                //   // print("login");
-                //   await routeState.go('/books/popular');
-                //   // Navigator.pushNamed(context, '/user_offers');
-                // } else {
-                //   print("incorrect data");
-                //   // showDialog<String>(
-                //   //   context: context,
-                //   //   builder: (context) => AlertDialog(
-                //   //     title: const Text('Alert!'),
-                //   //     content: const Text('The alert description goes here.'),
-                //   //     actions: [
-                //   //       TextButton(
-                //   //         onPressed: () => Navigator.pop(context, 'Cancel'),
-                //   //         child: const Text('Cancel'),
-                //   //       ),
-                //   //       TextButton(
-                //   //         onPressed: () => Navigator.pop(context, 'OK'),
-                //   //         child: const Text('OK'),
-                //   //       ),
-                //   //     ],
-                //   //   ),
-                //   // );
-                // }
+                // print(credentials.password);
+                if (200 == status) {
+                  // print("login");
+                  await routeState.go('/books/popular');
+                  // Navigator.pushNamed(context, '/user_offers');
+                } else {
+                  print("incorrect data");
+                  await routeState.go('/settings');
+
+                  // showDialog<String>(
+                  //   context: context,
+                  //   builder: (context) => AlertDialog(
+                  //     title: const Text('Succes!'),
+                  //     content: const Text('Offer was crated.'),
+                  //     actions: [
+                  //       // TextButton(
+                  //       // 	onPressed: () => Navigator.pop(context, 'Cancel'),
+                  //       // 	child: const Text('Cancel'),
+                  //       // ),
+                  //       TextButton(
+                  //         onPressed: () => Navigator.pop(context, 'OK'),
+                  //         child: const Text('OK'),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // );
+                }
               },
             ),
           )

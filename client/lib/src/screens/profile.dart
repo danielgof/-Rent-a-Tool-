@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:RT/src/screens/pages/offer_page.dart';
 import 'package:RT/src/screens/pages/offers_page.dart';
-import 'package:RT/src/screens/pages/registration_page.dart';
+import 'package:RT/src/screens/public_pages/registration_page.dart';
 import 'package:flutter/material.dart';
 
 import '../models/library.dart';
