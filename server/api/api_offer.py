@@ -40,6 +40,7 @@ def save_offer(current_user):
             abort(400)
         token = request.headers["Authorization"]
         data = request.get_json(force=True)
+        # print(data)
         user_info = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])["username"]
         add_offer_to_user(username=user_info, data=data)
         return {"status": "success"}, 200

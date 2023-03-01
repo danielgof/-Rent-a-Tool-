@@ -106,7 +106,7 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                   // Navigator.pushNamed(context, '/user_offers');
                 } else {
                   print("incorrect data");
-                  await routeState.go('/settings');
+                  // await routeState.go('/settings');
 
                   // showDialog<String>(
                   //   context: context,

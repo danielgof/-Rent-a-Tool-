@@ -30,7 +30,7 @@ class OfferRegistrationPage extends StatelessWidget {
     //   "phone_number": "+1343452243"
     // };
     var body_data = json.encode(credits);
-    // print(body_data);
+    print(body_data);
     final response = await http.post(Uri.parse(url), body: body_data, headers: {
       HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
     });
@@ -169,32 +169,46 @@ class OfferRegistrationPage extends StatelessWidget {
                 var date_finish = date_finishController.text;
                 var owner_name = owner_nameController.text;
                 var phone_number = phone_numberController.text;
-                var status = await offerRegistrationRequest(tool_name, tool_description, location, price, date_start, date_finish, owner_name, phone_number);
-                if (200 == status) {
-                  showDialog<String>(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Succes!'),
-                      content: const Text('Offer was crated.'),
-                      actions: [
-                        // TextButton(
-                        // 	onPressed: () => Navigator.pop(context, 'Cancel'),
-                        // 	child: const Text('Cancel'),
-                        // ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                  // Navigator.pushNamed(context, '/user_offers');
+                if (tool_name != "" && tool_description != "" && location != "" && price != "" && date_start != "" && date_finish != ""
+                    && owner_name != "" && phone_number != "") {
+                  print("test");
+                  var status = await offerRegistrationRequest(tool_name, tool_description, location, price, date_start, date_finish, owner_name, phone_number);
+                  if (200 == status) {
+                    showDialog<String>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Succes!'),
+                        content: const Text('Offer was crated.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                    // Navigator.pushNamed(context, '/user_offers');
+                  } else {
+                    showDialog<String>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Error!'),
+                        content: const Text('The error occured when register an offer.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 } else {
                   showDialog<String>(
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Error!'),
-                      content: const Text('The error occured when register an offer.'),
+                      content: const Text('Enter valid data.'),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, 'OK'),
