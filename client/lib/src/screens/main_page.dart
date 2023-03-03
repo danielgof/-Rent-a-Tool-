@@ -1,15 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:RT/src/models/offer.dart';
-import 'package:RT/src/models/offers.dart';
 import 'package:RT/src/screens/private_pages/alloffers_private_page.dart';
-import 'package:RT/src/screens/public_pages/alloffers_public_page.dart';
 import 'package:RT/src/screens/private_pages/map_page.dart';
 import 'package:RT/src/widgets/offers_list.dart';
 import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as http;
 import '../data.dart';
 import '../routing.dart';
 import '../widgets/book_list.dart';
@@ -58,6 +51,7 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 65, 203, 83),
           title: const Text('Rent a Tool'),
           bottom: TabBar(
             controller: _tabController,
@@ -95,7 +89,7 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
               // offers: offers.getOffersRequest(),
               onTap: _handleOfferTapped,
             ),
-            MapPage()
+            const MapPage()
             // AllOffersPage(),
             // BookList(
             //   books: libraryInstance.newBooks,

@@ -17,7 +17,8 @@ class BookDetailsScreen extends StatelessWidget {
     if (book == null) {
       return const Scaffold(
         body: Center(
-          child: Text('No book found.'),
+          child: Text('No book found.',
+              style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
         ),
       );
     }
@@ -37,7 +38,8 @@ class BookDetailsScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             TextButton(
-              child: const Text('View author (Push)'),
+              child: const Text('View author (Push)',
+                  style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
               onPressed: () {
                 Navigator.of(context).push<void>(
                   MaterialPageRoute<void>(

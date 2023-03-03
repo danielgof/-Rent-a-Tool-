@@ -8,15 +8,17 @@ from base import *
 
 
 db_name, db_username, db_password = config_db("config.yaml")
-engine = create_engine(f"postgresql://{db_username}:{db_password}@localhost:5432/{db_name}")
+engine = create_engine(
+    f"postgresql://{db_username}:{db_password}@localhost:5432/{db_name}"
+)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 
 Base.metadata.create_all(engine)
 session = Session()
-# user1 = User(username="JL", 
+# user1 = User(username="JL",
 #             phone="+19993459872",
-#             email="picard@gmail.com", 
+#             email="picard@gmail.com",
 #             password="NCC-1701-D",
 #             confirmed=1)
 # user2 = User(username="test",
@@ -85,7 +87,6 @@ session = Session()
 #     owner_name="Feodr",
 #     phone_number="+78992839822938"
 # )
-
 
 
 # # request1 = db_request.Request(

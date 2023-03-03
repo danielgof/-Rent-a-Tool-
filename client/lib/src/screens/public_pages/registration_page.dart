@@ -16,9 +16,8 @@ class RegistrationPage extends StatelessWidget {
       "email":email,
       "password":pass,
 		};
-		var body_data = json.encode(credits);
-		final response = await http.post(Uri.parse(url), body: body_data);
-		var responseData = json.decode(response.body);
+		var bodyData = json.encode(credits);
+		final response = await http.post(Uri.parse(url), body: bodyData);
 		var data = response.statusCode;
 		return data;
 	}
@@ -30,18 +29,17 @@ class RegistrationPage extends StatelessWidget {
 	Widget build(BuildContext context) {
 		return Scaffold(
 			bottomNavigationBar: BottomAppBar(
-				child: new Row(
+				child: Row(
 					mainAxisSize: MainAxisSize.max,
-					// mainAxisAlignment: MainAxisAlignment.spaceBetween,
 					children: <Widget>[
-						IconButton(icon: Icon(Icons.local_offer), onPressed: () {
+						IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
 							Navigator.push(
 								context,
 								MaterialPageRoute(builder: (context) => AllOffersPage()
 								),
 							);
 						},),
-						IconButton(icon: Icon(Icons.login), onPressed: () {
+						IconButton(icon: const Icon(Icons.login), onPressed: () {
 							Navigator.pop(context);
 						},),
 					],
@@ -55,13 +53,13 @@ class RegistrationPage extends StatelessWidget {
 					child: Column(
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: <Widget>[
-							Text('Registration'),
+							const Text('Registration'),
 							Padding(
 								padding: const EdgeInsets.only(
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
 									controller: usernameController,
-									decoration: InputDecoration(
+									decoration: const InputDecoration(
 										border: OutlineInputBorder(),
 										labelText: 'Username',
 										hintText: 'Enter username'),
@@ -73,7 +71,7 @@ class RegistrationPage extends StatelessWidget {
 								child: TextField(
 									controller: passController,
 									obscureText: true,
-									decoration: InputDecoration(
+									decoration: const InputDecoration(
 										border: OutlineInputBorder(),
 										labelText: 'Password',
 										hintText: 'Enter secure password'),
@@ -84,7 +82,7 @@ class RegistrationPage extends StatelessWidget {
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
 									controller: emailController,
-									decoration: InputDecoration(
+									decoration: const InputDecoration(
 										border: OutlineInputBorder(),
 										labelText: 'Email',
 										hintText: 'Enter email'),
@@ -95,57 +93,70 @@ class RegistrationPage extends StatelessWidget {
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
 									controller: phoneController,
-									decoration: InputDecoration(
+									decoration: const InputDecoration(
 										border: OutlineInputBorder(),
 										labelText: 'Phone number',
 										hintText: 'Enter phone number'),
 								),
 							),
-							ElevatedButton(
-								child: const Text('Register'),
-								onPressed: () async {
-									var username = usernameController.text;
-									var pass = passController.text;
-									var phone = phoneController.text;
-									var email = emailController.text;
-									var status = await registrationRequest(username, pass, phone, email);
-									if (200 == status) {
-										print("user was registered");
-										showDialog<String>(
-											context: context,
-											builder: (context) => AlertDialog(
-												title: const Text('Succes!'),
-												content: const Text('The user was registered succesfully.'),
-												actions: [
-													// TextButton(
-													// 	onPressed: () => Navigator.pop(context, 'Cancel'),
-													// 	child: const Text('Cancel'),
-													// ),
-													TextButton(
-														onPressed: () => Navigator.pop(context, 'OK'),
-														child: const Text('OK'),
+							Padding(
+								padding: const EdgeInsets.all(16),
+								child: TextButton(
+									onPressed: () async {
+										var username = usernameController.text;
+										var pass = passController.text;
+										var phone = phoneController.text;
+										var email = emailController.text;
+										var status = await registrationRequest(username, pass, phone, email);
+										if (username != "" && pass != "" && phone != "" && email != "") {
+											if (200 == status) {
+												showDialog<String>(
+													context: context,
+													builder: (context) => AlertDialog(
+														title: const Text('Success!'),
+														content: const Text('The user was registered successfully.'),
+														actions: [
+															TextButton(
+																onPressed: () => Navigator.pop(context, 'OK'),
+																child: const Text('OK'),
+															),
+														],
 													),
-												],
-											),
-										);
-										// Navigator.pushNamed(context, '/user_offers');
-									} else {
-										print("incorrect data");
-										showDialog<String>(
-											context: context,
-											builder: (context) => AlertDialog(
-												title: const Text('Error!'),
-												content: const Text('The error occured when register a user.'),
-												actions: [
-													TextButton(
-														onPressed: () => Navigator.pop(context, 'OK'),
-														child: const Text('OK'),
+												);
+												// Navigator.pushNamed(context, '/user_offers');
+											} else {
+												showDialog<String>(
+													context: context,
+													builder: (context) => AlertDialog(
+														title: const Text('Error!'),
+														content: const Text('The error occurred when register a user.'),
+														actions: [
+															TextButton(
+																onPressed: () => Navigator.pop(context, 'OK'),
+																child: const Text('OK'),
+															),
+														],
 													),
-												],
-											),
-										);
-									}
-								},
+												);
+											}
+										} else {
+											showDialog<String>(
+												context: context,
+												builder: (context) => AlertDialog(
+													title: const Text('Error!'),
+													content: const Text('All fields should be filled in order to register.'),
+													actions: [
+														TextButton(
+															onPressed: () => Navigator.pop(context, 'OK'),
+															child: const Text('OK'),
+														),
+													],
+												),
+											);
+										}
+									},
+									child: const Text('Register.'),
+								),
 							),
 						],
 					),

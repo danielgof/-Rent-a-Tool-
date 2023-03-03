@@ -1,11 +1,12 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import '../../api/url.dart';
 import '../auth.dart';
 import '../data.dart';
-import '../models/offer.dart';
+// import '../models/offer.dart';
 import '../routing.dart';
 import '../screens/sign_in.dart';
 import '../widgets/fade_transition_page.dart';
@@ -38,18 +39,13 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
   @override
   Widget build(BuildContext context) {
     Future<int> loginRequest(login, pass) async {
-      String url = "http://localhost:5000/api/v1/auth/login";
+      String url = "$URL/api/v1/auth/login";
       Map credits = {
         "username": login,
         "password": pass
       };
-      // Map credits = {
-      // 	"username": "JL",
-      // 	"password": "NCC-1701-D"
-      // };
-      var body_data = json.encode(credits);
-      final response = await http.post(Uri.parse(url), body: body_data);
-      var responseData = json.decode(response.body);
+      var bodyData = json.encode(credits);
+      final response = await http.post(Uri.parse(url), body: bodyData);
       var data = response.statusCode;
       return data;
     }
@@ -73,58 +69,31 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
     return Navigator(
       key: widget.navigatorKey,
       onPopPage: (route, dynamic result) {
-        // When a page that is stacked on top of the scaffold is popped, display
-        // the /books or /authors tab in BookstoreScaffold.
         if (route.settings is Page &&
             (route.settings as Page).key == _bookDetailsKey) {
           routeState.go('/books/popular');
         }
-
         if (route.settings is Page &&
             (route.settings as Page).key == _authorDetailsKey) {
           routeState.go('/authors');
         }
-
         return route.didPop(result);
       },
       pages: [
         if (routeState.route.pathTemplate == '/signin')
-          // Display the sign in screen.
           FadeTransitionPage<void>(
             key: _signInKey,
             child: SignInScreen(
               onSignIn: (credentials) async {
-                var signedIn = await authState.signIn(
-                    credentials.username, credentials.password);
                 var login = credentials.username;
                 var pass = credentials.password;
                 var status = await loginRequest(login, pass);
-                // print(credentials.password);
                 if (200 == status) {
-                  // print("login");
+                  // var signedIn =
+                  await authState.signIn(
+                  credentials.username, credentials.password);
                   await routeState.go('/books/popular');
                   // Navigator.pushNamed(context, '/user_offers');
-                } else {
-                  print("incorrect data");
-                  // await routeState.go('/settings');
-
-                  // showDialog<String>(
-                  //   context: context,
-                  //   builder: (context) => AlertDialog(
-                  //     title: const Text('Succes!'),
-                  //     content: const Text('Offer was crated.'),
-                  //     actions: [
-                  //       // TextButton(
-                  //       // 	onPressed: () => Navigator.pop(context, 'Cancel'),
-                  //       // 	child: const Text('Cancel'),
-                  //       // ),
-                  //       TextButton(
-                  //         onPressed: () => Navigator.pop(context, 'OK'),
-                  //         child: const Text('OK'),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // );
                 }
               },
             ),

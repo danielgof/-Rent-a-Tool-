@@ -27,20 +27,18 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    // appBar: AppBar(title: const Text('Bottom App Bar')),
     bottomNavigationBar: BottomAppBar(
-      child: new Row(
+      child: Row(
         mainAxisSize: MainAxisSize.max,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          IconButton(icon: Icon(Icons.local_offer), onPressed: () {
+          IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => AllOffersPage()
               ),
             );
           },),
-          IconButton(icon: Icon(Icons.login), onPressed: () {},),
+          IconButton(icon: const Icon(Icons.login), onPressed: () {},),
         ],
       ),
     ),
@@ -68,11 +66,34 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.all(16),
                 child: TextButton(
                   onPressed: () async {
-                    widget.onSignIn(Credentials(
-                        _usernameController.value.text,
-                        _passwordController.value.text));
+                    if (_usernameController.value.text != "" && _passwordController.value.text != "") {
+                      widget.onSignIn(Credentials(
+                          _usernameController.value.text,
+                          _passwordController.value.text)
+                      );
+                    } else {
+                      showDialog<String>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Error!',
+                              style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
+                          content: const Text('All fields should be filled in order to login.',
+                              style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK',
+                                  style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                   },
-                  child: const Text('Sign in'),
+                  child: const Text(
+                    'Sign in',
+                    style: TextStyle(color: Color.fromARGB(255, 65, 203, 83)),
+                  ),
                 ),
               ),
               Padding(
@@ -85,7 +106,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     );
                   },
-                  child: const Text('New user? Click to register.'),
+                  child: const Text('New user? Click to register.',
+                    style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
                 ),
               ),
             ],
@@ -94,8 +116,4 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     ),
   );
-}
-
-class _tabController {
-
 }

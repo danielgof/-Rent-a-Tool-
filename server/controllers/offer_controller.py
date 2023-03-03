@@ -57,5 +57,3 @@ delete user's offer
 def delete_offer_by_id(data: dict) -> None:
     session.query(Offer).filter(Offer.id == data["id"]).delete()
     session.commit()
-
-

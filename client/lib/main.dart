@@ -333,7 +333,7 @@ void setupWindow() {
 // import 'package:http/http.dart' as http;
 // import 'package:mobile/pages/registration_page.dart';
 //
-// import './pages/offers_page.dart';
+// import './pages/user_offers_page.dart';
 // import './pages/main_page.dart';
 // import './models/login_user.dart';
 //
