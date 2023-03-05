@@ -8,7 +8,7 @@ import '../auth.dart';
 import '../data.dart';
 // import '../models/offer.dart';
 import '../routing.dart';
-import '../screens/sign_in.dart';
+import 'public_pages/sign_in.dart';
 import '../widgets/fade_transition_page.dart';
 import 'author_details.dart';
 import 'book_details.dart';
@@ -85,6 +85,9 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
             key: _signInKey,
             child: SignInScreen(
               onSignIn: (credentials) async {
+                // await authState.signIn(
+                //     credentials.username, credentials.password);
+                // await routeState.go('/books/popular');
                 var login = credentials.username;
                 var pass = credentials.password;
                 var status = await loginRequest(login, pass);

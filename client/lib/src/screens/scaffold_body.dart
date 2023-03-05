@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../routing.dart';
 import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
 import 'profile.dart';
-import 'main_page.dart';
+import 'private_pages/main_page.dart';
 import 'scaffold.dart';
 
 /// Displays the contents of the body of [BookstoreScaffold]
@@ -19,8 +18,6 @@ class BookstoreScaffoldBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentRoute = RouteStateScope.of(context).route;
 
-    // A nested Router isn't necessary because the back button behavior doesn't
-    // need to be customized.
     return Navigator(
       key: navigatorKey,
       onPopPage: (route, dynamic result) => route.didPop(result),

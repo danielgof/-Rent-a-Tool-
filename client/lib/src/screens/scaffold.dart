@@ -13,16 +13,18 @@ class BookstoreScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final routeState = RouteStateScope.of(context);
     final selectedIndex = _getSelectedIndex(routeState.route.pathTemplate);
-
     return Scaffold(
       body: AdaptiveNavigationScaffold(
         selectedIndex: selectedIndex,
         body: const BookstoreScaffoldBody(),
+        // backgroundColor: const Color.fromARGB(255, 65, 203, 83),
         onDestinationSelected: (idx) {
           if (idx == 0) routeState.go('/books/popular');
           if (idx == 1) routeState.go('/authors');
           if (idx == 2) routeState.go('/settings');
         },
+        // fixedColor: Colors.green,
+        // backgroundColor: const Color.fromARGB(255, 65, 203, 83),
         destinations: const [
           AdaptiveScaffoldDestination(
             title: 'Offers',

@@ -35,7 +35,7 @@ class RegistrationPage extends StatelessWidget {
 						IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
 							Navigator.push(
 								context,
-								MaterialPageRoute(builder: (context) => AllOffersPage()
+								MaterialPageRoute(builder: (context) => AllOffersPageState()
 								),
 							);
 						},),
@@ -60,6 +60,20 @@ class RegistrationPage extends StatelessWidget {
 								child: TextField(
 									controller: usernameController,
 									decoration: const InputDecoration(
+										labelStyle: TextStyle(color: Colors.green),
+										focusedBorder: OutlineInputBorder(
+												borderSide: BorderSide(color: Colors.grey, width: 0.0),
+											// enabledBorder: new OutlineInputBorder(
+											// 	// borderRadius: new BorderRadius.circular(25.0),
+											// 	borderSide:  BorderSide(color: Colors.pinkAccent ),
+											//
+											// ),
+											// focusedBorder: new OutlineInputBorder(
+											// 	borderRadius: new BorderRadius.circular(25.0),
+											// 	borderSide:  BorderSide(color: Colors.pinkAccent ),
+											//
+											// ),
+										),
 										border: OutlineInputBorder(),
 										labelText: 'Username',
 										hintText: 'Enter username'),
@@ -72,9 +86,14 @@ class RegistrationPage extends StatelessWidget {
 									controller: passController,
 									obscureText: true,
 									decoration: const InputDecoration(
+										labelStyle: TextStyle(color: Colors.green),
+										focusedBorder: OutlineInputBorder(
+												borderSide: BorderSide(color: Colors.grey, width: 0.0),
+										),
 										border: OutlineInputBorder(),
 										labelText: 'Password',
-										hintText: 'Enter secure password'),
+										hintText: 'Enter secure password'
+									),
 								),
 							),
 							Padding(
@@ -83,9 +102,14 @@ class RegistrationPage extends StatelessWidget {
 								child: TextField(
 									controller: emailController,
 									decoration: const InputDecoration(
+											labelStyle: TextStyle(color: Colors.green),
+											focusedBorder: OutlineInputBorder(
+												borderSide: BorderSide(color: Colors.grey, width: 0.0),
+											),
 										border: OutlineInputBorder(),
 										labelText: 'Email',
-										hintText: 'Enter email'),
+										hintText: 'Enter email'
+									),
 								),
 							),
 							Padding(
@@ -94,9 +118,14 @@ class RegistrationPage extends StatelessWidget {
 								child: TextField(
 									controller: phoneController,
 									decoration: const InputDecoration(
+											labelStyle: TextStyle(color: Colors.green),
+											focusedBorder: OutlineInputBorder(
+												borderSide: BorderSide(color: Colors.grey, width: 0.0),
+											),
 										border: OutlineInputBorder(),
 										labelText: 'Phone number',
-										hintText: 'Enter phone number'),
+										hintText: 'Enter phone number'
+									),
 								),
 							),
 							Padding(
@@ -123,7 +152,6 @@ class RegistrationPage extends StatelessWidget {
 														],
 													),
 												);
-												// Navigator.pushNamed(context, '/user_offers');
 											} else {
 												showDialog<String>(
 													context: context,
@@ -133,7 +161,8 @@ class RegistrationPage extends StatelessWidget {
 														actions: [
 															TextButton(
 																onPressed: () => Navigator.pop(context, 'OK'),
-																child: const Text('OK'),
+																child: const Text('OK',
+																		style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
 															),
 														],
 													),
@@ -148,14 +177,16 @@ class RegistrationPage extends StatelessWidget {
 													actions: [
 														TextButton(
 															onPressed: () => Navigator.pop(context, 'OK'),
-															child: const Text('OK'),
+															child: const Text('OK',
+																	style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
 														),
 													],
 												),
 											);
 										}
 									},
-									child: const Text('Register.'),
+									child: const Text('Register.',
+											style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
 								),
 							),
 						],

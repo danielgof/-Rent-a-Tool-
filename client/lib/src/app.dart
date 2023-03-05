@@ -67,6 +67,9 @@ class _BookstoreState extends State<Bookstore> {
             // Revert back to pre-Flutter-2.5 transition behavior:
             // https://github.com/flutter/flutter/issues/82053
             theme: ThemeData(
+              // iconTheme: const IconThemeData(
+              //   color: Colors.green,
+              // ),
               pageTransitionsTheme: const PageTransitionsTheme(
                 builders: {
                   TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),

@@ -36,7 +36,8 @@ class _OfferPageState extends State<OfferPage> {
 		return SafeArea(
 			child: Scaffold(
 				appBar: AppBar(
-					title: Text("Offers"),
+					title: const Text("Offers"),
+					backgroundColor: const Color.fromARGB(255, 65, 203, 83),
 					actions: <Widget>[
             IconButton(
               icon: const Icon(

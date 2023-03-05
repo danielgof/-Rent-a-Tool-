@@ -20,22 +20,10 @@ class OfferRegistrationPage extends StatelessWidget {
       "owner_name":ownerName,
       "phone_number":phoneNumber,
     };
-    // Map credits = {
-    //   "tool_name": "test",
-    //   "tool_description": "test test",
-    //   "location": "test, test",
-    //   "price": "test",
-    //   "date_start": "03/01/2001",
-    //   "date_finish": "03/02/2001",
-    //   "owner_name": "test",
-    //   "phone_number": "+1343452243"
-    // };
     var bodyData = json.encode(credits);
     final response = await http.post(Uri.parse(url), body: bodyData, headers: {
       HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
     });
-    var responseData = json.decode(response.body);
-    // print(responseData);
     var data = response.statusCode;
     return data;
   }
@@ -52,8 +40,13 @@ class OfferRegistrationPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Offer registration."),
+          backgroundColor: const Color.fromARGB(255, 65, 203, 83),
         ),
       body: Center(
+        child: Card(
+        child: Container(
+        constraints: BoxConstraints.loose(const Size(600, 600)),
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -63,7 +56,15 @@ class OfferRegistrationPage extends StatelessWidget {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 controller: tool_nameController,
+                // decoration: const InputDecoration(
+                //   labelStyle: TextStyle(color: Colors.green),
+                //   focusedBorder: OutlineInputBorder(
+                //     borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                //   ),
                 decoration: const InputDecoration(
+                  labelStyle: TextStyle(color: Colors.green),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                  ),
                     border: OutlineInputBorder(),
                     labelText: 'tool name',
                     hintText: 'Enter tool name'),
@@ -75,6 +76,9 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: tool_descriptionController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'tool description',
                     hintText: 'tool description'),
@@ -86,9 +90,13 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: locationController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'location',
-                    hintText: 'location'),
+                    hintText: 'location'
+                ),
               ),
             ),
             Padding(
@@ -97,6 +105,9 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: priceController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'price',
                     hintText: 'price'),
@@ -108,6 +119,9 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: date_startController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'date_start',
                     hintText: 'date_start'),
@@ -119,6 +133,9 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: date_finishController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'date_finish',
                     hintText: 'date_finish'),
@@ -130,6 +147,9 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: owner_nameController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'owner_name',
                     hintText: 'owner_name'),
@@ -141,13 +161,17 @@ class OfferRegistrationPage extends StatelessWidget {
               child: TextField(
                 controller: phone_numberController,
                 decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     labelText: 'phone_number',
                     hintText: 'phone_number'),
               ),
             ),
-            ElevatedButton(
-              child: const Text('Register'),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextButton(
               onPressed: () async {
                 var toolName = tool_nameController.text;
                 var toolDescription = tool_descriptionController.text;
@@ -169,7 +193,10 @@ class OfferRegistrationPage extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK'),
+                            child: const Text('OK',
+                                style: TextStyle(color: Color.fromARGB(255, 65, 203, 83)
+                                )
+                            ),
                           ),
                         ],
                       ),
@@ -184,7 +211,10 @@ class OfferRegistrationPage extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK'),
+                            child: const Text('OK',
+                                style: TextStyle(color: Color.fromARGB(255, 65, 203, 83)
+                                )
+                            ),
                           ),
                         ],
                       ),
@@ -199,17 +229,27 @@ class OfferRegistrationPage extends StatelessWidget {
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('OK'),
+                          child: const Text('OK',
+                              style: TextStyle(color: Color.fromARGB(255, 65, 203, 83)
+                              )
+                          ),
                         ),
                       ],
                     ),
                   );
                 }
               },
+              child: const Text('Register',
+                  style: TextStyle(color: Color.fromARGB(255, 65, 203, 83)
+                  )
+              ),
             ),
+           ),
           ],
         ), // Column
-      ), // Center
-    ); // Scaffold
+       ),
+      )
+     )
+    );
   }
 }

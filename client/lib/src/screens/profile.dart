@@ -11,6 +11,7 @@ class AuthorsScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text(title),
+      backgroundColor: const Color.fromARGB(255, 65, 203, 83),
     ),
     body: Center(
       child: Card(
@@ -31,7 +32,8 @@ class AuthorsScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text('Create new offer.'),
+                child: const Text('Create new offer.',
+                    style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
               ),
             ),
             Padding(
@@ -44,7 +46,8 @@ class AuthorsScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text('My offers.'),
+                child: const Text('My offers.',
+                    style: TextStyle(color: Color.fromARGB(255, 65, 203, 83))),
               ),
             ),
             ],
