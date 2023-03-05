@@ -54,6 +54,38 @@ delete user's offer
 """
 
 
-def delete_offer_by_id(data: dict) -> None:
-    session.query(Offer).filter(Offer.id == data["id"]).delete()
-    session.commit()
+def delete_offer_by_id(data: dict) -> bool:
+    offer: Offer = session.query(Offer).filter(Offer.id == data["id"]).first()
+    if offer:
+        offer.delete()
+        session.commit()
+        return True
+    else:
+        return False
+
+
+"""
+upd offer by its id
+"""
+
+
+def upd_offer_by_id(data: dict) -> bool:
+    offer: Offer = session.query(Offer).filter(Offer.id == data["id"]).first()
+    if offer:
+        session.query(Offer).filter(Offer.id == data["id"]).update(
+            {
+                Offer.tool_name: data["tool_name"],
+                Offer.tool_description: data["tool_description"],
+                Offer.location: data["location"],
+                Offer.price: data["price"],
+                Offer.date_start: data["date_start"],
+                Offer.date_finish: data["date_finish"],
+                Offer.owner_name: data["owner_name"],
+                Offer.phone_number: data["phone_number"]
+            },
+            synchronize_session=False,
+        )
+        session.commit()
+        return True
+    else:
+        return False

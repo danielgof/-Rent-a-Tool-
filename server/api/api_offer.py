@@ -85,7 +85,24 @@ def delete_offer(current_user) -> dict:
         if not request.get_json(force=True):
             abort(400)
         data_id = request.get_json(force=True)
-        delete_offer_by_id(data=data_id)
+        result = delete_offer_by_id(data=data_id)
+        if result:
+            return {"status": "success"}, 200
+        else:
+            return {"status": "error"}, 404
+    except Exception as e:
+        current_app.logger.info(f"exeption {e}")
+        return {"message": "error"}, 500
+
+
+@offer.route("/upd", methods=["PUT"])
+@token_required
+def update_offer(current_user) -> dict:
+    try:
+        if not request.get_json(force=True):
+            abort(400)
+        new_offer = request.get_json(force=True)
+        upd_offer_by_id(data=new_offer)
         return {"status": "success"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
