@@ -8,8 +8,11 @@ from base import *
 
 
 db_name, db_username, db_password = config_db("config.yaml")
+# engine = create_engine(
+#     f"postgresql://{db_username}:{db_password}@localhost:5432/{db_name}"
+# )
 engine = create_engine(
-    f"postgresql://{db_username}:{db_password}@localhost:5432/{db_name}"
+    f"postgresql://{db_username}:{db_password}@ep-curly-mountain-716247.us-east-2.aws.neon.tech/{db_name}"
 )
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
