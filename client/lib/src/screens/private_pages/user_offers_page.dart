@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import '../../../api/url.dart';
 import '../../models/offer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +13,7 @@ class OfferPage extends StatefulWidget {
 class _OfferPageState extends State<OfferPage> {
 
 	Future<List<Offer>> getRequest() async {
-		String url = "http://localhost:5000/api/v1/offer/all";
+		String url = "$URL/api/v1/offer/all";
 		final response = await http.get(Uri.parse(url),
     headers: {
       HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
@@ -25,9 +26,15 @@ class _OfferPageState extends State<OfferPage> {
         id: offer["id"],
         toolName: offer["tool_name"],
         toolDescription: offer["tool_description"],
-        price: offer["price"]);
+        price: offer["price"],
+				dateStart: offer["date_start"],
+				dateFinish: offer["date_finish"],
+				ownerName: offer["owner_name"],
+				phoneNumber: offer["phone_number"]
+			);
 			offers.add(offerTmp);
 		}
+		print(offers);
 		return offers;
 	}
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import '../../../api/url.dart';
 import '../../models/offer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +22,7 @@ class _AllOffersPrivatePageState extends State<AllOffersPrivatePage> {
   }
 
   Future<List<Offer>> fetchOffers() async {
-    String url = "http://localhost:5000/api/v1/offer/all_all";
+    String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url),
       headers: {
         HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
@@ -118,6 +119,10 @@ class PostDetailsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             Text(
               post.toolDescription,
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            Text(
+              post.price,
               style: const TextStyle(fontSize: 18.0),
             ),
             const SizedBox(height: 16.0),

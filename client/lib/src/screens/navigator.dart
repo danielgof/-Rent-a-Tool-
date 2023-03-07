@@ -91,6 +91,7 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                 var login = credentials.username;
                 var pass = credentials.password;
                 var status = await loginRequest(login, pass);
+                print(status);
                 if (200 == status) {
                   // var signedIn =
                   await authState.signIn(
