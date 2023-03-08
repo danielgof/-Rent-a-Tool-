@@ -8,6 +8,8 @@ class Offer(Base):
     tool_name = Column(String, nullable=False)
     tool_description = Column(String, nullable=False)
     location = Column(String, nullable=False)
+    lat = Column(String, nullable=False)
+    lng = Column(String, nullable=False)
     price = Column(String, nullable=False)
     date_start = Column(Date, nullable=False)
     date_finish = Column(Date, nullable=False)

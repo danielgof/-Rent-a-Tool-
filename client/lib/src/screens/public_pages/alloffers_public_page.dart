@@ -4,6 +4,8 @@ import 'package:RT/src/models/offer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../api/url.dart';
+
 
 class AllOffersPageState extends StatefulWidget {
 	const AllOffersPageState({Key? key}) : super(key: key);
@@ -22,19 +24,16 @@ class _AllOffersPageState extends State<AllOffersPageState> {
 	}
 
 	Future<List<Offer>> fetchOffers() async {
-		String url = "http://localhost:5000/api/v1/offer/all_all";
+		String url = "$URL/api/v1/offer/all_all";
 		final response = await http.get(Uri.parse(url),
     headers: {
       HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
     },);
 
 		if (response.statusCode == 200) {
-			// If the server did return a 200 OK response, parse the JSON.
 			final List<dynamic> jsonList = json.decode(response.body)["data"];
-			// print(jsonList.map((json) => Post.fromJson(json)).toList());
 			return jsonList.map((json) => Offer.fromJson(json)).toList();
 		} else {
-			// If the server did not return a 200 OK response, throw an error.
 			throw Exception('Failed to load posts');
 		}
 	}
@@ -47,11 +46,6 @@ class _AllOffersPageState extends State<AllOffersPageState> {
 			    mainAxisSize: MainAxisSize.max,
 			    children: <Widget>[
 			      IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
-			        // Navigator.push(
-			        //   context,
-			        //   MaterialPageRoute(builder: (context) => AllOffersPage()
-			        //   ),
-			        // );
 			      },),
 			      IconButton(icon: const Icon(Icons.login), onPressed: () {
 			        Navigator.pop(context);
@@ -120,6 +114,7 @@ class PostDetailsPage extends StatelessWidget {
 		return Scaffold(
 			appBar: AppBar(
 				title: Text(post.toolName),
+				backgroundColor: const Color.fromARGB(255, 65, 203, 83),
 			),
 			body: Padding(
 				padding: const EdgeInsets.all(16.0),
@@ -135,11 +130,35 @@ class PostDetailsPage extends StatelessWidget {
 							post.toolDescription,
 							style: const TextStyle(fontSize: 18.0),
 						),
-						const SizedBox(height: 16.0),
 						Text(
-							'Post ID: ${post.id}',
-							style: const TextStyle(fontSize: 16.0),
+							'Price: ${post.price}',
+							style: const TextStyle(fontSize: 18.0),
 						),
+						Text(
+							'Location: ${post.location}',
+							style: const TextStyle(fontSize: 18.0),
+						),
+						Text(
+							'Date Start: ${post.dateStart}',
+							style: const TextStyle(fontSize: 18.0),
+						),
+						Text(
+							'Date Finish: ${post.dateFinish}',
+							style: const TextStyle(fontSize: 18.0),
+						),
+						Text(
+							'Owner Name: ${post.ownerName}',
+							style: const TextStyle(fontSize: 18.0),
+						),
+						Text(
+							'Phone Number: ${post.phoneNumber}',
+							style: const TextStyle(fontSize: 18.0),
+						),
+						// const SizedBox(height: 16.0),
+						// Text(
+						// 	'Post ID: ${post.id}',
+						// 	style: const TextStyle(fontSize: 16.0),
+						// ),
 					],
 				),
 			),

@@ -86,7 +86,7 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
             ),
             OffersList(
               // offers: getOffersRequest(),
-              offers: [Offer(id: 1, toolName: "test", toolDescription: "test", price: "test", dateStart: 'test', dateFinish: 'test', ownerName: 'test', phoneNumber: 'test')],
+              offers: [Offer(id: 1, toolName: "test", toolDescription: "test", price: "test", dateStart: 'test', dateFinish: 'test', ownerName: 'test', phoneNumber: 'test', location: 'some location', lng: '45.8', lat: '6')],
               // offers: offers.getOffersRequest(),
               onTap: _handleOfferTapped,
             ),

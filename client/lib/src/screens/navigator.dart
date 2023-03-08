@@ -1,12 +1,8 @@
-// import 'dart:io';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-
 import '../../api/url.dart';
 import '../auth.dart';
 import '../data.dart';
-// import '../models/offer.dart';
 import '../routing.dart';
 import 'public_pages/sign_in.dart';
 import '../widgets/fade_transition_page.dart';
@@ -98,6 +94,8 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                   credentials.username, credentials.password);
                   await routeState.go('/books/popular');
                   // Navigator.pushNamed(context, '/user_offers');
+                } else {
+
                 }
               },
             ),

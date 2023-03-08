@@ -7,6 +7,9 @@ class Offer {
   final String dateFinish;
   final String ownerName;
   final String phoneNumber;
+  final String location;
+  final String lat;
+  final String lng;
 
   Offer({
     required this.id,
@@ -17,6 +20,9 @@ class Offer {
     required this.dateFinish,
     required this.ownerName,
     required this.phoneNumber,
+    required this.location,
+    required this.lng,
+    required this.lat,
   });
 
   factory Offer.fromJson(Map<String, dynamic> json) {
@@ -24,6 +30,9 @@ class Offer {
       id: json['id'],
       toolName: json['tool_name'],
       toolDescription: json['tool_description'],
+      location: json['location'],
+      lat: json['lat'],
+      lng: json['lng'],
       price: json['price'],
       dateStart: json['date_start'],
       dateFinish: json['date_finish'],

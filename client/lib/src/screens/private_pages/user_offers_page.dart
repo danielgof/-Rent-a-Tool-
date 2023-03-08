@@ -30,11 +30,13 @@ class _OfferPageState extends State<OfferPage> {
 				dateStart: offer["date_start"],
 				dateFinish: offer["date_finish"],
 				ownerName: offer["owner_name"],
-				phoneNumber: offer["phone_number"]
+				phoneNumber: offer["phone_number"],
+				location: offer["location"],
+				lat: offer["lat"],
+				lng: offer["lng"],
 			);
 			offers.add(offerTmp);
 		}
-		print(offers);
 		return offers;
 	}
 

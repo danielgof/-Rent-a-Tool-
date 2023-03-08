@@ -122,14 +122,34 @@ class PostDetailsPage extends StatelessWidget {
               style: const TextStyle(fontSize: 18.0),
             ),
             Text(
-              post.price,
+              'Price: ${post.price}',
               style: const TextStyle(fontSize: 18.0),
             ),
-            const SizedBox(height: 16.0),
             Text(
-              'Post ID: ${post.id}',
-              style: const TextStyle(fontSize: 16.0),
+              'Location: ${post.location}',
+              style: const TextStyle(fontSize: 18.0),
             ),
+            Text(
+              'Date Start: ${post.dateStart}',
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            Text(
+              'Date Finish: ${post.dateFinish}',
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            Text(
+              'Owner Name: ${post.ownerName}',
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            Text(
+              'Phone Number: ${post.phoneNumber}',
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            // const SizedBox(height: 16.0),
+            // Text
+            //   'Post ID: ${post.id}',
+            //   style: const TextStyle(fontSize: 16.0),
+            // ),
           ],
         ),
       ),

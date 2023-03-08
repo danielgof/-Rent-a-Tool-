@@ -65,6 +65,8 @@ def get_all_user_offers(current_user):
                     "tool_name": offer.tool_name,
                     "tool_description": offer.tool_description,
                     "location": offer.location,
+                    "lat": offer.lat,
+                    "lng": offer.lng,
                     "price": offer.price,
                     "date_start": offer.date_start,
                     "date_finish": offer.date_finish,

@@ -58,12 +58,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 left: 15.0, right: 15.0, top: 15, bottom: 0),
             child:
               TextField(
-                  decoration: const InputDecoration(labelStyle: TextStyle(color: Colors.green),
-                    focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  border: OutlineInputBorder(),
-                  labelText: 'Username',),
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
+                decoration: const InputDecoration(labelStyle: TextStyle(color: Colors.green),
+                  focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                ),
+                border: OutlineInputBorder(),
+                labelText: 'Username',),
                 controller: _usernameController,
               ),
           ),
@@ -72,9 +73,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 left: 15.0, right: 15.0, top: 15, bottom: 0),
             child:
               TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
                 decoration: const InputDecoration(labelStyle: TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    // cursorColor: Colors.green,
                   ),
                   border: OutlineInputBorder(),
                   labelText: 'Password',),
@@ -135,7 +138,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           );
                         } else {
-                            widget.onSignIn(Credentials(
+                          widget.onSignIn(Credentials(
                               _usernameController.value.text,
                               _passwordController.value.text)
                           );

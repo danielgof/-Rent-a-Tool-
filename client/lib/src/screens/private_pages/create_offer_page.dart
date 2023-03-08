@@ -55,47 +55,14 @@ class OfferRegistrationPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
-                controller: tool_nameController,
-                // decoration: const InputDecoration(
-                //   labelStyle: TextStyle(color: Colors.green),
-                //   focusedBorder: OutlineInputBorder(
-                //     borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                //   ),
-                decoration: const InputDecoration(
-                  labelStyle: TextStyle(color: Colors.green),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                    border: OutlineInputBorder(),
-                    labelText: 'tool name',
-                    hintText: 'Enter tool name'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                controller: tool_descriptionController,
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.green),
-                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'tool description',
-                    hintText: 'tool description'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                controller: locationController,
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.green),
-                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'location',
-                    hintText: 'location'
+                 controller: tool_nameController,
+                 cursorColor: const Color.fromARGB(255, 65, 203, 83),
+                 decoration: const InputDecoration(
+                 labelStyle: TextStyle(color: Colors.green),
+                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),),
+                 border: OutlineInputBorder(),
+                 labelText: 'tool name',
+                 hintText: 'Enter tool name'
                 ),
               ),
             ),
@@ -103,48 +70,85 @@ class OfferRegistrationPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
+                controller: tool_descriptionController,
+                decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
+                 border: OutlineInputBorder(),
+                 labelText: 'tool description',
+                 hintText: 'tool description'
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
+                controller: locationController,
+                decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.green),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
+                 border: OutlineInputBorder(),
+                 labelText: 'location',
+                 hintText: 'location'
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
                 controller: priceController,
                 decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.green),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
                     ),
-                    border: OutlineInputBorder(),
-                    labelText: 'price',
-                    hintText: 'price'),
+                 border: OutlineInputBorder(),
+                 labelText: 'price',
+                 hintText: 'price'
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
                 controller: date_startController,
                 decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.green),
-                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'date_start',
-                    hintText: 'date_start'),
+                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),),
+                 border: OutlineInputBorder(),
+                 labelText: 'date_start',
+                 hintText: 'date_start'
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
                 controller: date_finishController,
                 decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.green),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'date_finish',
-                    hintText: 'date_finish'),
+                ),
+                border: OutlineInputBorder(),
+                labelText: 'date_finish',
+                hintText: 'date_finish'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
                 controller: owner_nameController,
                 decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.green),
@@ -159,6 +163,7 @@ class OfferRegistrationPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                cursorColor: const Color.fromARGB(255, 65, 203, 83),
                 controller: phone_numberController,
                 decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.green),

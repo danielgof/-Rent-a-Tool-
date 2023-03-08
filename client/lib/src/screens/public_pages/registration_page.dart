@@ -58,6 +58,7 @@ class RegistrationPage extends StatelessWidget {
 								padding: const EdgeInsets.only(
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
+									cursorColor: const Color.fromARGB(255, 65, 203, 83),
 									controller: usernameController,
 									decoration: const InputDecoration(
 										labelStyle: TextStyle(color: Colors.green),
@@ -83,6 +84,7 @@ class RegistrationPage extends StatelessWidget {
 								padding: const EdgeInsets.only(
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
+									cursorColor: const Color.fromARGB(255, 65, 203, 83),
 									controller: passController,
 									obscureText: true,
 									decoration: const InputDecoration(
@@ -100,6 +102,7 @@ class RegistrationPage extends StatelessWidget {
 								padding: const EdgeInsets.only(
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
+									cursorColor: const Color.fromARGB(255, 65, 203, 83),
 									controller: emailController,
 									decoration: const InputDecoration(
 											labelStyle: TextStyle(color: Colors.green),
@@ -116,6 +119,7 @@ class RegistrationPage extends StatelessWidget {
 								padding: const EdgeInsets.only(
 								left: 15.0, right: 15.0, top: 15, bottom: 0),
 								child: TextField(
+									cursorColor: const Color.fromARGB(255, 65, 203, 83),
 									controller: phoneController,
 									decoration: const InputDecoration(
 											labelStyle: TextStyle(color: Colors.green),
