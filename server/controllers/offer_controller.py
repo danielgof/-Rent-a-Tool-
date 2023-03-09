@@ -83,7 +83,7 @@ def upd_offer_by_id(data: dict) -> bool:
                 Offer.date_start: data["date_start"],
                 Offer.date_finish: data["date_finish"],
                 Offer.owner_name: data["owner_name"],
-                Offer.phone_number: data["phone_number"]
+                Offer.phone_number: data["phone_number"],
             },
             synchronize_session=False,
         )
@@ -91,3 +91,31 @@ def upd_offer_by_id(data: dict) -> bool:
         return True
     else:
         return False
+
+
+"""
+get all offers for particular user
+"""
+
+
+def all_offers_user(user_info: dict) -> list:
+    user = session.query(User).filter(User.username == user_info).first()
+    user_offers = user.offers
+    responce = []
+    for offer in user_offers:
+        responce.append(
+            {
+                "id": offer.id,
+                "tool_name": offer.tool_name,
+                "tool_description": offer.tool_description,
+                "location": offer.location,
+                "lat": offer.lat,
+                "lng": offer.lng,
+                "price": offer.price,
+                "date_start": offer.date_start,
+                "date_finish": offer.date_finish,
+                "owner_name": offer.owner_name,
+                "phone_number": offer.phone_number,
+            }
+        )
+    return responce

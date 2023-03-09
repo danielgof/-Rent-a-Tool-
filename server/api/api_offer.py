@@ -55,28 +55,10 @@ def get_all_user_offers(current_user):
     try:
         token = request.headers["Authorization"]
         user_info = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])["username"]
-        user = session.query(User).filter(User.username == user_info).first()
-        user_offers = user.offers
-        responce = []
-        for offer in user_offers:
-            responce.append(
-                {
-                    "id": offer.id,
-                    "tool_name": offer.tool_name,
-                    "tool_description": offer.tool_description,
-                    "location": offer.location,
-                    "lat": offer.lat,
-                    "lng": offer.lng,
-                    "price": offer.price,
-                    "date_start": offer.date_start,
-                    "date_finish": offer.date_finish,
-                    "owner_name": offer.owner_name,
-                    "phone_number": offer.phone_number,
-                }
-            )
+        responce = all_offers_user(user_info=user_info)
         return {"result": responce}
     except Exception as e:
-        current_app.logger.info("%s failed to log in", user.username)
+        current_app.logger.info("failed to log in")
         return {"message": "error"}, 500
 
 
