@@ -23,12 +23,12 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  late Future<List<LatLng>> _futurePosts;
+  late Future<List<LatLng>> _futureCoord;
 
   @override
   void initState() {
     super.initState();
-    _futurePosts = fetchOffers();
+    _futureCoord = fetchOffers();
   }
 
   Future<List<LatLng>> fetchOffers() async {
@@ -81,53 +81,8 @@ class _MapPageState extends State<MapPage> {
       );
       markers.add(marlerTmp);
     }
-    // final markers = <Marker>[
-    //   Marker(
-    //     width: 80,
-    //     height: 80,
-    //     point: london,
-    //     builder: (ctx) => GestureDetector(
-    //       onTap: () {
-    //         ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
-    //           content: Text('Tapped on blue FlutterLogo Marker'),
-    //         ));
-    //       },
-    //       child: const FlutterLogo(),
-    //     ),
-    //   ),
-    //   Marker(
-    //     width: 80,
-    //     height: 80,
-    //     point: dublin,
-    //     builder: (ctx) => GestureDetector(
-    //       onTap: () {
-    //         ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
-    //           content: Text('Tapped on green FlutterLogo Marker'),
-    //         ));
-    //       },
-    //       child: const FlutterLogo(
-    //         textColor: Colors.green,
-    //       ),
-    //     ),
-    //   ),
-    //   Marker(
-    //     width: 80,
-    //     height: 80,
-    //     point: paris,
-    //     builder: (ctx) => GestureDetector(
-    //       onTap: () {
-    //         ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
-    //           content: Text('Tapped on purple FlutterLogo Marker'),
-    //         ));
-    //       },
-    //       child: const FlutterLogo(textColor: Colors.purple),
-    //     ),
-    //   ),
-    // ];
 
     return Scaffold(
-      // appBar: AppBar(title: const Text('OnTap')),
-      // drawer: buildDrawer(context, OnTapPage.route),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(

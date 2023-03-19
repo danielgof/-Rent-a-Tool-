@@ -58,7 +58,6 @@ class _AllOffersPageState extends State<AllOffersPageState> {
 					future: _futurePosts,
 					builder: (context, snapshot) {
 						if (snapshot.hasData) {
-							// If we successfully fetched the list of posts, display them in a ListView
 							final List<Offer> posts = snapshot.data!;
 							return ListView.builder(
 								itemCount: posts.length,

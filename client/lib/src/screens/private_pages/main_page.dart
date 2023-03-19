@@ -1,5 +1,6 @@
 import 'package:RT/src/models/offer.dart';
 import 'package:RT/src/screens/private_pages/map_page.dart';
+import 'package:RT/src/screens/private_pages/test_map_page.dart';
 import 'package:RT/src/widgets/offers_list.dart';
 import 'package:flutter/material.dart';
 import '../../data.dart';
@@ -90,7 +91,7 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
               // offers: offers.getOffersRequest(),
               onTap: _handleOfferTapped,
             ),
-            const MapPage()
+            MapWithMarkers()
           ],
         ),
       );
