@@ -9,64 +9,102 @@ import 'package:http/http.dart' as http;
 
 import '../../../api/url.dart';
 
-class MapWithMarkers extends StatefulWidget {
+class MyMap extends StatefulWidget {
   @override
-  _MapWithMarkersState createState() => _MapWithMarkersState();
+  _MyMapState createState() => _MyMapState();
 }
 
-class _MapWithMarkersState extends State<MapWithMarkers> {
-  final MapController mapController = MapController();
+class _MyMapState extends State<MyMap> {
+  late Future<List<Marker>> _markers;
+  double _zoom = 6.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _markers = fetchMarkers();
+  }
 
   Future<List<Marker>> fetchMarkers() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
-    final data = jsonDecode(response.body) as List;
-    print(data.map((userData) => Marker(
-      point: LatLng(userData['address']['geo']['lat'], userData['address']['geo']['lng']),
-      builder: (context) => Icon(Icons.location_on),
-    )).toList());
-    return data.map((userData) => Marker(
-      point: LatLng(userData['address']['geo']['lat'], userData['address']['geo']['lng']),
-      builder: (context) => Icon(Icons.location_on),
-    )).toList();
+    String url = "$URL/api/v1/offer/all_all";
+    final response = await http.get(Uri.parse(url), headers: {
+      HttpHeaders.authorizationHeader:
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+    });
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      final List<dynamic> tmp = data["data"];
+      return tmp.map((markerData) {
+        final point = LatLng(
+          double.parse(markerData['lat'].toString()),
+          double.parse(markerData['lng'].toString()),
+        );
+        return Marker(
+          point: point,
+          builder: (ctx) => GestureDetector(
+            onTap: () {
+              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
+                content: Text('Tapped on Marker'),
+              ));
+            },
+            child: const Icon(Icons.pin_drop),
+          ),
+          // builder: (context) => const Icon(Icons.pin_drop),
+        );
+      }).toList();
+    } else {
+      throw Exception('Failed to load markers');
+    }
   }
+
   // Future<List<Marker>> fetchMarkers() async {
-  //   String url = "https://api.latlonglab.com/api/v1/destinations";
-  //   // String url = "$URL/api/v1/offer/all_all";
-  //   final response = await http.get(Uri.parse(url));
-  //
-  //   final data = json.decode(response.body);
-  //   print("test");
-  //   print(data);
-  //
-  //   return data.map((markerData) =>
-  //       Marker(
-  //     point: LatLng(markerData['lat'], markerData['lng']),
-  //     builder: (context) => const Icon(Icons.location_on),
-  //   )).toList();
+  //   // Replace this with your own logic to fetch marker data
+  //   return [
+  //     Marker(
+  //       point: LatLng(51.5, -0.09),
+  //       builder: (context) => Icon(Icons.pin_drop),
+  //     ),
+  //     Marker(
+  //       point: LatLng(52.5, -1.9),
+  //       builder: (context) => Icon(Icons.pin_drop),
+  //     ),
+  //     Marker(
+  //       point: LatLng(53.5, -2.9),
+  //       builder: (context) => Icon(Icons.pin_drop),
+  //     ),
+  //   ];
   // }
 
-  void _zoomIn() {
-    mapController.move(mapController.center, mapController.zoom + 1);
+  void _onZoomInPressed() {
+    setState(() {
+      _zoom += 1.0;
+    });
   }
 
-  void _zoomOut() {
-    mapController.move(mapController.center, mapController.zoom - 1);
+  void _onZoomOutPressed() {
+    setState(() {
+      _zoom -= 1.0;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Marker>>(
-      future: fetchMarkers(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final markers = snapshot.data;
-          return Stack(
-            children: [
-              FlutterMap(
-                mapController: mapController,
+    return Scaffold(
+      body: FutureBuilder<List<Marker>>(
+        future: _markers,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            print(snapshot.data);
+            return StatefulBuilder(
+              builder: (context, setState) => FlutterMap(
                 options: MapOptions(
-                  center: LatLng(37.7749, -122.4194),
-                  zoom: 13,
+                  center: LatLng(51.5, -0.09),
+                  zoom: _zoom,
+                  maxZoom: 18.0,
+                  minZoom: 3.0,
+                  // onTap: (point) {
+                  //   print(point);
+                  // },
                 ),
                 children: [
                   TileLayer(
@@ -74,33 +112,37 @@ class _MapWithMarkersState extends State<MapWithMarkers> {
                     subdomains: const ['a', 'b', 'c'],
                   ),
                   MarkerLayer(
-                    markers: markers ?? [],
+                    markers: snapshot.data!,
                   ),
                 ],
               ),
-              Positioned(
-                bottom: 16,
-                right: 16,
-                child: FloatingActionButton(
-                  onPressed: _zoomIn,
-                  child: const Icon(Icons.add),
-                ),
-              ),
-              Positioned(
-                bottom: 16,
-                left: 16,
-                child: FloatingActionButton(
-                  onPressed: _zoomOut,
-                  child: const Icon(Icons.remove),
-                ),
-              ),
-            ],
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+            );
+          } else if (snapshot.hasError) {
+            print(snapshot.data);
+            return const Center(
+              child: Text('Error fetching markers'),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: _onZoomInPressed,
+            child: Icon(Icons.add),
+          ),
+          SizedBox(height: 16.0),
+          FloatingActionButton(
+            onPressed: _onZoomOutPressed,
+            child: Icon(Icons.remove),
+          ),
+        ],
+      ),
     );
   }
 }
-

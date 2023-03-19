@@ -91,7 +91,8 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
               // offers: offers.getOffersRequest(),
               onTap: _handleOfferTapped,
             ),
-            MapWithMarkers()
+            // MapPage()
+            MyMap()
           ],
         ),
       );
