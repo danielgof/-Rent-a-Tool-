@@ -1,12 +1,15 @@
 import 'package:RT/src/models/offer.dart';
 import 'package:RT/src/screens/private_pages/map_page.dart';
 import 'package:RT/src/screens/private_pages/test_map_page.dart';
+import 'package:RT/src/screens/private_pages/user_offers_page.dart';
 import 'package:RT/src/widgets/offers_list.dart';
 import 'package:flutter/material.dart';
 import '../../data.dart';
 import '../../routing.dart';
 import '../../widgets/book_list.dart';
 import 'alloffers_private_page.dart';
+import 'chatPage.dart';
+
 
 class BooksScreen extends StatefulWidget {
   const BooksScreen({
@@ -67,8 +70,8 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
                 icon: Icon(Icons.people),
               ),
               Tab(
-                text: 'New',
-                icon: Icon(Icons.new_releases),
+                text: 'My Offers',
+                icon: Icon(Icons.my_library_books),
               ),
               Tab(
                 text: 'Map',
@@ -81,17 +84,12 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
           controller: _tabController,
           children: [
             const AllOffersPrivatePage(),
-            BookList(
-              books: libraryInstance.popularBooks,
-              onTap: _handleBookTapped,
-            ),
-            OffersList(
-              // offers: getOffersRequest(),
-              offers: [Offer(id: 1, toolName: "test", toolDescription: "test", price: "test", dateStart: 'test', dateFinish: 'test', ownerName: 'test', phoneNumber: 'test', location: 'some location', lng: '45.8', lat: '6')],
-              // offers: offers.getOffersRequest(),
-              onTap: _handleOfferTapped,
-            ),
-            // MapPage()
+            ChatPage(),
+            // BookList(
+            //   books: libraryInstance.popularBooks,
+            //   onTap: _handleBookTapped,
+            // ),
+            const OfferPage(),
             MyMap()
           ],
         ),

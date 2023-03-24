@@ -16,12 +16,19 @@ class MyMap extends StatefulWidget {
 
 class _MyMapState extends State<MyMap> {
   late Future<List<Marker>> _markers;
-  double _zoom = 6.0;
+  var _zoom = 6.0;
+  late MapOptions _mapOptions;
 
   @override
   void initState() {
     super.initState();
     _markers = fetchMarkers();
+    _mapOptions = MapOptions(
+      center: LatLng(51.5, -0.09),
+      zoom: _zoom,
+      maxZoom: 18.0,
+      minZoom: 3.0,
+    );
   }
 
   Future<List<Marker>> fetchMarkers() async {
@@ -78,14 +85,17 @@ class _MyMapState extends State<MyMap> {
   void _onZoomInPressed() {
     setState(() {
       _zoom += 1.0;
+      // _mapOptions = _mapOptions.copyWith(zoom: _zoom);
     });
   }
 
   void _onZoomOutPressed() {
     setState(() {
       _zoom -= 1.0;
+      // _mapOptions = _mapOptions.copyWith(zoom: _zoom);
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,18 +104,10 @@ class _MyMapState extends State<MyMap> {
         future: _markers,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data);
             return StatefulBuilder(
               builder: (context, setState) => FlutterMap(
-                options: MapOptions(
-                  center: LatLng(51.5, -0.09),
-                  zoom: _zoom,
-                  maxZoom: 18.0,
-                  minZoom: 3.0,
-                  // onTap: (point) {
-                  //   print(point);
-                  // },
-                ),
+                options: _mapOptions,
+                // options: _mapOptions,
                 children: [
                   TileLayer(
                     urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -118,7 +120,6 @@ class _MyMapState extends State<MyMap> {
               ),
             );
           } else if (snapshot.hasError) {
-            print(snapshot.data);
             return const Center(
               child: Text('Error fetching markers'),
             );
@@ -134,12 +135,12 @@ class _MyMapState extends State<MyMap> {
         children: [
           FloatingActionButton(
             onPressed: _onZoomInPressed,
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           FloatingActionButton(
             onPressed: _onZoomOutPressed,
-            child: Icon(Icons.remove),
+            child: const Icon(Icons.remove),
           ),
         ],
       ),
