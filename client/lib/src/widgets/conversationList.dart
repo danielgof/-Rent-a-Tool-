@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/private_pages/chatDetailPage.dart';
+import '../screens/private_pages/chat_detail_page.dart';
 
 
 

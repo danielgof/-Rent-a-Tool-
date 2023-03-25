@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from datetime import date
 from models.db_auth import *
 import models.db_offer as db_offer
+from models.db_message import *
 from config import *
 from base import *
 
@@ -105,6 +106,20 @@ session = Session()
 # )
 
 
+# message1 = Message(
+#     sender="John",
+#     receiver = "Charlz", 
+#     text="hello, world",
+#     date=date(2023, 1, 1)
+# )
+
+# message2 = Message(
+#     sender="alice",
+#     receiver = "bob", 
+#     text="hello, world",
+#     date=date(2023, 1, 1)
+# )
+
 # # request1 = db_request.Request(
 # #     "tool_name",
 # #     "some description",
@@ -127,6 +142,8 @@ session = Session()
 # user1.offers = [offer1, offer3]
 # user2.offers = [offer2, offer4, offer5, offer6]
 # # user2.requests = [request1, request2]
+
+# user1.messages = [message1, message2]
 
 # session = Session()
 

@@ -39,10 +39,77 @@ class _AllOffersPrivatePageState extends State<AllOffersPrivatePage> {
     }
   }
 
+  TextEditingController _searchController = TextEditingController();
+  bool _searchIconClicked = false;
+
+  void _searchPressed() {
+    setState(() {
+      _searchIconClicked = true;
+    });
+  }
+
+
+  void _cancelSearch() {
+    setState(() {
+      _searchIconClicked = false;
+      _searchController.clear();
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 65, 203, 83),
+          title: _searchIconClicked ?
+          TextField(
+            controller: _searchController,
+            cursorColor: const Color.fromARGB(255, 65, 203, 83),
+            decoration: const InputDecoration(
+              hintText: "Search...",
+              hintStyle: TextStyle(color: Colors.white),
+              // enabledBorder: OutlineInputBorder(
+              //     borderRadius: BorderRadius.circular(20),
+              //     borderSide: BorderSide(
+              //         color: Colors.grey.shade100
+              //     )
+              // ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                // cursorColor: Colors.green,
+              ),
+              // border: OutlineInputBorder(),
+            ),
+            style: const TextStyle(color: Colors.white),
+            autofocus: true,
+          )
+              : const Text("Search for available items."),
+          leading: _searchIconClicked ?
+          IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              _cancelSearch();
+            },
+          )
+              : IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              _searchPressed();
+            },
+          ),
+          actions: _searchIconClicked ? null : <Widget>[
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {},
+            ),
+          ],
+        ),
         body: Center(
           child: FutureBuilder<List<Offer>>(
             future: _futurePosts,

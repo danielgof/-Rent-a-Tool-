@@ -2,6 +2,8 @@ from sqlalchemy import Column, ForeignKey, String, Integer, Date, Table
 from base import *
 
 """Offer table"""
+
+
 class Offer(Base):
     __tablename__ = "offer"
     id = Column(Integer, primary_key=True)
@@ -16,9 +18,8 @@ class Offer(Base):
     owner_name = Column(String, nullable=False)
     phone_number = Column(String, nullable=False)
 
-
-    # def __init__(self, tool_name, tool_description, 
-    # location, price, date_start,  
+    # def __init__(self, tool_name, tool_description,
+    # location, price, date_start,
     # date_finish, owner_name, phone_number):
     #     self.tool_name = tool_name
     #     self.tool_description = tool_description
@@ -31,9 +32,16 @@ class Offer(Base):
 
 
 people_offers_association = Table(
-    'people_offers', Base.metadata,
-    Column('user_id', Integer, ForeignKey('users.id', ondelete='CASCADE',
-     onupdate='CASCADE')),
-    Column('offer_id', Integer, ForeignKey('offer.id', ondelete='CASCADE',
-     onupdate='CASCADE'))
+    "people_offers",
+    Base.metadata,
+    Column(
+        "user_id",
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE", onupdate="CASCADE"),
+    ),
+    Column(
+        "offer_id",
+        Integer,
+        ForeignKey("offer.id", ondelete="CASCADE", onupdate="CASCADE"),
+    ),
 )
