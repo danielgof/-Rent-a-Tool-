@@ -8,7 +8,7 @@ import '../../data.dart';
 import '../../routing.dart';
 import '../../widgets/book_list.dart';
 import 'alloffers_private_page.dart';
-import 'chatPage.dart';
+import 'chat_page.dart';
 
 
 class BooksScreen extends StatefulWidget {
@@ -84,7 +84,7 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
           controller: _tabController,
           children: [
             const AllOffersPrivatePage(),
-            ChatPage(),
+            const ChatPage(),
             // BookList(
             //   books: libraryInstance.popularBooks,
             //   onTap: _handleBookTapped,
