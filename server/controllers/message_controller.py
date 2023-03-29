@@ -30,6 +30,7 @@ def save_message(data: dict) -> bool:
     return status
 
 
+
 """
 Get all availabel messages
 """

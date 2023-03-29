@@ -54,11 +54,13 @@ class _ChatPageState extends State<ChatPage> {
                     filled: true,
                     fillColor: Colors.grey.shade100,
                     contentPadding: const EdgeInsets.all(8),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Color.fromARGB(255, 65, 203, 83), width: 0.0),
+                      // cursorColor: Colors.green,
+                    ),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: Colors.grey.shade100
-                        )
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(color: Colors.grey, width: 0.0),
                     ),
                   ),
                 ),

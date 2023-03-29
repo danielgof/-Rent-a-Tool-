@@ -10,6 +10,17 @@ chat = Blueprint("chat", __name__, url_prefix="/api/v1/chat")
 api chat
 """
 
+@chat.route("/", methods=["GET"])
+def index():
+    messages = [
+    {"messageContent": "Hello, Will", "messageType": "receiver"},
+    {"messageContent": "How have you been?", "messageType": "receiver"},
+    {"messageContent": "Hey Kriss, I am doing fine dude. wbu?", "messageType": "sender"},
+    {"messageContent": "ehhhh, doing OK.", "messageType": "receiver"},
+    {"messageContent": "Is there any thing wrong?", "messageType": "sender"},
+    {"messageContent": "test message", "messageType": "sender"}
+  ]
+    return messages
 
 @chat.route("/send_message", methods=["POST"])
 def send_message():

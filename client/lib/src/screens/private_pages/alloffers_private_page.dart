@@ -65,25 +65,21 @@ class _AllOffersPrivatePageState extends State<AllOffersPrivatePage> {
           backgroundColor: const Color.fromARGB(255, 65, 203, 83),
           title: _searchIconClicked ?
           TextField(
-            controller: _searchController,
             cursorColor: const Color.fromARGB(255, 65, 203, 83),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: "Search...",
-              hintStyle: TextStyle(color: Colors.white),
-              // enabledBorder: OutlineInputBorder(
-              //     borderRadius: BorderRadius.circular(20),
-              //     borderSide: BorderSide(
-              //         color: Colors.grey.shade100
-              //     )
-              // ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                // cursorColor: Colors.green,
+              hintStyle: TextStyle(color: Colors.grey.shade600),
+              prefixIcon: Icon(Icons.search,color: Colors.grey.shade600, size: 20,),
+              filled: true,
+              fillColor: Colors.grey.shade100,
+              contentPadding: const EdgeInsets.all(8),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                      color: Colors.grey.shade100
+                  )
               ),
-              // border: OutlineInputBorder(),
             ),
-            style: const TextStyle(color: Colors.white),
-            autofocus: true,
           )
               : const Text("Search for available items."),
           leading: _searchIconClicked ?
@@ -94,7 +90,7 @@ class _AllOffersPrivatePageState extends State<AllOffersPrivatePage> {
             },
           )
               : IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               _searchPressed();
             },
