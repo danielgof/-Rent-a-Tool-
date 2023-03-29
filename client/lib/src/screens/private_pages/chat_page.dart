@@ -46,7 +46,7 @@ class _ChatPageState extends State<ChatPage> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 16,left: 16,right: 16),
                 child: TextField(
-                  cursorColor: const Color.fromARGB(255, 65, 203, 83),
+                  cursorColor: Colors.blue,
                   decoration: InputDecoration(
                     hintText: "Search...",
                     hintStyle: TextStyle(color: Colors.grey.shade600),
@@ -55,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
                     fillColor: Colors.grey.shade100,
                     contentPadding: const EdgeInsets.all(8),
                     focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Color.fromARGB(255, 65, 203, 83), width: 0.0),
+                      borderSide: BorderSide(color: Colors.blue, width: 0.0),
                       // cursorColor: Colors.green,
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -86,4 +86,57 @@ class _ChatPageState extends State<ChatPage> {
       ),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: SingleChildScrollView(
+  //       physics: const BouncingScrollPhysics(),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: <Widget>[
+  //           SafeArea(
+  //             child: Padding(
+  //               padding: const EdgeInsets.only(top: 16,left: 16,right: 16),
+  //               child: TextField(
+  //                 cursorColor: const Color.fromARGB(255, 65, 203, 83),
+  //                 decoration: InputDecoration(
+  //                   hintText: "Search...",
+  //                   hintStyle: TextStyle(color: Colors.grey.shade600),
+  //                   prefixIcon: Icon(Icons.search,color: Colors.grey.shade600, size: 20,),
+  //                   filled: true,
+  //                   fillColor: Colors.grey.shade100,
+  //                   contentPadding: const EdgeInsets.all(8),
+  //                   focusedBorder: const OutlineInputBorder(
+  //                     borderSide: BorderSide(color: Color.fromARGB(255, 65, 203, 83), width: 0.0),
+  //                     // cursorColor: Colors.green,
+  //                   ),
+  //                   enabledBorder: OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(20),
+  //                     borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //           ListView.builder(
+  //             itemCount: chatUsers.length,
+  //             shrinkWrap: true,
+  //             padding: const EdgeInsets.only(top: 16),
+  //             physics: const NeverScrollableScrollPhysics(),
+  //             itemBuilder: (context, index){
+  //               return ConversationList(
+  //                 name: chatUsers[index].name,
+  //                 messageText: chatUsers[index].messageText,
+  //                 imageUrl: chatUsers[index].imageURL,
+  //                 time: chatUsers[index].time,
+  //                 isMessageRead: (index == 0 || index == 3)?true:false,
+  //               );
+  //             },
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

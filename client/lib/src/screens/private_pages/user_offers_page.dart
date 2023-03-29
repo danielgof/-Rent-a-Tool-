@@ -105,7 +105,7 @@ class PostDetailsPage extends StatelessWidget {
 		return Scaffold(
 			appBar: AppBar(
 				title: Text(post.toolName),
-				backgroundColor: const Color.fromARGB(255, 65, 203, 83),
+				backgroundColor: Colors.blue,
 			),
 			body: Padding(
 				padding: const EdgeInsets.all(16.0),
@@ -155,6 +155,62 @@ class PostDetailsPage extends StatelessWidget {
 			),
 		);
 	}
+
+	// @override
+	// Widget build(BuildContext context) {
+	// 	return Scaffold(
+	// 		appBar: AppBar(
+	// 			title: Text(post.toolName),
+	// 			backgroundColor: const Color.fromARGB(255, 65, 203, 83),
+	// 		),
+	// 		body: Padding(
+	// 			padding: const EdgeInsets.all(16.0),
+	// 			child: Column(
+	// 				crossAxisAlignment: CrossAxisAlignment.start,
+	// 				children: [
+	// 					Text(
+	// 						post.toolName,
+	// 						style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+	// 					),
+	// 					const SizedBox(height: 16.0),
+	// 					Text(
+	// 						post.toolDescription,
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					Text(
+	// 						'Price: ${post.price}',
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					Text(
+	// 						'Location: ${post.location}',
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					Text(
+	// 						'Date Start: ${post.dateStart}',
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					Text(
+	// 						'Date Finish: ${post.dateFinish}',
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					Text(
+	// 						'Owner Name: ${post.ownerName}',
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					Text(
+	// 						'Phone Number: ${post.phoneNumber}',
+	// 						style: const TextStyle(fontSize: 18.0),
+	// 					),
+	// 					// const SizedBox(height: 16.0),
+	// 					// Text
+	// 					//   'Post ID: ${post.id}',
+	// 					//   style: const TextStyle(fontSize: 16.0),
+	// 					// ),
+	// 				],
+	// 			),
+	// 		),
+	// 	);
+	// }
 }
 
 

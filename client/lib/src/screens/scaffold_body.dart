@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../routing.dart';
 import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
-import 'profile.dart';
+import 'private_pages/profile.dart';
 import 'private_pages/main_page.dart';
 import 'scaffold.dart';
 

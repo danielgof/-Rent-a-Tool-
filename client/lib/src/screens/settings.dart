@@ -38,20 +38,39 @@ class SettingsContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        children: [
-          ...[
-            Text(
-              'Settings',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            ElevatedButton(
-              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 65, 203, 83))),
-              onPressed: () {
-                BookstoreAuthScope.of(context).signOut();
-              },
-              child: const Text('Sign out'),
-            ),
-          ].map((w) => Padding(padding: const EdgeInsets.all(8), child: w)),
-        ],
-      );
+    children: [
+      ...[
+        Text(
+          'Settings',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        ElevatedButton(
+          style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.blue)),
+          onPressed: () {
+            BookstoreAuthScope.of(context).signOut();
+          },
+          child: const Text('Sign out'),
+        ),
+      ].map((w) => Padding(padding: const EdgeInsets.all(8), child: w)),
+    ],
+  );
+
+  // @override
+  // Widget build(BuildContext context) => Column(
+  //   children: [
+  //     ...[
+  //       Text(
+  //         'Settings',
+  //         style: Theme.of(context).textTheme.headlineMedium,
+  //       ),
+  //       ElevatedButton(
+  //         style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 65, 203, 83))),
+  //         onPressed: () {
+  //           BookstoreAuthScope.of(context).signOut();
+  //         },
+  //         child: const Text('Sign out'),
+  //       ),
+  //     ].map((w) => Padding(padding: const EdgeInsets.all(8), child: w)),
+  //   ],
+  // );
 }

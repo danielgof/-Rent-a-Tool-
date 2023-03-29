@@ -5,6 +5,7 @@ import 'dart:io';
 
 import '../../../api/url.dart';
 import '../../models/chat_message_model.dart';
+import '../../models/message.dart';
 
 
 class ChatDetailPage extends StatefulWidget{
@@ -28,6 +29,19 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final messages = jsonResponse.map((message) => ChatMessage.fromJson(message)).toList();
+      return messages;
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      throw Exception('Failed to load posts');
+    }
+  }
+
+  Future<List<Message>> _getMessages() async {
+    final response = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=JL&recipient=test'));
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonResponse = json.decode(response.body);
+      final messages = jsonResponse.map((message) => Message.fromJson(message)).toList();
+      print(messages);
       return messages;
     } else {
       print('Request failed with status: ${response.statusCode}.');
@@ -176,7 +190,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     ),
                     const SizedBox(width: 15,),
                     FloatingActionButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        _getMessages();
+                      },
                       backgroundColor: Colors.blue,
                       elevation: 0,
                       child: const Icon(Icons.send,color: Colors.white,size: 18,),
