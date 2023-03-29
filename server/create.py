@@ -107,15 +107,17 @@ session = Session()
 
 
 # message1 = Message(
-#     sender="John",
-#     receiver = "Charlz", 
+#     sender="JL",
+#     receiver = "alice",
+#     message_type="receiver", 
 #     text="hello, world",
 #     date=date(2023, 1, 1)
 # )
 
 # message2 = Message(
 #     sender="alice",
-#     receiver = "bob", 
+#     receiver = "JL",
+#     message_type="sender", 
 #     text="hello, world",
 #     date=date(2023, 1, 1)
 # )

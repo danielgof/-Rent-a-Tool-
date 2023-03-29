@@ -17,11 +17,13 @@ class ChatDetailPage extends StatefulWidget{
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   late Future<List<ChatMessage>> _futureMessages;
+  late Future<List<Message>> _futureListMessages;
 
   @override
   void initState() {
     super.initState();
     _futureMessages = _fetchMessages();
+    _futureListMessages = _getMessages();
   }
 
   Future<List<ChatMessage>> _fetchMessages() async {
@@ -37,11 +39,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   }
 
   Future<List<Message>> _getMessages() async {
-    final response = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=JL&recipient=test'));
+    final response = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=JL&recipient=alice'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final messages = jsonResponse.map((message) => Message.fromJson(message)).toList();
-      print(messages);
+      // print(messages);
       return messages;
     } else {
       print('Request failed with status: ${response.statusCode}.');
@@ -49,27 +51,20 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     }
   }
 
-
-  // Future<List<ChatMessage>> fetchMessages() async {
-  //   String url = "$URL/api/v1/chat/messages?sender=JL&recipient=test";
-  //   final response = await http.get(Uri.parse(url),
-  //     headers: {
-  //       HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
-  //     },);
-  //
-  //   if (response.statusCode == 200) {
-  //     // If the server did return a 200 OK response, parse the JSON.
-  //     final List<dynamic> jsonList = json.decode(response.body);
-  //     print(jsonList);
-  //     List<ChatMessage> messages = [];
-  //     return messages;
-  //     // print(jsonList.map((json) => Post.fromJson(json)).toList());
-  //     // return jsonList.map((json) => ChatMessage.fromJson(json)).toList();
-  //   } else {
-  //     // If the server did not return a 200 OK response, throw an error.
-  //     throw Exception('Failed to load posts');
-  //   }
-  // }
+  Future<int> sendMessage(message) async {
+    String url = "http://127.0.0.1:5000/api/v1/chat/send_message";
+    Map credits = {
+        "sender": "JL",
+        "recipient": "alice",
+        "message_type": "sender",
+        "text": message,
+        "date": "01/03/2027"
+      };
+    var bodyData = json.encode(credits);
+    final response = await http.post(Uri.parse(url), body: bodyData);
+    var data = response.statusCode;
+    return data;
+  }
 
   List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
@@ -78,6 +73,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
     ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
+
+  TextEditingController messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +119,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ),
         body: Stack(
           children: <Widget>[
-          FutureBuilder<List<ChatMessage>>(
-              future: _fetchMessages(),
+          // FutureBuilder<List<ChatMessage>>(
+            FutureBuilder<List<Message>>(
+              // future: _fetchMessages(),
+              future: _getMessages(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -147,7 +146,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                               color: (messages[index].messageType  == "receiver"?Colors.grey.shade200:Colors.blue[200]),
                             ),
                             padding: const EdgeInsets.all(16),
-                            child: Text(messages[index].messageContent, style: const TextStyle(fontSize: 15),),
+                            child: Text(messages[index].text, style: const TextStyle(fontSize: 15),),
                           ),
                         ),
                       );
@@ -179,19 +178,20 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       ),
                     ),
                     const SizedBox(width: 15,),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "Write message...",
                             hintStyle: TextStyle(color: Colors.black54),
-                            border: InputBorder.none
+                            border: InputBorder.none,
                         ),
+                        controller: messageController,
                       ),
                     ),
                     const SizedBox(width: 15,),
                     FloatingActionButton(
                       onPressed: (){
-                        _getMessages();
+                        sendMessage(messageController.text);
                       },
                       backgroundColor: Colors.blue,
                       elevation: 0,

@@ -2,12 +2,8 @@ from models.db_message import *
 from create import *
 
 
-"""
-Save message to sender and to receiver
-"""
-
-
 def save_message(data: dict) -> bool:
+    """Save message to sender and to receiver"""
     status: bool = False
     receiver: User = (
         session.query(User).filter(User.username == data.get("recipient")).first()
@@ -20,6 +16,7 @@ def save_message(data: dict) -> bool:
     message = Message(
         receiver=data.get("recipient"),
         sender=data.get("sender"),
+        message_type=data.get("message_type"),
         text=data.get("text"),
         date=data.get("date"),
     )
@@ -30,11 +27,16 @@ def save_message(data: dict) -> bool:
     return status
 
 
-
-"""
-Get all availabel messages
-"""
-
-
 def all_messages() -> list:
+    """Get all availabel messages"""
     return session.query(Message).all()
+
+
+def user_messages(username: str) -> list:
+    """return all messages for particular user"""
+    result: list = list()
+    messages = all_messages()
+    for message in messages:
+        if message.receiver == username and message.sender == username:
+            result.append(message)
+    return result

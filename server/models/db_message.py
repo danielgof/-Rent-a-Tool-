@@ -9,6 +9,7 @@ class Message(Base):
     id = Column(Integer, primary_key=True)
     receiver = Column(String, nullable=False)
     sender = Column(String, nullable=False)
+    message_type = Column(String, nullable=False)
     text = Column(String, nullable=False)
     date = Column(Date, nullable=False)
 
