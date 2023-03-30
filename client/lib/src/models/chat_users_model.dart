@@ -11,4 +11,13 @@ class ChatUsers{
     required this.imageURL,
     required this.time
   });
+
+  factory ChatUsers.fromJson(Map<String, dynamic> json) {
+    return ChatUsers(
+      name: json['name'],
+      messageText: json['messageText'],
+      imageURL: json['imageURL'],
+      time: json['time'],
+    );
+  }
 }

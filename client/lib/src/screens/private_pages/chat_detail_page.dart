@@ -22,21 +22,21 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   @override
   void initState() {
     super.initState();
-    _futureMessages = _fetchMessages();
+    // _futureMessages = _fetchMessages();
     _futureListMessages = _getMessages();
   }
-
-  Future<List<ChatMessage>> _fetchMessages() async {
-    final response = await http.get(Uri.parse('$URL/api/v1/chat/'));
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      final messages = jsonResponse.map((message) => ChatMessage.fromJson(message)).toList();
-      return messages;
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-      throw Exception('Failed to load posts');
-    }
-  }
+  //
+  // Future<List<ChatMessage>> _fetchMessages() async {
+  //   final response = await http.get(Uri.parse('$URL/api/v1/chat/'));
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> jsonResponse = json.decode(response.body);
+  //     final messages = jsonResponse.map((message) => ChatMessage.fromJson(message)).toList();
+  //     return messages;
+  //   } else {
+  //     print('Request failed with status: ${response.statusCode}.');
+  //     throw Exception('Failed to load posts');
+  //   }
+  // }
 
   Future<List<Message>> _getMessages() async {
     final response = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=JL&recipient=alice'));
@@ -119,9 +119,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ),
         body: Stack(
           children: <Widget>[
-          // FutureBuilder<List<ChatMessage>>(
             FutureBuilder<List<Message>>(
-              // future: _fetchMessages(),
               future: _getMessages(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

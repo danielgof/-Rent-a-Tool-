@@ -77,6 +77,32 @@ def all():
         )
     return result
 
-@chat.route("/user_chats")
+
+@chat.route("/user_chats", methods=["GET"])
 def get_all_chats():
-    return ""
+    chats: list = list()
+    chats.append(
+        {
+            "name": "Jane Russel",
+            "messageText": "Awesome Setup",
+            "imageURL": "https://randomuser.me/api/portraits/men/5.jpg",
+            "time": "Now",
+        }
+    )
+    chats.append(
+        {
+            "name": "Glady's Murphy",
+            "messageText": "That's Great",
+            "imageURL": "https://randomuser.me/api/portraits/men/2.jpg",
+            "time": "Yesterday",
+        }
+    )
+    chats.append(
+        {
+            "name": "Jorge Henry",
+            "messageText": "Hey where are you?",
+            "imageURL": "https://randomuser.me/api/portraits/men/15.jpg",
+            "time": "29 Mar",
+        }
+    )
+    return chats
