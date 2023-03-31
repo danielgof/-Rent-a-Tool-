@@ -105,4 +105,12 @@ def get_all_chats():
             "time": "29 Mar",
         }
     )
+    chats.append(
+        {
+            "name": "alice",
+            "messageText": "Thankyou, It's awesome",
+            "imageURL": "https://randomuser.me/api/portraits/women/5.jpg",
+            "time": "23 Mar",
+        }
+    )
     return chats

@@ -2,14 +2,145 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
+
 
 import '../../../api/url.dart';
 import '../../models/chat_message_model.dart';
+import '../../models/chat_users_model.dart';
 import '../../models/message.dart';
 
 
+// class ChatDetailPage extends StatefulWidget{
+//   final String name;
+//   final String messageText;
+//   final String imageUrl;
+//   final String time;
+//
+//   const ChatDetailPage({
+//     Key? key,
+//     required this.name,
+//     required this.messageText,
+//     required this.imageUrl,
+//     required this.time,
+//   }) : super(key: key);
+//
+//   @override
+//   _ChatDetailPageState createState() => _ChatDetailPageState();
+// }
+//
+// class _ChatDetailPageState extends State<ChatDetailPage> {
+//   final TextEditingController _messageController = TextEditingController();
+//   late final WebSocket _channel;
+//   late final StreamSubscription _subscription;
+//   final List<Message> _messages = [];
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _channel = WebSocket.connect(Uri.parse('$URL/api/v1/chat')) as WebSocket;
+//     _subscription = _channel.stream.listen(_handleMessage);
+//   }
+//
+//   @override
+//   void dispose() {
+//     _subscription.cancel();
+//     _channel.sink.close();
+//     super.dispose();
+//   }
+//
+//   void _handleMessage(dynamic data) {
+//     final message = Message.fromJson(jsonDecode(data));
+//     setState(() {
+//       _messages.add(message);
+//     });
+//   }
+//
+//   void _sendMessage() {
+//     final message = _messageController.text.trim();
+//     if (message.isNotEmpty) {
+//       final data = jsonEncode({
+//         'sender': 'JL',
+//         'recipient': 'alice',
+//         'text': message,
+//         'date': DateTime.now().toString(),
+//       });
+//       _channel.sink.add(data);
+//       _messageController.clear();
+//     }
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         // ...
+//       ),
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: _messages.length,
+//               itemBuilder: (context, index) {
+//                 final message = _messages[index];
+//                 final isSender = message.sender == 'JL';
+//                 return Container(
+//                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+//                   alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+//                   child: Container(
+//                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+//                     decoration: BoxDecoration(
+//                       borderRadius: BorderRadius.circular(20),
+//                       color: isSender ? Colors.blue[200] : Colors.grey[200],
+//                     ),
+//                     child: Text(message.text),
+//                   ),
+//                 );
+//               },
+//             ),
+//           ),
+//           Container(
+//             padding: const EdgeInsets.symmetric(horizontal: 8),
+//             child: Row(
+//               children: [
+//                 Expanded(
+//                   child: TextField(
+//                     controller: _messageController,
+//                     decoration: InputDecoration(
+//                       hintText: 'Type a message...',
+//                       border: const OutlineInputBorder(),
+//                     ),
+//                   ),
+//                 ),
+//                 IconButton(
+//                   onPressed: _sendMessage,
+//                   icon: const Icon(Icons.send),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
 class ChatDetailPage extends StatefulWidget{
-  const ChatDetailPage({super.key});
+  late String name;
+  late String messageText;
+  late String imageUrl;
+  late String time;
+
+
+  ChatDetailPage({
+    super.key,
+    required this.name,
+    required this.messageText,
+    required this.imageUrl,
+    required this.time,
+  });
 
   @override
   _ChatDetailPageState createState() => _ChatDetailPageState();
@@ -22,31 +153,22 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   @override
   void initState() {
     super.initState();
-    // _futureMessages = _fetchMessages();
     _futureListMessages = _getMessages();
   }
-  //
-  // Future<List<ChatMessage>> _fetchMessages() async {
-  //   final response = await http.get(Uri.parse('$URL/api/v1/chat/'));
-  //   if (response.statusCode == 200) {
-  //     final List<dynamic> jsonResponse = json.decode(response.body);
-  //     final messages = jsonResponse.map((message) => ChatMessage.fromJson(message)).toList();
-  //     return messages;
-  //   } else {
-  //     print('Request failed with status: ${response.statusCode}.');
-  //     throw Exception('Failed to load posts');
-  //   }
-  // }
 
   Future<List<Message>> _getMessages() async {
-    final response = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=JL&recipient=alice'));
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      final messages = jsonResponse.map((message) => Message.fromJson(message)).toList();
+    final response1 = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=JL&recipient=alice'));
+    final response2 = await http.get(Uri.parse('$URL/api/v1/chat/messages?sender=alice&recipient=JL'));
+    if (response1.statusCode == 200) {
+      final List<dynamic> jsonResponse1 = json.decode(response1.body);
+      final messages1 = jsonResponse1.map((message1) => Message.fromJson(message1)).toList();
+      final List<dynamic> jsonResponse2 = json.decode(response2.body);
+      final messages2 = jsonResponse2.map((message2) => Message.fromJson(message2)).toList();
+      var messages = messages1 + messages2;
       // print(messages);
       return messages;
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      print('Request failed with status: ${response1.statusCode}.');
       throw Exception('Failed to load posts');
     }
   }
@@ -76,8 +198,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 
   TextEditingController messageController = TextEditingController();
 
+
+
   @override
   Widget build(BuildContext context) {
+    // print("widget.name: "+widget.name);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -85,7 +210,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           backgroundColor: Colors.white,
           flexibleSpace: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(right: 16),
+              padding: EdgeInsets.only(right: 16),
               child: Row(
                 children: <Widget>[
                   IconButton(
@@ -95,8 +220,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     icon: const Icon(Icons.arrow_back,color: Colors.black,),
                   ),
                   const SizedBox(width: 2,),
-                  const CircleAvatar(
-                    backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(widget.imageUrl),
                     maxRadius: 20,
                   ),
                   const SizedBox(width: 12,),
@@ -105,7 +230,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        const Text("Kriss Benwat",style: TextStyle( fontSize: 16 ,fontWeight: FontWeight.w600),),
+                        Text(widget.name, style: const TextStyle( fontSize: 16 ,fontWeight: FontWeight.w600),),
                         const SizedBox(height: 6,),
                         Text("Online",style: TextStyle(color: Colors.grey.shade600, fontSize: 13),),
                       ],
@@ -137,11 +262,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       return Container(
                         padding: const EdgeInsets.only(left: 14,right: 14,top: 10,bottom: 10),
                         child: Align(
-                          alignment: (messages[index].messageType == "receiver"?Alignment.topLeft:Alignment.topRight),
+                          alignment: (messages[index].receiver == "JL"?Alignment.topLeft:Alignment.topRight),
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: (messages[index].messageType  == "receiver"?Colors.grey.shade200:Colors.blue[200]),
+                              color: (messages[index].receiver  == "JL"?Colors.grey.shade200:Colors.blue[200]),
                             ),
                             padding: const EdgeInsets.all(16),
                             child: Text(messages[index].text, style: const TextStyle(fontSize: 15),),

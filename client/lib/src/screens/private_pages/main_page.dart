@@ -1,5 +1,6 @@
 import 'package:RT/src/models/offer.dart';
 import 'package:RT/src/screens/private_pages/map_page.dart';
+import 'package:RT/src/screens/private_pages/test.dart';
 import 'package:RT/src/screens/private_pages/test_map_page.dart';
 import 'package:RT/src/screens/private_pages/user_offers_page.dart';
 import 'package:RT/src/widgets/offers_list.dart';
@@ -90,7 +91,8 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
         //   books: libraryInstance.popularBooks,
         //   onTap: _handleBookTapped,
         // ),
-        const OfferPage(),
+        MyApp(),
+        // const OfferPage(),
         MyMap()
       ],
     ),

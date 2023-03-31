@@ -29,10 +29,8 @@ class _ChatPageState extends State<ChatPage> {
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final messages = jsonResponse.map((message) => ChatUsers.fromJson(message)).toList();
-      // print(messages);
       return messages;
     } else {
-      // print('Request failed with status: ${response.statusCode}.');
       throw Exception('Failed to load posts');
     }
   }
@@ -84,7 +82,6 @@ class _ChatPageState extends State<ChatPage> {
                     contentPadding: const EdgeInsets.all(8),
                     focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue, width: 0.0),
-                      // cursorColor: Colors.green,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
