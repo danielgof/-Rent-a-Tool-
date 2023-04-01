@@ -1,13 +1,10 @@
 import 'package:RT/src/models/offer.dart';
-import 'package:RT/src/screens/private_pages/map_page.dart';
-import 'package:RT/src/screens/private_pages/test.dart';
 import 'package:RT/src/screens/private_pages/test_map_page.dart';
 import 'package:RT/src/screens/private_pages/user_offers_page.dart';
-import 'package:RT/src/widgets/offers_list.dart';
 import 'package:flutter/material.dart';
+
 import '../../data.dart';
 import '../../routing.dart';
-import '../../widgets/book_list.dart';
 import 'alloffers_private_page.dart';
 import 'chat_page.dart';
 
@@ -52,7 +49,6 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
     _tabController.removeListener(_handleTabIndexChanged);
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -124,74 +120,4 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
         break;
     }
   }
-
-  // @override
-  // Widget build(BuildContext context) => Scaffold(
-  //       appBar: AppBar(
-  //         backgroundColor: const Color.fromARGB(255, 65, 203, 83),
-  //         // title: const Text('Rent a Tool'),
-  //         title: TabBar(
-  //           indicatorColor: const Color.fromARGB(255, 0, 0, 0),
-  //           controller: _tabController,
-  //           tabs: const [
-  //             Tab(
-  //               text: 'All',
-  //               icon: Icon(Icons.list),
-  //             ),
-  //             Tab(
-  //               text: 'Messages',
-  //               icon: Icon(Icons.people),
-  //             ),
-  //             Tab(
-  //               text: 'My Offers',
-  //               icon: Icon(Icons.my_library_books),
-  //             ),
-  //             Tab(
-  //               text: 'Map',
-  //               icon: Icon(Icons.map),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       body: TabBarView(
-  //         controller: _tabController,
-  //         children: [
-  //           const AllOffersPrivatePage(),
-  //           const ChatPage(),
-  //           // BookList(
-  //           //   books: libraryInstance.popularBooks,
-  //           //   onTap: _handleBookTapped,
-  //           // ),
-  //           const OfferPage(),
-  //           MyMap()
-  //         ],
-  //       ),
-  //     );
-  //
-  // RouteState get _routeState => RouteStateScope.of(context);
-  //
-  // void _handleBookTapped(Book book) {
-  //   _routeState.go('/book/${book.id}');
-  // }
-  //
-  // void _handleOfferTapped(Offer offer) {
-  //   _routeState.go('/book/${offer.id}');
-  // }
-  //
-  // void _handleTabIndexChanged() {
-  //   switch (_tabController.index) {
-  //     case 1:
-  //       _routeState.go('/books/new');
-  //       break;
-  //     case 2:
-  //       _routeState.go('/books/all');
-  //       break;
-  //     case 0:
-  //       _routeState.go('/books/map');
-  //       break;
-  //     default:
-  //       _routeState.go('/books/popular');
-  //       break;
-  //   }
-  // }
 }

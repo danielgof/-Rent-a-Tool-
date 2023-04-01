@@ -4,12 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-
 import 'package:http/http.dart' as http;
 
 import '../../../api/url.dart';
 import '../../models/offer.dart';
-import '../public_pages/alloffers_public_page.dart';
 import 'alloffers_private_page.dart';
 
 class MyMap extends StatefulWidget {
@@ -53,7 +51,6 @@ class _MyMapState extends State<MyMap> {
           point: point,
           builder: (ctx) => GestureDetector(
             onTap: () {
-              print(markerData);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -83,24 +80,6 @@ class _MyMapState extends State<MyMap> {
     }
   }
 
-  // Future<List<Marker>> fetchMarkers() async {
-  //   // Replace this with your own logic to fetch marker data
-  //   return [
-  //     Marker(
-  //       point: LatLng(51.5, -0.09),
-  //       builder: (context) => Icon(Icons.pin_drop),
-  //     ),
-  //     Marker(
-  //       point: LatLng(52.5, -1.9),
-  //       builder: (context) => Icon(Icons.pin_drop),
-  //     ),
-  //     Marker(
-  //       point: LatLng(53.5, -2.9),
-  //       builder: (context) => Icon(Icons.pin_drop),
-  //     ),
-  //   ];
-  // }
-
   void _onZoomInPressed() {
     setState(() {
       _zoom += 1.0;
@@ -114,7 +93,6 @@ class _MyMapState extends State<MyMap> {
       // _mapOptions = _mapOptions.copyWith(zoom: _zoom);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {

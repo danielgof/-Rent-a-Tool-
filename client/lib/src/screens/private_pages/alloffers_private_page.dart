@@ -62,101 +62,144 @@ class _AllOffersPrivatePageState extends State<AllOffersPrivatePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: _searchIconClicked ?
-          TextField(
-            cursorColor: Colors.blue,
-            decoration: InputDecoration(
-              hintText: "Search...",
-              hintStyle: TextStyle(color: Colors.grey.shade600),
-              prefixIcon: Icon(Icons.search,color: Colors.grey.shade600, size: 20,),
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              contentPadding: const EdgeInsets.all(8),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                      color: Colors.grey.shade100
-                  )
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                cursorColor: Colors.blue,
+                decoration: InputDecoration(
+                  hintText: "Search...",
+                  hintStyle: TextStyle(color: Colors.grey.shade600),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.grey.shade600,
+                    size: 20,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.shade100,
+                  contentPadding: const EdgeInsets.all(8),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 0.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                  ),
+                ),
               ),
             ),
-          )
-              : const Text("Search for available items."),
-          leading: _searchIconClicked ?
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              _cancelSearch();
-            },
-          )
-              : IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              _searchPressed();
-            },
-          ),
-          actions: _searchIconClicked ? null : <Widget>[
-            IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {},
+            Expanded(
+              child: Center(
+                child: FutureBuilder<List<Offer>>(
+                  future: _futurePosts,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      // If we successfully fetched the list of posts, display them in a ListView
+                      final List<Offer> posts = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          final post = posts[index];
+                          return GestureDetector(
+                            onTap: () {
+                              // Navigate to the PostDetailsPage when a post is tapped
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PostDetailsPagePrivate(post: post),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    post.toolName,
+                                    style: const TextStyle(fontSize: 20.0),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  Text(post.toolDescription),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      // If an error occurred while fetching the posts, display an error message
+                      return Text('${snapshot.error}');
+                    }
+                    // By default, show a loading spinner
+                    return const CircularProgressIndicator();
+                  },
+                ),
+              ),
             ),
           ],
-        ),
-        body: Center(
-          child: FutureBuilder<List<Offer>>(
-            future: _futurePosts,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                // If we successfully fetched the list of posts, display them in a ListView
-                final List<Offer> posts = snapshot.data!;
-                return ListView.builder(
-                  itemCount: posts.length,
-                  itemBuilder: (context, index) {
-                    final post = posts[index];
-                    return GestureDetector(
-                      onTap: () {
-                        // Navigate to the PostDetailsPage when a post is tapped
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PostDetailsPagePrivate(post: post),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              post.toolName,
-                              style: const TextStyle(fontSize: 20.0),
-                            ),
-                            const SizedBox(height: 8.0),
-                            Text(post.toolDescription),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              } else if (snapshot.hasError) {
-                // If an error occurred while fetching the posts, display an error message
-                return Text('${snapshot.error}');
-              }
-              // By default, show a loading spinner
-              return const CircularProgressIndicator();
-            },
-          ),
         ),
       ),
     );
   }
+
+
+// @override
+  // Widget build(BuildContext context) {
+  //   return SafeArea(
+  //     child: Scaffold(
+  //       body: Center(
+  //         child:
+  //         FutureBuilder<List<Offer>>(
+  //           future: _futurePosts,
+  //           builder: (context, snapshot) {
+  //             if (snapshot.hasData) {
+  //               // If we successfully fetched the list of posts, display them in a ListView
+  //               final List<Offer> posts = snapshot.data!;
+  //               return ListView.builder(
+  //                 itemCount: posts.length,
+  //                 itemBuilder: (context, index) {
+  //                   final post = posts[index];
+  //                   return GestureDetector(
+  //                     onTap: () {
+  //                       // Navigate to the PostDetailsPage when a post is tapped
+  //                       Navigator.push(
+  //                         context,
+  //                         MaterialPageRoute(
+  //                           builder: (context) => PostDetailsPagePrivate(post: post),
+  //                         ),
+  //                       );
+  //                     },
+  //                     child: Container(
+  //                       padding: const EdgeInsets.all(16.0),
+  //                       child: Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             post.toolName,
+  //                             style: const TextStyle(fontSize: 20.0),
+  //                           ),
+  //                           const SizedBox(height: 8.0),
+  //                           Text(post.toolDescription),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   );
+  //                 },
+  //               );
+  //             } else if (snapshot.hasError) {
+  //               // If an error occurred while fetching the posts, display an error message
+  //               return Text('${snapshot.error}');
+  //             }
+  //             // By default, show a loading spinner
+  //             return const CircularProgressIndicator();
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   // @override
   // Widget build(BuildContext context) {
