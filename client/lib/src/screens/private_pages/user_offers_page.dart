@@ -5,6 +5,8 @@ import '../../models/offer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'chat_detail_page.dart';
+
 class OfferPage extends StatefulWidget {
 	const OfferPage({super.key});
 
@@ -145,11 +147,49 @@ class PostDetailsPage extends StatelessWidget {
 							'Phone Number: ${post.phoneNumber}',
 							style: const TextStyle(fontSize: 18.0),
 						),
-						// const SizedBox(height: 16.0),
-						// Text
-						//   'Post ID: ${post.id}',
-						//   style: const TextStyle(fontSize: 16.0),
-						// ),
+						GestureDetector(
+							onTap: () {
+								Navigator.push(context, MaterialPageRoute(builder: (context) {
+									return ChatDetailPage(
+										name: post.ownerName,
+										messageText: "",
+										imageUrl: "widget.imageUrl",
+										time: "widget.time",
+									);
+								}));
+							},
+							child: Container(
+								padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
+								child: Row(
+									children: <Widget>[
+										Expanded(
+											child: Row(
+												children: <Widget>[
+													CircleAvatar(
+														backgroundImage: NetworkImage("widget.imageUrl"),
+														maxRadius: 30,
+													),
+													SizedBox(width: 16,),
+													Expanded(
+														child: Container(
+															color: Colors.transparent,
+															child: Column(
+																crossAxisAlignment: CrossAxisAlignment.start,
+																children: <Widget>[
+																	Text(post.ownerName, style: const TextStyle(fontSize: 16),),
+																	const SizedBox(height: 6,),
+																],
+															),
+														),
+													),
+												],
+											),
+										),
+										// Text(widget.time,style: TextStyle(fontSize: 12,fontWeight: widget.isMessageRead?FontWeight.bold:FontWeight.normal),),
+									],
+								),
+							),
+						)
 					],
 				),
 			),

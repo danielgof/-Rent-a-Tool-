@@ -91,8 +91,8 @@ class _BooksScreenState extends State<BooksScreen> with SingleTickerProviderStat
         //   books: libraryInstance.popularBooks,
         //   onTap: _handleBookTapped,
         // ),
-        MyApp(),
-        // const OfferPage(),
+        // MyApp(),
+        const OfferPage(),
         MyMap()
       ],
     ),

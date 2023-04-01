@@ -244,7 +244,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ),
         body: Stack(
           children: <Widget>[
-            FutureBuilder<List<Message>>(
+          Container(
+            margin: const EdgeInsets.only(bottom: 50),
+            child: FutureBuilder<List<Message>>(
               future: _getMessages(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -277,6 +279,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   );
                 }
               },
+            ),
             ),
             Align(
               alignment: Alignment.bottomLeft,

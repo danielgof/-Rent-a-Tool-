@@ -72,9 +72,24 @@ class _MapPageState extends State<MapPage> {
         point: marker,
         builder: (ctx) => GestureDetector(
           onTap: () {
-            ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
-              content: Text('Tapped on blue FlutterLogo Marker'),
-            ));
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Alert'),
+                  content: Text('This is an alert message.'),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: Text('Ok'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+
           },
           child: const FlutterLogo(),
         ),

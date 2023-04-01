@@ -8,6 +8,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../api/url.dart';
+import '../../models/offer.dart';
+import '../public_pages/alloffers_public_page.dart';
+import 'alloffers_private_page.dart';
 
 class MyMap extends StatefulWidget {
   @override
@@ -50,9 +53,25 @@ class _MyMapState extends State<MyMap> {
           point: point,
           builder: (ctx) => GestureDetector(
             onTap: () {
-              ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(
-                content: Text('Tapped on Marker'),
-              ));
+              print(markerData);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PostDetailsPagePrivate(post: Offer(
+                    id: markerData['id'],
+                    toolName: markerData['tool_name'],
+                    toolDescription: markerData['tool_description'],
+                    price: markerData['price'],
+                    dateStart: markerData['date_start'],
+                    dateFinish: markerData['date_finish'],
+                    ownerName: markerData['owner_name'],
+                    phoneNumber: markerData['phone_number'],
+                    location: markerData['location'],
+                    lng: markerData['lng'],
+                    lat: markerData['lat'],
+                  )),
+                ),
+              );
             },
             child: const Icon(Icons.pin_drop),
           ),

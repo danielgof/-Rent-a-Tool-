@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://localhost:5000/api/v1/chat/messages?sender=alice&recipient=JL'),
+    Uri.parse('wss://localhost:5000/'),
   );
 
   @override
