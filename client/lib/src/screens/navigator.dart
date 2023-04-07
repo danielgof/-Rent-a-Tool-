@@ -1,3 +1,4 @@
+import 'package:RT/src/screens/public_pages/alloffers_public_page.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import '../../api/url.dart';
@@ -79,6 +80,7 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
         if (routeState.route.pathTemplate == '/signin')
           FadeTransitionPage<void>(
             key: _signInKey,
+            // child: AllOffersPageState()
             child: SignInScreen(
               onSignIn: (credentials) async {
                 // await authState.signIn(
@@ -87,7 +89,6 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
                 var login = credentials.username;
                 var pass = credentials.password;
                 var status = await loginRequest(login, pass);
-                print(status);
                 if (200 == status) {
                   // var signedIn =
                   await authState.signIn(
@@ -100,6 +101,7 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
               },
             ),
           )
+
         else ...[
           // Display the app
           FadeTransitionPage<void>(

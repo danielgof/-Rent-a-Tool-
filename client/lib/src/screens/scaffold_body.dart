@@ -6,7 +6,7 @@ import 'private_pages/profile.dart';
 import 'private_pages/main_page.dart';
 import 'scaffold.dart';
 
-/// Displays the contents of the body of [BookstoreScaffold]
+
 class BookstoreScaffoldBody extends StatelessWidget {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -39,12 +39,6 @@ class BookstoreScaffoldBody extends StatelessWidget {
             child: BooksScreen(),
           )
 
-        // Avoid building a Navigator with an empty `pages` list when the
-        // RouteState is set to an unexpected path, such as /signin.
-        //
-        // Since RouteStateScope is an InheritedNotifier, any change to the
-        // route will result in a call to this build method, even though this
-        // widget isn't built when those routes are active.
         else
           FadeTransitionPage<void>(
             key: const ValueKey('empty'),
