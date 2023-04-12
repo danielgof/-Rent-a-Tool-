@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../api/url.dart';
 import 'alloffers_public_page.dart';
 
 
@@ -9,7 +10,7 @@ class RegistrationPage extends StatelessWidget {
 	RegistrationPage({Key? key}) : super(key: key);
 
 	Future<int> registrationRequest(username, pass, phone, email) async {
-		String url = "http://localhost:5000/api/v1/auth/register";
+		String url = "$URL/api/v1/auth/register";
 		Map credits = {
 			"username": username,
 			"phone": phone,

@@ -63,3 +63,8 @@ def register_user():
     except Exception as e:
         current_app.logger.info("Failed to register user %s", data["username"])
         return {"message": "error"}, 500
+    
+
+@auth.cli.command('menu')
+def foo() -> None:
+    print("hello from command line")

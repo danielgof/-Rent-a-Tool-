@@ -39,6 +39,7 @@ app.register_blueprint(offer)
 app.register_blueprint(chat)
 CORS(app)
 
+
 if __name__ == "__main__":
     # app.run()
     socketio.run(app)
