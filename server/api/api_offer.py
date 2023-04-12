@@ -91,3 +91,12 @@ def update_offer(current_user) -> dict:
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
         return {"message": "error"}, 500
+
+
+@offer.route("/query", methods=["POST"])
+def query_offer() -> dict:
+    data = request.get_json(force=True)
+    query = data["query"]
+    res: list = list()
+    res = offers_by_query(query=query)
+    return {"status": "success", "data": res}, 200

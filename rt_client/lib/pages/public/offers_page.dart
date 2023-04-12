@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../models/offer.dart';
 import '../../utils.dart';
 import 'login_page.dart';
+import 'mapOffers.dart';
 
 
 
@@ -132,6 +133,13 @@ class _AllOffersPageState extends State<AllOffersPageState> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SignInScreen(onSignIn: (Credentials value) {  },)
+                ),
+              );
+            },),
+            IconButton(icon: const Icon(Icons.map), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyMap()
                 ),
               );
             },),

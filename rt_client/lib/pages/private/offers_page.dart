@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../utils.dart';
+import '../public/login_page.dart';
+import '../public/mapOffers.dart';
 
 
 
@@ -128,7 +130,18 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
               Navigator.pop(context);
             },),
             IconButton(icon: const Icon(Icons.login), onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignInScreen(onSignIn: (Credentials value) {  },)
+                ),
+              );
+            },),
+            IconButton(icon: const Icon(Icons.map), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyMap()
+                ),
+              );
             },),
           ],
         ),

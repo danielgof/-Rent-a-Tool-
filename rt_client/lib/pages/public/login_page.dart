@@ -5,6 +5,7 @@ import 'package:rt_client/pages/public/registration_page.dart';
 
 import '../../utils.dart';
 import '../private/offers_page.dart';
+import 'mapOffers.dart';
 import 'offers_page.dart';
 
 class Credentials {
@@ -58,13 +59,13 @@ class _SignInScreenState extends State<SignInScreen> {
           IconButton(icon: const Icon(Icons.login), onPressed: () {
             Navigator.pop(context);
           },),
-          // IconButton(icon: const Icon(Icons.map), onPressed: () {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => MyMap()
-          //     ),
-          //   );
-          // },),
+          IconButton(icon: const Icon(Icons.map), onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyMap()
+              ),
+            );
+          },),
         ],
       ),
     ),
