@@ -8,20 +8,18 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../../utils.dart';
-import 'login_page.dart';
 import 'offers_page.dart';
 
 
-class MyMap extends StatefulWidget {
+class MyMapPrivate extends StatefulWidget {
   @override
-  _MyMapState createState() => _MyMapState();
+  _MyMapPrivateState createState() => _MyMapPrivateState();
 }
 
-class _MyMapState extends State<MyMap> {
+class _MyMapPrivateState extends State<MyMapPrivate> {
   late Future<List<Marker>> _markers;
   var _zoom = 6.0;
   late MapOptions _mapOptions;
-
 
 
   @override
@@ -73,7 +71,7 @@ class _MyMapState extends State<MyMap> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PostDetailsPage(post: Offer(
+                  builder: (context) => PostDetailsPrivatePage(post: Offer(
                     id: markerData['id'],
                     toolName: markerData['tool_name'],
                     toolDescription: markerData['tool_description'],

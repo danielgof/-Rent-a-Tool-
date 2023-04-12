@@ -3,17 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rt_client/pages/public/registration_page.dart';
 
+import '../../models/credentials.dart';
 import '../../utils.dart';
+import '../private/main_page_private.dart';
 import '../private/offers_page.dart';
-import 'mapOffers.dart';
-import 'offers_page.dart';
 
-class Credentials {
-  final String username;
-  final String password;
-
-  Credentials(this.username, this.password);
-}
 
 class SignInScreen extends StatefulWidget {
   final ValueChanged<Credentials> onSignIn;
@@ -45,30 +39,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    bottomNavigationBar: BottomAppBar(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AllOffersPageState()
-              ),
-            );
-          },),
-          IconButton(icon: const Icon(Icons.login), onPressed: () {
-            Navigator.pop(context);
-          },),
-          IconButton(icon: const Icon(Icons.map), onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MyMap()
-              ),
-            );
-          },),
-        ],
-      ),
-    ),
     body: Center(
       child: Card(
         child: Container(
@@ -178,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           if (status == 200) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const AllOffersPrivatePage()
+                              MaterialPageRoute(builder: (context) => PrivateMain()
                               ),
                             );
                           } else {

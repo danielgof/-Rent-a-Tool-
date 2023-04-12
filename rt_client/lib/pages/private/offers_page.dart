@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../models/credentials.dart';
 import '../../models/offer.dart';
 import '../../utils.dart';
 import '../public/login_page.dart';
@@ -122,38 +123,14 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
-              Navigator.pop(context);
-            },),
-            IconButton(icon: const Icon(Icons.login), onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignInScreen(onSignIn: (Credentials value) {  },)
-                ),
-              );
-            },),
-            IconButton(icon: const Icon(Icons.map), onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyMap()
-                ),
-              );
-            },),
-          ],
-        ),
-      ),
     );
   }
 }
 
-class PostDetailsPage extends StatelessWidget {
+class PostDetailsPrivatePage extends StatelessWidget {
   final Offer post;
 
-  const PostDetailsPage({Key? key, required this.post}) : super(key: key);
+  const PostDetailsPrivatePage({Key? key, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

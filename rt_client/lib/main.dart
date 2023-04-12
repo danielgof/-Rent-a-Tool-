@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rt_client/pages/public/main_page_public.dart';
 
 import 'pages/public/offers_page.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AllOffersPageState(),
+      home: PublicMain(),
     );
   }
 }

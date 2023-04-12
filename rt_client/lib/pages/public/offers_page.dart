@@ -5,9 +5,6 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../utils.dart';
-import 'login_page.dart';
-import 'mapOffers.dart';
-
 
 
 class AllOffersPageState extends StatefulWidget {
@@ -85,13 +82,12 @@ class _AllOffersPageState extends State<AllOffersPageState> {
                         final post = posts[index];
                         return GestureDetector(
                           onTap: () {
-                            // Navigate to the PostDetailsPage when a post is tapped
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => PostDetailsPagePrivate(post: post),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostDetailsPage(post: post),
+                              ),
+                            );
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16.0),
@@ -121,30 +117,6 @@ class _AllOffersPageState extends State<AllOffersPageState> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            IconButton(icon: const Icon(Icons.local_offer), onPressed: () {
-              Navigator.pop(context);
-            },),
-            IconButton(icon: const Icon(Icons.login), onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignInScreen(onSignIn: (Credentials value) {  },)
-                ),
-              );
-            },),
-            IconButton(icon: const Icon(Icons.map), onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyMap()
-                ),
-              );
-            },),
-          ],
-        ),
       ),
     );
   }
