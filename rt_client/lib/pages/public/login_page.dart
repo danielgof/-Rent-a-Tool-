@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rt_client/pages/public/registration_page.dart';
+import 'package:rt_client/pages/public/unauthorized_page.dart';
 
 import '../../models/credentials.dart';
 import '../../utils.dart';
@@ -76,7 +77,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       borderSide: BorderSide(color: Colors.grey, width: 0.0),
                       // cursorColor: Colors.green,
                     ),
-
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                   ),
@@ -137,14 +137,10 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           );
                         } else {
-                          // print(_usernameController.value.text + "     "+ _passwordController.value.text);
-                          // widget.onSignIn(Credentials(
-                          //     _usernameController.value.text,
-                          //     _passwordController.value.text)
-                          // );
                           var login = _usernameController.value.text;
                           var pass = _passwordController.value.text;
                           var status = await loginRequest(login, pass);
+                          print(status);
                           if (status == 200) {
                             Navigator.push(
                               context,
@@ -152,7 +148,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             );
                           } else {
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => UnauthorizedScreen()
+                              ),
+                            );
                           }
                         }
                       }

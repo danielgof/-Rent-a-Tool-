@@ -7,14 +7,14 @@ import '../../models/offer.dart';
 import '../../utils.dart';
 
 
-class AllOffersPageState extends StatefulWidget {
-  const AllOffersPageState({Key? key}) : super(key: key);
+class AllOffersPublicPage extends StatefulWidget {
+  const AllOffersPublicPage({Key? key}) : super(key: key);
 
   @override
   _AllOffersPageState createState() => _AllOffersPageState();
 }
 
-class _AllOffersPageState extends State<AllOffersPageState> {
+class _AllOffersPageState extends State<AllOffersPublicPage> {
   late Future<List<Offer>> _futurePosts;
 
   @override

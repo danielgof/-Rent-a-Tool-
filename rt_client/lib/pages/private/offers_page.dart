@@ -7,7 +7,7 @@ import '../../models/credentials.dart';
 import '../../models/offer.dart';
 import '../../utils.dart';
 import '../public/login_page.dart';
-import '../public/mapOffers.dart';
+import '../public/map_offers.dart';
 
 
 

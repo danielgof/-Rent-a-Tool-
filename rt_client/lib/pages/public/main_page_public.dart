@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../models/credentials.dart';
 import 'login_page.dart';
-import 'mapOffers.dart';
+import 'map_offers.dart';
 import 'offers_page.dart';
 
 
 class PublicMain extends StatefulWidget {
+  const PublicMain({Key? key}) : super(key: key);
 
   @override
   State<PublicMain> createState() => _PublicMainScreenState();
@@ -22,13 +23,9 @@ class _PublicMainScreenState extends State<PublicMain> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    AllOffersPageState(),
+    const AllOffersPublicPage(),
     SignInScreen(onSignIn: (Credentials value) {  },),
-    MyMap(),
-    // Icon(
-    //   Icons.chat,
-    //   size: 150,
-    // ),
+    MapOffersPublicPage(),
   ];
 
   @override

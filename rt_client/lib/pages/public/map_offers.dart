@@ -8,20 +8,18 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../../utils.dart';
-import 'login_page.dart';
 import 'offers_page.dart';
 
 
-class MyMap extends StatefulWidget {
+class MapOffersPublicPage extends StatefulWidget {
   @override
-  _MyMapState createState() => _MyMapState();
+  _MapOffersPublicState createState() => _MapOffersPublicState();
 }
 
-class _MyMapState extends State<MyMap> {
+class _MapOffersPublicState extends State<MapOffersPublicPage> {
   late Future<List<Marker>> _markers;
   var _zoom = 6.0;
   late MapOptions _mapOptions;
-
 
 
   @override
@@ -48,7 +46,7 @@ class _MyMapState extends State<MyMap> {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url), headers: {
       HttpHeaders.authorizationHeader:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+      TOKEN,
     });
 
     if (response.statusCode == 200) {
@@ -63,7 +61,7 @@ class _MyMapState extends State<MyMap> {
           point: point,
           builder: (ctx) => GestureDetector(
             onTap: () {
-              print("clicked");
+              // print("clicked");
               // showDialog(
               //   context: context,
               //   builder: (BuildContext context) {
@@ -91,7 +89,6 @@ class _MyMapState extends State<MyMap> {
             },
             child: const Icon(Icons.pin_drop),
           ),
-          // builder: (context) => const Icon(Icons.pin_drop),
         );
       }).toList();
     } else {
