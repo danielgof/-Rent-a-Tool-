@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../../utils.dart';
-import 'offers_page.dart';
+import 'all_offers_page.dart';
 
 
 class MyMapPrivate extends StatefulWidget {
@@ -46,7 +46,7 @@ class _MyMapPrivateState extends State<MyMapPrivate> {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url), headers: {
       HttpHeaders.authorizationHeader:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+      TOKEN,
     });
 
     if (response.statusCode == 200) {
@@ -71,7 +71,7 @@ class _MyMapPrivateState extends State<MyMapPrivate> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PostDetailsPrivatePage(post: Offer(
+                  builder: (context) => PostDetailsPagePrivate(post: Offer(
                     id: markerData['id'],
                     toolName: markerData['tool_name'],
                     toolDescription: markerData['tool_description'],

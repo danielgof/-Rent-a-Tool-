@@ -36,6 +36,8 @@ def add_offer_to_user(username: str, data: dict) -> None:
         price=data["price"],
         date_start=data["date_start"],
         date_finish=data["date_finish"],
+        lat=data["lat"],
+        lng=data["lng"],
         owner_name=data["owner_name"],
         phone_number=data["phone_number"],
     )

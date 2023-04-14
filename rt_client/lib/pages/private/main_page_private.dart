@@ -21,7 +21,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    AllOffersPrivatePage(),
+    OffersPrivatePage(),
     MyMapPrivate(),
   ];
 
@@ -32,7 +32,6 @@ class _PrivateMainScreenState extends State<PrivateMain> {
           title: const Text('RT'),
           automaticallyImplyLeading: false,
           actions: <Widget>[
-
             Padding(
                 padding: const EdgeInsets.only(right: 20.0),
                 child: GestureDetector(

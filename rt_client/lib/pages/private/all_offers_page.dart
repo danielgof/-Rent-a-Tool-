@@ -7,14 +7,14 @@ import '../../models/offer.dart';
 import '../../utils.dart';
 
 
-class AllOffersPublicPage extends StatefulWidget {
-  const AllOffersPublicPage({Key? key}) : super(key: key);
+class AllOffersPrivatePage extends StatefulWidget {
+  const AllOffersPrivatePage({Key? key}) : super(key: key);
 
   @override
   _AllOffersPageState createState() => _AllOffersPageState();
 }
 
-class _AllOffersPageState extends State<AllOffersPublicPage> {
+class _AllOffersPageState extends State<AllOffersPrivatePage> {
   late Future<List<Offer>> _futurePosts;
 
   @override
@@ -28,13 +28,10 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
     final response = await http.get(Uri.parse(url),
       headers: {
         HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
-      },
-    );
+      },);
 
     if (response.statusCode == 200) {
-      // print(json.decode(response.body)["data"]);
       final List<dynamic> jsonList = json.decode(response.body)["data"];
-      // print(jsonList.map((json) => Offer.fromJson(json)).toList());
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load posts');
@@ -88,7 +85,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PostDetailsPage(post: post),
+                                builder: (context) => PostDetailsPagePrivate(post: post),
                               ),
                             );
                           },
@@ -125,10 +122,10 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
   }
 }
 
-class PostDetailsPage extends StatelessWidget {
+class PostDetailsPagePrivate extends StatelessWidget {
   final Offer post;
 
-  const PostDetailsPage({Key? key, required this.post}) : super(key: key);
+  const PostDetailsPagePrivate({Key? key, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
