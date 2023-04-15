@@ -22,7 +22,7 @@ api offer
 @offer.route("/all_all", methods=["GET"])
 # @token_required
 # def get_all_offers(current_user):
-def get_all_offers():
+def get_all_offers() -> dict:
     try:
         responce = all_offers()
         return {"status": "success", "data": responce}, 200
@@ -33,10 +33,8 @@ def get_all_offers():
 
 @offer.route("/save", methods=["POST"])
 @token_required
-def save_offer(current_user):
+def save_offer(current_user) -> dict:
     try:
-        # if not request.json:
-        #     abort(400)
         if not request.get_json(force=True):
             abort(400)
         token = request.headers["Authorization"]
@@ -51,12 +49,12 @@ def save_offer(current_user):
 
 @offer.route("/all", methods=["GET"])
 @token_required
-def get_all_user_offers(current_user):
+def get_all_user_offers(current_user) -> dict:
     try:
         token = request.headers["Authorization"]
         user_info = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])["username"]
         responce = all_offers_user(user_info=user_info)
-        return {"result": responce}
+        return {"data": responce}
     except Exception as e:
         current_app.logger.info("failed to log in")
         return {"message": "error"}, 500
@@ -95,8 +93,14 @@ def update_offer(current_user) -> dict:
 
 @offer.route("/query", methods=["POST"])
 def query_offer() -> dict:
-    data = request.get_json(force=True)
-    query = data["query"]
-    res: list = list()
-    res = offers_by_query(query=query)
-    return {"status": "success", "data": res}, 200
+    try:
+        if not request.get_json(force=True):
+            abort(400)
+        data = request.get_json(force=True)
+        query = data["query"]
+        res: list = list()
+        res = offers_by_query(query=query)
+        return {"status": "success", "data": res}, 200
+    except Exception as e:
+        current_app.logger.info(f"exeption {e}")
+        return {"message": "error"}, 500

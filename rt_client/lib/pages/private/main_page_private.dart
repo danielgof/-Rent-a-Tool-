@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rt_client/pages/private/user_details_page.dart';
+import 'package:rt_client/pages/private/user_offers.dart';
 
 import '../public/main_page_public.dart';
 import 'map_offers_private.dart';
@@ -21,8 +23,9 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    OffersPrivatePage(),
+    const OffersPrivatePage(),
     MyMapPrivate(),
+    const UserOffersPage(),
   ];
 
   @override
@@ -36,7 +39,12 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                 padding: const EdgeInsets.only(right: 20.0),
                 child: GestureDetector(
                   onTap: () {
-                    print("object");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UserDetailsPage(),
+                      ),
+                    );
                   },
                   child: const CircleAvatar(
                     backgroundImage: NetworkImage("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="),
@@ -51,14 +59,13 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PublicMain(),
+                        builder: (context) => const PublicMain(),
                       ),
                     );
                   },
                   child: const Icon(Icons.logout),
                 )
             ),
-
             ],
           ),
         body: Center(
@@ -73,6 +80,10 @@ class _PrivateMainScreenState extends State<PrivateMain> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.map),
                 label: 'Map',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.my_library_books),
+                label: 'My offers',
               ),
             ],
             currentIndex: _selectedIndex, //New

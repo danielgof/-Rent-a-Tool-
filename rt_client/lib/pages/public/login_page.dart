@@ -7,7 +7,6 @@ import 'package:rt_client/pages/public/unauthorized_page.dart';
 import '../../models/credentials.dart';
 import '../../utils.dart';
 import '../private/main_page_private.dart';
-import '../private/offers_page.dart';
 
 
 class SignInScreen extends StatefulWidget {

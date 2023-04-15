@@ -5,16 +5,17 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../utils.dart';
+import 'main_page_private.dart';
 
 
-class AllOffersPrivatePage extends StatefulWidget {
-  const AllOffersPrivatePage({Key? key}) : super(key: key);
+class UserOffersPage extends StatefulWidget {
+  const UserOffersPage({Key? key}) : super(key: key);
 
   @override
   _AllOffersPageState createState() => _AllOffersPageState();
 }
 
-class _AllOffersPageState extends State<AllOffersPrivatePage> {
+class _AllOffersPageState extends State<UserOffersPage> {
   late Future<List<Offer>> _futurePosts;
 
   @override
@@ -24,7 +25,7 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
   }
 
   Future<List<Offer>> fetchOffers() async {
-    String url = "$URL/api/v1/offer/all_all";
+    String url = "$URL/api/v1/offer/all";
     final response = await http.get(Uri.parse(url),
       headers: {
         HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
@@ -35,6 +36,24 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load posts');
+    }
+  }
+
+  Future<int> deleteOffer() async {
+    String url = "$URL/api/v1/offer/delete";
+    Map body = {"id": 14};
+    var bodyData = json.encode(body);
+    final response = await http.delete(Uri.parse(url),
+      body: bodyData,
+      headers: {
+        HttpHeaders.authorizationHeader: TOKEN,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return response.statusCode;
+    } else {
+      throw Exception('Failed to delete post');
     }
   }
 
@@ -94,17 +113,22 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    const CircleAvatar(
-                                      backgroundImage: NetworkImage("https://www.thespruce.com/thmb/NFdwIIaQ1i2EnjfQqxfCG8cWayA=/fit-in/1500x1106/filters:no_upscale():max_bytes(150000):strip_icc()/dewaltoverall-c15397d1c2264b1e80dba45d74505bd4.jpg"),
-                                      maxRadius: 20,
-                                    ),
-                                    Text(
-                                      post.toolName,
-                                      style: const TextStyle(fontSize: 20.0),
-                                    ),
-                                  ],
+                                Container(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      deleteOffer();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => PrivateMain()
+                                        ),
+                                      );
+                                    },
+                                    child: const Icon(Icons.delete),
+                                  ),
+                                ),
+                                Text(
+                                  post.toolName,
+                                  style: const TextStyle(fontSize: 20.0),
                                 ),
                                 const SizedBox(height: 8.0),
                                 Text(post.toolDescription),
