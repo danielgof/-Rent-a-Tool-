@@ -48,10 +48,10 @@ def add_offer_to_user(username: str, data: dict) -> None:
 
 def delete_offer_by_id(data: dict) -> bool:
     """delete user's offer"""
-    # offer: Offer = session.query(Offer).filter(Offer.id == data["id"]).first()
-    offer: Offer = session.query(Offer).filter(Offer.id == data["id"]).delete()
+    offer: Offer = session.query(Offer).filter(Offer.id == data["id"]).first()
+    # offer: Offer = session.query(Offer).filter(Offer.id == data["id"]).delete()
     if offer:
-        # offer.delete()
+        session.query(Offer).filter(Offer.id == data["id"]).delete()
         session.commit()
         return True
     else:

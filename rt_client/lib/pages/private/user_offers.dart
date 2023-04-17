@@ -39,9 +39,17 @@ class _AllOffersPageState extends State<UserOffersPage> {
     }
   }
 
-  Future<int> deleteOffer() async {
+  AlertDialog alert = const AlertDialog(
+    title: Text("Offer was deleted successfully"),
+    // content: Text("This is my message."),
+    // actions: [
+    //   okButton,
+    // ],
+  );
+
+  Future<int> deleteOffer(id) async {
     String url = "$URL/api/v1/offer/delete";
-    Map body = {"id": 14};
+    Map body = {"id": id};
     var bodyData = json.encode(body);
     final response = await http.delete(Uri.parse(url),
       body: bodyData,
@@ -51,6 +59,12 @@ class _AllOffersPageState extends State<UserOffersPage> {
     );
 
     if (response.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
       return response.statusCode;
     } else {
       throw Exception('Failed to delete post');
@@ -113,18 +127,17 @@ class _AllOffersPageState extends State<UserOffersPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      deleteOffer();
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => PrivateMain()
-                                        ),
-                                      );
-                                    },
-                                    child: const Icon(Icons.delete),
-                                  ),
+                                GestureDetector(
+                                  onTap: () {
+                                    deleteOffer(post.id);
+
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => PrivateMain()
+                                      ),
+                                    );
+                                  },
+                                  child: const Icon(Icons.delete),
                                 ),
                                 Text(
                                   post.toolName,

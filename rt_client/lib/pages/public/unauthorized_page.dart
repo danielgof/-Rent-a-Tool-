@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rt_client/pages/public/registration_page.dart';
 
-import 'offers_page.dart';
-
+import 'main_page_public.dart';
 
 class UnauthorizedScreen extends StatefulWidget {
   const UnauthorizedScreen({super.key});
@@ -33,7 +31,7 @@ class _SignInScreenState extends State<UnauthorizedScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AllOffersPublicPage()
+                      MaterialPageRoute(builder: (context) => PublicMain()
                       ),
                     );
                   },

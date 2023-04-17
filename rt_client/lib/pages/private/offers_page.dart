@@ -9,7 +9,7 @@ import '../../utils.dart';
 import '../public/login_page.dart';
 import '../public/map_offers.dart';
 import 'all_offers_page.dart';
-import 'offer_registration.dart';
+import 'offer_registration/offer_registration_description.dart';
 
 
 
@@ -61,7 +61,7 @@ class _AllOffersPageState extends State<OffersPrivatePage> {
         body: TabBarView(
           children: <Widget>[
             const AllOffersPrivatePage(),
-            OfferRegistrationPage(),
+            OfferRegistrationDescriptionPage(),
           ],
         ),
       ),
