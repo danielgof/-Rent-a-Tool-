@@ -172,7 +172,7 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                       owner_nameController.value.text,
                       phone_numberController.value.text,
                     );
-                    print(widget.tool_name);
+                    print("widget.date_start"+widget.date_start);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => PrivateMain()

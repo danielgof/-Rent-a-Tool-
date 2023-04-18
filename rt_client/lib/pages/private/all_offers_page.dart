@@ -97,7 +97,7 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                                 Row(
                                   children: [
                                     const CircleAvatar(
-                                      backgroundImage: NetworkImage("https://www.thespruce.com/thmb/NFdwIIaQ1i2EnjfQqxfCG8cWayA=/fit-in/1500x1106/filters:no_upscale():max_bytes(150000):strip_icc()/dewaltoverall-c15397d1c2264b1e80dba45d74505bd4.jpg"),
+                                      backgroundImage: NetworkImage("https://w7.pngwing.com/pngs/501/176/png-transparent-car-repair-tool-maps-location-placeholder-pin-icon.png"),
                                       maxRadius: 20,
                                     ),
                                     Text(

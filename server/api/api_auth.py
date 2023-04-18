@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort
 from flask_cors import CORS
+
 # from flask_mail import Mail, Message
 from functools import wraps
 from datetime import date, datetime, timedelta
@@ -19,43 +20,39 @@ auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 auth api
 """
 
-"""
-requires: 
-ensures: 
-"""
+
 @auth.route("/login", methods=["POST", "GET"])
 def login():
+    """login users"""
     try:
         data = request.get_json(force=True)
-        user = session.query(User) \
-            .filter(User.username == data["username"]).first()
-        if user:
-            token = jwt.encode({"username": data["username"], 
-            "exp": datetime.utcnow() + timedelta(days=365)}, 
-            SECRET_KEY)
+        user = session.query(User).filter(User.username == data["username"]).first()
+        if user and data["password"] == user.password:
+            token = jwt.encode(
+                {
+                    "username": data["username"],
+                    "exp": datetime.utcnow() + timedelta(days=365),
+                },
+                SECRET_KEY,
+            )
             current_app.logger.info("%s logged in successfully", user.username)
-            return {
-                "status": "success",
-                "token": token
-                }, 200
+            return {"status": "success", "token": token}, 200
         else:
-            return {"status":"User not found"}, 404
+            return {"status": "User not found"}, 404
     except Exception as e:
         current_app.logger.info("%s failed to log in", user.username)
         return {"message": "error"}, 500
 
+
 """
 """
+
+
 @auth.route("/register", methods=["POST"])
 def register_user():
     try:
         data = request.get_json(force=True)
-        add_user(
-                data["username"], 
-                data["phone"], 
-                data["email"], 
-                data["password"]
-                )
+        add_user(data["username"], data["phone"], data["email"], data["password"])
         # msg = Message("Subject", sender="daniilgofman1701@gmail.com", recipients=["daniilgofman1701@gmail.com"])
         # msg.body = "Veryfication link must be here"
         # mail.send(msg)
@@ -63,8 +60,8 @@ def register_user():
     except Exception as e:
         current_app.logger.info("Failed to register user %s", data["username"])
         return {"message": "error"}, 500
-    
 
-@auth.cli.command('menu')
+
+@auth.cli.command("menu")
 def foo() -> None:
     print("hello from command line")

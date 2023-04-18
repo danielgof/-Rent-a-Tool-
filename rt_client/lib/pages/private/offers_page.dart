@@ -3,14 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../models/credentials.dart';
 import '../../models/offer.dart';
 import '../../utils.dart';
-import '../public/login_page.dart';
-import '../public/map_offers.dart';
 import 'all_offers_page.dart';
 import 'offer_registration/offer_registration_description.dart';
-
 
 
 class OffersPrivatePage extends StatefulWidget {
