@@ -5,6 +5,7 @@ import 'dart:io';
 
 import '../main_page_private.dart';
 import '../../../utils.dart';
+import '../offers_page.dart';
 
 
 class OfferRegistrationContactsPage extends StatefulWidget {
@@ -34,10 +35,8 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
   @override
   void initState() {
     super.initState();
-    // this.tool_name = tool_name;
   }
 
-  // print(widget.tool_name);
 
   Future<int> registrationRequest(tool_name, tool_description, location, price,
       date_start, date_finish, lat, lng, owner_name, phone_number) async {
@@ -63,12 +62,6 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
     return data;
   }
 
-  // TextEditingController tool_nameController = TextEditingController();
-  // TextEditingController tool_descriptionController = TextEditingController();
-  // TextEditingController locationController = TextEditingController();
-  // TextEditingController priceController = TextEditingController();
-  // TextEditingController date_startController = TextEditingController();
-  // TextEditingController date_finishController = TextEditingController();
   TextEditingController owner_nameController = TextEditingController();
   TextEditingController phone_numberController = TextEditingController();
   TextEditingController latController = TextEditingController();
@@ -158,8 +151,7 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: TextButton(
-                  onPressed: () {
+                  child: ElevatedButton(onPressed: () {
                     registrationRequest(
                       widget.tool_name,
                       widget.tool_description,
@@ -172,15 +164,29 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                       owner_nameController.value.text,
                       phone_numberController.value.text,
                     );
-                    print("widget.date_start"+widget.date_start);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => PrivateMain()
                       ),
                     );
                   },
-                  child: const Text('Return to registration page.',
-                      style: TextStyle(color: Colors.blue)),
+                  child:
+                    const Text('Register offer.',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: ElevatedButton(onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PrivateMain()
+                    ),
+                  );
+                },
+                  child:
+                  const Text('Return to previous step.',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ],

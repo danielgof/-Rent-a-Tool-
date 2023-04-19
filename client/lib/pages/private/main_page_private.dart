@@ -3,6 +3,7 @@ import 'package:rt_client/pages/private/user_details_page.dart';
 import 'package:rt_client/pages/private/user_offers.dart';
 
 import '../public/main_page_public.dart';
+import 'all_offers_page.dart';
 import 'chat_page.dart';
 import 'map_offers_private.dart';
 import 'offers_page.dart';
@@ -24,10 +25,10 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    const OffersPrivatePage(),
+    const AllOffersPrivatePage(),
     MyMapPrivate(),
-    // ChatPage(),
-    const UserOffersPage(),
+    ChatPage(),
+    const OffersPrivatePage(),
   ];
 
   @override
@@ -74,6 +75,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
             child: _pages.elementAt(_selectedIndex), //New
           ),
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.local_offer),
@@ -83,10 +85,10 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                 icon: Icon(Icons.map),
                 label: 'Map',
               ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.message),
-              //   label: 'My chats',
-              // ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.message),
+                label: 'My chats',
+              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.my_library_books),
                 label: 'My offers',

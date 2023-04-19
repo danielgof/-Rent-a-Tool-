@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rt_client/pages/private/user_offers.dart';
 
 import '../../models/offer.dart';
 import '../../utils.dart';
-import 'all_offers_page.dart';
 import 'offer_registration/offer_registration_description.dart';
 
 
@@ -56,7 +56,7 @@ class _AllOffersPageState extends State<OffersPrivatePage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            const AllOffersPrivatePage(),
+            const UserOffersPage(),
             OfferRegistrationDescriptionPage(),
           ],
         ),
