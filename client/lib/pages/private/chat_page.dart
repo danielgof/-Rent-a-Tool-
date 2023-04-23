@@ -3,17 +3,19 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../models/chats.dart';
-import '../../utils.dart';
+import '../../api/utils.dart';
 
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ChatPageState createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
+  // ignore: unused_field
   late Future<List<ChatUsers>> _futureListChats;
 
   @override
@@ -122,6 +124,7 @@ class _ChatPageState extends State<ChatPage> {
 }
 
 
+// ignore: must_be_immutable
 class ConversationList extends StatefulWidget{
   String name;
   String messageText;
@@ -137,6 +140,7 @@ class ConversationList extends StatefulWidget{
     required this.isMessageRead});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ConversationListState createState() => _ConversationListState();
 }
 

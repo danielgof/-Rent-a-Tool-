@@ -7,7 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
-import '../../../utils.dart';
+import '../../api/utils.dart';
 import 'offers_page.dart';
 
 
@@ -80,7 +80,6 @@ class _MapOffersPublicState extends State<MapOffersPublicPage> {
                     dateFinish: markerData['date_finish'],
                     ownerName: markerData['owner_name'],
                     phoneNumber: markerData['phone_number'],
-                    location: markerData['location'],
                     lng: markerData['lng'],
                     lat: markerData['lat'],
                   )),

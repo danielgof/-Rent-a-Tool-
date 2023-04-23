@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../utils.dart';
+import '../../api/utils.dart';
 
 
+// ignore: must_be_immutable
 class RegistrationPage extends StatelessWidget {
   RegistrationPage({Key? key}) : super(key: key);
 
@@ -42,82 +43,73 @@ class RegistrationPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text('Registration',
-                    style: Theme.of(context).textTheme.headlineMedium),
+                  style: Theme.of(context).textTheme.headlineMedium),
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: usernameController,
                     decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                          // enabledBorder: new OutlineInputBorder(
-                          // 	// borderRadius: new BorderRadius.circular(25.0),
-                          // 	borderSide:  BorderSide(color: Colors.pinkAccent ),
-                          //
-                          // ),
-                          // focusedBorder: new OutlineInputBorder(
-                          // 	borderRadius: new BorderRadius.circular(25.0),
-                          // 	borderSide:  BorderSide(color: Colors.pinkAccent ),
-                          //
-                          // ),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Username',
-                        hintText: 'Enter username'),
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                      ),
+                      border: OutlineInputBorder(),
+                      labelText: 'Username',
+                      hintText: 'Enter username',
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: passController,
                     obscureText: true,
                     decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Password',
-                        hintText: 'Enter secure password'
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                      ),
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                      hintText: 'Enter secure password',
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: emailController,
                     decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Email',
-                        hintText: 'Enter email'
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                      ),
+                      border: OutlineInputBorder(),
+                      labelText: 'Email',
+                      hintText: 'Enter email',
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: phoneController,
                     decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Phone number',
-                        hintText: 'Enter phone number'
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                      ),
+                      border: OutlineInputBorder(),
+                      labelText: 'Phone number',
+                      hintText: 'Enter phone number',
                     ),
                   ),
                 ),
@@ -140,7 +132,7 @@ class RegistrationPage extends StatelessWidget {
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
+                                  child: const Text("OK"),
                                 ),
                               ],
                             ),
@@ -155,7 +147,8 @@ class RegistrationPage extends StatelessWidget {
                                 TextButton(
                                   onPressed: () => Navigator.pop(context, 'OK'),
                                   child: const Text('OK',
-                                      style: TextStyle(color: Colors.blue)),
+                                    style: TextStyle(color: Colors.blue),
+                                  ),
                                 ),
                               ],
                             ),
@@ -171,7 +164,8 @@ class RegistrationPage extends StatelessWidget {
                               TextButton(
                                 onPressed: () => Navigator.pop(context, 'OK'),
                                 child: const Text('OK',
-                                    style: TextStyle(color: Colors.blue)),
+                                  style: TextStyle(color: Colors.blue),
+                                ),
                               ),
                             ],
                           ),
@@ -179,7 +173,7 @@ class RegistrationPage extends StatelessWidget {
                       }
                     },
                     child: const Text('Register.',
-                        style: TextStyle(color: Colors.blue)),
+                      style: TextStyle(color: Colors.blue)),
                   ),
                 ),
               ],

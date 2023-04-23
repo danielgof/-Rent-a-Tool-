@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rt_client/pages/private/settings_page.dart';
 import 'package:rt_client/pages/private/user_details_page.dart';
-import 'package:rt_client/pages/private/user_offers.dart';
 
 import '../public/main_page_public.dart';
 import 'all_offers_page.dart';
@@ -27,7 +27,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   static final List<Widget> _pages = <Widget>[
     const AllOffersPrivatePage(),
     MyMapPrivate(),
-    ChatPage(),
+    const ChatPage(),
     const OffersPrivatePage(),
   ];
 
@@ -53,6 +53,20 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                     backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
                     maxRadius: 20,
                   ),
+                )
+            ),
+            Padding(
+                padding: const EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.settings),
                 )
             ),
             Padding(

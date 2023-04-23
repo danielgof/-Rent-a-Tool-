@@ -1,54 +1,51 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'offer_registration_contacts.dart';
 
 class OfferRegistrationDescriptionPage extends StatefulWidget {
+  const OfferRegistrationDescriptionPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
-  DateTime date_start = DateTime.now();
-  DateTime date_finish = DateTime.now();
+  DateTime dateStart = DateTime.now();
+  DateTime dateFinish = DateTime.now();
 
   Future<void> _selectDateStart(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: date_start,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2050));
-    if (pickedDate != null && pickedDate != date_start) {
+      context: context,
+      initialDate: dateStart,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2050),
+      );
+    if (pickedDate != null && pickedDate != dateStart) {
       setState(() {
-        date_start = pickedDate;
+        dateStart = pickedDate;
       });
     }
   }
 
   Future<void> _selectDateFinish(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: date_finish,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2050));
-    if (pickedDate != null && pickedDate != date_finish) {
+      context: context,
+      initialDate: dateFinish,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2050),
+    );
+    if (pickedDate != null && pickedDate != dateFinish) {
       setState(() {
-        date_finish = pickedDate;
+        dateFinish = pickedDate;
       });
     }
   }
 
-
-  TextEditingController tool_nameController = TextEditingController();
-  TextEditingController tool_descriptionController = TextEditingController();
-  TextEditingController owner_nameController = TextEditingController();
-  TextEditingController phone_numberController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
+  // Text fields controllers
+  TextEditingController toolNameController = TextEditingController();
+  TextEditingController toolDescriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-  TextEditingController date_startController = TextEditingController();
-  TextEditingController date_finishController = TextEditingController();
-  TextEditingController latController = TextEditingController();
-  TextEditingController lngController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -64,31 +61,15 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 cursorColor: Colors.blue,
-                controller: tool_nameController,
+                controller: toolNameController,
                 decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'Tool name',
-                    hintText: 'Enter tool name'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                cursorColor: Colors.blue,
-                controller: tool_descriptionController,
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'Tool description',
-                    hintText: 'Enter detailed description of the tool'
+                  labelStyle: TextStyle(color: Colors.blue),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                  ),
+                  border: OutlineInputBorder(),
+                  labelText: 'Tool name',
+                  hintText: 'Enter tool name',
                 ),
               ),
             ),
@@ -97,15 +78,15 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 cursorColor: Colors.blue,
-                controller: locationController,
+                controller: toolDescriptionController,
                 decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'Location',
-                    hintText: 'Enter location'
+                  labelStyle: TextStyle(color: Colors.blue),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                  ),
+                  border: OutlineInputBorder(),
+                  labelText: 'Tool description',
+                  hintText: 'Enter detailed description of the tool',
                 ),
               ),
             ),
@@ -122,8 +103,7 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                     ),
                     border: OutlineInputBorder(),
                     labelText: 'Price',
-                    hintText: 'Enter price'
-                ),
+                    hintText: 'Enter price'),
               ),
             ),
             Padding(
@@ -131,41 +111,52 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                 left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: Column(
                 children: <Widget>[
-                  Text(date_start.toString()),
+                  Text(
+                    // dateStart.toString(),
+                    "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2,'0')}-${dateStart.day.toString().padLeft(2,'0')}",
+                    style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
                   ElevatedButton(
                     onPressed: () => _selectDateStart(context),
                     child: const Text('Select start date'),
                   ),
                 ],
-              )
+              ),
             ),
             Padding(
                 padding: const EdgeInsets.only(
                     left: 15.0, right: 15.0, top: 15, bottom: 0),
                 child: Column(
                   children: <Widget>[
-                    Text(date_finish.toString()),
+                    Text(
+                      // dateFinish.toString(),
+                      "${dateFinish.year.toString()}-${dateFinish.month.toString().padLeft(2,'0')}-${dateFinish.day.toString().padLeft(2,'0')}",
+                      style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                    ),
                     ElevatedButton(
                       onPressed: () => _selectDateFinish(context),
                       child: const Text('Select end date'),
                     ),
                   ],
-                )
-            ),
+                )),
             Padding(
               padding: const EdgeInsets.all(6),
               child: TextButton(
-                onPressed: ()  {
+                onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OfferRegistrationContactsPage(
-                      tool_name: tool_nameController.value.text,
-                      tool_description: tool_descriptionController.value.text,
-                      location: locationController.value.text,
-                      price: priceController.value.text,
-                      date_start: date_start.toString(),
-                      date_finish: date_finish.toString(),
-                    ),
+                    MaterialPageRoute(
+                      builder: (context) => OfferRegistrationContactsPage(
+                        toolName: toolNameController.value.text,
+                        toolDescription: toolDescriptionController.value.text,
+                        price: priceController.value.text,
+                        dateStart: dateStart.toString(),
+                        dateFinish: dateFinish.toString(),
+                      ),
                     ),
                   );
                 },

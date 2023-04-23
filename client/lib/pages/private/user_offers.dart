@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
-import '../../utils.dart';
+import '../../api/utils.dart';
 import 'main_page_private.dart';
 
 
@@ -47,7 +47,7 @@ class _AllOffersPageState extends State<UserOffersPage> {
     // ],
   );
 
-  Future<int> deleteOffer(id) async {
+  Future<int> _deleteOffer(id) async {
     String url = "$URL/api/v1/offer/delete";
     Map body = {"id": id};
     var bodyData = json.encode(body);
@@ -129,8 +129,7 @@ class _AllOffersPageState extends State<UserOffersPage> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    deleteOffer(post.id);
-
+                                    _deleteOffer(post.id);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) => PrivateMain()
@@ -198,10 +197,6 @@ class PostDetailsPagePrivate extends StatelessWidget {
               style: const TextStyle(fontSize: 18.0),
             ),
             Text(
-              'Location: ${post.location}',
-              style: const TextStyle(fontSize: 18.0),
-            ),
-            Text(
               'Date Start: ${post.dateStart}',
               style: const TextStyle(fontSize: 18.0),
             ),
@@ -217,11 +212,6 @@ class PostDetailsPagePrivate extends StatelessWidget {
               'Phone Number: ${post.phoneNumber}',
               style: const TextStyle(fontSize: 18.0),
             ),
-            // const SizedBox(height: 16.0),
-            // Text(
-            // 	'Post ID: ${post.id}',
-            // 	style: const TextStyle(fontSize: 16.0),
-            // ),
           ],
         ),
       ),

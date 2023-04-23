@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
-import '../../utils.dart';
+import '../../api/utils.dart';
 
 
 class AllOffersPrivatePage extends StatefulWidget {
@@ -158,10 +158,6 @@ class PostDetailsPagePrivate extends StatelessWidget {
             ),
             Text(
               'Price: ${post.price}',
-              style: const TextStyle(fontSize: 18.0),
-            ),
-            Text(
-              'Location: ${post.location}',
               style: const TextStyle(fontSize: 18.0),
             ),
             Text(

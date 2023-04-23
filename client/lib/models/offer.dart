@@ -7,7 +7,6 @@ class Offer {
   final String dateFinish;
   final String ownerName;
   final String phoneNumber;
-  final String location;
   final String lat;
   final String lng;
 
@@ -20,7 +19,6 @@ class Offer {
     required this.dateFinish,
     required this.ownerName,
     required this.phoneNumber,
-    required this.location,
     required this.lng,
     required this.lat,
   });
@@ -30,7 +28,6 @@ class Offer {
         id: json['id'],
         toolName: json['tool_name'],
         toolDescription: json['tool_description'],
-        location: json['location'],
         lat: json['lat'],
         lng: json['lng'],
         price: json['price'],

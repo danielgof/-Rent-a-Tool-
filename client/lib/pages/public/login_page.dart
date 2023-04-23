@@ -5,7 +5,7 @@ import 'package:rt_client/pages/public/registration_page.dart';
 import 'package:rt_client/pages/public/unauthorized_page.dart';
 
 import '../../models/credentials.dart';
-import '../../utils.dart';
+import '../../api/utils.dart';
 import '../private/main_page_private.dart';
 
 
