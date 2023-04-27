@@ -6,6 +6,7 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 import '../main_page_private.dart';
 import '../../../api/utils.dart';
+import 'offer_registration_description.dart';
 
 // ignore: must_be_immutable
 class OfferRegistrationContactsPage extends StatefulWidget {
@@ -34,10 +35,11 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
     super.initState();
   }
 
+  // Extraction username of current user from JWT
   final String username = JWT.decode(TOKEN).payload["username"];
 
   AlertDialog alert = const AlertDialog(
-    title: Text("Offer was deleted successfully"),
+    title: Text("Offer was created successfully"),
     // content: Text("This is my message."),
     // actions: [
     //   okButton,
@@ -176,7 +178,7 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PrivateMain()
+                      MaterialPageRoute(builder: (context) => const OfferRegistrationDescriptionPage()
                       ),
                     );
                   },

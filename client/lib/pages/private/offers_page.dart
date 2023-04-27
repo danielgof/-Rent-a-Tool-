@@ -54,9 +54,9 @@ class _AllOffersPageState extends State<OffersPrivatePage> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: <Widget>[
-            const UserOffersPage(),
+            UserOffersPage(),
             OfferRegistrationDescriptionPage(),
           ],
         ),

@@ -169,7 +169,7 @@ class _ConversationListState extends State<ConversationList> {
                     backgroundImage: NetworkImage(widget.imageUrl),
                     maxRadius: 30,
                   ),
-                  SizedBox(width: 16,),
+                  const SizedBox(width: 16,),
                   Expanded(
                     child: Container(
                       color: Colors.transparent,

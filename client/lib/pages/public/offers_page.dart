@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';
+import '../private/all_offers_page.dart';
 
 
 class AllOffersPublicPage extends StatefulWidget {
@@ -83,6 +86,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                       itemCount: posts.length,
                       itemBuilder: (context, index) {
                         final post = posts[index];
+                        // print(post.lng);
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -170,6 +174,41 @@ class PostDetailsPage extends StatelessWidget {
             Text(
               'Phone Number: ${post.phoneNumber}',
               style: const TextStyle(fontSize: 18.0),
+            ),
+            SizedBox(
+              width: 400,
+              height: 400,
+              child: StatefulBuilder(
+                builder: (context, setState) => FlutterMap(
+                  // options: _mapOptions,
+                  // options: _mapOptions,
+                  options: MapOptions(
+                    center: LatLng(double.parse(post.lat), double.parse(post.lng)),
+                    zoom: 6,
+                    maxZoom: 18.0,
+                    minZoom: 3.0,
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      subdomains: const ['a', 'b', 'c'],
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        Marker(
+                          point: LatLng(double.parse(post.lat), double.parse(post.lng)),
+                          builder: (ctx) => GestureDetector(
+                            onTap: () {
+                              print("clicked");
+                            },
+                            child: const Icon(Icons.pin_drop),
+                          ),
+                        ),
+                      ]
+                    )
+                  ],
+                ),
+              ),
             ),
             // const SizedBox(height: 16.0),
             // Text(
