@@ -12,13 +12,15 @@ import 'offers_page.dart';
 
 
 class MapOffersPublicPage extends StatefulWidget {
+  const MapOffersPublicPage({super.key});
+
   @override
   _MapOffersPublicState createState() => _MapOffersPublicState();
 }
 
 class _MapOffersPublicState extends State<MapOffersPublicPage> {
   late Future<List<Marker>> _markers;
-  var _zoom = 6.0;
+  late double zoom = 6.0;
   late MapOptions _mapOptions;
 
 
@@ -28,7 +30,7 @@ class _MapOffersPublicState extends State<MapOffersPublicPage> {
     _markers = fetchMarkers();
     _mapOptions = MapOptions(
       center: LatLng(51.5, -0.09),
-      zoom: _zoom,
+      zoom: zoom,
       maxZoom: 18.0,
       minZoom: 3.0,
     );
@@ -97,15 +99,26 @@ class _MapOffersPublicState extends State<MapOffersPublicPage> {
 
   void _onZoomInPressed() {
     setState(() {
-      _zoom += 1.0;
-      // _mapOptions = _mapOptions.copyWith(zoom: _zoom);
-    });
+      zoom += 1.0;
+      _mapOptions = MapOptions(
+        center: _mapOptions.center,
+        zoom: zoom,
+        maxZoom: _mapOptions.maxZoom,
+        minZoom: _mapOptions.minZoom,
+        );
+      },
+    );
   }
 
   void _onZoomOutPressed() {
     setState(() {
-      _zoom -= 1.0;
-      // _mapOptions = _mapOptions.copyWith(zoom: _zoom);
+      zoom -= 1.0;
+      _mapOptions = MapOptions(
+        center: _mapOptions.center,
+        zoom: zoom,
+        maxZoom: _mapOptions.maxZoom,
+        minZoom: _mapOptions.minZoom,
+      );
     });
   }
 
@@ -116,29 +129,23 @@ class _MapOffersPublicState extends State<MapOffersPublicPage> {
         future: _markers,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return StatefulBuilder(
-              builder: (context, setState) => FlutterMap(
-                options: _mapOptions,
-                // options: _mapOptions,
-                children: [
-                  TileLayer(
-                    urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    subdomains: const ['a', 'b', 'c'],
-                  ),
-                  MarkerLayer(
-                    markers: snapshot.data!,
-                  ),
-                ],
-              ),
+            return FlutterMap(
+              mapController: MapController(),
+              options: _mapOptions,
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  subdomains: ['a', 'b', 'c'],
+                ),
+                MarkerLayer(
+                  markers: snapshot.data!,
+                ),
+              ],
             );
           } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error fetching markers'),
-            );
+            return Text('Failed to load markers');
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
@@ -159,3 +166,83 @@ class _MapOffersPublicState extends State<MapOffersPublicPage> {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_map/flutter_map.dart';
+// import 'package:latlong2/latlong.dart';
+//
+// class MapOffersPublicPage extends StatefulWidget {
+//   @override
+//   _ZoomableMapState createState() => _ZoomableMapState();
+// }
+//
+// class _ZoomableMapState extends State<MapOffersPublicPage> {
+//   MapController mapController = MapController();
+//   double currentZoom = 13.0;
+//
+//   void _onMapCreated(MapController controller) {
+//     setState(() {
+//       mapController = controller;
+//     });
+//   }
+//
+//   void _onZoomChanged(MapPosition position, bool hasGesture) {
+//     setState(() {
+//       currentZoom = mapController.zoom;
+//     });
+//   }
+//
+//   void _zoomIn() {
+//     setState(() {
+//       currentZoom += 1;
+//       mapController.move(mapController.center, currentZoom);
+//     });
+//   }
+//
+//   void _zoomOut() {
+//     setState(() {
+//       currentZoom -= 1;
+//       mapController.move(mapController.center, currentZoom);
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: FlutterMap(
+//               mapController: mapController,
+//               options: MapOptions(
+//                 center: LatLng(37.7749, -122.4194),
+//                 zoom: currentZoom,
+//                 onPositionChanged: _onZoomChanged,
+//               ),
+//               children: [
+//                 TileLayer(
+//                   urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+//                   subdomains: const ['a', 'b', 'c'],
+//                 ),
+//               ],
+//             ),
+//           ),
+//           ButtonBar(
+//             alignment: MainAxisAlignment.center,
+//             children: [
+//               ElevatedButton(
+//                 onPressed: _zoomIn,
+//                 child: const Icon(Icons.add),
+//               ),
+//               ElevatedButton(
+//                 onPressed: _zoomOut,
+//                 child: const Icon(Icons.remove),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
