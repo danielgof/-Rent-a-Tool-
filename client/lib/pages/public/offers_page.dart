@@ -43,6 +43,8 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
     }
   }
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,6 +55,10 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 cursorColor: Colors.blue,
+                controller: searchController,
+                onChanged: (String val) async {
+                  print(searchController.value.text);
+                },
                 decoration: InputDecoration(
                   hintText: "Search...",
                   hintStyle: TextStyle(color: Colors.grey.shade600),
