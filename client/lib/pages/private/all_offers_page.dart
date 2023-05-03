@@ -29,7 +29,7 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+        HttpHeaders.authorizationHeader: TOKEN,
       },);
 
     if (response.statusCode == 200) {
@@ -91,26 +91,30 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                               ),
                             );
                           },
-                          child: Container(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const CircleAvatar(
-                                      backgroundImage: NetworkImage("https://w7.pngwing.com/pngs/501/176/png-transparent-car-repair-tool-maps-location-placeholder-pin-icon.png"),
-                                      maxRadius: 20,
-                                    ),
-                                    Text(
-                                      post.toolName,
-                                      style: const TextStyle(fontSize: 20.0),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8.0),
-                                Text(post.toolDescription),
-                              ],
+                          child: Card(
+                            margin: const EdgeInsets.all(12),
+                            child: Container(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const CircleAvatar(
+                                        backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                        maxRadius: 40,
+                                      ),
+                                      Text(
+                                        post.toolName,
+                                        style: const TextStyle(fontSize: 20.0),
+                                      ),
+                                    ].map((widget) => Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: widget,
+                                    )).toList(),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

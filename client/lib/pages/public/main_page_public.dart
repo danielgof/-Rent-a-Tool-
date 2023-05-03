@@ -25,7 +25,7 @@ class _PublicMainScreenState extends State<PublicMain> {
   static final List<Widget> _pages = <Widget>[
     const AllOffersPublicPage(),
     SignInScreen(onSignIn: (Credentials value) {  },),
-    MapOffersPublicPage(),
+    const MapOffersPublicPage(),
   ];
 
   @override

@@ -5,7 +5,6 @@ import 'main_page_public.dart';
 class UnauthorizedScreen extends StatefulWidget {
   const UnauthorizedScreen({super.key});
 
-
   @override
   State<UnauthorizedScreen> createState() => _SignInScreenState();
 }
@@ -31,11 +30,11 @@ class _SignInScreenState extends State<UnauthorizedScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PublicMain()
+                      MaterialPageRoute(builder: (context) => const PublicMain()
                       ),
                     );
                   },
-                  child: const Text('Return to registration page.',
+                  child: const Text('Return to home page.',
                       style: TextStyle(color: Colors.blue)),
                 ),
               ),

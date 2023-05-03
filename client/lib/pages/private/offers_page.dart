@@ -45,6 +45,7 @@ class _AllOffersPageState extends State<OffersPrivatePage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const TabBar(

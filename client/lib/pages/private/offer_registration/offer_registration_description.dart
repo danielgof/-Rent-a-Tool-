@@ -50,123 +50,127 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text('Offer registration',
-                style: Theme.of(context).textTheme.headlineMedium),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                cursorColor: Colors.blue,
-                controller: toolNameController,
-                decoration: const InputDecoration(
-                  labelStyle: TextStyle(color: Colors.blue),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  border: OutlineInputBorder(),
-                  labelText: 'Tool name',
-                  hintText: 'Enter tool name',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                cursorColor: Colors.blue,
-                controller: toolDescriptionController,
-                decoration: const InputDecoration(
-                  labelStyle: TextStyle(color: Colors.blue),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  border: OutlineInputBorder(),
-                  labelText: 'Tool description',
-                  hintText: 'Enter detailed description of the tool',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                cursorColor: Colors.blue,
-                controller: priceController,
-                decoration: const InputDecoration(
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Offer registration',
+                  style: Theme.of(context).textTheme.headlineMedium),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                child: TextField(
+                  cursorColor: Colors.blue,
+                  controller: toolNameController,
+                  decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.blue),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 0.0),
                     ),
                     border: OutlineInputBorder(),
-                    labelText: 'Price',
-                    hintText: 'Enter price'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    // dateStart.toString(),
-                    "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2,'0')}-${dateStart.day.toString().padLeft(2,'0')}",
-                    style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ElevatedButton(
-                    onPressed: () => _selectDateStart(context),
-                    child: const Text('Select start date'),
+                    labelText: 'Tool name',
+                    hintText: 'Enter tool name',
                   ),
-                ],
+                ),
               ),
-            ),
-            Padding(
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                child: TextField(
+                  cursorColor: Colors.blue,
+                  controller: toolDescriptionController,
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.blue),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
+                    border: OutlineInputBorder(),
+                    labelText: 'Tool description',
+                    hintText: 'Enter detailed description of the tool',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                child: TextField(
+                  cursorColor: Colors.blue,
+                  controller: priceController,
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                      ),
+                      border: OutlineInputBorder(),
+                      labelText: 'Price',
+                      hintText: 'Enter price'),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(
                     left: 15.0, right: 15.0, top: 15, bottom: 0),
                 child: Column(
                   children: <Widget>[
                     Text(
-                      // dateFinish.toString(),
-                      "${dateFinish.year.toString()}-${dateFinish.month.toString().padLeft(2,'0')}-${dateFinish.day.toString().padLeft(2,'0')}",
+                      // dateStart.toString(),
+                      "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2,'0')}-${dateStart.day.toString().padLeft(2,'0')}",
                       style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => _selectDateFinish(context),
-                      child: const Text('Select end date'),
-                    ),
-                  ],
-                )),
-            Padding(
-              padding: const EdgeInsets.all(6),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OfferRegistrationContactsPage(
-                        toolName: toolNameController.value.text,
-                        toolDescription: toolDescriptionController.value.text,
-                        price: priceController.value.text,
-                        dateStart: dateStart.toString(),
-                        dateFinish: dateFinish.toString(),
+                        fontSize: 20,
                       ),
                     ),
-                  );
-                },
-                child: const Text('Next step.',
-                    style: TextStyle(color: Colors.blue)),
+                    ElevatedButton(
+                      onPressed: () => _selectDateStart(context),
+                      child: const Text('Select start date'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        // dateFinish.toString(),
+                        "${dateFinish.year.toString()}-${dateFinish.month.toString().padLeft(2,'0')}-${dateFinish.day.toString().padLeft(2,'0')}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => _selectDateFinish(context),
+                        child: const Text('Select end date'),
+                      ),
+                    ],
+                  )),
+              Padding(
+                padding: const EdgeInsets.all(6),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OfferRegistrationContactsPage(
+                          toolName: toolNameController.value.text,
+                          toolDescription: toolDescriptionController.value.text,
+                          price: priceController.value.text,
+                          dateStart: dateStart.toString(),
+                          dateFinish: dateFinish.toString(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Next step.',
+                      style: TextStyle(color: Colors.blue)),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

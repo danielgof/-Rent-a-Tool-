@@ -84,113 +84,123 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
   TextEditingController lngController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: Center(
-      child: Card(
-        child: Container(
-          constraints: BoxConstraints.loose(const Size(600, 600)),
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Enter other details.',
-                style: Theme.of(context).textTheme.headlineMedium),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-                child: TextField(
-                  cursorColor: Colors.blue,
-                  controller: latController,
-                  decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'Latitude',
-                    hintText: 'Enter your latitude.'
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-                child: TextField(
-                  cursorColor: Colors.blue,
-                  controller: lngController,
-                  decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'Latitude',
-                    hintText: 'Enter your latitude.'
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-                child: TextField(
-                  cursorColor: Colors.blue,
-                  controller: phoneNumberController,
-                  decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    labelText: 'Phone number',
-                    hintText: 'Enter your phone number.'
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                  child: ElevatedButton(onPressed: () {
-                    _registrationRequest(
-                      widget.toolName,
-                      widget.toolDescription,
-                      widget.price,
-                      widget.dateStart,
-                      widget.dateFinish,
-                      latController.value.text,
-                      lngController.value.text,
-                      username,
-                      phoneNumberController.value.text,
-                    );
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => PrivateMain(),
+  Widget build(BuildContext context) {
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Center(
+          child: Card(
+            child: Container(
+              constraints: BoxConstraints.loose(const Size(600, 600)),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Enter other details.',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headlineMedium),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    child: TextField(
+                      cursorColor: Colors.blue,
+                      controller: latController,
+                      decoration: const InputDecoration(
+                          labelStyle: TextStyle(color: Colors.blue),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey, width: 0.0),
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Latitude',
+                          hintText: 'Enter your latitude.'
                       ),
-                    );
-                  },
-                  child:
-                    const Text('Register offer.',
-                      style: TextStyle(color: Colors.white)),
+                    ),
                   ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const OfferRegistrationDescriptionPage()
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    child: TextField(
+                      cursorColor: Colors.blue,
+                      controller: lngController,
+                      decoration: const InputDecoration(
+                          labelStyle: TextStyle(color: Colors.blue),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey, width: 0.0),
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Latitude',
+                          hintText: 'Enter your latitude.'
                       ),
-                    );
-                  },
-                  child: const Text('Return to previous step.',
-                    style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15.0, right: 15.0, top: 15, bottom: 0),
+                    child: TextField(
+                      cursorColor: Colors.blue,
+                      controller: phoneNumberController,
+                      decoration: const InputDecoration(
+                          labelStyle: TextStyle(color: Colors.blue),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey, width: 0.0),
+                          ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Phone number',
+                          hintText: 'Enter your phone number.'
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ElevatedButton(onPressed: () {
+                      _registrationRequest(
+                        widget.toolName,
+                        widget.toolDescription,
+                        widget.price,
+                        widget.dateStart,
+                        widget.dateFinish,
+                        latController.value.text,
+                        lngController.value.text,
+                        username,
+                        phoneNumberController.value.text,
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PrivateMain(),
+                        ),
+                      );
+                    },
+                      child:
+                      const Text('Register offer.',
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (
+                              context) => const OfferRegistrationDescriptionPage()
+                          ),
+                        );
+                      },
+                      child: const Text('Return to previous step.',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
-    ),
-  );
+    );
+  }
 }

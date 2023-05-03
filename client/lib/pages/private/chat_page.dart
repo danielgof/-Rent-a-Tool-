@@ -165,8 +165,8 @@ class _ConversationListState extends State<ConversationList> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.imageUrl),
+                  const CircleAvatar(
+                    backgroundImage: NetworkImage("https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"),
                     maxRadius: 30,
                   ),
                   const SizedBox(width: 16,),

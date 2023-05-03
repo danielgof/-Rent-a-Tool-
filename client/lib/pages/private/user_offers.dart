@@ -77,6 +77,7 @@ class _AllOffersPageState extends State<UserOffersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Padding(
@@ -125,31 +126,70 @@ class _AllOffersPageState extends State<UserOffersPage> {
                               ),
                             );
                           },
-                          child: Container(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    _deleteOffer(post.id);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => PrivateMain()
+                          child: Card(
+                            margin: const EdgeInsets.all(12),
+                            child: Container(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const CircleAvatar(
+                                        backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                        maxRadius: 40,
                                       ),
-                                    );
-                                  },
-                                  child: const Icon(Icons.delete),
-                                ),
-                                Text(
-                                  post.toolName,
-                                  style: const TextStyle(fontSize: 20.0),
-                                ),
-                                const SizedBox(height: 8.0),
-                                Text(post.toolDescription),
-                              ],
+                                      Text(
+                                        post.toolName,
+                                        style: const TextStyle(fontSize: 20.0),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _deleteOffer(post.id);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => PrivateMain()
+                                            ),
+                                          );
+                                        },
+                                        child: const Icon(Icons.delete),
+                                      ),
+                                    ].map((widget) => Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: widget,
+                                    )).toList(),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
+                          // child:
+                          //
+                          // Container(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //       GestureDetector(
+                          //         onTap: () {
+                          //           _deleteOffer(post.id);
+                          //           Navigator.push(
+                          //             context,
+                          //             MaterialPageRoute(builder: (context) => PrivateMain()
+                          //             ),
+                          //           );
+                          //         },
+                          //         child: const Icon(Icons.delete),
+                          //       ),
+                          //       Text(
+                          //         post.toolName,
+                          //         style: const TextStyle(fontSize: 20.0),
+                          //       ),
+                          //       const SizedBox(height: 8.0),
+                          //       Text(post.toolDescription),
+                          //     ],
+                          //   ),
+                          // ),
                         );
                       },
                     );

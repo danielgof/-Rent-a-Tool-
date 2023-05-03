@@ -109,7 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text('Error!'),
-                              content: const Text('You forgot your pass.'),
+                              content: const Text('You forgot your password.'),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context, 'OK'),
@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ],
                             ),
                           );
-                        } else {
+                        } else if (_usernameController.value.text != "" && _passwordController.value.text != "") {
                           var login = _usernameController.value.text;
                           var pass = _passwordController.value.text;
                           var status = await loginRequest(login, pass);
