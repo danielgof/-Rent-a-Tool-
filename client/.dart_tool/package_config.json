@@ -45,9 +45,9 @@
     },
     {
       "name": "crypto",
-      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/crypto-3.0.2",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/crypto-3.0.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "cupertino_icons",
@@ -93,7 +93,7 @@
     },
     {
       "name": "flutter_map",
-      "rootUri": "file:///home/daniel/.pub-cache/git/flutter_map-ea9fcbaeb56546b8c04d1dad3c3bd2bf6af0159e/",
+      "rootUri": "file:///home/daniel/.pub-cache/git/flutter_map-578bda0707df16bc5a22d2fc15a0851fca2a2d7a/",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -105,9 +105,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/http-0.13.5",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "http_parser",
@@ -117,9 +117,15 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/intl-0.18.0",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "jiffy",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/jiffy-6.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "js",
@@ -272,7 +278,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-04-23T19:06:09.476865Z",
+  "generated": "2023-05-05T21:05:31.025269Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

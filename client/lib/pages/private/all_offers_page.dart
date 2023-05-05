@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
@@ -104,9 +105,17 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                                         backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
                                         maxRadius: 40,
                                       ),
-                                      Text(
-                                        post.toolName,
-                                        style: const TextStyle(fontSize: 20.0),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            "Name: ${post.toolName}",
+                                            style: const TextStyle(fontSize: 20.0),
+                                          ),
+                                          Text(
+                                            "price: ${post.price}\$",
+                                            style: const TextStyle(fontSize: 20.0),
+                                          ),
+                                        ],
                                       ),
                                     ].map((widget) => Padding(
                                       padding: const EdgeInsets.all(16),
@@ -175,7 +184,7 @@ class PostDetailsPagePrivate extends StatelessWidget {
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
-                  'Price: ${post.price}',
+                  'Price: ${post.price} US Dollars',
                   style: const TextStyle(fontSize: 18.0),
                 ),
               ),
@@ -183,8 +192,7 @@ class PostDetailsPagePrivate extends StatelessWidget {
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
-                  'Date Start: ${post.dateStart}',
-                  // semanticsLabel: "${DateTime.parse(post.dateStart).year.toString()}-${DateTime.parse(post.dateStart).month.toString().padLeft(2,'0')}-${DateTime.parse(post.dateStart).toString().padLeft(2,'0')}",
+                  'Date Start: ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}',
                   style: const TextStyle(fontSize: 18.0),
                 ),
               ),
@@ -192,7 +200,7 @@ class PostDetailsPagePrivate extends StatelessWidget {
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
-                  'Date Finish: ${post.dateFinish}',
+                  'Date Finish: ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}',
                   style: const TextStyle(fontSize: 18.0),
                 ),
               ),

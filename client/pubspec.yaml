@@ -34,6 +34,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   dart_jsonwebtoken: ^2.7.1
+  jiffy: ^6.1.0
 
 
 dev_dependencies:

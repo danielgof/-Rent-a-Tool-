@@ -103,14 +103,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: emailController,
-                    onChanged: (String val) async {
-                      String curEmail = emailController.value.text;
-                      // print(emailController.value.text);
-                      bool emailValid =
-                      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(curEmail);
-                      print(emailValid);
-                    },
+                    // onChanged: (String val) async {
+                    //   String curEmail = emailController.value.text;
+                    //   // print(emailController.value.text);
+                    //   bool emailValid =
+                    //   RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    //       .hasMatch(curEmail);
+                    // },
                     decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.blue),
                       focusedBorder: OutlineInputBorder(
@@ -155,7 +154,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                       border: OutlineInputBorder(),
                       labelText: "Phone number",
-                      hintText: "Enter phone number",
+                      hintText: "Enter ten digits phone number",
                     ),
                   ),
                 ),
@@ -168,7 +167,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       var phone = dropdownvalue + phoneController.text;
                       var email = emailController.text;
                       bool phoneValid =
-                      RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')
+                      RegExp(r'(^(?:[+0]9)?[0-9]{10}$)')
                           .hasMatch(phoneController.text);
                       bool emailValid =
                       RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
