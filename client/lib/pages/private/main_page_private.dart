@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rt_client/pages/private/settings_page.dart';
 import 'package:rt_client/pages/private/user_details_page.dart';
+import 'package:rt_client/pages/private/user_offers.dart';
 
 import '../public/main_page_public.dart';
 import 'all_offers_page.dart';
 import 'chat_page.dart';
 import 'map_offers_private.dart';
+import 'offer_registration/offer_registration_description.dart';
 import 'offers_page.dart';
 
 
@@ -28,7 +30,8 @@ class _PrivateMainScreenState extends State<PrivateMain> {
     const AllOffersPrivatePage(),
     MyMapPrivate(),
     const ChatPage(),
-    const OffersPrivatePage(),
+    const UserOffersPage(),
+    const OfferRegistrationDescriptionPage()
   ];
 
   @override
@@ -106,6 +109,10 @@ class _PrivateMainScreenState extends State<PrivateMain> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.my_library_books),
                 label: 'My offers',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.create),
+                label: 'Create offer',
               ),
             ],
             currentIndex: _selectedIndex, //New
