@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
+import '../../api/utils.dart';
 import 'main_page_private.dart';
-
 
 class UserDetailsPage extends StatefulWidget {
 
@@ -14,6 +15,18 @@ class UserDetailsPage extends StatefulWidget {
 }
 
 class _UserDetailsPageState extends State<UserDetailsPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // Extraction username of current user from JWT
+  String username = JWT.decode(TOKEN).payload["username"];
+  String name = "Jack";
+  String lastname = "Picard";
+  String phone = "+19994567834";
+  String email = "picard23@hooli.com";
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -29,23 +42,38 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               Text('User\' profile page',
                   style: Theme.of(context).textTheme.headlineMedium),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const CircleAvatar(
-                    backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                    backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
                     maxRadius: 40,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "User's first name",
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                      Text(
-                        "User's last name",
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Username: $username",
+                          style: const TextStyle(fontSize: 20.0),
+                        ),
+                        Text(
+                          "Name: $name",
+                          style: const TextStyle(fontSize: 20.0),
+                        ),
+                        Text(
+                          "Lastname: $lastname",
+                          style: const TextStyle(fontSize: 20.0),
+                        ),
+                        Text(
+                          "Email: $email",
+                          style: const TextStyle(fontSize: 20.0),
+                        ),
+                        Text(
+                          "Phone: $phone",
+                          style: const TextStyle(fontSize: 20.0),
+                        ),
+                      ],
+                    ),
                   ),
                 ].map((widget) => Padding(
                   padding: const EdgeInsets.all(16),
@@ -62,8 +90,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                       ),
                     );
                   },
-                  child: const Text('Return back.',
-                      style: TextStyle(color: Colors.blue)),
+                  child: const Text('Return back.', style: TextStyle(color: Colors.blue),),
                 ),
               ),
             ],

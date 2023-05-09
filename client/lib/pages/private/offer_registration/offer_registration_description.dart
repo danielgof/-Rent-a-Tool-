@@ -121,7 +121,7 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                         fontSize: 20,
                       ),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () => _selectDateStart(context),
                       child: const Text('Select start date'),
                     ),
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                           fontSize: 20,
                         ),
                       ),
-                      ElevatedButton(
+                      TextButton(
                         onPressed: () => _selectDateFinish(context),
                         child: const Text('Select end date'),
                       ),

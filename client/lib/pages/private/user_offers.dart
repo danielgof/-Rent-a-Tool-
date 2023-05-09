@@ -163,33 +163,6 @@ class _AllOffersPageState extends State<UserOffersPage> {
                               ),
                             ),
                           ),
-                          // child:
-                          //
-                          // Container(
-                          //   padding: const EdgeInsets.all(16.0),
-                          //   child: Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.start,
-                          //     children: [
-                          //       GestureDetector(
-                          //         onTap: () {
-                          //           _deleteOffer(post.id);
-                          //           Navigator.push(
-                          //             context,
-                          //             MaterialPageRoute(builder: (context) => PrivateMain()
-                          //             ),
-                          //           );
-                          //         },
-                          //         child: const Icon(Icons.delete),
-                          //       ),
-                          //       Text(
-                          //         post.toolName,
-                          //         style: const TextStyle(fontSize: 20.0),
-                          //       ),
-                          //       const SizedBox(height: 8.0),
-                          //       Text(post.toolDescription),
-                          //     ],
-                          //   ),
-                          // ),
                         );
                       },
                     );
@@ -257,7 +230,6 @@ class PostDetailsPagePrivate extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
                   'Date Start: ${post.dateStart}',
-                  // semanticsLabel: "${DateTime.parse(post.dateStart).year.toString()}-${DateTime.parse(post.dateStart).month.toString().padLeft(2,'0')}-${DateTime.parse(post.dateStart).toString().padLeft(2,'0')}",
                   style: const TextStyle(fontSize: 18.0),
                 ),
               ),

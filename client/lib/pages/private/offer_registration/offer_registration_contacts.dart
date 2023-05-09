@@ -157,7 +157,7 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
-                    child: ElevatedButton(onPressed: () {
+                    child: TextButton(onPressed: () {
                       _registrationRequest(
                         widget.toolName,
                         widget.toolDescription,
@@ -174,15 +174,17 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                         MaterialPageRoute(builder: (context) => PrivateMain(),
                         ),
                       );
-                    },
-                      child:
-                      const Text('Register offer.',
-                          style: TextStyle(color: Colors.white)),
+                    }, child:
+                      const Text('REGISTER OFFER.',
+                        style: TextStyle(color: Colors.blue,
+                          fontSize: 35,
+                        ),
+                      ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
-                    child: ElevatedButton(
+                    child: TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -192,7 +194,7 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                         );
                       },
                       child: const Text('Return to previous step.',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.blue),
                       ),
                     ),
                   ),
