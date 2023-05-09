@@ -38,6 +38,8 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
   // Extraction username of current user from JWT
   final String username = JWT.decode(TOKEN).payload["username"];
 
+  final String phoneNumber = "+123239203902";
+
   AlertDialog alert = const AlertDialog(
     title: Text("Offer was created successfully"),
     // content: Text("This is my message."),
@@ -79,7 +81,6 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
     }
   }
 
-  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController latController = TextEditingController();
   TextEditingController lngController = TextEditingController();
 
@@ -138,24 +139,6 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 15, bottom: 0),
-                    child: TextField(
-                      cursorColor: Colors.blue,
-                      controller: phoneNumberController,
-                      decoration: const InputDecoration(
-                          labelStyle: TextStyle(color: Colors.blue),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.grey, width: 0.0),
-                          ),
-                          border: OutlineInputBorder(),
-                          labelText: 'Phone number',
-                          hintText: 'Enter your phone number.'
-                      ),
-                    ),
-                  ),
-                  Padding(
                     padding: const EdgeInsets.all(16),
                     child: TextButton(onPressed: () {
                       _registrationRequest(
@@ -167,7 +150,7 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                         latController.value.text,
                         lngController.value.text,
                         username,
-                        phoneNumberController.value.text,
+                        phoneNumber,
                       );
                       Navigator.push(
                         context,

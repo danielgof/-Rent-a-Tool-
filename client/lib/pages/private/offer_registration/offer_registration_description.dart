@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'offer_registration_contacts.dart';
 
@@ -13,6 +14,7 @@ class OfferRegistrationDescriptionPage extends StatefulWidget {
 class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
   DateTime dateStart = DateTime.now();
   DateTime dateFinish = DateTime.now();
+
 
   Future<void> _selectDateStart(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -157,8 +159,8 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                           toolName: toolNameController.value.text,
                           toolDescription: toolDescriptionController.value.text,
                           price: priceController.value.text,
-                          dateStart: dateStart.toString(),
-                          dateFinish: dateFinish.toString(),
+                          dateStart: DateFormat("EEE, dd MMM yyyy ss:mm:hh").format(dateStart),
+                          dateFinish: DateFormat("EEE, dd MMM yyyy ss:mm:hh").format(dateFinish),
                         ),
                       ),
                     );

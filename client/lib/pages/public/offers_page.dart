@@ -54,7 +54,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
     if (response.statusCode == 200) {
       // print(json.decode(response.body)["data"]);
       final List<dynamic> jsonList = json.decode(response.body)["data"];
-      // print(jsonList.map((json) => Offer.fromJson(json)).toList());
+      print(jsonList.map((json) => Offer.fromJson(json)).toList());
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load posts');
