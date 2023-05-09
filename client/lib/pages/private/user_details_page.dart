@@ -30,26 +30,27 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    resizeToAvoidBottomInset: false,
     body: Center(
-      child: Card(
-        child: Container(
-          constraints: BoxConstraints.loose(const Size(600, 600)),
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('User\' profile page',
-                  style: Theme.of(context).textTheme.headlineMedium),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const CircleAvatar(
-                    backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
-                    maxRadius: 40,
-                  ),
-                  Expanded(
-                    child: Column(
+      child: SafeArea(
+        child: Card(
+          child: Container(
+            constraints: BoxConstraints.loose(const Size(600, 600)),
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('User\' profile page',
+                    style: Theme.of(context).textTheme.headlineMedium),
+                Row (
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                      maxRadius: 40,
+                    ),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
@@ -74,26 +75,28 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         ),
                       ],
                     ),
-                  ),
-                ].map((widget) => Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: widget,
-                )).toList(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => PrivateMain()
-                      ),
-                    );
-                  },
-                  child: const Text('Return back.', style: TextStyle(color: Colors.blue),),
+                  ].map((widget) => Flexible(
+                      flex: 1,
+                      child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: widget,
+                  ))).toList(),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PrivateMain()
+                        ),
+                      );
+                    },
+                    child: const Text('Return back.', style: TextStyle(color: Colors.blue),),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
