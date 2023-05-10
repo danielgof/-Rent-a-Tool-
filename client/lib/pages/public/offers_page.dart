@@ -397,7 +397,7 @@ class PostDetailsPage extends StatelessWidget {
                         child: const Text("CONTACT OWNER",
                         style: TextStyle(
                             color: Colors.blue,
-                            fontSize: 35,
+                            fontSize: 30,
                           ),
                         ),
                       ),
@@ -407,11 +407,16 @@ class PostDetailsPage extends StatelessWidget {
                         child: const Text("ACCEPT OFFER",
                           style: TextStyle(
                             color: Colors.blue,
-                            fontSize: 35,
+                            fontSize: 30,
                           ),
                         ),
                       ),
-                    ],
+                    ].map((widget) => Flexible(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: widget,
+                        ))).toList(),
                   ),
                 ),
                 Container(
