@@ -157,7 +157,8 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                         MaterialPageRoute(builder: (context) => PrivateMain(),
                         ),
                       );
-                    }, child:
+                    },
+                      child:
                       const Text('REGISTER OFFER.',
                         style: TextStyle(color: Colors.blue,
                           fontSize: 35,
