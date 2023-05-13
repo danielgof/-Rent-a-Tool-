@@ -204,186 +204,203 @@ class PostDetailsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                Container(
-                  alignment: Alignment.centerRight,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        "Description: ",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ],
-                        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Flexible(
+                      flex: 1,
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                        maxRadius: 60,
                       ),
-                      Text(
-                        post.toolDescription,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                    ),
+                    // const
+                    Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerRight,
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "Description: ",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 2.0),
+                                      blurRadius: 3.0,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                post.toolDescription,
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Price: ",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ],
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Price: ",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 2.0),
+                                      blurRadius: 3.0,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                '${post.price} US Dollars',
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                      '${post.price} US Dollars',
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Date Start: ",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 2.0),
+                                      blurRadius: 3.0,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Date Start: ",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ],
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Date Finish: ",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 2.0),
+                                      blurRadius: 3.0,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Owner Name: ",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 2.0),
+                                      blurRadius: 3.0,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                post.ownerName,
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Date Finish: ",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ],
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Phone Number: ",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(1.0, 2.0),
+                                      blurRadius: 3.0,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                post.phoneNumber,
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          backgroundColor: Color.fromARGB(25, 23, 2, 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Owner Name: ",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        post.ownerName,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          backgroundColor: Color.fromARGB(25, 23, 2, 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Phone Number: ",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontStyle: FontStyle.italic,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 2.0),
-                              blurRadius: 3.0,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        post.phoneNumber,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          backgroundColor: Color.fromARGB(25, 23, 2, 12),
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
                 Container(
                   alignment: Alignment.center,

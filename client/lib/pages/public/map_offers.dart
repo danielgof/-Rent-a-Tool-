@@ -149,20 +149,20 @@ class _MapOffersPublicState extends State<MapOffersPublicPage> {
           }
         },
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: _onZoomInPressed,
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(height: 16.0),
-          FloatingActionButton(
-            onPressed: _onZoomOutPressed,
-            child: const Icon(Icons.remove),
-          ),
-        ],
-      ),
+      // floatingActionButton: Column(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     FloatingActionButton(
+      //       onPressed: _onZoomInPressed,
+      //       child: const Icon(Icons.add),
+      //     ),
+      //     const SizedBox(height: 16.0),
+      //     FloatingActionButton(
+      //       onPressed: _onZoomOutPressed,
+      //       child: const Icon(Icons.remove),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
