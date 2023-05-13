@@ -26,6 +26,7 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     _futurePosts = fetchOffers();
   }
 
+
   Future<List<Offer>> fetchOffers() async {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url),

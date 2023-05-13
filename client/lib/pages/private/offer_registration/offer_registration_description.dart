@@ -15,7 +15,7 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
   DateTime dateStart = DateTime.now();
   DateTime dateFinish = DateTime.now();
 
-
+  // Function to select start date of an offer's rent
   Future<void> _selectDateStart(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -30,6 +30,7 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
     }
   }
 
+  // Function to select end date of an offer's rent
   Future<void> _selectDateFinish(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -60,10 +61,12 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text('Offer registration',
-                  style: Theme.of(context).textTheme.headlineMedium),
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  left: 15.0, right: 15.0, top: 15, bottom: 0,
+                ),
                 child: TextField(
                   cursorColor: Colors.blue,
                   controller: toolNameController,
@@ -80,7 +83,7 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
                 child: TextField(
                   cursorColor: Colors.blue,
                   controller: toolDescriptionController,
@@ -97,46 +100,66 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
                 child: TextField(
                   cursorColor: Colors.blue,
                   controller: priceController,
                   decoration: const InputDecoration(
-                      labelStyle: TextStyle(color: Colors.blue),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    labelStyle: TextStyle(color: Colors.blue),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 0.0),
+                    ),
+                    border: OutlineInputBorder(),
+                    labelText: 'Price',
+                    hintText: 'Enter price',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2,'0')}-${dateStart.day.toString().padLeft(2,'0')}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
-                      border: OutlineInputBorder(),
-                      labelText: 'Price',
-                      hintText: 'Enter price'),
+                      TextButton(
+                        onPressed: () => _selectDateStart(context),
+                        child: const Text('Select start date'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 15.0, right: 15.0, top: 15, bottom: 0),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      // dateStart.toString(),
-                      "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2,'0')}-${dateStart.day.toString().padLeft(2,'0')}",
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    // color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
                     ),
-                    TextButton(
-                      onPressed: () => _selectDateStart(context),
-                      child: const Text('Select start date'),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  child: Column(
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        // dateFinish.toString(),
                         "${dateFinish.year.toString()}-${dateFinish.month.toString().padLeft(2,'0')}-${dateFinish.day.toString().padLeft(2,'0')}",
                         style: const TextStyle(
                           fontSize: 20,
@@ -147,7 +170,9 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                         child: const Text('Select end date'),
                       ),
                     ],
-                  )),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(6),
                 child: TextButton(
@@ -165,8 +190,15 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
                       ),
                     );
                   },
-                  child: const Text('Next step.',
-                      style: TextStyle(color: Colors.blue)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text('Next step',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      Icon(Icons.navigate_next)
+                    ],
+                  ),
                 ),
               ),
             ],
