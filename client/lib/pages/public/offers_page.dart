@@ -5,6 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
+import 'package:rt_client/api/apiAuth.dart';
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';
@@ -45,16 +46,12 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
 
   Future<List<Offer>> fetchOffers() async {
     String url = "$URL/api/v1/offer/all_all";
-    final response = await http.get(Uri.parse(url),
-      headers: {
-        HttpHeaders.authorizationHeader: TOKEN,
-      },
-    );
 
+    final response = await apiAuth().get(url);
     if (response.statusCode == 200) {
       // print(json.decode(response.body)["data"]);
       final List<dynamic> jsonList = json.decode(response.body)["data"];
-      print(jsonList.map((json) => Offer.fromJson(json)).toList());
+      // print(jsonList.map((json) => Offer.fromJson(json)).toList());
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load posts');

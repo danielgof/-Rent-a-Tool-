@@ -177,8 +177,14 @@ class _OfferRegistrationContactsPageState extends State<OfferRegistrationContact
                           ),
                         );
                       },
-                      child: const Text('Return to previous step.',
-                        style: TextStyle(color: Colors.blue),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.navigate_before),
+                          Text('Return to previous step.',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ],
                       ),
                     ),
                   ),
