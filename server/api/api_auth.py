@@ -22,15 +22,19 @@ auth api
 
 
 @auth.route("/login", methods=["POST", "GET"])
-def login():
+def login() -> dict:
     """login users"""
     try:
         data = request.get_json(force=True)
-        user = session.query(User).filter(User.username == data["username"]).first()
+        user = session.query(User).filter(
+            User.username == data["username"]).first()
         if user and data["password"] == user.password:
             token = jwt.encode(
                 {
                     "username": data["username"],
+                    "email": user.email,
+                    "phone": user.phone,
+                    "pass": user.password,
                     "exp": datetime.utcnow() + timedelta(days=365),
                 },
                 SECRET_KEY,
@@ -44,24 +48,39 @@ def login():
         return {"message": "error"}, 500
 
 
-"""
-"""
-
-
 @auth.route("/register", methods=["POST"])
-def register_user():
+def register_user() -> dict:
     try:
         data = request.get_json(force=True)
-        add_user(data["username"], data["phone"], data["email"], data["password"])
+        add_user(data["username"], data["phone"],
+                 data["email"], data["password"])
         # msg = Message("Subject", sender="daniilgofman1701@gmail.com", recipients=["daniilgofman1701@gmail.com"])
         # msg.body = "Veryfication link must be here"
         # mail.send(msg)
-        return {"status": "success"}, 200
+        return {"message": "success"}, 200
     except Exception as e:
         current_app.logger.info("Failed to register user %s", data["username"])
         return {"message": "error"}, 500
 
 
-@auth.cli.command("menu")
-def foo() -> None:
-    print("hello from command line")
+@auth.route("/upd", methods=["PUT"])
+def upd_username() -> dict:
+    try:
+        data = request.get_json(force=True)
+        """extracting values from json"""
+        uname: str = data["username"]
+        new_uname: str = data["new_uname"]
+        email: str = data["email"]
+        phone: str = data["phone"]
+        passwd: str = data["passwd"]
+        if (new_uname != ""):
+            upd_uname(uname=uname, new_uname=new_uname)
+        if (email != ""):
+            upd_email(uname=uname, email=email)
+        if (phone != ""):
+            upd_phone(uname=uname, phone=phone)
+        if (passwd != ""):
+            upd_passwd(uname=uname, passwd=passwd)
+        return {"message": "updated"}, 200
+    except Exception as e:
+        return {"message": e}, 500
