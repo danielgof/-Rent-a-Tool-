@@ -75,6 +75,25 @@ class _AllOffersPageState extends State<UserOffersPage> {
     }
   }
 
+  Future<List<Offer>> queryOffer(query) async {
+    String url = "$URL/api/v1/offer/query";
+    Map credits = {
+      "query": query,
+    };
+    var bodyData = json.encode(credits);
+    final response = await http.post(Uri.parse(url), body: bodyData);
+    if (response.statusCode == 200) {
+      // print(json.decode(response.body)["data"]);
+      final List<dynamic> jsonList = json.decode(response.body)["data"];
+      // print(jsonList.map((json) => Offer.fromJson(json)).toList());
+      return jsonList.map((json) => Offer.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load offers');
+    }
+  }
+
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +104,15 @@ class _AllOffersPageState extends State<UserOffersPage> {
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               cursorColor: Colors.blue,
+              controller: searchController,
+              onChanged: (String val) async {
+                setState(() {
+                  _futurePosts = queryOffer(searchController.value.text);
+                  if (searchController.value.text == "") {
+                    _futurePosts = fetchOffers();
+                  }
+                });
+              },
               decoration: InputDecoration(
                 hintText: "Search...",
                 hintStyle: TextStyle(color: Colors.grey.shade600),

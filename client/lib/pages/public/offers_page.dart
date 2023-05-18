@@ -72,7 +72,12 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                 cursorColor: Colors.blue,
                 controller: searchController,
                 onChanged: (String val) async {
-                  _futurePosts = queryOffer(searchController.value.text);
+                  setState(() {
+                    _futurePosts = queryOffer(searchController.value.text);
+                    if (searchController.value.text == "") {
+                      _futurePosts = fetchOffers();
+                    }
+                  });
                 },
                 decoration: InputDecoration(
                   hintText: "Search...",
