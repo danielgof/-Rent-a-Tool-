@@ -103,9 +103,11 @@ def all_offers_user(user_info: dict) -> list:
 
 
 def offers_by_query(query: str) -> list:
+    """searches offers by give @code{query}"""
     offers: list = list()
     res: list = list()
-    offers = session.query(Offer).filter(Offer.tool_name.match(f"%{query}%")).all()
+    offers = session.query(Offer).filter(
+        Offer.tool_name.match(f"%{query}%")).all()
     for offer in offers:
         res.append(
             {
