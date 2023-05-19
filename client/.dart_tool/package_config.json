@@ -8,6 +8,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "archive",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/archive-3.3.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/args-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "async",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/async-2.10.0",
       "packageUri": "lib/",
@@ -24,6 +36,18 @@
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/characters-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "checked_yaml",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/checked_yaml-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "cli_util",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/cli_util-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "clock",
@@ -86,6 +110,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_launcher_icons",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.13.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -116,6 +146,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "image",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/image-4.0.17",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
@@ -132,6 +168,12 @@
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/js-0.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.16"
+    },
+    {
+      "name": "json_annotation",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "latlong2",
@@ -180,6 +222,12 @@
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/path-1.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/petitparser-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "pointycastle",
@@ -272,13 +320,25 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/xml-6.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "yaml",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/yaml-3.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "rt_client",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-05-09T22:07:25.750847Z",
+  "generated": "2023-05-19T23:38:47.026729Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
