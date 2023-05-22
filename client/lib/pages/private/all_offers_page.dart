@@ -87,6 +87,13 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                   color: Colors.grey.shade600,
                   size: 20,
                 ),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () => setState(() {
+                    searchController.clear();
+                    _futurePosts = fetchOffers();
+                  }),
+                ),
                 filled: true,
                 fillColor: Colors.grey.shade100,
                 contentPadding: const EdgeInsets.all(8),
