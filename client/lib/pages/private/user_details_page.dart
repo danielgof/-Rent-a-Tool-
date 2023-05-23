@@ -50,7 +50,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     // ],
   );
 
-  Future<int> _updProfile(uname, email, phone, pass) async {
+  Future<int> updProfile(uname, email, phone, pass) async {
     String url = "$URL/api/v1/auth/upd";
     String new_uname;
     if (uname == JWT.decode(TOKEN).payload["username"]) {
@@ -235,7 +235,18 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                       String phone = phoneController.value.text;
                       String pass = passController.value.text;
                       print(uname);
-                      _updProfile(uname, email, phone, pass);
+                      var statusCode = updProfile(uname, email, phone, pass);
+                      if (statusCode == 200) {
+                        // ignore: use_build_context_synchronously
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
+                      } else {
+                        throw Exception('Failed to upd user\'s info');
+                      }
                       // Navigator.push(
                       //   context,
                       //   MaterialPageRoute(builder: (context) => PrivateMain(),

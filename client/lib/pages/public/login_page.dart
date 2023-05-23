@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:rt_client/pages/public/registration_page.dart';
 import 'package:rt_client/pages/public/unauthorized_page.dart';
 
 import '../../models/credentials.dart';
-import '../../api/utils.dart';
 import '../private/main_page_private.dart';
+import '../../api/ApiAuth.dart';
 
 
 class SignInScreen extends StatefulWidget {
@@ -25,17 +23,17 @@ class _SignInScreenState extends State<SignInScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  Future<int> loginRequest(login, pass) async {
-    String url = "$URL/api/v1/auth/login";
-    Map credits = {
-      "username": login,
-      "password": pass
-    };
-    var bodyData = json.encode(credits);
-    final response = await http.post(Uri.parse(url), body: bodyData);
-    var data = response.statusCode;
-    return data;
-  }
+  // Future<int> loginRequest(login, pass) async {
+  //   String url = "$URL/api/v1/auth/login";
+  //   Map credits = {
+  //     "username": login,
+  //     "password": pass
+  //   };
+  //   var bodyData = json.encode(credits);
+  //   final response = await http.post(Uri.parse(url), body: bodyData);
+  //   var data = response.statusCode;
+  //   return data;
+  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -138,8 +136,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         } else if (_usernameController.value.text != "" && _passwordController.value.text != "") {
                           var login = _usernameController.value.text;
                           var pass = _passwordController.value.text;
-                          var status = await loginRequest(login, pass);
-                          print(status);
+                          var status = await ApiAuth().loginRequest(login, pass);
+                          // print(status);
                           if (status == 200) {
                             Navigator.push(
                               context,
@@ -169,7 +167,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegistrationPage()
+                      MaterialPageRoute(builder: (context) => const RegistrationPage()
                       ),
                     );
                   },

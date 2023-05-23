@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
-import 'package:rt_client/api/apiAuth.dart';
+import 'package:rt_client/api/ApiAuth.dart';
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';
@@ -47,7 +46,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
   Future<List<Offer>> fetchOffers() async {
     String url = "$URL/api/v1/offer/all_all";
 
-    final response = await apiAuth().get(url);
+    final response = await ApiAuth().get(url);
     if (response.statusCode == 200) {
       // print(json.decode(response.body)["data"]);
       final List<dynamic> jsonList = json.decode(response.body)["data"];

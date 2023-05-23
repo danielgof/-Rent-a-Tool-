@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import '../../api/utils.dart';
+import 'package:rt_client/api/ApiAuth.dart';
 
 
 class RegistrationPage extends StatefulWidget {
@@ -23,19 +20,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
     '+90 TUR',
   ];
 
-  Future<int> registrationRequest(username, pass, phone, email) async {
-    String url = "$URL/api/v1/auth/register";
-    Map credits = {
-      "username": username,
-      "phone": phone,
-      "email":email,
-      "password":pass,
-    };
-    var bodyData = json.encode(credits);
-    final response = await http.post(Uri.parse(url), body: bodyData);
-    var data = response.statusCode;
-    return data;
-  }
+  // Future<int> registrationRequest(username, pass, phone, email) async {
+  //   String url = "$URL/api/v1/auth/register";
+  //   Map credits = {
+  //     "username": username,
+  //     "phone": phone,
+  //     "email":email,
+  //     "password":pass,
+  //   };
+  //   var bodyData = json.encode(credits);
+  //   final response = await http.post(Uri.parse(url), body: bodyData);
+  //   var data = response.statusCode;
+  //   return data;
+  // }
   TextEditingController usernameController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -173,7 +170,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(email);
                       if (username != "" && pass != "" && phone != "" && email != "" && emailValid && phoneValid) {
-                        var status = await registrationRequest(username, pass, phone, email);
+                        var status = await ApiAuth().registrationRequest(username, pass, phone, email);
                         if (200 == status) {
                           showDialog<String>(
                             context: context,
