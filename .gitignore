@@ -7,3 +7,4 @@ config_local.yaml
 data
 data.txt
 server_hosting
+rt_client
