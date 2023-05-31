@@ -189,7 +189,6 @@ class PostDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print();
     return Scaffold(
       appBar: AppBar(
         title: Text(post.toolName),
@@ -202,27 +201,22 @@ class PostDetailsPage extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    post.toolName,
-                    style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 16.0),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Flexible(
-                      flex: 1,
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                        maxRadius: 60,
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        post.toolName,
+                        style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // const
+                    const SizedBox(height: 16.0),
+                    const CircleAvatar(
+                      backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                      maxRadius: 60,
+                    ),
                     Column(
                       children: [
                         Container(
@@ -408,41 +402,41 @@ class PostDetailsPage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(onPressed: () {
+
+                            },
+                            child: const Text("CONTACT OWNER",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                          TextButton(onPressed: () {
+
+                          },
+                            child: const Text("ACCEPT OFFER",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                        ].map((widget) => Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: widget,
+                            ))).toList(),
+                      ),
+                    ),
                   ],
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(onPressed: () {
-
-                        },
-                        child: const Text("CONTACT OWNER",
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(onPressed: () {
-
-                      },
-                        child: const Text("ACCEPT OFFER",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ].map((widget) => Flexible(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: widget,
-                        ))).toList(),
-                  ),
                 ),
                 Container(
                   alignment: Alignment.center,
@@ -486,7 +480,9 @@ class PostDetailsPage extends StatelessWidget {
             ),
           ),
         ),
-      )
+      ),
     );
   }
 }
+
+

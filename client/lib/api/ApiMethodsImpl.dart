@@ -23,7 +23,13 @@ class APIMethodsImpl extends APIMethods {
   Future<Response> post(String url, Map credits) async {
     // TODO: implement post
     var bodyData = json.encode(credits);
-    final response = await http.post(Uri.parse(url), body: bodyData);
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: TOKEN,
+      },
+      body: bodyData,
+    );
     return response;
   }
 
@@ -37,6 +43,19 @@ class APIMethodsImpl extends APIMethods {
         HttpHeaders.authorizationHeader: TOKEN,
       },
       body: bodyData,
+    );
+    return response;
+  }
+
+  @override
+  Future<Response> delete(String url, Map credits) async {
+    var bodyData = json.encode(credits);
+    var response = await http.delete(
+      Uri.parse(url),
+        headers: {
+          HttpHeaders.authorizationHeader: TOKEN,
+        },
+        body: bodyData
     );
     return response;
   }

@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
+import 'package:flutter/material.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
+import 'package:rt_client/api/ApiOffer.dart';
+
+import 'package:http/http.dart' as http;
 import '../main_page_private.dart';
 import '../../../api/utils.dart';
 import 'offer_registration_description.dart';
