@@ -4,6 +4,7 @@
         android:label="RT"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
 <!--        android:icon="@mipmap/launcher_icon">-->
         <activity
             android:name=".MainActivity"
@@ -21,6 +22,8 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            <meta-data android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyAFOhsz8SXinnaU23AEKHWUqhf1I1N7YB8"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

@@ -27,7 +27,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
 
   static final List<Widget> _pages = <Widget>[
     const AllOffersPrivatePage(),
-    MyMapPrivate(),
+    // MyMapPrivate(),
     const ChatPage(),
     const UserOffersPage(),
     const OfferRegistrationDescriptionPage()

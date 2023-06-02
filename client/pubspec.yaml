@@ -36,14 +36,15 @@ dependencies:
   dart_jsonwebtoken: ^2.7.1
   jiffy: ^6.1.0
   intl: ^0.18.1
+  google_maps_flutter: ^2.2.8
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_map:
-    git:
-      url: https://github.com/fleaflet/flutter_map.git
+#  flutter_map:
+#    git:
+#      url: https://github.com/fleaflet/flutter_map.git
 
   flutter_lints: ^2.0.0
   flutter_launcher_icons: "^0.13.1"

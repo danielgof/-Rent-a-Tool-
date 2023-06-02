@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/credentials.dart';
 import 'login_page.dart';
 import 'map_offers.dart';
+import 'map_sample.dart';
 import 'offers_page.dart';
 
 
@@ -25,7 +26,8 @@ class _PublicMainScreenState extends State<PublicMain> {
   static final List<Widget> _pages = <Widget>[
     const AllOffersPublicPage(),
     SignInScreen(onSignIn: (Credentials value) {  },),
-    const MapOffersPublicPage(),
+    SimpleMap(),
+    // const MapOffersPublicPage(),
   ];
 
   @override

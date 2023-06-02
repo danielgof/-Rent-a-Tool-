@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+// import 'package:flutter_map/flutter_map.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:latlong2/latlong.dart';
+// import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'package:rt_client/api/ApiAuth.dart';
 
@@ -438,44 +438,44 @@ class PostDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 400,
-                    height: 400,
-                    child: StatefulBuilder(
-                      builder: (context, setState) => FlutterMap(
-                        // options: _mapOptions,
-                        // options: _mapOptions,
-                        options: MapOptions(
-                          center: LatLng(double.parse(post.lat), double.parse(post.lng)),
-                          zoom: 6,
-                          maxZoom: 18.0,
-                          minZoom: 3.0,
-                        ),
-                        children: [
-                          TileLayer(
-                            urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            subdomains: const ['a', 'b', 'c'],
-                          ),
-                          MarkerLayer(
-                            markers: [
-                              Marker(
-                                point: LatLng(double.parse(post.lat), double.parse(post.lng)),
-                                builder: (ctx) => GestureDetector(
-                                  onTap: () {
-                                    print("clicked");
-                                  },
-                                  child: const Icon(Icons.pin_drop),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   alignment: Alignment.center,
+                //   child: SizedBox(
+                //     width: 400,
+                //     height: 400,
+                //     child: StatefulBuilder(
+                //       builder: (context, setState) => FlutterMap(
+                //         // options: _mapOptions,
+                //         // options: _mapOptions,
+                //         options: MapOptions(
+                //           center: LatLng(double.parse(post.lat), double.parse(post.lng)),
+                //           zoom: 6,
+                //           maxZoom: 18.0,
+                //           minZoom: 3.0,
+                //         ),
+                //         children: [
+                //           TileLayer(
+                //             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                //             subdomains: const ['a', 'b', 'c'],
+                //           ),
+                //           MarkerLayer(
+                //             markers: [
+                //               Marker(
+                //                 point: LatLng(double.parse(post.lat), double.parse(post.lng)),
+                //                 builder: (ctx) => GestureDetector(
+                //                   onTap: () {
+                //                     print("clicked");
+                //                   },
+                //                   child: const Icon(Icons.pin_drop),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
