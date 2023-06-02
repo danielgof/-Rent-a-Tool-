@@ -5,25 +5,25 @@
 // import 'package:flutter_map/flutter_map.dart';
 // import 'package:latlong2/latlong.dart';
 // import 'package:http/http.dart' as http;
-//
+
 // import '../../models/offer.dart';
 // import '../../api/utils.dart';
 // import 'offers_page.dart';
-//
-//
+
+
 // class MapOffersPublicPage extends StatefulWidget {
 //   const MapOffersPublicPage({super.key});
-//
+
 //   @override
 //   _MapOffersPublicState createState() => _MapOffersPublicState();
 // }
-//
+
 // class _MapOffersPublicState extends State<MapOffersPublicPage> {
 //   late Future<List<Marker>> _markers;
 //   late double zoom = 6.0;
 //   late MapOptions _mapOptions;
-//
-//
+
+
 //   @override
 //   void initState() {
 //     super.initState();
@@ -35,7 +35,7 @@
 //       minZoom: 3.0,
 //     );
 //   }
-//
+
 //   AlertDialog alert = const AlertDialog(
 //     title: Text("My title"),
 //     content: Text("This is my message."),
@@ -43,14 +43,14 @@
 //     //   okButton,
 //     // ],
 //   );
-//
+
 //   Future<List<Marker>> fetchMarkers() async {
 //     String url = "$URL/api/v1/offer/all_all";
 //     final response = await http.get(Uri.parse(url), headers: {
 //       HttpHeaders.authorizationHeader:
 //       TOKEN,
 //     });
-//
+
 //     if (response.statusCode == 200) {
 //       final Map<String, dynamic> data = jsonDecode(response.body);
 //       final List<dynamic> tmp = data["data"];
@@ -96,7 +96,7 @@
 //       throw Exception('Failed to load markers');
 //     }
 //   }
-//
+
 //   void _onZoomInPressed() {
 //     setState(() {
 //       zoom += 1.0;
@@ -109,7 +109,7 @@
 //       },
 //     );
 //   }
-//
+
 //   void _onZoomOutPressed() {
 //     setState(() {
 //       zoom -= 1.0;
@@ -121,7 +121,7 @@
 //       );
 //     });
 //   }
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -166,8 +166,8 @@
 //     );
 //   }
 // }
-//
-//
+
+
 // // import 'package:flutter/material.dart';
 // // import 'package:flutter_map/flutter_map.dart';
 // // import 'package:latlong2/latlong.dart';
