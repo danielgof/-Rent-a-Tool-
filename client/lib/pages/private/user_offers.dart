@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-// import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jiffy/jiffy.dart';
-// import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
@@ -478,44 +478,44 @@ class PostDetailsPagePrivate extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Container(
-                //   alignment: Alignment.center,
-                //   child: SizedBox(
-                //     width: 400,
-                //     height: 400,
-                //     child: StatefulBuilder(
-                //       builder: (context, setState) => FlutterMap(
-                //         // options: _mapOptions,
-                //         // options: _mapOptions,
-                //         options: MapOptions(
-                //           center: LatLng(double.parse(post.lat), double.parse(post.lng)),
-                //           zoom: 6,
-                //           maxZoom: 18.0,
-                //           minZoom: 3.0,
-                //         ),
-                //         children: [
-                //           TileLayer(
-                //             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                //             subdomains: const ['a', 'b', 'c'],
-                //           ),
-                //           MarkerLayer(
-                //             markers: [
-                //               Marker(
-                //                 point: LatLng(double.parse(post.lat), double.parse(post.lng)),
-                //                 builder: (ctx) => GestureDetector(
-                //                   onTap: () {
-                //                     print("clicked");
-                //                   },
-                //                   child: const Icon(Icons.pin_drop),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 400,
+                    height: 400,
+                    child: StatefulBuilder(builder: (context, setState) {
+                      return GoogleMap(
+                        markers: {
+                          Marker(
+                            markerId: MarkerId(post.toolName.toString()),
+                            position: LatLng(
+                              double.parse(post.lat.toString()),
+                              double.parse(post.lng.toString()),
+                            ),
+                          )
+                        },
+                        // on below line setting camera position
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            double.parse(post.lat.toString()),
+                            double.parse(post.lng.toString()),
+                          ),
+                          zoom: 14.4746,
+                        ),
+                        // on below line specifying map type.
+                        mapType: MapType.normal,
+                        // on below line setting user location enabled.
+                        myLocationEnabled: true,
+                        // on below line setting compass enabled.
+                        compassEnabled: true,
+                        // on below line specifying controller on map complete.
+                        onMapCreated: (GoogleMapController controller) {
+                          Completer().complete(controller);
+                        },
+                      );
+                    }),
+                  ),
+                ),
               ],
             ),
           ),

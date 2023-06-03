@@ -1,6 +1,6 @@
 {
-    "name": "rt_client",
-    "short_name": "rt_client",
+    "name": "maps",
+    "short_name": "maps",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rt_client/pages/public/main_page_public.dart';
+import 'package:client/pages/public/main_page_public.dart';
 
 void main() {
   runApp(const MyApp());

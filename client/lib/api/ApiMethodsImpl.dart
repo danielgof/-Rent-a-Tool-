@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rt_client/api/ApiMethods.dart';
+import 'package:client/api/ApiMethods.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:rt_client/api/utils.dart';
+import 'package:client/api/utils.dart';
 
 // Implements HTTP-Methods to commute with the server
 class APIMethodsImpl extends APIMethods {

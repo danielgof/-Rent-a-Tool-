@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:rt_client/pages/private/user_offers.dart';
+import 'package:client/pages/private/user_offers.dart';
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';

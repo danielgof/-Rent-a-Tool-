@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:rt_client/api/ApiMethodsImpl.dart';
-import 'package:rt_client/api/utils.dart';
+import 'package:client/api/ApiMethodsImpl.dart';
+import 'package:client/api/utils.dart';
 import '../models/offer.dart';
 
 class ApiOffer extends APIMethodsImpl {

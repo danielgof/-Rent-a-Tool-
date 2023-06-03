@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/rt_client.iml" filepath="$PROJECT_DIR$/rt_client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/rt_client_android.iml" filepath="$PROJECT_DIR$/android/rt_client_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maps.iml" filepath="$PROJECT_DIR$/maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/maps_android.iml" filepath="$PROJECT_DIR$/android/maps_android.iml" />
     </modules>
   </component>
 </project>

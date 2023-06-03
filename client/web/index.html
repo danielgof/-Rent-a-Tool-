@@ -16,6 +16,8 @@
   -->
   <base href="$FLUTTER_BASE_HREF">
 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFOhsz8SXinnaU23AEKHWUqhf1I1N7YB8"></script>
+
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
@@ -23,15 +25,13 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="rt_client">
+  <meta name="apple-mobile-web-app-title" content="maps">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-   <link rel="icon" type="image/png" href="favicon.png"/>
-<!--  <link rel="icon" type="image/png" href="%PUBLIC_URL%/assets/LOGO.jpg"/>-->
+  <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>RT</title>
-  
   <link rel="manifest" href="manifest.json">
 
   <script>
@@ -48,11 +48,12 @@
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
         }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
       });
     });
   </script>

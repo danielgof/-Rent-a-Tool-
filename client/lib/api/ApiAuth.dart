@@ -1,5 +1,5 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
-import 'package:rt_client/api/utils.dart';
+import 'package:client/api/utils.dart';
 import 'ApiMethodsImpl.dart';
 
 class ApiAuth extends APIMethodsImpl {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rt_client/api/ApiAuth.dart';
+import 'package:client/api/ApiAuth.dart';
 
 
 class RegistrationPage extends StatefulWidget {

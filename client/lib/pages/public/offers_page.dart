@@ -1,14 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-// import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jiffy/jiffy.dart';
-// import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
-import 'package:rt_client/api/ApiAuth.dart';
+import 'package:client/api/ApiAuth.dart';
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';
-
 
 class AllOffersPublicPage extends StatefulWidget {
   const AllOffersPublicPage({Key? key}) : super(key: key);
@@ -101,7 +100,8 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                    borderSide:
+                        const BorderSide(color: Colors.grey, width: 0.0),
                   ),
                 ),
               ),
@@ -124,7 +124,8 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PostDetailsPage(post: post),
+                                  builder: (context) =>
+                                      PostDetailsPage(post: post),
                                 ),
                               );
                             },
@@ -138,25 +139,31 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                                     Row(
                                       children: [
                                         const CircleAvatar(
-                                          backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                          backgroundImage: NetworkImage(
+                                              "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
                                           maxRadius: 40,
                                         ),
                                         Column(
                                           children: [
                                             Text(
                                               "Name: ${post.toolName}",
-                                              style: const TextStyle(fontSize: 20.0),
+                                              style: const TextStyle(
+                                                  fontSize: 20.0),
                                             ),
                                             Text(
                                               "price: ${post.price}\$",
-                                              style: const TextStyle(fontSize: 20.0),
+                                              style: const TextStyle(
+                                                  fontSize: 20.0),
                                             ),
                                           ],
                                         ),
-                                      ].map((widget) => Padding(
-                                        padding: const EdgeInsets.all(16),
-                                        child: widget,
-                                      )).toList(),
+                                      ]
+                                          .map((widget) => Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                child: widget,
+                                              ))
+                                          .toList(),
                                     ),
                                   ],
                                 ),
@@ -209,19 +216,22 @@ class PostDetailsPage extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         post.toolName,
-                        style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 24.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const CircleAvatar(
-                      backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                      backgroundImage: NetworkImage(
+                          "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
                       maxRadius: 60,
                     ),
                     Column(
                       children: [
                         Container(
                           alignment: Alignment.centerRight,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -244,7 +254,8 @@ class PostDetailsPage extends StatelessWidget {
                                 post.toolDescription,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -252,7 +263,8 @@ class PostDetailsPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -274,7 +286,8 @@ class PostDetailsPage extends StatelessWidget {
                                 '${post.price} US Dollars',
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -282,7 +295,8 @@ class PostDetailsPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -301,10 +315,13 @@ class PostDetailsPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                Jiffy.parse(post.dateStart,
+                                        pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                                    .format(pattern: "dd/MM/yyyy"),
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -312,7 +329,8 @@ class PostDetailsPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -331,10 +349,13 @@ class PostDetailsPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                Jiffy.parse(post.dateFinish,
+                                        pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                                    .format(pattern: "dd/MM/yyyy"),
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -342,12 +363,14 @@ class PostDetailsPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
                                 "Owner Name: ",
+                                // textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   fontStyle: FontStyle.italic,
@@ -364,7 +387,8 @@ class PostDetailsPage extends StatelessWidget {
                                 post.ownerName,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -372,12 +396,16 @@ class PostDetailsPage extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin: const EdgeInsets.only(
+                            top: 10.0,
+                            bottom: 10.0,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
                                 "Phone Number: ",
+                                // textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   fontStyle: FontStyle.italic,
@@ -394,7 +422,8 @@ class PostDetailsPage extends StatelessWidget {
                                 post.phoneNumber,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -408,74 +437,78 @@ class PostDetailsPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextButton(onPressed: () {
-
-                            },
-                            child: const Text("CONTACT OWNER",
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 30,
-                              ),
-                            ),
-                          ),
-                          TextButton(onPressed: () {
-
-                          },
-                            child: const Text("ACCEPT OFFER",
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "CONTACT OWNER",
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 30,
                               ),
                             ),
                           ),
-                        ].map((widget) => Flexible(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: widget,
-                            ))).toList(),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "RENT TOOL",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                        ]
+                            .map((widget) => Flexible(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: widget,
+                                )))
+                            .toList(),
                       ),
                     ),
                   ],
                 ),
-                // Container(
-                //   alignment: Alignment.center,
-                //   child: SizedBox(
-                //     width: 400,
-                //     height: 400,
-                //     child: StatefulBuilder(
-                //       builder: (context, setState) => FlutterMap(
-                //         // options: _mapOptions,
-                //         // options: _mapOptions,
-                //         options: MapOptions(
-                //           center: LatLng(double.parse(post.lat), double.parse(post.lng)),
-                //           zoom: 6,
-                //           maxZoom: 18.0,
-                //           minZoom: 3.0,
-                //         ),
-                //         children: [
-                //           TileLayer(
-                //             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                //             subdomains: const ['a', 'b', 'c'],
-                //           ),
-                //           MarkerLayer(
-                //             markers: [
-                //               Marker(
-                //                 point: LatLng(double.parse(post.lat), double.parse(post.lng)),
-                //                 builder: (ctx) => GestureDetector(
-                //                   onTap: () {
-                //                     print("clicked");
-                //                   },
-                //                   child: const Icon(Icons.pin_drop),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 400,
+                    height: 400,
+                    child: StatefulBuilder(builder: (context, setState) {
+                      return GoogleMap(
+                        markers: {
+                          Marker(
+                            markerId: MarkerId(post.toolName.toString()),
+                            position: LatLng(
+                              double.parse(post.lat.toString()),
+                              double.parse(post.lng.toString()),
+                            ),
+                          )
+                        },
+                        // on below line setting camera position
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                            double.parse(post.lat.toString()),
+                            double.parse(post.lng.toString()),
+                          ),
+                          zoom: 14.4746,
+                        ),
+                        // on below line specifying map type.
+                        mapType: MapType.normal,
+                        // on below line setting user location enabled.
+                        myLocationEnabled: true,
+                        // on below line setting compass enabled.
+                        compassEnabled: true,
+                        // on below line specifying controller on map complete.
+                        onMapCreated: (GoogleMapController controller) {
+                          Completer().complete(controller);
+                        },
+                      );
+                    }),
+                  ),
+                ),
               ],
             ),
           ),
@@ -484,5 +517,3 @@ class PostDetailsPage extends StatelessWidget {
     );
   }
 }
-
-

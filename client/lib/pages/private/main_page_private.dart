@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rt_client/pages/private/settings_page.dart';
-import 'package:rt_client/pages/private/user_details_page.dart';
-import 'package:rt_client/pages/private/user_offers.dart';
+import 'package:client/pages/private/settings_page.dart';
+import 'package:client/pages/private/user_details_page.dart';
+import 'package:client/pages/private/user_offers.dart';
 
 import '../public/main_page_public.dart';
 import 'all_offers_page.dart';
@@ -27,7 +27,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
 
   static final List<Widget> _pages = <Widget>[
     const AllOffersPrivatePage(),
-    // MyMapPrivate(),
+    MyMapPrivate(),
     const ChatPage(),
     const UserOffersPage(),
     const OfferRegistrationDescriptionPage()
@@ -37,7 +37,14 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RT'),
+        title: GestureDetector(
+          child: const Text("RT"),
+          onTap: () {
+            setState(() {
+              _selectedIndex = 0;
+            });
+          },
+        ), 
         automaticallyImplyLeading: false,
         actions: <Widget>[
           Padding(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../models/credentials.dart';
 import 'login_page.dart';
-import 'map_offers.dart';
-import 'map_sample.dart';
+// import 'map_offers.dart';
+import 'map_page.dart';
 import 'offers_page.dart';
 
 
