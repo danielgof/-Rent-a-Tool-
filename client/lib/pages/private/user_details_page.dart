@@ -155,130 +155,113 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('User\' profile page',
-                      style: Theme.of(context).textTheme.headlineMedium),
+                  Text("User\' profile page",
+                    style: Theme.of(context).textTheme.headlineMedium),
+                  const CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                    maxRadius: 40,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
-                        maxRadius: 40,
+                      const Text(
+                        "Username: ",
+                        style: TextStyle(fontSize: 20.0),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Username: ",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              EditableText(
-                                controller: unameController,
-                                focusNode: funame,
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                cursorColor: Colors.blue,
-                                backgroundCursorColor: Colors.blue,
-                              ),
-                            ]
-                                .map((widget) => Flexible(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: widget,
-                                    )))
-                                .toList(),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Email: ",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              EditableText(
-                                controller: emailController,
-                                focusNode: femail,
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                cursorColor: Colors.blue,
-                                backgroundCursorColor: Colors.blue,
-                              ),
-                            ]
-                                .map((widget) => Flexible(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: widget,
-                                    )))
-                                .toList(),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Phone: ",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              EditableText(
-                                controller: phoneController,
-                                focusNode: fphone,
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                cursorColor: Colors.blue,
-                                backgroundCursorColor: Colors.blue,
-                              ),
-                            ]
-                                .map((widget) => Flexible(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: widget,
-                                    )))
-                                .toList(),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Pass: ",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              EditableText(
-                                controller: passController,
-                                focusNode: fpass,
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                ),
-                                cursorColor: Colors.blue,
-                                backgroundCursorColor: Colors.blue,
-                              ),
-                            ]
-                                .map((widget) => Flexible(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: widget,
-                                    )))
-                                .toList(),
-                          ),
-                        ],
+                      EditableText(
+                        controller: unameController,
+                        focusNode: funame,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        ),
+                        cursorColor: Colors.blue,
+                        backgroundCursorColor: Colors.blue,
                       ),
                     ]
                         .map((widget) => Flexible(
                             flex: 1,
                             child: Padding(
-                              padding: const EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(5),
+                              child: widget,
+                            )))
+                        .toList(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Email: ",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      EditableText(
+                        controller: emailController,
+                        focusNode: femail,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        ),
+                        cursorColor: Colors.blue,
+                        backgroundCursorColor: Colors.blue,
+                      ),
+                    ]
+                        .map((widget) => Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: widget,
+                            )))
+                        .toList(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Phone: ",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      EditableText(
+                        controller: phoneController,
+                        focusNode: fphone,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        ),
+                        cursorColor: Colors.blue,
+                        backgroundCursorColor: Colors.blue,
+                      ),
+                    ]
+                        .map((widget) => Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: widget,
+                            )))
+                        .toList(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Pass: ",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      EditableText(
+                        controller: passController,
+                        focusNode: fpass,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        ),
+                        cursorColor: Colors.blue,
+                        backgroundCursorColor: Colors.blue,
+                      ),
+                    ]
+                        .map((widget) => Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
                               child: widget,
                             )))
                         .toList(),
