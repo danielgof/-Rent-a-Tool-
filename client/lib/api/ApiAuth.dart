@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:client/api/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ApiMethodsImpl.dart';
 
 class ApiAuth extends APIMethodsImpl {
@@ -12,6 +15,12 @@ class ApiAuth extends APIMethodsImpl {
       "password": pass
     };
     final response = await APIMethodsImpl().post(url, credits);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Save an token value to 'JWT' key.
+    await prefs.setString("JWT", json.decode(response.body)["token"]);
+    // Try reading data from the 'action' key. If it doesn't exist, returns null.
+    final String? token = prefs.getString("JWT");
+    // print(token);
     var data = response.statusCode;
     return data;
   }
@@ -32,18 +41,18 @@ class ApiAuth extends APIMethodsImpl {
   Future<int> updProfile(uname, email, phone, pass) async {
     String url = "$URL/api/v1/auth/upd";
     String new_uname;
-    if (uname == JWT.decode(TOKEN).payload["username"]) {
+    if (uname == JWT.decode(Utils.TOKEN).payload["username"]) {
       new_uname = "";
     } else {
       new_uname = uname;
     }
-    if (email == JWT.decode(TOKEN).payload["email"]) {
+    if (email == JWT.decode(Utils.TOKEN).payload["email"]) {
       email = "";
     }
-    if (phone == JWT.decode(TOKEN).payload["phone"]) {
+    if (phone == JWT.decode(Utils.TOKEN).payload["phone"]) {
       phone = "";
     }
-    if (pass == JWT.decode(TOKEN).payload["pass"]) {
+    if (pass == JWT.decode(Utils.TOKEN).payload["pass"]) {
       pass = "";
     }
     Map<String, String> credits = {

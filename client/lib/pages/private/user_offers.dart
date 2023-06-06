@@ -31,7 +31,7 @@ class _AllOffersPageState extends State<UserOffersPage> {
     String url = "$URL/api/v1/offer/all";
     final response = await http.get(Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: TOKEN,
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
     );
     if (response.statusCode == 200) {
@@ -57,7 +57,7 @@ class _AllOffersPageState extends State<UserOffersPage> {
     final response = await http.delete(Uri.parse(url),
       body: bodyData,
       headers: {
-        HttpHeaders.authorizationHeader: TOKEN,
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
     );
 

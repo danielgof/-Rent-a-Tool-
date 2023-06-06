@@ -33,7 +33,7 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: TOKEN,
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },);
 
     if (response.statusCode == 200) {

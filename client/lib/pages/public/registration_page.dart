@@ -157,6 +157,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
+                  child: const Text(
+                    "By clicking REGISTER, you agree to our Terms and Privacy Policy.",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 15,
+                      ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
                   child: TextButton(
                     onPressed: () async {
                       var username = usernameController.text;

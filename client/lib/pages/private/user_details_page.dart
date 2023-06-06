@@ -5,12 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../api/utils.dart';
 import 'main_page_private.dart';
 
 class UserDetailsPage extends StatefulWidget {
-
   const UserDetailsPage({
     super.key,
   });
@@ -20,10 +20,54 @@ class UserDetailsPage extends StatefulWidget {
 }
 
 class _UserDetailsPageState extends State<UserDetailsPage> {
+  static String username = "";
+  static String email = "";
+  static String phone = "";
+  static String pass = "";
 
   @override
   void initState() {
+    getUsername();
+    getEmail();
+    getPass();
+    getPhone();
     super.initState();
+  }
+
+  void getUsername() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("JWT").toString();
+    var tname = JWT.decode(token).payload["username"];
+    setState(() {
+      username = tname;
+    });
+  }
+
+  void getEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("JWT").toString();
+    var temail = JWT.decode(token).payload["email"];
+    setState(() {
+      email = temail;
+    });
+  }
+
+  void getPhone() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("JWT").toString();
+    var tphone = JWT.decode(token).payload["phone"];
+    setState(() {
+      email = tphone;
+    });
+  }
+
+  void getPass() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("JWT").toString();
+    var tpass = JWT.decode(token).payload["pass"];
+    setState(() {
+      email = tpass;
+    });
   }
 
   FocusNode funame = FocusNode();
@@ -31,16 +75,15 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   FocusNode femail = FocusNode();
   FocusNode fpass = FocusNode();
 
-  // Extraction username of current user from JWT
-  String username = JWT.decode(TOKEN).payload["username"];
-  String phone = "+19994567834";
-  String email = "picard23@hooli.com";
-  String pass = "1234";
-
-  var unameController = TextEditingController(text: JWT.decode(TOKEN).payload["username"]);
-  var emailController = TextEditingController(text: JWT.decode(TOKEN).payload["email"]);
-  var phoneController = TextEditingController(text: JWT.decode(TOKEN).payload["phone"]);
-  var passController = TextEditingController(text: JWT.decode(TOKEN).payload["pass"]);
+  // var unameController =
+  //     TextEditingController(text: JWT.decode(Utils.TOKEN).payload["username"]);
+  // var unameController = TextEditingController(text: username);
+  // var emailController =
+  //   TextEditingController(text: JWT.decode(Utils.TOKEN).payload["email"]);
+  // var phoneController =
+  //   TextEditingController(text: JWT.decode(Utils.TOKEN).payload["phone"]);
+  // var passController =
+  //   TextEditingController(text: JWT.decode(Utils.TOKEN).payload["pass"]);
 
   AlertDialog alert = const AlertDialog(
     title: Text("User's details updated successfully"),
@@ -53,18 +96,18 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   Future<int> updProfile(uname, email, phone, pass) async {
     String url = "$URL/api/v1/auth/upd";
     String new_uname;
-    if (uname == JWT.decode(TOKEN).payload["username"]) {
+    if (uname == JWT.decode(Utils.TOKEN).payload["username"]) {
       new_uname = "";
     } else {
       new_uname = uname;
     }
-    if (email == JWT.decode(TOKEN).payload["email"]) {
+    if (email == JWT.decode(Utils.TOKEN).payload["email"]) {
       email = "";
     }
-    if (phone == JWT.decode(TOKEN).payload["phone"]) {
+    if (phone == JWT.decode(Utils.TOKEN).payload["phone"]) {
       phone = "";
     }
-    if (pass == JWT.decode(TOKEN).payload["pass"]) {
+    if (pass == JWT.decode(Utils.TOKEN).payload["pass"]) {
       pass = "";
     }
     Map<String, String> credits = {
@@ -78,8 +121,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     final response = await http.put(
       Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader:
-        TOKEN,
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
       body: bodyData,
     );
@@ -99,6 +141,11 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    var unameController = TextEditingController(text: username);
+    var emailController = TextEditingController(text: email);
+    var phoneController = TextEditingController(text: phone);
+    var passController = TextEditingController(text: pass);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
@@ -113,11 +160,12 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 children: [
                   Text('User\' profile page',
                       style: Theme.of(context).textTheme.headlineMedium),
-                  Row (
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const CircleAvatar(
-                        backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                        backgroundImage: NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
                         maxRadius: 40,
                       ),
                       Column(
@@ -125,7 +173,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children:  [
+                            children: [
                               const Text(
                                 "Username: ",
                                 style: TextStyle(fontSize: 20.0),
@@ -140,15 +188,18 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                                 cursorColor: Colors.blue,
                                 backgroundCursorColor: Colors.blue,
                               ),
-                            ].map((widget) => Flexible(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: widget,
-                                ))).toList(),
+                            ]
+                                .map((widget) => Flexible(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: widget,
+                                    )))
+                                .toList(),
                           ),
-                          Row(mainAxisAlignment: MainAxisAlignment.start,
-                            children:  [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
                               const Text(
                                 "Email: ",
                                 style: TextStyle(fontSize: 20.0),
@@ -163,15 +214,18 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                                 cursorColor: Colors.blue,
                                 backgroundCursorColor: Colors.blue,
                               ),
-                            ].map((widget) => Flexible(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: widget,
-                                ))).toList(),
+                            ]
+                                .map((widget) => Flexible(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: widget,
+                                    )))
+                                .toList(),
                           ),
-                          Row(mainAxisAlignment: MainAxisAlignment.start,
-                            children:  [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
                               const Text(
                                 "Phone: ",
                                 style: TextStyle(fontSize: 20.0),
@@ -186,16 +240,18 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                                 cursorColor: Colors.blue,
                                 backgroundCursorColor: Colors.blue,
                               ),
-                            ].map((widget) => Flexible(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: widget,
-                                ))).toList(),
+                            ]
+                                .map((widget) => Flexible(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: widget,
+                                    )))
+                                .toList(),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children:  [
+                            children: [
                               const Text(
                                 "Pass: ",
                                 style: TextStyle(fontSize: 20.0),
@@ -210,51 +266,58 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                                 cursorColor: Colors.blue,
                                 backgroundCursorColor: Colors.blue,
                               ),
-                            ].map((widget) => Flexible(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: widget,
-                                ))).toList(),
+                            ]
+                                .map((widget) => Flexible(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: widget,
+                                    )))
+                                .toList(),
                           ),
                         ],
                       ),
-                    ].map((widget) => Flexible(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: widget,
-                        ))).toList(),
+                    ]
+                        .map((widget) => Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: widget,
+                            )))
+                        .toList(),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
-                    child: TextButton(onPressed: () async {
-                      print("clicked");
-                      String uname = unameController.value.text;
-                      String email = emailController.value.text;
-                      String phone = phoneController.value.text;
-                      String pass = passController.value.text;
-                      print(uname);
-                      var statusCode = updProfile(uname, email, phone, pass);
-                      if (statusCode == 200) {
-                        // ignore: use_build_context_synchronously
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          },
-                        );
-                      } else {
-                        throw Exception('Failed to upd user\'s info');
-                      }
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => PrivateMain(),
-                      //   ),
-                      // );
-                    },
-                    child: const Text('UPD INFO',
-                        style: TextStyle(color: Colors.blue,
+                    child: TextButton(
+                      onPressed: () async {
+                        print("clicked");
+                        String uname = unameController.value.text;
+                        String email = emailController.value.text;
+                        String phone = phoneController.value.text;
+                        String pass = passController.value.text;
+                        print(uname);
+                        var statusCode = updProfile(uname, email, phone, pass);
+                        if (statusCode == 200) {
+                          // ignore: use_build_context_synchronously
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alert;
+                            },
+                          );
+                        } else {
+                          throw Exception('Failed to upd user\'s info');
+                        }
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => PrivateMain(),
+                        //   ),
+                        // );
+                      },
+                      child: const Text(
+                        'UPD INFO',
+                        style: TextStyle(
+                          color: Colors.blue,
                           fontSize: 35,
                         ),
                       ),
@@ -266,11 +329,13 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PrivateMain()
-                          ),
+                          MaterialPageRoute(
+                              builder: (context) => PrivateMain()),
                         );
                       },
-                      child: const Text('Return back.', style: TextStyle(color: Colors.blue),
+                      child: const Text(
+                        'Return back.',
+                        style: TextStyle(color: Colors.blue),
                       ),
                     ),
                   ),

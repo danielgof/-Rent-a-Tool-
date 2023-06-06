@@ -45,7 +45,7 @@ class _OfferRegistrationContactsPageState
   }
 
   // Extraction username of current user from JWT
-  final String username = JWT.decode(TOKEN).payload["username"];
+  final String username = JWT.decode(Utils.TOKEN).payload["username"];
 
   final String phoneNumber = "+123239203902";
 
@@ -74,7 +74,7 @@ class _OfferRegistrationContactsPageState
     var bodyData = json.encode(credits);
     final response = await http.post(Uri.parse(url),
         headers: {
-          HttpHeaders.authorizationHeader: TOKEN,
+          HttpHeaders.authorizationHeader: Utils.TOKEN,
         },
         body: bodyData);
     if (response.statusCode == 200) {

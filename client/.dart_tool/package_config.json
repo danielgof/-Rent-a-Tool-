@@ -15,9 +15,9 @@
     },
     {
       "name": "args",
-      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/args-2.4.1",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/args-2.4.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "async",
@@ -104,6 +104,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "ffi",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/ffi-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "file",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/file-6.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fixnum",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/fixnum-1.1.0",
       "packageUri": "lib/",
@@ -153,7 +165,7 @@
     },
     {
       "name": "google_maps_flutter",
-      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/google_maps_flutter-2.2.8",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/google_maps_flutter-2.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -177,7 +189,7 @@
     },
     {
       "name": "google_maps_flutter_web",
-      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.0",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -266,10 +278,34 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "path_provider_linux",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/petitparser-5.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/platform-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "plugin_platform_interface",
@@ -284,10 +320,58 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "process",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/process-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "sanitize_html",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/sanitize_html-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "shared_preferences",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences_android",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences_foundation",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences_linux",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences_platform_interface",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_platform_interface-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences_web",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_web-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences_windows",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "sky_engine",
@@ -350,6 +434,18 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "win32",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/win32-4.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "xdg_directories",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/xdg_directories-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "xml",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/xml-6.2.2",
       "packageUri": "lib/",
@@ -368,7 +464,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-03T16:17:31.764970Z",
+  "generated": "2023-06-06T15:13:02.436770Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

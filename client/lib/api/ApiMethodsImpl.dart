@@ -13,7 +13,7 @@ class APIMethodsImpl extends APIMethods {
     final response = await http.get(
       Uri.parse(url),
       headers: {
-       HttpHeaders.authorizationHeader: TOKEN,
+       HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
     );
     return response;
@@ -26,7 +26,7 @@ class APIMethodsImpl extends APIMethods {
     final response = await http.post(
       Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: TOKEN,
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
       body: bodyData,
     );
@@ -40,7 +40,7 @@ class APIMethodsImpl extends APIMethods {
     final response = await http.put(
       Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: TOKEN,
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
       body: bodyData,
     );
@@ -53,7 +53,7 @@ class APIMethodsImpl extends APIMethods {
     var response = await http.delete(
       Uri.parse(url),
         headers: {
-          HttpHeaders.authorizationHeader: TOKEN,
+          HttpHeaders.authorizationHeader: Utils.TOKEN,
         },
         body: bodyData
     );
