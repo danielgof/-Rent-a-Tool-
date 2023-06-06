@@ -20,70 +20,67 @@ class UserDetailsPage extends StatefulWidget {
 }
 
 class _UserDetailsPageState extends State<UserDetailsPage> {
-  static String username = "";
-  static String email = "";
-  static String phone = "";
-  static String pass = "";
+  static var token = Utils.TOKEN;
+  // static var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpMIiwiZW1haWwiOiJDYXBpdGFuSkxAbWFpbC5jb20iLCJwaG9uZSI6IisxOTk5MzQ1OTg3MiIsInBhc3MiOiJOQ0MtMTcwMS1EIiwiZXhwIjoxNzE1OTkyNzI2fQ.pVruL9qUrBCZj2rmdFNfequUZ0DNX5dExK9AZByn8Qw";
+  String username = JWT.decode(token).payload["phone"];
+  String email = JWT.decode(token).payload["phone"];
+  String phone = JWT.decode(token).payload["phone"];
+  String pass = JWT.decode(token).payload["phone"];
 
   @override
   void initState() {
-    getUsername();
-    getEmail();
-    getPass();
-    getPhone();
     super.initState();
   }
 
-  void getUsername() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("JWT").toString();
-    var tname = JWT.decode(token).payload["username"];
-    setState(() {
-      username = tname;
-    });
-  }
+  // void getUsername() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString("JWT").toString();
+  //   var tname = JWT.decode(token).payload["username"];
+  //   setState(() {
+  //     username = tname;
+  //   });
+  // }
 
-  void getEmail() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("JWT").toString();
-    var temail = JWT.decode(token).payload["email"];
-    setState(() {
-      email = temail;
-    });
-  }
+  // void getEmail() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString("JWT").toString();
+  //   var temail = JWT.decode(token).payload["email"];
+  //   setState(() {
+  //     email = temail;
+  //   });
+  // }
 
-  void getPhone() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("JWT").toString();
-    var tphone = JWT.decode(token).payload["phone"];
-    setState(() {
-      email = tphone;
-    });
-  }
+  // void getPhone() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString("JWT").toString();
+  //   var tphone = JWT.decode(token).payload["phone"];
+  //   setState(() {
+  //     email = tphone;
+  //   });
+  // }
 
-  void getPass() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("JWT").toString();
-    var tpass = JWT.decode(token).payload["pass"];
-    setState(() {
-      email = tpass;
-    });
-  }
+  // void getPass() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString("JWT").toString();
+  //   var tpass = JWT.decode(token).payload["pass"];
+  //   setState(() {
+  //     email = tpass;
+  //   });
+  // }
 
   FocusNode funame = FocusNode();
   FocusNode fphone = FocusNode();
   FocusNode femail = FocusNode();
   FocusNode fpass = FocusNode();
 
-  // var unameController =
-  //     TextEditingController(text: JWT.decode(Utils.TOKEN).payload["username"]);
-  // var unameController = TextEditingController(text: username);
-  // var emailController =
-  //   TextEditingController(text: JWT.decode(Utils.TOKEN).payload["email"]);
-  // var phoneController =
-  //   TextEditingController(text: JWT.decode(Utils.TOKEN).payload["phone"]);
-  // var passController =
-  //   TextEditingController(text: JWT.decode(Utils.TOKEN).payload["pass"]);
+  var unameController =
+      TextEditingController(text: JWT.decode(Utils.TOKEN).payload["username"]);
+  var emailController =
+    TextEditingController(text: JWT.decode(Utils.TOKEN).payload["email"]);
+  var phoneController =
+    TextEditingController(text: JWT.decode(Utils.TOKEN).payload["phone"]);
+  var passController =
+    TextEditingController(text: JWT.decode(Utils.TOKEN).payload["pass"]);
 
   AlertDialog alert = const AlertDialog(
     title: Text("User's details updated successfully"),
@@ -141,11 +138,11 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var unameController = TextEditingController(text: username);
-    var emailController = TextEditingController(text: email);
-    var phoneController = TextEditingController(text: phone);
-    var passController = TextEditingController(text: pass);
-
+    // var unameController = TextEditingController(text: username);
+    // var emailController = TextEditingController(text: email);
+    // var phoneController = TextEditingController(text: phone);
+    // var passController = TextEditingController(text: pass);
+    // print(JWT.decode(Utils.TOKEN).payload);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(

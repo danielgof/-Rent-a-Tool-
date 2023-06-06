@@ -10,20 +10,19 @@ class ApiAuth extends APIMethodsImpl {
   // 1) Login method
   Future<int> loginRequest(login, pass) async {
     String url = "$URL/api/v1/auth/login";
-    Map credits = {
-      "username": login,
-      "password": pass
-    };
+    Map credits = {"username": login, "password": pass};
     final response = await APIMethodsImpl().post(url, credits);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     // Save an token value to 'JWT' key.
     await prefs.setString("JWT", json.decode(response.body)["token"]);
+    Utils.TOKEN = json.decode(response.body)["token"];
     // Try reading data from the 'action' key. If it doesn't exist, returns null.
     final String? token = prefs.getString("JWT");
     // print(token);
     var data = response.statusCode;
     return data;
   }
+
   // 2) Registration method
   Future<int> registrationRequest(username, pass, phone, email) async {
     String url = "$URL/api/v1/auth/register";
@@ -37,6 +36,7 @@ class ApiAuth extends APIMethodsImpl {
     var data = response.statusCode;
     return data;
   }
+
   // 3) Upd info method
   Future<int> updProfile(uname, email, phone, pass) async {
     String url = "$URL/api/v1/auth/upd";
