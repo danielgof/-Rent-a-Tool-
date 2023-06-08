@@ -34,7 +34,7 @@ class _UserDetailsPageState extends State<SettingsPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PrivateMain()
+                      MaterialPageRoute(builder: (context) => PrivateMain(selectedIndex: 0,)
                       ),
                     );
                   },

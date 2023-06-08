@@ -141,7 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           if (status == 200) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => PrivateMain()
+                              MaterialPageRoute(builder: (context) => PrivateMain(selectedIndex: 0,)
                               ),
                             );
                           } else {

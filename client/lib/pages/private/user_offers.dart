@@ -191,7 +191,7 @@ class _AllOffersPageState extends State<UserOffersPage> {
                                           _deleteOffer(post.id);
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => PrivateMain()
+                                            MaterialPageRoute(builder: (context) => PrivateMain(selectedIndex: 0,)
                                             ),
                                           );
                                         },

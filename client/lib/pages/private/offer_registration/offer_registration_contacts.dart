@@ -177,7 +177,9 @@ class _OfferRegistrationContactsPageState
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PrivateMain(),
+                        builder: (context) => PrivateMain(
+                          selectedIndex: 0,
+                        ),
                       ),
                     );
                   },
@@ -194,8 +196,9 @@ class _OfferRegistrationContactsPageState
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const OfferRegistrationDescriptionPage(),
+                        builder: (context) => PrivateMain(
+                          selectedIndex: 4,
+                        ),
                       ),
                     );
                   },
@@ -204,7 +207,7 @@ class _OfferRegistrationContactsPageState
                     children: const [
                       Icon(Icons.navigate_before),
                       Text(
-                        'Return to previous step.',
+                        "Return to previous step.",
                         style: TextStyle(color: Colors.blue),
                       ),
                     ],

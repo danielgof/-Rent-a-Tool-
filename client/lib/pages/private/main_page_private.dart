@@ -11,17 +11,26 @@ import 'offer_registration/offer_registration_description.dart';
 
 
 class PrivateMain extends StatefulWidget {
+  int selectedIndex;
+  PrivateMain({
+    super.key,
+    required this.selectedIndex,
+  });
 
   @override
-  State<PrivateMain> createState() => _PrivateMainScreenState();
+  State<PrivateMain> createState() => _PrivateMainScreenState(selectedIndex: this.selectedIndex);
 }
 
 class _PrivateMainScreenState extends State<PrivateMain> {
 
-  int _selectedIndex = 0;
+  int selectedIndex;
+  _PrivateMainScreenState({
+    required this.selectedIndex,
+  });
+
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
@@ -41,7 +50,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
           child: const Text("RT"),
           onTap: () {
             setState(() {
-              _selectedIndex = 0;
+              selectedIndex = 0;
             });
           },
         ), 
@@ -95,7 +104,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
         ],
       ),
       body: Center(
-        child: _pages.elementAt(_selectedIndex), //New
+        child: _pages.elementAt(selectedIndex), //New
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -121,7 +130,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
             label: 'Create offer',
           ),
         ],
-        currentIndex: _selectedIndex, //New
+        currentIndex: selectedIndex, //New
         onTap: _onItemTapped,
       ),
     );

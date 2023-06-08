@@ -310,7 +310,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PrivateMain()),
+                            builder: (context) => PrivateMain(selectedIndex: 0,),),
                         );
                       },
                       child: const Text(
