@@ -25,7 +25,7 @@ class _PublicMainScreenState extends State<PublicMain> {
 
   static final List<Widget> _pages = <Widget>[
     const AllOffersPublicPage(),
-    SignInScreen(onSignIn: (Credentials value) {  },),
+    SignInScreen(onSignIn: (Credentials value) {  }, isAuth: false,),
     SimpleMap(),
     // const MapOffersPublicPage(),
   ];
@@ -39,15 +39,15 @@ class _PublicMainScreenState extends State<PublicMain> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.local_offer),
-          label: 'Offers',
+          label: "Offers",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.login),
-          label: 'Login',
+          label: "Login",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
-          label: 'Map',
+          label: "Map",
         ),
       ],
       currentIndex: _selectedIndex, //New

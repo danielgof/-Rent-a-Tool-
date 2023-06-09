@@ -10,7 +10,6 @@ import '../../models/offer.dart';
 import '../../api/utils.dart';
 import 'main_page_private.dart';
 
-
 class UserOffersPage extends StatefulWidget {
   const UserOffersPage({Key? key}) : super(key: key);
 
@@ -29,7 +28,8 @@ class _AllOffersPageState extends State<UserOffersPage> {
 
   Future<List<Offer>> fetchOffers() async {
     String url = "$URL/api/v1/offer/all";
-    final response = await http.get(Uri.parse(url),
+    final response = await http.get(
+      Uri.parse(url),
       headers: {
         HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
@@ -54,7 +54,8 @@ class _AllOffersPageState extends State<UserOffersPage> {
     String url = "$URL/api/v1/offer/delete";
     Map body = {"id": id};
     var bodyData = json.encode(body);
-    final response = await http.delete(Uri.parse(url),
+    final response = await http.delete(
+      Uri.parse(url),
       body: bodyData,
       headers: {
         HttpHeaders.authorizationHeader: Utils.TOKEN,
@@ -157,7 +158,8 @@ class _AllOffersPageState extends State<UserOffersPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PostDetailsPagePrivate(post: post),
+                                builder: (context) =>
+                                    PostDetailsPagePrivate(post: post),
                               ),
                             );
                           },
@@ -169,36 +171,47 @@ class _AllOffersPageState extends State<UserOffersPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const CircleAvatar(
-                                            backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                                            maxRadius: 40,
-                                          ),
-                                          Text(
-                                            post.toolName,
-                                            style: const TextStyle(fontSize: 20.0),
-                                          ),
-                                        ].map((widget) => Padding(
-                                          padding: const EdgeInsets.all(20),
-                                          child: widget,
-                                        )).toList(),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          _deleteOffer(post.id);
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => PrivateMain(selectedIndex: 0,)
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                              maxRadius: 40,
                                             ),
-                                          );
-                                        },
-                                        child: const Icon(Icons.delete),
-                                      ),
-                                    ]
-                                  ),
+                                            Text(
+                                              post.toolName,
+                                              style: const TextStyle(
+                                                  fontSize: 20.0),
+                                            ),
+                                          ]
+                                              .map((widget) => Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20),
+                                                    child: widget,
+                                                  ))
+                                              .toList(),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            _deleteOffer(post.id);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PrivateMain(
+                                                  selectedIndex: 0,
+                                                  isAuth: true,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: const Icon(Icons.delete),
+                                        ),
+                                      ]),
                                 ],
                               ),
                             ),
@@ -225,7 +238,8 @@ class _AllOffersPageState extends State<UserOffersPage> {
 class PostDetailsPagePrivate extends StatelessWidget {
   final Offer post;
 
-  const PostDetailsPagePrivate({Key? key, required this.post}) : super(key: key);
+  const PostDetailsPagePrivate({Key? key, required this.post})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -249,19 +263,22 @@ class PostDetailsPagePrivate extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         post.toolName,
-                        style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 24.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const CircleAvatar(
-                      backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                      backgroundImage: NetworkImage(
+                          "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
                       maxRadius: 60,
                     ),
                     Column(
                       children: [
                         Container(
                           alignment: Alignment.centerRight,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -284,7 +301,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 post.toolDescription,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -292,7 +310,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -314,7 +333,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 '${post.price} US Dollars',
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -322,7 +342,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -341,10 +362,13 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                Jiffy.parse(post.dateStart,
+                                        pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                                    .format(pattern: "dd/MM/yyyy"),
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -352,7 +376,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -371,10 +396,13 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                Jiffy.parse(post.dateFinish,
+                                        pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                                    .format(pattern: "dd/MM/yyyy"),
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -382,7 +410,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -404,7 +433,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 post.ownerName,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -412,7 +442,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -434,7 +465,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 post.phoneNumber,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -448,32 +480,34 @@ class PostDetailsPagePrivate extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextButton(onPressed: () {
-
-                          },
-                            child: const Text("CONTACT OWNER",
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "CONTACT OWNER",
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 30,
                               ),
                             ),
                           ),
-                          TextButton(onPressed: () {
-
-                          },
-                            child: const Text("ACCEPT OFFER",
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "ACCEPT OFFER",
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 30,
                               ),
                             ),
                           ),
-                        ].map((widget) => Flexible(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: widget,
-                            ))).toList(),
+                        ]
+                            .map((widget) => Flexible(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: widget,
+                                )))
+                            .toList(),
                       ),
                     ),
                   ],

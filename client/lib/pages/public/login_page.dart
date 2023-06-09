@@ -9,19 +9,24 @@ import 'unauthorized_page.dart';
 
 class SignInScreen extends StatefulWidget {
   final ValueChanged<Credentials> onSignIn;
-
+  final bool isAuth;
   const SignInScreen({
-    required this.onSignIn,
     super.key,
+    required this.onSignIn,
+    required this.isAuth,
   });
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignInScreen> createState() => _SignInScreenState(isAuth: this.isAuth);
 }
 
 class _SignInScreenState extends State<SignInScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool isAuth;
+  _SignInScreenState({
+    required this.isAuth,
+  });
 
   // Future<int> loginRequest(login, pass) async {
   //   String url = "$URL/api/v1/auth/login";
@@ -46,11 +51,11 @@ class _SignInScreenState extends State<SignInScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Sign in',
-                  style: Theme.of(context).textTheme.headlineMedium),
+              Text("Sign in",
+                style: Theme.of(context).textTheme.headlineMedium),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                left: 15.0, right: 15.0, top: 15, bottom: 0),
                 child:
                 TextField(
                   cursorColor: Colors.blue,
@@ -141,7 +146,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           if (status == 200) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => PrivateMain(selectedIndex: 0,)
+                              MaterialPageRoute(builder: (context) => PrivateMain(selectedIndex: 0, isAuth: true,)
                               ),
                             );
                           } else {

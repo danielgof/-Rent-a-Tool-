@@ -87,7 +87,7 @@ class _OfferRegistrationContactsPageState
       );
       return response.statusCode;
     } else {
-      throw Exception('Failed to create offer');
+      throw Exception("Failed to create offer");
     }
   }
 
@@ -97,10 +97,10 @@ class _OfferRegistrationContactsPageState
         markerId: MarkerId(point.toString()),
         position: point,
         infoWindow: const InfoWindow(
-          title: 'I am a marker',
+          title: "I am a marker",
         ),
         icon:
-            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+          BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
       ));
     });
   }
@@ -124,7 +124,7 @@ class _OfferRegistrationContactsPageState
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("Choose location.",
-                    style: Theme.of(context).textTheme.headlineMedium),
+                  style: Theme.of(context).textTheme.headlineMedium),
                 Container(
                   alignment: Alignment.center,
                   child: SizedBox(
@@ -179,6 +179,7 @@ class _OfferRegistrationContactsPageState
                       MaterialPageRoute(
                         builder: (context) => PrivateMain(
                           selectedIndex: 0,
+                          isAuth: true,
                         ),
                       ),
                     );
@@ -198,6 +199,7 @@ class _OfferRegistrationContactsPageState
                       MaterialPageRoute(
                         builder: (context) => PrivateMain(
                           selectedIndex: 4,
+                          isAuth: true,
                         ),
                       ),
                     );

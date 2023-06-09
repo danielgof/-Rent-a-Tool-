@@ -76,11 +76,11 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   var unameController =
       TextEditingController(text: JWT.decode(Utils.TOKEN).payload["username"]);
   var emailController =
-    TextEditingController(text: JWT.decode(Utils.TOKEN).payload["email"]);
+      TextEditingController(text: JWT.decode(Utils.TOKEN).payload["email"]);
   var phoneController =
-    TextEditingController(text: JWT.decode(Utils.TOKEN).payload["phone"]);
+      TextEditingController(text: JWT.decode(Utils.TOKEN).payload["phone"]);
   var passController =
-    TextEditingController(text: JWT.decode(Utils.TOKEN).payload["pass"]);
+      TextEditingController(text: JWT.decode(Utils.TOKEN).payload["pass"]);
 
   AlertDialog alert = const AlertDialog(
     title: Text("User's details updated successfully"),
@@ -156,7 +156,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("User\' profile page",
-                    style: Theme.of(context).textTheme.headlineMedium),
+                      style: Theme.of(context).textTheme.headlineMedium),
                   const CircleAvatar(
                     backgroundImage: NetworkImage(
                         "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
@@ -310,7 +310,11 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PrivateMain(selectedIndex: 0,),),
+                            builder: (context) => PrivateMain(
+                              selectedIndex: 0,
+                              isAuth: true,
+                            ),
+                          ),
                         );
                       },
                       child: const Text(

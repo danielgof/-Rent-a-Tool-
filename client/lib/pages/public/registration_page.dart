@@ -41,7 +41,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text("Return to login page."),
         backgroundColor: Colors.blue,
@@ -49,7 +49,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Center(
         child: Card(
           child: Container(
-            constraints: BoxConstraints.loose(const Size(600, 600)),
+            constraints: BoxConstraints.loose(const Size(600, 800)),
             padding: const EdgeInsets.all(8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

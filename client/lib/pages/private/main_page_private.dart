@@ -9,23 +9,28 @@ import 'chat_page.dart';
 import 'map_offers_private.dart';
 import 'offer_registration/offer_registration_description.dart';
 
-
 class PrivateMain extends StatefulWidget {
   int selectedIndex;
+  bool isAuth;
   PrivateMain({
     super.key,
     required this.selectedIndex,
+    required this.isAuth,
   });
 
   @override
-  State<PrivateMain> createState() => _PrivateMainScreenState(selectedIndex: this.selectedIndex);
+  State<PrivateMain> createState() => _PrivateMainScreenState(
+        selectedIndex: this.selectedIndex,
+        isAuth: this.isAuth,
+      );
 }
 
 class _PrivateMainScreenState extends State<PrivateMain> {
-
   int selectedIndex;
+  bool isAuth;
   _PrivateMainScreenState({
     required this.selectedIndex,
+    required this.isAuth,
   });
 
   void _onItemTapped(int index) {
@@ -44,19 +49,22 @@ class _PrivateMainScreenState extends State<PrivateMain> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(
-          child: const Text("RT"),
-          onTap: () {
-            setState(() {
-              selectedIndex = 0;
-            });
-          },
-        ), 
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Padding(
+    // print("==============================================");
+    // print(isAuth);
+    if (isAuth == true) {
+      return Scaffold(
+        appBar: AppBar(
+          title: GestureDetector(
+            child: const Text("RT"),
+            onTap: () {
+              setState(() {
+                selectedIndex = 0;
+              });
+            },
+          ),
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
@@ -68,12 +76,13 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                   );
                 },
                 child: const CircleAvatar(
-                  backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                  backgroundImage: NetworkImage(
+                      "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
                   maxRadius: 20,
                 ),
-              )
-          ),
-          Padding(
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
@@ -85,12 +94,15 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                   );
                 },
                 child: const Icon(Icons.settings),
-              )
-          ),
-          Padding(
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
+                  setState(() {
+                    isAuth = false;
+                  });
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -99,40 +111,74 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                   );
                 },
                 child: const Icon(Icons.logout),
-              )
+              ),
+            ),
+          ],
+        ),
+        body: Center(
+          child: _pages.elementAt(selectedIndex), //New
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.local_offer),
+              label: "Offers",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              label: "Map",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              label: "My chats",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.my_library_books),
+              label: "My offers",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.create),
+              label: 'Create offer',
+            ),
+          ],
+          currentIndex: selectedIndex, //New
+          onTap: _onItemTapped,
+        ),
+      );
+    } else {
+      return Scaffold(
+        body: Center(
+          child: Card(
+            child: Container(
+              constraints: BoxConstraints.loose(const Size(600, 600)),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("You have not been authorized.",
+                    style: Theme.of(context).textTheme.headlineMedium),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const PublicMain()
+                          ),
+                        );
+                      },
+                      child: const Text('Return to home page.',
+                          style: TextStyle(color: Colors.blue)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
-      ),
-      body: Center(
-        child: _pages.elementAt(selectedIndex), //New
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_offer),
-            label: 'Offers',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'My chats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.my_library_books),
-            label: 'My offers',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.create),
-            label: 'Create offer',
-          ),
-        ],
-        currentIndex: selectedIndex, //New
-        onTap: _onItemTapped,
-      ),
-    );
-  }
+        ),
+      );
+    }
+  } 
 }
