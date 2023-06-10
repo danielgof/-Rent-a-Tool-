@@ -23,7 +23,7 @@ auth api
 
 @auth.route("/login", methods=["POST", "GET"])
 def login() -> dict:
-    """login users"""
+    """Login users"""
     try:
         data = request.get_json(force=True)
         user = session.query(User).filter(
@@ -50,6 +50,7 @@ def login() -> dict:
 
 @auth.route("/register", methods=["POST"])
 def register_user() -> dict:
+    """Register user in database"""
     try:
         data = request.get_json(force=True)
         add_user(data["username"], data["phone"],
@@ -65,6 +66,7 @@ def register_user() -> dict:
 
 @auth.route("/upd", methods=["PUT"])
 def upd_username() -> dict:
+    """Updates user info"""
     try:
         data = request.get_json(force=True)
         """extracting values from json"""
@@ -82,5 +84,19 @@ def upd_username() -> dict:
         if (passwd != ""):
             upd_passwd(uname=uname, passwd=passwd)
         return {"message": "updated"}, 200
+    except Exception as e:
+        return {"message": e}, 500
+
+
+@auth.route("/save_avatar", methods=["POST"])
+def save_avatar() -> dict:
+    try:
+        token = request.headers["Authorization"]
+        img = request.files["logo"]
+        uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
+                               "HS256"])["username"]
+        # data = request.get_json(force=True)
+        save_avatar(img=img, username=uname)
+        return {"message": "saved"}, 200
     except Exception as e:
         return {"message": e}, 500

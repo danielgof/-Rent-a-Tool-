@@ -39,7 +39,8 @@ def save_offer(current_user) -> dict:
             abort(400)
         token = request.headers["Authorization"]
         data = request.get_json(force=True)
-        user_info = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])["username"]
+        user_info = jwt.decode(token, SECRET_KEY, algorithms=[
+                               "HS256"])["username"]
         add_offer_to_user(username=user_info, data=data)
         return {"status": "success"}, 200
     except Exception as e:
@@ -52,7 +53,8 @@ def save_offer(current_user) -> dict:
 def get_all_user_offers(current_user) -> dict:
     try:
         token = request.headers["Authorization"]
-        user_info = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])["username"]
+        user_info = jwt.decode(token, SECRET_KEY, algorithms=[
+                               "HS256"])["username"]
         responce = all_offers_user(user_info=user_info)
         return {"data": responce}
     except Exception as e:
