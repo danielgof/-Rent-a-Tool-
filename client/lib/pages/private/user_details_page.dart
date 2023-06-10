@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+// import 'package:async/async.dart';
+// import 'package:path/path.dart' as Path;
 
 import 'package:flutter/material.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../../api/utils.dart';
 import 'main_page_private.dart';
@@ -31,42 +34,6 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   void initState() {
     super.initState();
   }
-
-  // void getUsername() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var token = prefs.getString("JWT").toString();
-  //   var tname = JWT.decode(token).payload["username"];
-  //   setState(() {
-  //     username = tname;
-  //   });
-  // }
-
-  // void getEmail() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var token = prefs.getString("JWT").toString();
-  //   var temail = JWT.decode(token).payload["email"];
-  //   setState(() {
-  //     email = temail;
-  //   });
-  // }
-
-  // void getPhone() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var token = prefs.getString("JWT").toString();
-  //   var tphone = JWT.decode(token).payload["phone"];
-  //   setState(() {
-  //     email = tphone;
-  //   });
-  // }
-
-  // void getPass() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var token = prefs.getString("JWT").toString();
-  //   var tpass = JWT.decode(token).payload["pass"];
-  //   setState(() {
-  //     email = tpass;
-  //   });
-  // }
 
   FocusNode funame = FocusNode();
   FocusNode fphone = FocusNode();
@@ -132,7 +99,63 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       );
       return response.statusCode;
     } else {
-      throw Exception('Failed to upd user\'s info');
+      throw Exception("Failed to upd user\'s info");
+    }
+  }
+
+  Future<void> sendFileToApi(Uint8List fileBytes, String fileName) async {
+    String url = "$URL/api/v1/auth/save_avatar";
+    // Create a POST request with the file content as the request body
+    var headers = {
+      'Authorization':
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzEzMDEwMTEzfQ.4Yas1txQ9uK3xDafKzwjpUpLB59wpvvY44M-14E6Ook'
+    };
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://localhost:5000/api/v1/auth/save_avatar'));
+    request.files.add(
+      await http.MultipartFile.fromBytes(
+        'logo',
+        fileBytes,
+        filename: fileName,
+      ),
+    );
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  File? imageFile;
+
+  _getFromGallery() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      // File file = File(result.files.single.path!);
+      String? fileName = result.files.single.name;
+      // Retrieve the file as Uint8List
+      Uint8List? fileBytes = result.files.single.bytes;
+      // print("=========================");
+      // print(fileName);
+
+      if (fileBytes != null) {
+        // Process the file further as per your requirement
+        // For example, you can upload the file to a server using the sendImageToServer function mentioned in the previous response
+        await sendFileToApi(fileBytes, fileName);
+        // Print the file size
+        print('Selected file size: ${fileBytes.lengthInBytes} bytes');
+      } else {
+        // File bytes are null
+        print('Failed to read file');
+      }
+    } else {
+      // User canceled the file selection
+      print('No file selected');
     }
   }
 
@@ -161,6 +184,20 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                     backgroundImage: NetworkImage(
                         "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
                     maxRadius: 40,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      _getFromGallery();
+                    },
+                    child: const Text("Select image."),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // _getFromGallery();
+                      print(imageFile);
+                      // _saveLogo(imageFile!);
+                    },
+                    child: const Text("Save image."),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -270,7 +307,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                     padding: const EdgeInsets.all(16),
                     child: TextButton(
                       onPressed: () async {
-                        print("clicked");
+                        // print("clicked");
                         String uname = unameController.value.text;
                         String email = emailController.value.text;
                         String phone = phoneController.value.text;
@@ -286,7 +323,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                             },
                           );
                         } else {
-                          throw Exception('Failed to upd user\'s info');
+                          throw Exception("Failed to upd user\'s info");
                         }
                         // Navigator.push(
                         //   context,
@@ -295,7 +332,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         // );
                       },
                       child: const Text(
-                        'UPD INFO',
+                        "UPD INFO",
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 35,
@@ -318,7 +355,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         );
                       },
                       child: const Text(
-                        'Return back.',
+                        "Return back.",
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),

@@ -86,15 +86,19 @@ def upd_username() -> dict:
         return {"message": "updated"}, 200
     except Exception as e:
         return {"message": e}, 500
-
+import io
 
 @auth.route("/save_avatar", methods=["POST"])
-def save_avatar() -> dict:
+def save_avtr() -> dict:
     try:
         token = request.headers["Authorization"]
+        # print(request.get_data())
         img = request.files["logo"]
+        # print(io.BytesIO(img))
+        # print(img.__str__)
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
                                "HS256"])["username"]
+        # print(uname)
         # data = request.get_json(force=True)
         save_avatar(img=img, username=uname)
         return {"message": "saved"}, 200

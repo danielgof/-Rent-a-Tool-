@@ -92,13 +92,16 @@ def save_avatar(img, username: str) -> bool:
     """Saves avatar to folder with the same name as user's name"""
     res: bool = False
     # print(img)
-    # print(os.getcwd())
+    home_dir: str = os.getcwd()
+    print("before: %s", os.getcwd())
     if not os.path.exists(f"images/users/{username}"):
         os.mkdir(f"images/users/{username}")
-        os.chdir(f"images/users/{username}")
-        filename = secure_filename(img.filename)
-        img.save(filename)
-        res = True
-        os.chdir("/../"*2)
+    os.chdir(f"images/users/{username}")
+    filename = secure_filename(img.filename)
+    # print(f"filename: {filename}")
+    img.save(filename)
+    res = True
+    os.chdir(home_dir)
+    print("after: %s",os.getcwd())
     # print(os.getcwd())
     return res

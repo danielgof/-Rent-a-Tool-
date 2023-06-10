@@ -1,7 +1,7 @@
-// const String URL = "http://localhost:5000";
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String URL = "https://brodon.pythonanywhere.com";
+// const String URL = "https://brodon.pythonanywhere.com";
+const String URL = "http://localhost:5000";
 
 
 class Utils {
