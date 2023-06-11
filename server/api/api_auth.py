@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify, abort
+import io
+from flask import Blueprint, request, jsonify, abort, send_file
 from flask_cors import CORS
 
 # from flask_mail import Mail, Message
@@ -86,7 +87,7 @@ def upd_username() -> dict:
         return {"message": "updated"}, 200
     except Exception as e:
         return {"message": e}, 500
-import io
+
 
 @auth.route("/save_avatar", methods=["POST"])
 def save_avtr() -> dict:
@@ -97,10 +98,26 @@ def save_avtr() -> dict:
         # print(io.BytesIO(img))
         # print(img.__str__)
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
-                               "HS256"])["username"]
+            "HS256"])["username"]
         # print(uname)
         # data = request.get_json(force=True)
         save_avatar(img=img, username=uname)
         return {"message": "saved"}, 200
+    except Exception as e:
+        return {"message": e}, 500
+
+
+@auth.route("/avatar", methods=["GET"])
+def get_avtr() -> dict:
+    try:
+        token = request.headers["Authorization"]
+        uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
+            "HS256"])["username"]
+        # with open(f"images/users/{uname}/user.png", "r") as file:
+        #     res = file
+        os.chdir(f"./images/users/{uname}")
+        files = os.listdir()
+        avatar: str = files[-1]
+        return send_file(f"images/users/{uname}/{avatar}")
     except Exception as e:
         return {"message": e}, 500

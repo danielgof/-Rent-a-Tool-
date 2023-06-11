@@ -180,10 +180,40 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 children: [
                   Text("User\' profile page",
                       style: Theme.of(context).textTheme.headlineMedium),
-                  const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
-                    maxRadius: 40,
+                  // const CircleAvatar(
+                  //   backgroundImage: NetworkImage(
+                  //       "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                  //   maxRadius: 40,
+                  // ),
+                  SizedBox(
+                    height: 115,
+                    width: 115,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      fit: StackFit.expand,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: -25,
+                          child: RawMaterialButton(
+                            onPressed: () {
+                              print("worked!!!!");
+                            },
+                            elevation: 2.0,
+                            fillColor: Color(0xFFF5F6F9),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              color: Colors.blue,
+                            ),
+                            padding: EdgeInsets.all(15.0),
+                            shape: CircleBorder(),
+                          )),
+                      ],
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
