@@ -1,7 +1,9 @@
-import io
-from flask import Blueprint, request, jsonify, abort, send_file
+import base64
+from io import BytesIO
+# import io
+from flask import Blueprint, request, jsonify, abort, send_file, Response
 from flask_cors import CORS
-
+from werkzeug.wsgi import wrap_file
 # from flask_mail import Mail, Message
 from functools import wraps
 from datetime import date, datetime, timedelta
@@ -13,6 +15,7 @@ from controllers.auth_controller import *
 from create import *
 from config import *
 from security import *
+from werkzeug.wsgi import FileWrapper
 
 auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 # SECRET_KEY, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_USE_TLS, MAIL_USE_SSL = config_auth("./config.yaml")
@@ -110,6 +113,7 @@ def save_avtr() -> dict:
 @auth.route("/avatar", methods=["GET"])
 def get_avtr() -> dict:
     try:
+        home_path = os.getcwd()
         token = request.headers["Authorization"]
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
@@ -117,7 +121,30 @@ def get_avtr() -> dict:
         #     res = file
         os.chdir(f"./images/users/{uname}")
         files = os.listdir()
-        avatar: str = files[-1]
-        return send_file(f"images/users/{uname}/{avatar}")
+        avatar: str = files[1]
+        file = open(avatar, "rb")
+        encoded_string = base64.b64encode(file.read())
+        # print(file.read())
+        # b = BytesIO(file)
+        # res = BytesIO()
+
+        # w = FileWrapper(encoded_string)
+        # print(w)
+        # with open(f"images/users/{uname}/{avatar}", "r") as fh:
+        #     buf = fh.read()
+        # w = wrap_file(buf)
+        os.chdir(home_path)
+        # return {"image": file.read()}, 200
+        return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
+        # return send_file(f"images/users/{uname}/{avatar}")
     except Exception as e:
         return {"message": e}, 500
+
+
+@auth.route('/')
+def hello_world():
+    b = BytesIO(b"blah blah blah")
+    print(b)
+    w = FileWrapper(b)
+    print(w)
+    return Response(w, mimetype="text/plain", direct_passthrough=True)
