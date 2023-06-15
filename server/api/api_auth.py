@@ -121,7 +121,7 @@ def get_avtr() -> dict:
         #     res = file
         os.chdir(f"./images/users/{uname}")
         files = os.listdir()
-        avatar: str = files[1]
+        avatar: str = files[-1]
         file = open(avatar, "rb")
         encoded_string = base64.b64encode(file.read())
         # print(file.read())
@@ -141,10 +141,10 @@ def get_avtr() -> dict:
         return {"message": e}, 500
 
 
-@auth.route('/')
-def hello_world():
-    b = BytesIO(b"blah blah blah")
-    print(b)
-    w = FileWrapper(b)
-    print(w)
-    return Response(w, mimetype="text/plain", direct_passthrough=True)
+# @auth.route('/')
+# def hello_world():
+#     b = BytesIO(b"blah blah blah")
+#     print(b)
+#     w = FileWrapper(b)
+#     print(w)
+#     return Response(w, mimetype="text/plain", direct_passthrough=True)

@@ -8,6 +8,7 @@ import 'all_offers_page.dart';
 import 'chat_page.dart';
 import 'map_offers_private.dart';
 import 'offer_registration/offer_registration_description.dart';
+import 'user.dart';
 
 class PrivateMain extends StatefulWidget {
   int selectedIndex;
@@ -71,7 +72,9 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const UserDetailsPage(),
+                      builder: (context) => 
+                      // UserPage(),
+                      UserDetailsPage(),
                     ),
                   );
                 },

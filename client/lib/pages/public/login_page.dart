@@ -142,7 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           var login = _usernameController.value.text;
                           var pass = _passwordController.value.text;
                           var status = await ApiAuth().loginRequest(login, pass);
-                          // print(status);
+                          print(status);
                           if (status == 200) {
                             Navigator.push(
                               context,
