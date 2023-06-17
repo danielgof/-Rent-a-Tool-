@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:client/api/utils.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'ApiMethodsImpl.dart';
 
@@ -9,18 +10,23 @@ class ApiAuth extends APIMethodsImpl {
 //  TODO
   // 1) Login method
   Future<int> loginRequest(login, pass) async {
-    String url = "$URL/api/v1/auth/login";
-    Map credits = {"username": login, "password": pass};
-    final response = await APIMethodsImpl().post(url, credits);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Save an token value to 'JWT' key.
-    await prefs.setString("JWT", json.decode(response.body)["token"]);
-    Utils.TOKEN = json.decode(response.body)["token"];
-    // Try reading data from the 'action' key. If it doesn't exist, returns null.
-    final String? token = prefs.getString("JWT");
-    // print(token);
-    var data = response.statusCode;
-    return data;
+    try{ 
+      var url = "$URL/api/v1/auth/login";
+      Map credits = {"username": login, "password": pass};
+      final response = await APIMethodsImpl().post(url, credits);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      // Save an token value to 'JWT' key.
+      await prefs.setString("JWT", json.decode(response.body)["token"]);
+      Utils.TOKEN = json.decode(response.body)["token"];
+      // Try reading data from the 'action' key. If it doesn't exist, returns null.
+      final String? token = prefs.getString("JWT");
+      // print(token);
+      var data = response.statusCode;
+      return data;
+      } on PlatformException catch (e) {
+      print(e.toString());
+      return int.parse(e.code);
+    }
   }
 
   // 2) Registration method

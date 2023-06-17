@@ -148,10 +148,18 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
+
+      // String? filePath = result.files.single.path;
+      // imageFile = File(filePath!);
+      // Uint8List? fileBytes = imageFile?.readAsBytesSync();
+      // print(fileBytes);
       // File file = File(result.files.single.path!);
       String? fileName = result.files.single.name;
       // Retrieve the file as Uint8List
+      print(fileName);
+      
       Uint8List? fileBytes = result.files.single.bytes;
+
       // print("=========================");
       // print(fileName);
 
