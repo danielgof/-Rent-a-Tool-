@@ -98,10 +98,10 @@ def save_avatar(img, username: str) -> bool:
         os.mkdir(f"images/users/{username}")
     os.chdir(f"images/users/{username}")
     filename = secure_filename(img.filename)
-    # print(f"filename: {filename}")
-    img.save(filename)
+    print(len(os.listdir()))
+    img.save(f"{len(os.listdir())+1}_"+filename)
     res = True
     os.chdir(home_dir)
-    print("after: %s",os.getcwd())
+    print("after: %s", os.getcwd())
     # print(os.getcwd())
     return res

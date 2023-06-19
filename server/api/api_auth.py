@@ -96,14 +96,9 @@ def upd_username() -> dict:
 def save_avtr() -> dict:
     try:
         token = request.headers["Authorization"]
-        # print(request.get_data())
         img = request.files["logo"]
-        # print(io.BytesIO(img))
-        # print(img.__str__)
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
-        # print(uname)
-        # data = request.get_json(force=True)
         save_avatar(img=img, username=uname)
         return {"message": "saved"}, 200
     except Exception as e:
@@ -117,34 +112,13 @@ def get_avtr() -> dict:
         token = request.headers["Authorization"]
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
-        # with open(f"images/users/{uname}/user.png", "r") as file:
-        #     res = file
         os.chdir(f"./images/users/{uname}")
         files = os.listdir()
+        print(files)
         avatar: str = files[-1]
         file = open(avatar, "rb")
         encoded_string = base64.b64encode(file.read())
-        # print(file.read())
-        # b = BytesIO(file)
-        # res = BytesIO()
-
-        # w = FileWrapper(encoded_string)
-        # print(w)
-        # with open(f"images/users/{uname}/{avatar}", "r") as fh:
-        #     buf = fh.read()
-        # w = wrap_file(buf)
         os.chdir(home_path)
-        # return {"image": file.read()}, 200
         return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
-        # return send_file(f"images/users/{uname}/{avatar}")
     except Exception as e:
         return {"message": e}, 500
-
-
-# @auth.route('/')
-# def hello_world():
-#     b = BytesIO(b"blah blah blah")
-#     print(b)
-#     w = FileWrapper(b)
-#     print(w)
-#     return Response(w, mimetype="text/plain", direct_passthrough=True)
