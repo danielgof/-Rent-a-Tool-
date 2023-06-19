@@ -7,10 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'ApiMethodsImpl.dart';
 
 class ApiAuth extends APIMethodsImpl {
-//  TODO
   // 1) Login method
   Future<int> loginRequest(login, pass) async {
     try{ 
+      print("hello from login");
       var url = "$URL/api/v1/auth/login";
       Map credits = {"username": login, "password": pass};
       final response = await APIMethodsImpl().post(url, credits);
