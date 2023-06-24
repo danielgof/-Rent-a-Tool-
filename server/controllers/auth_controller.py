@@ -91,17 +91,15 @@ def upd_passwd(uname: str, passwd: str) -> bool:
 def save_avatar(img, username: str) -> bool:
     """Saves avatar to folder with the same name as user's name"""
     res: bool = False
-    # print(img)
     home_dir: str = os.getcwd()
-    print("before: %s", os.getcwd())
+    # print("before: %s", os.getcwd())
     if not os.path.exists(f"images/users/{username}"):
         os.mkdir(f"images/users/{username}")
     os.chdir(f"images/users/{username}")
     filename = secure_filename(img.filename)
-    print(len(os.listdir()))
+    # print(len(os.listdir()))
     img.save(f"{len(os.listdir())+1}_"+filename)
     res = True
     os.chdir(home_dir)
-    print("after: %s", os.getcwd())
-    # print(os.getcwd())
+    # print("after: %s", os.getcwd())
     return res

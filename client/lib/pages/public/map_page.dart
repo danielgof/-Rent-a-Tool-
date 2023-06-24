@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../api/utils.dart';
+
 class SimpleMap extends StatefulWidget {
   @override
   _SimpleMapState createState() => _SimpleMapState();
@@ -13,8 +15,6 @@ class SimpleMap extends StatefulWidget {
 class _SimpleMapState extends State<SimpleMap> {
   // on below line we are initializing our controller for google maps.
   Completer<GoogleMapController> _controller = Completer();
- 
-  String URL = "https://brodon.pythonanywhere.com";
 
   late Future<List<Marker>> _markers;
 
@@ -30,7 +30,7 @@ class _SimpleMapState extends State<SimpleMap> {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       final List<dynamic> tmp = data["data"];
-      print(response.statusCode);
+      // print(response.statusCode);
       return tmp.map((markerData) {
         final point = LatLng(
           double.parse(markerData['lat'].toString()),
@@ -47,7 +47,7 @@ class _SimpleMapState extends State<SimpleMap> {
   }
 // on below line we are specifying our camera position
   static const CameraPosition _kGoogle = CameraPosition(
-    target: LatLng(37.422131, -122.084801),
+    target: LatLng(40.0, -82.99),
     zoom: 14.4746,
   );
  

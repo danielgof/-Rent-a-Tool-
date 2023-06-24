@@ -1,14 +1,17 @@
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:client/pages/private/settings_page.dart';
 import 'package:client/pages/private/user_details_page.dart';
 import 'package:client/pages/private/user_offers.dart';
 
+import '../../api/utils.dart';
 import '../public/main_page_public.dart';
 import 'all_offers_page.dart';
 import 'chat_page.dart';
 import 'map_offers_private.dart';
 import 'offer_registration/offer_registration_description.dart';
-import 'user.dart';
 
 class PrivateMain extends StatefulWidget {
   int selectedIndex;
@@ -48,10 +51,23 @@ class _PrivateMainScreenState extends State<PrivateMain> {
     const OfferRegistrationDescriptionPage()
   ];
 
+  Future<String> fetchImageBytes() async {
+    Map<String, String> head = new Map<String, String>();
+    head['Authorization'] = Utils.TOKEN;
+    // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6ImVtYWlsIiwicGhvbmUiOiJ0ZXN0IiwicGFzcyI6InRlc3QiLCJleHAiOjE3MTg3NTc2MDF9.cWbNIygoq-lmLYtA6x2n5Z3tlKiuTt_JTLWNRNyorns';
+    final response =
+        await http.get(Uri.parse('$URL/api/v1/auth/avatar'), headers: head);
+    if (response.statusCode == 200) {
+      // print(response.body);
+      return response.body;
+    } else {
+      // return "Failed";
+      throw Exception('Failed to load image');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // print("==============================================");
-    // print(isAuth);
     if (isAuth == true) {
       return Scaffold(
         appBar: AppBar(
@@ -72,17 +88,41 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => 
-                      // UserPage(),
-                      UserDetailsPage(),
+                      builder: (context) =>
+                          // UserPage(),
+                          UserDetailsPage(),
                     ),
                   );
                 },
-                child: const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
-                  maxRadius: 20,
+                child: FutureBuilder<String>(
+                  future: fetchImageBytes(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircleAvatar(
+                        child: Image.asset("assets/placeholders/logo.png"),
+                      );
+                    } else if (snapshot.hasError) {
+                      return CircleAvatar(
+                        child: Image.asset("assets/placeholders/logo.png"),
+                      );
+                    } else if (snapshot.hasData) {
+                      Uint8List bytesImage =
+                          const Base64Decoder().convert(snapshot.data!);
+                      // print(bytesImage);
+                      return CircleAvatar(
+                        backgroundImage: MemoryImage(bytesImage),
+                      );
+                    } else {
+                      return Text('No image data');
+                    }
+                  },
                 ),
+                // const CircleAvatar(
+                //   backgroundImage: NetworkImage(
+                //       "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                //   maxRadius: 20,
+                // ),
               ),
             ),
             Padding(
@@ -161,18 +201,18 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("You have not been authorized.",
-                    style: Theme.of(context).textTheme.headlineMedium),
+                      style: Theme.of(context).textTheme.headlineMedium),
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const PublicMain()
-                          ),
+                          MaterialPageRoute(
+                              builder: (context) => const PublicMain()),
                         );
                       },
-                      child: const Text('Return to home page.',
+                      child: const Text("Return to home page.",
                           style: TextStyle(color: Colors.blue)),
                     ),
                   ),
@@ -183,5 +223,5 @@ class _PrivateMainScreenState extends State<PrivateMain> {
         ),
       );
     }
-  } 
+  }
 }
