@@ -136,34 +136,22 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                                          maxRadius: 40,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "Name: ${post.toolName}",
-                                              style: const TextStyle(
-                                                  fontSize: 20.0),
-                                            ),
-                                            Text(
-                                              "price: ${post.price}\$",
-                                              style: const TextStyle(
-                                                  fontSize: 20.0),
-                                            ),
-                                          ],
-                                        ),
-                                      ]
-                                          .map((widget) => Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16),
-                                                child: widget,
-                                              ))
-                                          .toList(),
+                                    ListTile(
+                                      title: Text(
+                                        post.toolName,
+                                        style: const TextStyle(fontSize: 20.0),
+                                      ),
+                                      subtitle: Text(
+                                          "Available from ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")} to ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}"),
+                                      // trailing: Icon(Icons.favorite_outline),
+                                    ),
+                                    const SizedBox(
+                                      height: 200.0,
+                                      width: 400.0,
+                                      child: Image(
+                                        image: NetworkImage(
+                                            "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                      ),
                                     ),
                                   ],
                                 ),

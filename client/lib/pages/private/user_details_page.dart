@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:io';
-// import 'package:file_picker/_internal/file_picker_web.dart';
+import 'package:file_picker/_internal/file_picker_web.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
@@ -131,7 +131,13 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      // print(await response.stream.bytesToString());
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UserDetailsPage(),
+        ),
+      );
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -157,14 +163,14 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       /*
         Mobile verion of image loader
        */
-      String? filePath = result.files.single.path;
-      imageFile = File(filePath!);
-      Uint8List? fileBytes = imageFile?.readAsBytesSync();
+      // String? filePath = result.files.single.path;
+      // imageFile = File(filePath!);
+      // Uint8List? fileBytes = imageFile?.readAsBytesSync();
       /*
         Web version of image loader
        */
       // Retrieve the file as Uint8List
-      // Uint8List? fileBytes = result.files.single.bytes;
+      Uint8List? fileBytes = result.files.single.bytes;
       if (fileBytes != null) {
         // Process the file further as per your requirement
         // For example, you can upload the file to a server using the sendImageToServer function mentioned in the previous response
@@ -216,7 +222,9 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("User\' profile page",
+                  Text(
+                      JWT.decode(Utils.TOKEN).payload["username"] +
+                          "\'s profile page",
                       style: Theme.of(context).textTheme.headlineMedium),
                   Container(
                     child: FutureBuilder<String>(
@@ -234,7 +242,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                               children: [
                                 CircleAvatar(
                                   child: Image.asset(
-                                      "assets/placeholders/logo.png"),
+                                      "assets/placeholders/user.png"),
                                 ),
                                 Positioned(
                                   bottom: 0,
@@ -268,7 +276,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                               children: [
                                 CircleAvatar(
                                   child: Image.asset(
-                                      "assets/placeholders/logo.png"),
+                                      "assets/placeholders/user.png"),
                                 ),
                                 Positioned(
                                   bottom: 0,
@@ -331,7 +339,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                           // CircleAvatar(backgroundImage: MemoryImage(bytesImage),);
                           // return Image.memory(bytesImage);
                         } else {
-                          return Text('No image data');
+                          return const Text("No image data");
                         }
                       },
                     ),
@@ -452,6 +460,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         print(uname);
                         var statusCode = updProfile(uname, email, phone, pass);
                         setState(() {});
+                        // ignore: unrelated_type_equality_checks
                         if (statusCode == 200) {
                           // ignore: use_build_context_synchronously
                           showDialog(
@@ -463,11 +472,6 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         } else {
                           throw Exception("Failed to upd user\'s info");
                         }
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => PrivateMain(),
-                        //   ),
-                        // );
                       },
                       child: const Text(
                         "UPD INFO",

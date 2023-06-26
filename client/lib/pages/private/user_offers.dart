@@ -170,48 +170,38 @@ class _AllOffersPageState extends State<UserOffersPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                                              maxRadius: 40,
+                                  ListTile(
+                                    title: Text(
+                                      post.toolName,
+                                      style: const TextStyle(fontSize: 20.0),
+                                    ),
+                                    subtitle: Text(
+                                        "Available from ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")} to ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}"),
+                                    // trailing: Icon(Icons.favorite_outline),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        _deleteOffer(post.id);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PrivateMain(
+                                              selectedIndex: 0,
+                                              isAuth: true,
                                             ),
-                                            Text(
-                                              post.toolName,
-                                              style: const TextStyle(
-                                                  fontSize: 20.0),
-                                            ),
-                                          ]
-                                              .map((widget) => Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: widget,
-                                                  ))
-                                              .toList(),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            _deleteOffer(post.id);
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PrivateMain(
-                                                  selectedIndex: 0,
-                                                  isAuth: true,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: const Icon(Icons.delete),
-                                        ),
-                                      ]),
+                                          ),
+                                        );
+                                      },
+                                      child: const Icon(Icons.delete),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 200.0,
+                                    width: 400.0,
+                                    child: Image(
+                                      image: NetworkImage(
+                                          "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

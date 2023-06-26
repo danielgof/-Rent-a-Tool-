@@ -33,7 +33,8 @@ def send_message():
     sender = request.json.get("sender")
     recipient = request.json.get("recipient")
     message = request.json.get("message")
-    message_data = {"sender": sender, "recipient": recipient, "message": message}
+    message_data = {"sender": sender,
+                    "recipient": recipient, "message": message}
     save_message(request.json)
     socketio.emit("new_message", message_data)
     return {"message": "Message sent successfully!"}

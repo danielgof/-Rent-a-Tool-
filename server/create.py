@@ -4,6 +4,7 @@ from datetime import date
 from models.db_auth import *
 import models.db_offer as db_offer
 from models.db_message import *
+from models.db_inbox import *
 from config import *
 from base import *
 

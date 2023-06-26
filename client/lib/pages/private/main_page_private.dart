@@ -54,14 +54,11 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   Future<String> fetchImageBytes() async {
     Map<String, String> head = new Map<String, String>();
     head['Authorization'] = Utils.TOKEN;
-    // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6ImVtYWlsIiwicGhvbmUiOiJ0ZXN0IiwicGFzcyI6InRlc3QiLCJleHAiOjE3MTg3NTc2MDF9.cWbNIygoq-lmLYtA6x2n5Z3tlKiuTt_JTLWNRNyorns';
     final response =
         await http.get(Uri.parse('$URL/api/v1/auth/avatar'), headers: head);
     if (response.statusCode == 200) {
-      // print(response.body);
       return response.body;
     } else {
-      // return "Failed";
       throw Exception('Failed to load image');
     }
   }
@@ -100,11 +97,11 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                       (BuildContext context, AsyncSnapshot<String> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircleAvatar(
-                        child: Image.asset("assets/placeholders/logo.png"),
+                        child: Image.asset("assets/placeholders/user.png"),
                       );
                     } else if (snapshot.hasError) {
                       return CircleAvatar(
-                        child: Image.asset("assets/placeholders/logo.png"),
+                        child: Image.asset("assets/placeholders/user.png"),
                       );
                     } else if (snapshot.hasData) {
                       Uint8List bytesImage =
@@ -118,11 +115,6 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                     }
                   },
                 ),
-                // const CircleAvatar(
-                //   backgroundImage: NetworkImage(
-                //       "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
-                //   maxRadius: 20,
-                // ),
               ),
             ),
             Padding(
