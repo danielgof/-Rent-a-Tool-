@@ -1,3 +1,7 @@
+import base64
+import os
+from werkzeug.utils import secure_filename
+
 from models.db_offer import *
 from create import *
 
@@ -42,6 +46,7 @@ def add_offer_to_user(username: str, data: dict) -> None:
     user_offers.append(offer)
     session.add(offer)
     session.commit()
+    
 
 
 def delete_offer_by_id(data: dict) -> bool:

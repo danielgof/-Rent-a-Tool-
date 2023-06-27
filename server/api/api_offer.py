@@ -106,3 +106,27 @@ def query_offer() -> dict:
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
         return {"message": "error"}, 500
+
+
+@offer.route("save_logo", methods=["POST"])
+def save_logo() -> dict:
+    try:
+        home_dir = os.getcwd()
+        token = request.headers["Authorization"]
+        img = request.files["logo"]
+        uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
+            "HS256"])["username"]
+        print("before: %s", os.getcwd())
+        if not os.path.exists(f"images/users/{uname}/offers"):
+            os.mkdir(f"images/users/{uname}/offers")
+        os.chdir(f"images/users/{uname}/offers")
+        # files = os.listdir()
+        # for file in files:
+        #     os.remove(file)
+        filename = secure_filename(img.filename)
+        img.save(f"{len(os.listdir())+1}_"+filename)
+        os.chdir(home_dir)
+        return {"message": "saved"}, 200
+    except Exception as e:
+        current_app.logger.info(f"exeption {e}")
+        return {"message": "error"}, 500
