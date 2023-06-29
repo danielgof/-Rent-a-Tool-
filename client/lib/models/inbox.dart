@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class Inbox {
-  String id;
+  int id;
   String opponent;
-  String roomId;
+  int roomId;
   String date;
   String lastMessage;
   String imageURL;

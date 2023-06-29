@@ -112,7 +112,6 @@ def get_avtr() -> dict:
             "HS256"])["username"]
         os.chdir(f"./images/users/{uname}")
         files = os.listdir()
-        print(files)
         avatar: str = files[-1]
         file = open(avatar, "rb")
         encoded_string = base64.b64encode(file.read())

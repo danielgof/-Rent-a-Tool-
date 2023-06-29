@@ -116,6 +116,7 @@ class _ChatPageState extends State<ChatPage> {
                         messageText: snapshot.data![index].lastMessage,
                         imageUrl: snapshot.data![index].imageURL,
                         time: snapshot.data![index].date,
+                        room_id: snapshot.data![index].roomId,
                         isMessageRead:
                             (index == 0 || index == 3) ? true : false,
                       );
@@ -140,14 +141,17 @@ class ConversationList extends StatefulWidget {
   String imageUrl;
   String time;
   bool isMessageRead;
+  int room_id;
 
-  ConversationList(
-      {super.key,
-      required this.name,
-      required this.messageText,
-      required this.imageUrl,
-      required this.time,
-      required this.isMessageRead});
+  ConversationList({
+    super.key,
+    required this.name,
+    required this.messageText,
+    required this.imageUrl,
+    required this.time,
+    required this.isMessageRead,
+    required this.room_id,
+  });
 
   @override
   // ignore: library_private_types_in_public_api
@@ -162,6 +166,7 @@ class _ConversationListState extends State<ConversationList> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ChatDetailPage(
             username: widget.name,
+            room_id: widget.room_id,
             // messageText: widget.messageText,
             // imageUrl: widget.imageUrl,
             // time: widget.time,
@@ -243,20 +248,24 @@ class ChatMessage {
 
 class ChatDetailPage extends StatefulWidget {
   String username;
+  int room_id;
   ChatDetailPage({
     super.key,
     required this.username,
+    required this.room_id,
   });
   @override
   _ChatDetailPageState createState() =>
-      _ChatDetailPageState(username: username);
+      _ChatDetailPageState(username: username, room_id: room_id);
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   String username;
+  int room_id;
   late Future<List<ChatMessage>> _messages;
   _ChatDetailPageState({
     required this.username,
+    required this.room_id,
   });
 
   @override
@@ -267,10 +276,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 
   Future<List<ChatMessage>> _getMessages() async {
     final response = await http.get(
-      Uri.parse("$URL/api/v1/chat/room/1/"),
+      Uri.parse("$URL/api/v1/chat/room/$room_id/"),
       headers: {
-        HttpHeaders.authorizationHeader:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpMIiwiZW1haWwiOiJwaWNhcmRAZ21haWwuY29tIiwicGhvbmUiOiIrMTk5OTM0NTk4NzIiLCJwYXNzIjoiTkNDLTE3MDEtRCIsImV4cCI6MTcxOTU4MzI5MX0.8LoE9CUGNo5eWk4otXhFcWX6ltbBEdorz77LRV9p388",
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpMIiwiZW1haWwiOiJwaWNhcmRAZ21haWwuY29tIiwicGhvbmUiOiIrMTk5OTM0NTk4NzIiLCJwYXNzIjoiTkNDLTE3MDEtRCIsImV4cCI6MTcxOTU4MzI5MX0.8LoE9CUGNo5eWk4otXhFcWX6ltbBEdorz77LRV9p388",
       },
     );
     if (response.statusCode == 200) {

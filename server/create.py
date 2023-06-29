@@ -22,17 +22,20 @@ Session = sessionmaker(bind=engine)
 Base.metadata.create_all(engine)
 session = Session()
 
-# user1 = User(username="JL",
-#              phone="+19993459872",
-#              email="picard@gmail.com",
-#              password="NCC-1701-D",
-#              confirmed=1)
-# user2 = User(username="test",
-#              phone="+19993452342",
-#              email="test@testmail.com",
-#              password="test",
-#              confirmed=1)
-
+# user1 = User(
+#     username="JL",
+#     phone="+19993459872",
+#     email="picard@gmail.com",
+#     password="NCC-1701-D",
+#     confirmed=1,
+# )
+# user2 = User(
+#     username="test",
+#     phone="+19993452342",
+#     email="test@testmail.com",
+#     password="test",
+#     confirmed=1,
+# )
 # user3 = User(
 #     username="WRicker",
 #     phone="1234567890",
@@ -109,7 +112,7 @@ session = Session()
 # )
 
 # inbox1 = Inbox(
-#     opponent="JL",
+#     opponent="Will Ricker",
 #     room_id=1,
 #     date=date(2023, 2, 14),
 #     last_message="how are you?",
@@ -117,11 +120,19 @@ session = Session()
 # )
 
 # inbox2 = Inbox(
-#     opponent="WRicker",
-#     room_id=3,
+#     opponent="test",
+#     room_id=2,
 #     date=date(2263, 2, 14),
 #     last_message="meet you at shuttle bay",
-#     img="https://randomuser.me/api/portraits/men/5.jpg",
+#     img="https://randomuser.me/api/portraits/men/4.jpg",
+# )
+
+# inbox3 = Inbox(
+#     opponent="JL",
+#     room_id=2,
+#     date=date(2263, 2, 14),
+#     last_message="meet you at shuttle bay",
+#     img="https://randomuser.me/api/portraits/men/4.jpg",
 # )
 
 # messages = [
@@ -155,24 +166,19 @@ session = Session()
 #         date=date(2023, 2, 14),
 #         message="Just outer space missions.."
 #     ),
+#     Message(
+#         user_name="JL",
+#         room_id=2,
+#         date=date(2023, 2, 14),
+#         message="Hey, it JL. I need your help."
+#     ),
+#     Message(
+#         user_name="test",
+#         room_id=2,
+#         date=date(2023, 2, 14),
+#         message="No problem."
+#     ),
 # ]
-
-
-# # message1 = Message(
-# #     sender="JL",
-# #     receiver = "alice",
-# #     message_type="receiver",
-# #     text="hello, world",
-# #     date=date(2023, 1, 1)
-# # )
-
-# # message2 = Message(
-# #     sender="alice",
-# #     receiver = "JL",
-# #     message_type="sender",
-# #     text="hello, world",
-# #     date=date(2023, 1, 1)
-# # )
 
 # # # request1 = db_request.Request(
 # # #     "tool_name",
@@ -195,7 +201,8 @@ session = Session()
 
 # user1.offers = [offer1, offer3]
 # user2.offers = [offer2, offer4, offer5, offer6]
-# user2.inbox = [inbox1, inbox2]
+# user1.inbox = [inbox1, inbox2]
+# user2.inbox = [inbox3]
 # # # user2.requests = [request1, request2]
 
 # # user1.messages = [message1, message2]

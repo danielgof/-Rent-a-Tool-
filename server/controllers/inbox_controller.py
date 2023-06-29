@@ -1,4 +1,5 @@
 from models.db_inbox import *
+from controllers.message_controller import *
 from create import *
 
 
@@ -8,13 +9,14 @@ def user_inbox(user_info: str) -> list:
     user_inbox = user.inbox
     responce = []
     for chat in user_inbox:
+        messages = messages_by_room(room_id=chat.room_id, u_name=user_info)
         responce.append(
             {
-                "id": str(chat.id),
+                "id": chat.id,
                 "opponent": chat.opponent,
-                "room_id": str(chat.room_id),
+                "room_id": chat.room_id,
                 "date": chat.date,
-                "last_message": chat.last_message,
+                "last_message": messages[-1]["messageContent"],
                 "img": chat.img,
             }
         )

@@ -63,39 +63,38 @@ def on_join(data):
 
 @socketio.on('leave')
 def on_leave(data):
-    username = data['username']
-    room = data['room']
-    leave_room(room)
-    send(username + ' has left the room.', to=room)
+    try:
+        username = data['username']
+        room = data['room']
+        leave_room(room)
+        send(username + ' has left the room.', to=room)
+    except Exception as e:
+        current_app.logger.info("failed to load messages")
+        return {"message": "error"}, 500
 
 
 @chat.route("/inbox", methods=["GET"])
 def get_all_chats():
-    token = request.headers["Authorization"]
-    user_info = jwt.decode(token, SECRET_KEY, algorithms=[
-        "HS256"])["username"]
-    chats: list = list()
-    chats = user_inbox(user_info=user_info)
-    return chats
+    try:
+        token = request.headers["Authorization"]
+        user_info = jwt.decode(token, SECRET_KEY, algorithms=[
+            "HS256"])["username"]
+        chats: list = list()
+        # print(user_info)
+        chats = user_inbox(user_info=user_info)
+        return chats
+    except Exception as e:
+        current_app.logger.info("failed to load messages")
+        return {"message": "error"}, 500
 
 
 @chat.route("/room/<room_id>/", methods=["GET"])
 def get_chat_messages(room_id) -> dict:
     try:
-        # messages = [{"messageContent": "Hello, Will", "messageType": "receiver"},
-        #             {"messageContent": "How have you been?",
-        #                 "messageType": "receiver"},
-        #             {"messageContent": "Hey Kriss, I am doing fine dude. wbu?",
-        #              "messageType": "sender"},
-        #             {"messageContent": "ehhhh, doing OK.",
-        #                 "messageType": "receiver"},
-        #             {"messageContent": "Is there any thing wrong?", "messageType": "sender"},]
         token = request.headers["Authorization"]
         name = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
-        # print(name)
         res = messages_by_room(room_id=room_id, u_name=name)
-        # print(res)
         return {"message": "success", "data": res}, 200
     except Exception as e:
         current_app.logger.info("failed to load messages")
