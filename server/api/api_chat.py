@@ -1,30 +1,17 @@
-from flask import request, Blueprint
-from main import socketio
+from flask import current_app, request, Blueprint
+import jwt
+from flask_socketio import join_room, leave_room, send
 
 from controllers.message_controller import *
+from controllers.inbox_controller import *
 from setup import *
+from main import socketio
 
 
 chat = Blueprint("chat", __name__, url_prefix="/api/v1/chat")
 """
 api chat
 """
-
-
-@chat.route("/", methods=["GET"])
-def index():
-    messages = [
-        {"messageContent": "Hello, Will", "messageType": "receiver"},
-        {"messageContent": "How have you been?", "messageType": "receiver"},
-        {
-            "messageContent": "Hey Kriss, I am doing fine dude. wbu?",
-            "messageType": "sender",
-        },
-        {"messageContent": "ehhhh, doing OK.", "messageType": "receiver"},
-        {"messageContent": "Is there any thing wrong?", "messageType": "sender"},
-        {"messageContent": "test message", "messageType": "sender"},
-    ]
-    return messages
 
 
 @chat.route("/send_message", methods=["POST"])
@@ -61,57 +48,55 @@ def get_messages():
     return conversation
 
 
-@chat.route("/all", methods=["GET"])
-def all():
-    all: list = all_messages()
-    result: list = list()
-    for message in all:
-        result.append(
-            {
-                "id": message.id,
-                "receiver": message.receiver,
-                "sender": message.sender,
-                "message_type": message.message_type,
-                "text": message.text,
-                "date": message.date,
-            }
-        )
-    return result
+@socketio.on('message')
+def handle_message(data):
+    print('received message: ' + data["message"])
 
 
-@chat.route("/user_chats", methods=["GET"])
+@socketio.on('join')
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    send(username + ' has entered the room.', to=room)
+
+
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    send(username + ' has left the room.', to=room)
+
+
+@chat.route("/inbox", methods=["GET"])
 def get_all_chats():
+    token = request.headers["Authorization"]
+    user_info = jwt.decode(token, SECRET_KEY, algorithms=[
+        "HS256"])["username"]
     chats: list = list()
-    chats.append(
-        {
-            "name": "Jane Russel",
-            "messageText": "Awesome Setup",
-            "imageURL": "https://randomuser.me/api/portraits/men/5.jpg",
-            "time": "Now",
-        }
-    )
-    chats.append(
-        {
-            "name": "Glady's Murphy",
-            "messageText": "That's Great",
-            "imageURL": "https://randomuser.me/api/portraits/men/2.jpg",
-            "time": "Yesterday",
-        }
-    )
-    chats.append(
-        {
-            "name": "Jorge Henry",
-            "messageText": "Hey where are you?",
-            "imageURL": "https://randomuser.me/api/portraits/men/15.jpg",
-            "time": "29 Mar",
-        }
-    )
-    chats.append(
-        {
-            "name": "alice",
-            "messageText": "Thankyou, It's awesome",
-            "imageURL": "https://randomuser.me/api/portraits/women/5.jpg",
-            "time": "23 Mar",
-        }
-    )
+    chats = user_inbox(user_info=user_info)
     return chats
+
+
+@chat.route("/room/<room_id>/", methods=["GET"])
+def get_chat_messages(room_id) -> dict:
+    try:
+        # messages = [{"messageContent": "Hello, Will", "messageType": "receiver"},
+        #             {"messageContent": "How have you been?",
+        #                 "messageType": "receiver"},
+        #             {"messageContent": "Hey Kriss, I am doing fine dude. wbu?",
+        #              "messageType": "sender"},
+        #             {"messageContent": "ehhhh, doing OK.",
+        #                 "messageType": "receiver"},
+        #             {"messageContent": "Is there any thing wrong?", "messageType": "sender"},]
+        token = request.headers["Authorization"]
+        name = jwt.decode(token, SECRET_KEY, algorithms=[
+            "HS256"])["username"]
+        # print(name)
+        res = messages_by_room(room_id=room_id, u_name=name)
+        # print(res)
+        return {"message": "success", "data": res}, 200
+    except Exception as e:
+        current_app.logger.info("failed to load messages")
+        return {"message": "error"}, 500

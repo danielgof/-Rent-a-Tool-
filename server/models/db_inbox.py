@@ -6,14 +6,15 @@ class Inbox(Base):
     """Inbox table"""
     __tablename__ = "inbox"
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer)
+    # u_name = Column(String)
     opponent = Column(String, nullable=False)
-    message_text = Column(String, nullable=False)
-    img = Column(String, nullable=False)
+    room_id = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
+    last_message = Column(String, nullable=False)
+    img = Column(String, nullable=False)
 
 
-people_messges_association = Table(
+people_inbox_association = Table(
     "people_inbox",
     Base.metadata,
     Column(

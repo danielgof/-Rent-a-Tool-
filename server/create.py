@@ -23,15 +23,23 @@ Base.metadata.create_all(engine)
 session = Session()
 
 # user1 = User(username="JL",
-#             phone="+19993459872",
-#             email="picard@gmail.com",
-#             password="NCC-1701-D",
-#             confirmed=1)
+#              phone="+19993459872",
+#              email="picard@gmail.com",
+#              password="NCC-1701-D",
+#              confirmed=1)
 # user2 = User(username="test",
-#             phone="+19993452342",
-#             email="test@testmail.com",
-#             password="test",
-#             confirmed=1)
+#              phone="+19993452342",
+#              email="test@testmail.com",
+#              password="test",
+#              confirmed=1)
+
+# user3 = User(
+#     username="WRicker",
+#     phone="1234567890",
+#     email="wr@starfleet.com",
+#     password="key",
+#     confirmed=1
+# )
 
 # offer1 = db_offer.Offer(
 #     tool_name="tool_name",
@@ -100,49 +108,100 @@ session = Session()
 #     phone_number="+78992839822938"
 # )
 
-
-# message1 = Message(
-#     sender="JL",
-#     receiver = "alice",
-#     message_type="receiver", 
-#     text="hello, world",
-#     date=date(2023, 1, 1)
+# inbox1 = Inbox(
+#     opponent="JL",
+#     room_id=1,
+#     date=date(2023, 2, 14),
+#     last_message="how are you?",
+#     img="https://randomuser.me/api/portraits/men/5.jpg",
 # )
 
-# message2 = Message(
-#     sender="alice",
-#     receiver = "JL",
-#     message_type="sender", 
-#     text="hello, world",
-#     date=date(2023, 1, 1)
+# inbox2 = Inbox(
+#     opponent="WRicker",
+#     room_id=3,
+#     date=date(2263, 2, 14),
+#     last_message="meet you at shuttle bay",
+#     img="https://randomuser.me/api/portraits/men/5.jpg",
 # )
 
-# # request1 = db_request.Request(
-# #     "tool_name",
-# #     "some description",
-# #     "test location",
-# #     date(2023, 1, 1),
-# #     date(2023, 2, 12),
-# #     "owner name",
-# #     "owner phone number"
+# messages = [
+#     Message(
+#         user_name="JL",
+#         room_id=1,
+#         date=date(2023, 2, 14),
+#         message="Hello, Will"
+#     ),
+#     Message(
+#         user_name="JL",
+#         room_id=1,
+#         date=date(2023, 2, 14),
+#         message="How have you been?"
+#     ),
+#     Message(
+#         user_name="WRicker",
+#         room_id=1,
+#         date=date(2023, 2, 14),
+#         message="Hey JL, I am doing fine dude."
+#     ),
+#     Message(
+#         user_name="WRicker",
+#         room_id=1,
+#         date=date(2023, 2, 14),
+#         message="How have you been so far?"
+#     ),
+#     Message(
+#         user_name="JL",
+#         room_id=1,
+#         date=date(2023, 2, 14),
+#         message="Just outer space missions.."
+#     ),
+# ]
+
+
+# # message1 = Message(
+# #     sender="JL",
+# #     receiver = "alice",
+# #     message_type="receiver",
+# #     text="hello, world",
+# #     date=date(2023, 1, 1)
 # # )
-# # request2 = db_request.Request(
-# #     "tool_name2",
-# #     "some description2",
-# #     "test location2",
-# #     date(2022, 1, 1),
-# #     date(2022, 2, 12),
-# #     "owner name2",
-# #     "owner phone number2"
+
+# # message2 = Message(
+# #     sender="alice",
+# #     receiver = "JL",
+# #     message_type="sender",
+# #     text="hello, world",
+# #     date=date(2023, 1, 1)
 # # )
+
+# # # request1 = db_request.Request(
+# # #     "tool_name",
+# # #     "some description",
+# # #     "test location",
+# # #     date(2023, 1, 1),
+# # #     date(2023, 2, 12),
+# # #     "owner name",
+# # #     "owner phone number"
+# # # )
+# # # request2 = db_request.Request(
+# # #     "tool_name2",
+# # #     "some description2",
+# # #     "test location2",
+# # #     date(2022, 1, 1),
+# # #     date(2022, 2, 12),
+# # #     "owner name2",
+# # #     "owner phone number2"
+# # # )
 
 # user1.offers = [offer1, offer3]
 # user2.offers = [offer2, offer4, offer5, offer6]
-# # user2.requests = [request1, request2]
+# user2.inbox = [inbox1, inbox2]
+# # # user2.requests = [request1, request2]
 
-# user1.messages = [message1, message2]
+# # user1.messages = [message1, message2]
 
 # session = Session()
+# session.add_all(messages)
 
 # session.add(user1)
 # session.add(user2)
