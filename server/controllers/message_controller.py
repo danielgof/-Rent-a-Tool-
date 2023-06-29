@@ -61,10 +61,15 @@ def messages_by_room(room_id: int, u_name: str) -> list:
             }
             for message in session.query(Message).filter(Message.room_id == room_id).all()]
 
-    # {
-    #     "id": message.id,
-    #     "room_id": message.room_id,
-    #     "username": message.user_name,
-    #     "date": message.date,
-    #     "message": message.message,
-    # }
+
+def save_message(data: dict, room: int):
+    session.add(
+        Message(
+            user_name=data["user_name"],
+            room_id=room,
+            date=data["date"],
+            message=data["message"],
+        )
+    )
+    session.commit()
+    session.close()

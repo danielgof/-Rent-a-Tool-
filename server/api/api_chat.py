@@ -14,40 +14,6 @@ api chat
 """
 
 
-@chat.route("/send_message", methods=["POST"])
-def send_message():
-    data = request.get_json(force=True)
-    sender = request.json.get("sender")
-    recipient = request.json.get("recipient")
-    message = request.json.get("message")
-    message_data = {"sender": sender,
-                    "recipient": recipient, "message": message}
-    save_message(request.json)
-    socketio.emit("new_message", message_data)
-    return {"message": "Message sent successfully!"}
-
-
-@chat.route("/messages", methods=["GET"])
-def get_messages():
-    sender = request.args.get("sender")
-    receiver = request.args.get("recipient")
-    messages = all_messages()
-    conversation = list()
-    for message in messages:
-        if message.receiver == receiver and message.sender == sender:
-            conversation.append(
-                {
-                    "id": message.id,
-                    "receiver": message.receiver,
-                    "sender": message.sender,
-                    "message_type": message.message_type,
-                    "text": message.text,
-                    "date": message.date,
-                }
-            )
-    return conversation
-
-
 @socketio.on('message')
 def handle_message(data):
     print('received message: ' + data["message"])
@@ -80,7 +46,6 @@ def get_all_chats():
         user_info = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
         chats: list = list()
-        # print(user_info)
         chats = user_inbox(user_info=user_info)
         return chats
     except Exception as e:
@@ -90,12 +55,25 @@ def get_all_chats():
 
 @chat.route("/room/<room_id>/", methods=["GET"])
 def get_chat_messages(room_id) -> dict:
+    """Endpoint to get all messages for particular room"""
     try:
         token = request.headers["Authorization"]
         name = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
         res = messages_by_room(room_id=room_id, u_name=name)
         return {"message": "success", "data": res}, 200
+    except Exception as e:
+        current_app.logger.info("failed to load messages")
+        return {"message": "error"}, 500
+
+
+@chat.route("/save_msg/<room_id>/", methods=["POST"])
+def add_msg(room_id) -> dict:
+    """Endpoint to receive data with new message"""
+    try:
+        data = request.get_json(force=True)
+        save_message(data=data, room=room_id)
+        return {"message": "success"}, 200
     except Exception as e:
         current_app.logger.info("failed to load messages")
         return {"message": "error"}, 500

@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:intl/intl.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -43,27 +44,6 @@ class _ChatPageState extends State<ChatPage> {
       throw Exception("Failed to load chats");
     }
   }
-
-  // List<ChatUsers> chatUsers = [
-  //   ChatUsers(
-  //     name: "Jane Russel",
-  //     messageText: "Awesome Setup",
-  //     imageURL: "https://randomuser.me/api/portraits/men/5.jpg",
-  //     time: "Now",
-  //   ),
-  //   ChatUsers(
-  //       name: "Glady's Murphy",
-  //       messageText: "That's Great",
-  //       imageURL: "https://randomuser.me/api/portraits/men/2.jpg",
-  //       time: "Yesterday"
-  //   ),
-  //   ChatUsers(name: "Jorge Henry", messageText: "Hey where are you?", imageURL: "https://randomuser.me/api/portraits/men/15.jpg", time: "31 Mar"),
-  //   ChatUsers(name: "Philip Fox", messageText: "Busy! Call me in 20 mins", imageURL: "https://randomuser.me/api/portraits/men/1.jpg", time: "28 Mar"),
-  //   ChatUsers(name: "Debra Hawkins", messageText: "Thankyou, It's awesome", imageURL: "https://randomuser.me/api/portraits/women/5.jpg", time: "23 Mar"),
-  //   ChatUsers(name: "Jacob Pena", messageText: "will update you in evening", imageURL: "https://randomuser.me/api/portraits/men/25.jpg", time: "17 Mar"),
-  //   ChatUsers(name: "Andrey Jones", messageText: "Can you please share the file?", imageURL: "https://randomuser.me/api/portraits/men/8.jpg", time: "24 Feb"),
-  //   ChatUsers(name: "John Wick", messageText: "How are you?", imageURL: "https://randomuser.me/api/portraits/men/9.jpg", time: "18 Feb"),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -166,10 +146,7 @@ class _ConversationListState extends State<ConversationList> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ChatDetailPage(
             username: widget.name,
-            room_id: widget.room_id,
-            // messageText: widget.messageText,
-            // imageUrl: widget.imageUrl,
-            // time: widget.time,
+            roomId: widget.room_id,
           );
         }));
       },
@@ -248,25 +225,30 @@ class ChatMessage {
 
 class ChatDetailPage extends StatefulWidget {
   String username;
-  int room_id;
+  int roomId;
   ChatDetailPage({
     super.key,
     required this.username,
-    required this.room_id,
+    required this.roomId,
   });
   @override
+  // ignore: library_private_types_in_public_api
   _ChatDetailPageState createState() =>
-      _ChatDetailPageState(username: username, room_id: room_id);
+      // ignore: no_logic_in_create_state
+      _ChatDetailPageState(username: username, roomId: roomId);
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   String username;
-  int room_id;
+  int roomId;
   late Future<List<ChatMessage>> _messages;
+
   _ChatDetailPageState({
     required this.username,
-    required this.room_id,
+    required this.roomId,
   });
+
+  TextEditingController myController = TextEditingController();
 
   @override
   void initState() {
@@ -274,17 +256,29 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     _messages = _getMessages();
   }
 
-  Future<List<ChatMessage>> _getMessages() async {
-    final response = await http.get(
-      Uri.parse("$URL/api/v1/chat/room/$room_id/"),
+  Future<int> _sendMessage(Map data) async {
+    print(data);
+    final response = await http.post(
+      Uri.parse("$URL/api/v1/chat/save_msg/$roomId/"),
       headers: {
         HttpHeaders.authorizationHeader: Utils.TOKEN,
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpMIiwiZW1haWwiOiJwaWNhcmRAZ21haWwuY29tIiwicGhvbmUiOiIrMTk5OTM0NTk4NzIiLCJwYXNzIjoiTkNDLTE3MDEtRCIsImV4cCI6MTcxOTU4MzI5MX0.8LoE9CUGNo5eWk4otXhFcWX6ltbBEdorz77LRV9p388",
+      },
+      body: json.encode(data),
+    );
+    // print(response.statusCode);
+    return response.statusCode;
+  }
+
+  Future<List<ChatMessage>> _getMessages() async {
+    final response = await http.get(
+      Uri.parse("$URL/api/v1/chat/room/$roomId/"),
+      headers: {
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
     );
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body)["data"];
-      print(jsonResponse);
+      // print(jsonResponse);
       final messages =
           jsonResponse.map((message) => ChatMessage.fromJson(message)).toList();
       return messages;
@@ -427,26 +421,44 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   const SizedBox(
                     width: 15,
                   ),
-                  const Expanded(
+                  Expanded(
                     child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Write message...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
+                      controller: myController,
+                      decoration: const InputDecoration(
+                        hintText: "Write message...",
+                        hintStyle: TextStyle(color: Colors.black54),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                   const SizedBox(
                     width: 15,
                   ),
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Map data = {
+                        "user_name":
+                            JWT.decode(Utils.TOKEN).payload["username"],
+                        "date": DateFormat("EEE, dd MMM yyyy ss:mm:hh")
+                            .format(DateTime.now()),
+                        "message": myController.value.text,
+                      };
+                      _sendMessage(data);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return ChatDetailPage(
+                          username: JWT.decode(Utils.TOKEN).payload["username"],
+                          roomId: roomId,
+                        );
+                      }));
+                    },
+                    backgroundColor: Colors.blue,
+                    elevation: 0,
                     child: const Icon(
                       Icons.send,
                       color: Colors.white,
                       size: 18,
                     ),
-                    backgroundColor: Colors.blue,
-                    elevation: 0,
                   ),
                 ],
               ),
