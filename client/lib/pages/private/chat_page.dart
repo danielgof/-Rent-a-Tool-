@@ -359,8 +359,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   return ListView.builder(
                     itemCount: messages.length,
                     shrinkWrap: true,
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(top: 10, bottom: 60),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Container(
                         padding: const EdgeInsets.only(

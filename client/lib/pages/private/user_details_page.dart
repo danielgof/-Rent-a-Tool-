@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:io';
-import 'package:file_picker/_internal/file_picker_web.dart';
+// import 'package:file_picker/_internal/file_picker_web.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
@@ -115,8 +115,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     String url = "$URL/api/v1/auth/save_avatar";
     // Create a POST request with the file content as the request body
     var headers = {
-      'Authorization': Utils.TOKEN,
-      // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzEzMDEwMTEzfQ.4Yas1txQ9uK3xDafKzwjpUpLB59wpvvY44M-14E6Ook'
+      "Authorization": Utils.TOKEN,
     };
     var request = http.MultipartRequest("POST", Uri.parse(url));
     request.files.add(
@@ -163,14 +162,14 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       /*
         Mobile verion of image loader
        */
-      // String? filePath = result.files.single.path;
-      // imageFile = File(filePath!);
-      // Uint8List? fileBytes = imageFile?.readAsBytesSync();
+      String? filePath = result.files.single.path;
+      imageFile = File(filePath!);
+      Uint8List? fileBytes = imageFile?.readAsBytesSync();
       /*
         Web version of image loader
        */
       // Retrieve the file as Uint8List
-      Uint8List? fileBytes = result.files.single.bytes;
+      // Uint8List? fileBytes = result.files.single.bytes;
       if (fileBytes != null) {
         // Process the file further as per your requirement
         // For example, you can upload the file to a server using the sendImageToServer function mentioned in the previous response
