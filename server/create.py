@@ -2,7 +2,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from datetime import date
 from models.db_auth import *
-import models.db_offer as db_offer
+from models.db_offer import *
 from models.db_message import *
 from models.db_inbox import *
 from config import *
@@ -17,8 +17,9 @@ db_name, db_username, db_password = config_db("config_local.yaml")
 # engine = create_engine(
 #     f"postgresql://{db_username}:{db_password}@ep-curly-mountain-716247.us-east-2.aws.neon.tech/{db_name}"
 # )
+
 engine = create_engine(
-    "mysql+pymysql://brodon:admin@brodon.mysql.pythonanywhere-services.com/brodon$rt?charset=utf8mb4",
+    "mysql+pymysql://root:admin@localhost:3306/rt?charset=utf8mb4",
     pool_recycle=280
 )
 
@@ -48,7 +49,7 @@ user3 = User(
     confirmed=1
 )
 
-offer1 = db_offer.Offer(
+offer1 = Offer(
     tool_name="tool_name",
     tool_description="some description",
     lat="44.9",
@@ -59,7 +60,7 @@ offer1 = db_offer.Offer(
     owner_name="owner name",
     phone_number="+1893489384389"
 )
-offer2 = db_offer.Offer(
+offer2 = Offer(
     tool_name="screw driver",
     tool_description="screw driver description",
     lat="47.9",
@@ -70,7 +71,7 @@ offer2 = db_offer.Offer(
     owner_name="Jack",
     phone_number="+1893489384389"
 )
-offer3 = db_offer.Offer(
+offer3 = Offer(
     tool_name="hammer",
     tool_description="hammer some description",
     lat="50.5",
@@ -81,7 +82,7 @@ offer3 = db_offer.Offer(
     owner_name="Alexander",
     phone_number="+1893489384389"
 )
-offer4 = db_offer.Offer(
+offer4 = Offer(
     tool_name="bike",
     tool_description="bike some description",
     lat="48.9",
@@ -92,7 +93,7 @@ offer4 = db_offer.Offer(
     owner_name="Volodya",
     phone_number="+7893489384389"
 )
-offer5 = db_offer.Offer(
+offer5 = Offer(
     tool_name="Fan",
     tool_description="fan descr.",
     lat="60",
@@ -103,7 +104,7 @@ offer5 = db_offer.Offer(
     owner_name="Dmitry",
     phone_number="+90893489384389"
 )
-offer6 = db_offer.Offer(
+offer6 = Offer(
     tool_name="printer",
     tool_description="printer descr.",
     lat="50",

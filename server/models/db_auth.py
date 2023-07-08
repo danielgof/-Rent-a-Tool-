@@ -11,10 +11,10 @@ from base import *
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
-    username = Column(String, nullable=False)
-    phone = Column(String, nullable=False)
-    email = Column(String, nullable=False)
-    password = Column(String)
+    username = Column(String(256), nullable=False)
+    phone = Column(String(256), nullable=False)
+    email = Column(String(256), nullable=False)
+    password = Column(String(256))
     confirmed = Column(Integer, default=0)
     offers = relationship("Offer", secondary=people_offers_association)
     # messages = relationship("Message", secondary=people_messges_association)

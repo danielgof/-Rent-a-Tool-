@@ -7,15 +7,15 @@ from base import *
 class Offer(Base):
     __tablename__ = "offer"
     id = Column(Integer, primary_key=True)
-    tool_name = Column(String, nullable=False)
-    tool_description = Column(String, nullable=False)
-    lat = Column(String, nullable=False)
-    lng = Column(String, nullable=False)
-    price = Column(String, nullable=False)
+    tool_name = Column(String(256), nullable=False)
+    tool_description = Column(String(256), nullable=False)
+    lat = Column(String(256), nullable=False)
+    lng = Column(String(256), nullable=False)
+    price = Column(String(256), nullable=False)
     date_start = Column(Date, nullable=False)
     date_finish = Column(Date, nullable=False)
-    owner_name = Column(String, nullable=False)
-    phone_number = Column(String, nullable=False)
+    owner_name = Column(String(256), nullable=False)
+    phone_number = Column(String(256), nullable=False)
 
 
 people_offers_association = Table(

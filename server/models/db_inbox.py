@@ -7,11 +7,11 @@ class Inbox(Base):
     __tablename__ = "inbox"
     id = Column(Integer, primary_key=True)
     # u_name = Column(String)
-    opponent = Column(String, nullable=False)
+    opponent = Column(String(256), nullable=False)
     room_id = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
-    last_message = Column(String, nullable=False)
-    img = Column(String, nullable=False)
+    last_message = Column(String(256), nullable=False)
+    img = Column(String(256), nullable=False)
 
 
 people_inbox_association = Table(

@@ -120,9 +120,6 @@ def save_logo() -> dict:
         if not os.path.exists(f"images/users/{uname}/offers"):
             os.mkdir(f"images/users/{uname}/offers")
         os.chdir(f"images/users/{uname}/offers")
-        # files = os.listdir()
-        # for file in files:
-        #     os.remove(file)
         filename = secure_filename(img.filename)
         img.save(f"{len(os.listdir())+1}_"+filename)
         os.chdir(home_dir)
