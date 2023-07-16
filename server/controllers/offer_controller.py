@@ -1,7 +1,7 @@
 import base64
 import os
 from werkzeug.utils import secure_filename
-
+from datetime import datetime
 from models.db_offer import *
 from create import *
 
@@ -36,8 +36,8 @@ def add_offer_to_user(username: str, data: dict) -> None:
         tool_name=data["tool_name"],
         tool_description=data["tool_description"],
         price=data["price"],
-        date_start=data["date_start"],
-        date_finish=data["date_finish"],
+        date_start=datetime.strptime(data["date_start"], "%d/%m/%Y"),
+        date_finish=datetime.strptime(data["date_finish"], "%d/%m/%Y"),
         lat=data["lat"],
         lng=data["lng"],
         owner_name=data["owner_name"],
@@ -46,7 +46,6 @@ def add_offer_to_user(username: str, data: dict) -> None:
     user_offers.append(offer)
     session.add(offer)
     session.commit()
-    
 
 
 def delete_offer_by_id(data: dict) -> bool:
@@ -69,10 +68,11 @@ def upd_offer_by_id(data: dict) -> bool:
             {
                 Offer.tool_name: data["tool_name"],
                 Offer.tool_description: data["tool_description"],
-                Offer.location: data["location"],
+                Offer.lng: data["lng"],
+                Offer.lat: data["lat"],
                 Offer.price: data["price"],
-                Offer.date_start: data["date_start"],
-                Offer.date_finish: data["date_finish"],
+                Offer.date_start: datetime.strptime(data["date_start"], "%d/%m/%Y"),
+                Offer.date_finish: datetime.strptime(data["date_finish"], "%d/%m/%Y"),
                 Offer.owner_name: data["owner_name"],
                 Offer.phone_number: data["phone_number"],
             },
@@ -112,7 +112,7 @@ def offers_by_query(query: str) -> list:
     offers: list = list()
     res: list = list()
     offers = session.query(Offer).filter(
-        Offer.tool_name.match(f"%{query}%")).all()
+        Offer.tool_name.like(f"%{query}%")).all()
     for offer in offers:
         res.append(
             {

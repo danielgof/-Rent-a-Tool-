@@ -21,7 +21,7 @@ auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 """
 auth api
 """
-
+SECRET_KEY = "key"
 
 @auth.route("/login", methods=["POST", "GET"])
 def login() -> dict:
@@ -47,7 +47,7 @@ def login() -> dict:
             return {"status": "User not found"}, 404
     except Exception as e:
         current_app.logger.info("%s failed to log in", user.username)
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @auth.route("/register", methods=["POST"])
@@ -63,7 +63,7 @@ def register_user() -> dict:
         return {"message": "success"}, 200
     except Exception as e:
         current_app.logger.info("Failed to register user %s", data["username"])
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @auth.route("/upd", methods=["PUT"])
@@ -87,7 +87,7 @@ def upd_username() -> dict:
             upd_passwd(uname=uname, passwd=passwd)
         return {"message": "updated"}, 200
     except Exception as e:
-        return {"message": e}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @auth.route("/save_avatar", methods=["POST"])
@@ -100,7 +100,7 @@ def save_avtr() -> dict:
         save_avatar(img=img, username=uname)
         return {"message": "saved"}, 200
     except Exception as e:
-        return {"message": e}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @auth.route("/avatar", methods=["GET"])
@@ -118,4 +118,4 @@ def get_avtr() -> dict:
         os.chdir(home_path)
         return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
     except Exception as e:
-        return {"message": e}, 500
+        return {"message": f"error {e}"}, 500

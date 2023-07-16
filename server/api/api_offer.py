@@ -28,7 +28,7 @@ def get_all_offers() -> dict:
         return {"status": "success", "data": responce}, 200
     except Exception as e:
         current_app.logger.info("exception: ", e)
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @offer.route("/save", methods=["POST"])
@@ -45,7 +45,7 @@ def save_offer(current_user) -> dict:
         return {"status": "success"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @offer.route("/all", methods=["GET"])
@@ -59,7 +59,7 @@ def get_all_user_offers(current_user) -> dict:
         return {"data": responce}
     except Exception as e:
         current_app.logger.info("failed to log in")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @offer.route("/delete", methods=["DELETE"])
@@ -76,7 +76,7 @@ def delete_offer(current_user) -> dict:
             return {"status": "error"}, 404
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @offer.route("/upd", methods=["PUT"])
@@ -90,7 +90,7 @@ def update_offer(current_user) -> dict:
         return {"status": "success"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @offer.route("/query", methods=["POST"])
@@ -105,7 +105,7 @@ def query_offer() -> dict:
         return {"status": "success", "data": res}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @offer.route("save_logo", methods=["POST"])
@@ -116,14 +116,13 @@ def save_logo() -> dict:
         img = request.files["logo"]
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
-        print("before: %s", os.getcwd())
-        if not os.path.exists(f"images/users/{uname}/offers"):
-            os.mkdir(f"images/users/{uname}/offers")
-        os.chdir(f"images/users/{uname}/offers")
+        if not os.path.exists(f"images/offers/{uname}/"):
+            os.mkdir(f"images/offers/{uname}/")
+        os.chdir(f"images/offers/{uname}/")
         filename = secure_filename(img.filename)
-        img.save(f"{len(os.listdir())+1}_"+filename)
+        img.save(filename)
         os.chdir(home_dir)
         return {"message": "saved"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
