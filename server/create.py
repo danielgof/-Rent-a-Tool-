@@ -56,7 +56,7 @@ session = Session()
 # )
 
 # offer1 = Offer(
-#     tool_name="tool_name",
+#     tool_name="camera",
 #     tool_description="some description",
 #     lat="44.9",
 #     lng="4.9",
@@ -64,7 +64,8 @@ session = Session()
 #     date_start=date(2023, 1, 1),
 #     date_finish=date(2023, 2, 12),
 #     owner_name="owner name",
-#     phone_number="+1893489384389"
+#     phone_number="+1893489384389",
+#     img="camera.jpeg"
 # )
 # offer2 = Offer(
 #     tool_name="screw driver",
@@ -75,7 +76,8 @@ session = Session()
 #     date_start=date(2023, 1, 1),
 #     date_finish=date(2023, 2, 12),
 #     owner_name="Jack",
-#     phone_number="+1893489384389"
+#     phone_number="+1893489384389",
+#     img="screw_driver.jpeg"
 # )
 # offer3 = Offer(
 #     tool_name="hammer",
@@ -86,7 +88,8 @@ session = Session()
 #     date_start=date(2023, 1, 1),
 #     date_finish=date(2023, 2, 12),
 #     owner_name="Alexander",
-#     phone_number="+1893489384389"
+#     phone_number="+1893489384389",
+#     img="hammer.jpg"
 # )
 # offer4 = Offer(
 #     tool_name="bike",
@@ -97,7 +100,8 @@ session = Session()
 #     date_start=date(2023, 2, 1),
 #     date_finish=date(2023, 2, 12),
 #     owner_name="Volodya",
-#     phone_number="+7893489384389"
+#     phone_number="+7893489384389",
+#     img="bike.jpeg"
 # )
 # offer5 = Offer(
 #     tool_name="Fan",
@@ -108,7 +112,8 @@ session = Session()
 #     date_start=date(2023, 2, 11),
 #     date_finish=date(2023, 3, 12),
 #     owner_name="Dmitry",
-#     phone_number="+90893489384389"
+#     phone_number="+90893489384389",
+#     img="fan.jpg"
 # )
 # offer6 = Offer(
 #     tool_name="printer",
@@ -119,7 +124,8 @@ session = Session()
 #     date_start=date(2023, 2, 14),
 #     date_finish=date(2023, 4, 12),
 #     owner_name="Feodr",
-#     phone_number="+78992839822938"
+#     phone_number="+78992839822938",
+#     img="printer.jpg"
 # )
 
 # inbox1 = Inbox(
