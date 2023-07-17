@@ -1,3 +1,4 @@
+SECRET_KEY = "key"
 # import yaml
 # """
 # ger credits for data base

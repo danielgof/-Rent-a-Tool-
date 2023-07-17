@@ -21,7 +21,7 @@ auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 """
 auth api
 """
-SECRET_KEY = "key"
+
 
 @auth.route("/login", methods=["POST", "GET"])
 def login() -> dict:
@@ -55,8 +55,8 @@ def register_user() -> dict:
     """Register user in database"""
     try:
         data = request.get_json(force=True)
-        add_user(data["username"], data["phone"],
-                 data["email"], data["password"])
+        add_user(user_name=data["username"], phone=data["phone"],
+                email=data["email"], paswd=data["password"])
         # msg = Message("Subject", sender="daniilgofman1701@gmail.com", recipients=["daniilgofman1701@gmail.com"])
         # msg.body = "Veryfication link must be here"
         # mail.send(msg)
