@@ -1,3 +1,4 @@
+from datetime import datetime
 from models.db_message import *
 from create import *
 
@@ -19,7 +20,8 @@ def save_message(data: dict) -> bool:
         sender=data.get("sender"),
         message_type=data.get("message_type"),
         text=data.get("text"),
-        date=data.get("date"),
+        date=datetime.strptime(data["date"], "%d/%m/%Y"),
+        # date=data.get("date"),
     )
     receiver_messages.append(message)
     sender_messages.append(message)
@@ -67,7 +69,7 @@ def save_message(data: dict, room: int):
         Message(
             user_name=data["user_name"],
             room_id=room,
-            date=data["date"],
+            date=datetime.strptime(data["date"], "%d/%m/%Y"),
             message=data["message"],
         )
     )

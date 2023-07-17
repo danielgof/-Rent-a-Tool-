@@ -9,6 +9,7 @@ class Offer {
   final String phoneNumber;
   final String lat;
   final String lng;
+  final String img;
 
   Offer({
     required this.id,
@@ -21,6 +22,7 @@ class Offer {
     required this.phoneNumber,
     required this.lng,
     required this.lat,
+    required this.img,
   });
 
   factory Offer.fromJson(Map<String, dynamic> json) {
@@ -34,7 +36,8 @@ class Offer {
         dateStart: json['date_start'],
         dateFinish: json['date_finish'],
         ownerName: json['owner_name'],
-        phoneNumber: json['phone_number']
+        phoneNumber: json['phone_number'],
+        img: json['img']
     );
   }
 }

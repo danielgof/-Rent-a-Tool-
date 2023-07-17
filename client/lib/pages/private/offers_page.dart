@@ -8,7 +8,6 @@ import '../../models/offer.dart';
 import '../../api/utils.dart';
 import 'offer_registration/offer_registration_description.dart';
 
-
 class OffersPrivatePage extends StatefulWidget {
   const OffersPrivatePage({Key? key}) : super(key: key);
 
@@ -27,10 +26,13 @@ class _AllOffersPageState extends State<OffersPrivatePage> {
 
   Future<List<Offer>> fetchOffers() async {
     String url = "$URL/api/v1/offer/all_all";
-    final response = await http.get(Uri.parse(url),
+    final response = await http.get(
+      Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
-      },);
+        HttpHeaders.authorizationHeader:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+      },
+    );
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = json.decode(response.body)["data"];

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jiffy/jiffy.dart';
@@ -39,6 +40,25 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load offers');
+    }
+  }
+
+  Future<String> fetchOfferBytes(String img) async {
+    Map<String, String> head = new Map<String, String>();
+    head['Content-Length'] = '111227';
+    head['Content-Type'] = 'application/json';
+    var data = {"img": img};
+    var bodyData = json.encode(data);
+    final response = await http.post(
+      Uri.parse("$URL/api/v1/offer/logo"),
+      headers: head,
+      body: bodyData,
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception("Failed to load image");
     }
   }
 
@@ -118,7 +138,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
                           final post = posts[index];
-                          // print(post.lng);
+                          // print(post.img);
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -143,15 +163,42 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                                       ),
                                       subtitle: Text(
                                           "Available from ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")} to ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}"),
-                                      // trailing: Icon(Icons.favorite_outline),
                                     ),
-                                    const SizedBox(
-                                      height: 200.0,
-                                      width: 400.0,
-                                      child: Image(
-                                        image: NetworkImage(
-                                            "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                                      ),
+                                    FutureBuilder<String>(
+                                      future: fetchOfferBytes(post.img),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<String> snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return SizedBox(
+                                            height: 200.0,
+                                            width: 400.0,
+                                            child: Image.asset(
+                                                "assets/placeholders/no_image.png"),
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return SizedBox(
+                                            height: 200.0,
+                                            width: 400.0,
+                                            child: Image.asset(
+                                                "assets/placeholders/no_image.png"),
+                                          );
+                                        } else if (snapshot.hasData) {
+                                          Uint8List bytesImage =
+                                              const Base64Decoder()
+                                                  .convert(snapshot.data!);
+                                          // print(bytesImage);
+                                          return SizedBox(
+                                            height: 200.0,
+                                            width: 400.0,
+                                            child: Image(
+                                              image: MemoryImage(bytesImage),
+                                            ),
+                                          );
+                                        } else {
+                                          return Text('No image data');
+                                        }
+                                      },
                                     ),
                                   ],
                                 ),
@@ -182,6 +229,25 @@ class PostDetailsPage extends StatelessWidget {
 
   const PostDetailsPage({Key? key, required this.post}) : super(key: key);
 
+  Future<String> fetchOfferBytes(String img) async {
+    Map<String, String> head = new Map<String, String>();
+    head['Content-Length'] = '111227';
+    head['Content-Type'] = 'application/json';
+    var data = {"img": img};
+    var bodyData = json.encode(data);
+    final response = await http.post(
+      Uri.parse("$URL/api/v1/offer/logo"),
+      headers: head,
+      body: bodyData,
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception("Failed to load image");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -209,10 +275,40 @@ class PostDetailsPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                      maxRadius: 60,
+                    FutureBuilder<String>(
+                      future: fetchOfferBytes(post.img),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return SizedBox(
+                            height: 200.0,
+                            width: 400.0,
+                            child:
+                                Image.asset("assets/placeholders/no_image.png"),
+                          );
+                        } else if (snapshot.hasError) {
+                          return SizedBox(
+                            height: 200.0,
+                            width: 400.0,
+                            child:
+                                Image.asset("assets/placeholders/no_image.png"),
+                          );
+                        } else if (snapshot.hasData) {
+                          Uint8List bytesImage =
+                              const Base64Decoder().convert(snapshot.data!);
+                          // print(bytesImage);
+                          return SizedBox(
+                            height: 200.0,
+                            width: 400.0,
+                            child: Image(
+                              image: MemoryImage(bytesImage),
+                            ),
+                          );
+                        } else {
+                          return Text('No image data');
+                        }
+                      },
                     ),
                     Column(
                       children: [

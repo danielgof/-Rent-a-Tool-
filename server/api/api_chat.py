@@ -50,7 +50,7 @@ def get_all_chats():
         return chats
     except Exception as e:
         current_app.logger.info("failed to load messages")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @chat.route("/room/<room_id>/", methods=["GET"])
@@ -64,7 +64,7 @@ def get_chat_messages(room_id) -> dict:
         return {"message": "success", "data": res}, 200
     except Exception as e:
         current_app.logger.info("failed to load messages")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500
 
 
 @chat.route("/save_msg/<room_id>/", methods=["POST"])
@@ -76,4 +76,4 @@ def add_msg(room_id) -> dict:
         return {"message": "success"}, 200
     except Exception as e:
         current_app.logger.info("failed to load messages")
-        return {"message": "error"}, 500
+        return {"message": f"error {e}"}, 500

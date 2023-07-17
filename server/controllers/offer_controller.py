@@ -23,6 +23,7 @@ def all_offers() -> list:
                 "date_finish": offer.date_finish,
                 "owner_name": offer.owner_name,
                 "phone_number": offer.phone_number,
+                "img": offer.img,
             }
         )
     return responce
@@ -42,6 +43,7 @@ def add_offer_to_user(username: str, data: dict) -> None:
         lng=data["lng"],
         owner_name=data["owner_name"],
         phone_number=data["phone_number"],
+        img=data["img"],
     )
     user_offers.append(offer)
     session.add(offer)

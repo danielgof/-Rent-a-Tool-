@@ -203,12 +203,6 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Uint8List bytesImage = const Base64Decoder().convert(_base64);
-    // var unameController = TextEditingController(text: username);
-    // var emailController = TextEditingController(text: email);
-    // var phoneController = TextEditingController(text: phone);
-    // var passController = TextEditingController(text: pass);
-    // print(JWT.decode(Utils.TOKEN).payload);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Center(
@@ -241,7 +235,8 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                               children: [
                                 CircleAvatar(
                                   child: Image.asset(
-                                      "assets/placeholders/user.png"),
+                                    "assets/placeholders/user.png",
+                                  ),
                                 ),
                                 Positioned(
                                   bottom: 0,
@@ -302,7 +297,6 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                         } else if (snapshot.hasData) {
                           Uint8List bytesImage =
                               const Base64Decoder().convert(snapshot.data!);
-                          // print(bytesImage);
                           return SizedBox(
                             height: 115,
                             width: 115,

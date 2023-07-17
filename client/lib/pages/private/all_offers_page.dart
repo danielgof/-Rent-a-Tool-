@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:flutter_map/flutter_map.dart';
@@ -10,7 +11,6 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';
-
 
 class AllOffersPrivatePage extends StatefulWidget {
   const AllOffersPrivatePage({Key? key}) : super(key: key);
@@ -28,13 +28,14 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     _futurePosts = fetchOffers();
   }
 
-
   Future<List<Offer>> fetchOffers() async {
     String url = "$URL/api/v1/offer/all_all";
-    final response = await http.get(Uri.parse(url),
+    final response = await http.get(
+      Uri.parse(url),
       headers: {
         HttpHeaders.authorizationHeader: Utils.TOKEN,
-      },);
+      },
+    );
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = json.decode(response.body)["data"];
@@ -58,6 +59,25 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load offers');
+    }
+  }
+
+  Future<String> fetchOfferBytes(String img) async {
+    Map<String, String> head = new Map<String, String>();
+    head['Content-Length'] = '111227';
+    head['Content-Type'] = 'application/json';
+    var data = {"img": img};
+    var bodyData = json.encode(data);
+    final response = await http.post(
+      Uri.parse("$URL/api/v1/offer/logo"),
+      headers: head,
+      body: bodyData,
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception("Failed to load image");
     }
   }
 
@@ -126,7 +146,8 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PostDetailsPagePrivate(post: post),
+                                builder: (context) =>
+                                    PostDetailsPagePrivate(post: post),
                               ),
                             );
                           },
@@ -138,22 +159,50 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ListTile(
-                                      title: Text(
-                                        post.toolName,
-                                        style: const TextStyle(fontSize: 20.0),
-                                      ),
-                                      subtitle: Text(
-                                          "Available from ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")} to ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}"),
-                                      // trailing: Icon(Icons.favorite_outline),
+                                    title: Text(
+                                      post.toolName,
+                                      style: const TextStyle(fontSize: 20.0),
                                     ),
-                                    const SizedBox(
-                                      height: 200.0,
-                                      width: 400.0,
-                                      child: Image(
-                                        image: NetworkImage(
-                                            "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                                      ),
-                                    ),
+                                    subtitle: Text(
+                                        "Available from ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")} to ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}"),
+                                    // trailing: Icon(Icons.favorite_outline),
+                                  ),
+                                  FutureBuilder<String>(
+                                    future: fetchOfferBytes(post.img),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<String> snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return SizedBox(
+                                          height: 200.0,
+                                          width: 400.0,
+                                          child: Image.asset(
+                                              "assets/placeholders/no_image.png"),
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return SizedBox(
+                                          height: 200.0,
+                                          width: 400.0,
+                                          child: Image.asset(
+                                              "assets/placeholders/no_image.png"),
+                                        );
+                                      } else if (snapshot.hasData) {
+                                        Uint8List bytesImage =
+                                            const Base64Decoder()
+                                                .convert(snapshot.data!);
+                                        // print(bytesImage);
+                                        return SizedBox(
+                                          height: 200.0,
+                                          width: 400.0,
+                                          child: Image(
+                                            image: MemoryImage(bytesImage),
+                                          ),
+                                        );
+                                      } else {
+                                        return Text('No image data');
+                                      }
+                                    },
+                                  ),
                                 ],
                               ),
                             ),
@@ -180,7 +229,27 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
 class PostDetailsPagePrivate extends StatelessWidget {
   final Offer post;
 
-  const PostDetailsPagePrivate({Key? key, required this.post}) : super(key: key);
+  const PostDetailsPagePrivate({Key? key, required this.post})
+      : super(key: key);
+
+  Future<String> fetchOfferBytes(String img) async {
+    Map<String, String> head = new Map<String, String>();
+    head['Content-Length'] = '111227';
+    head['Content-Type'] = 'application/json';
+    var data = {"img": img};
+    var bodyData = json.encode(data);
+    final response = await http.post(
+      Uri.parse("$URL/api/v1/offer/logo"),
+      headers: head,
+      body: bodyData,
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception("Failed to load image");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,19 +273,52 @@ class PostDetailsPagePrivate extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         post.toolName,
-                        style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 24.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    const CircleAvatar(
-                      backgroundImage: NetworkImage("https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                      maxRadius: 60,
+                    FutureBuilder<String>(
+                      future: fetchOfferBytes(post.img),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return SizedBox(
+                            height: 200.0,
+                            width: 400.0,
+                            child:
+                                Image.asset("assets/placeholders/no_image.png"),
+                          );
+                        } else if (snapshot.hasError) {
+                          return SizedBox(
+                            height: 200.0,
+                            width: 400.0,
+                            child:
+                                Image.asset("assets/placeholders/no_image.png"),
+                          );
+                        } else if (snapshot.hasData) {
+                          Uint8List bytesImage =
+                              const Base64Decoder().convert(snapshot.data!);
+                          // print(bytesImage);
+                          return SizedBox(
+                            height: 200.0,
+                            width: 400.0,
+                            child: Image(
+                              image: MemoryImage(bytesImage),
+                            ),
+                          );
+                        } else {
+                          return Text('No image data');
+                        }
+                      },
                     ),
                     Column(
                       children: [
                         Container(
                           alignment: Alignment.centerRight,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -239,7 +341,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 post.toolDescription,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -247,7 +350,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -269,7 +373,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 '${post.price} US Dollars',
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -277,7 +382,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -296,10 +402,13 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                Jiffy.parse(post.dateStart,
+                                        pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                                    .format(pattern: "dd/MM/yyyy"),
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -307,7 +416,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -326,10 +436,13 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy"),
+                                Jiffy.parse(post.dateFinish,
+                                        pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                                    .format(pattern: "dd/MM/yyyy"),
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -337,7 +450,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -359,7 +473,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 post.ownerName,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -367,7 +482,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          margin:
+                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -389,7 +505,8 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 post.phoneNumber,
                                 style: const TextStyle(
                                   fontSize: 18.0,
-                                  backgroundColor: Color.fromARGB(25, 23, 2, 12),
+                                  backgroundColor:
+                                      Color.fromARGB(25, 23, 2, 12),
                                 ),
                               ),
                             ],
@@ -403,10 +520,10 @@ class PostDetailsPagePrivate extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextButton(onPressed: () {
-
-                          },
-                            child: const Text("CONTACT OWNER",
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "CONTACT OWNER",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.blue,
@@ -414,10 +531,10 @@ class PostDetailsPagePrivate extends StatelessWidget {
                               ),
                             ),
                           ),
-                          TextButton(onPressed: () {
-
-                          },
-                            child: const Text("RENT TOOL",
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "RENT TOOL",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.blue,
@@ -425,12 +542,14 @@ class PostDetailsPagePrivate extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ].map((widget) => Flexible(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: widget,
-                            ))).toList(),
+                        ]
+                            .map((widget) => Flexible(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: widget,
+                                )))
+                            .toList(),
                       ),
                     ),
                   ],

@@ -16,6 +16,6 @@ def token_required(f):
             data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
             current_user = session.query(User).filter(User.username == data["username"]).first()
         except:
-            return {"status":"token is invalid"}, 402
+            return {"status":"token is invalid"}, 401
         return f(current_user, *args, **kwargs)
     return decorated
