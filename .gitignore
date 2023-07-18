@@ -10,3 +10,4 @@ server_hosting
 rt_client
 maps
 tmp
+__pycache__
