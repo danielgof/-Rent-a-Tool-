@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
@@ -80,8 +81,9 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
         // Process the file further as per your requirement
         // For example, you can upload the file to a server using the sendImageToServer function mentioned in the previous response
         // await sendFileToApi(fileBytes, fileName);
+        String file = base64Encode(fileBytes);
         setState(() {
-          img = fileBytes as String;
+          img = file;
         });
         // Print the file size
         print('Selected file size: ${fileBytes.lengthInBytes} bytes');
@@ -99,190 +101,188 @@ class _MyHomePageState extends State<OfferRegistrationDescriptionPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    'Offer registration',
-                    style: Theme.of(context).textTheme.headlineMedium,
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Offer registration",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15.0,
+                    right: 15.0,
+                    top: 15,
+                    bottom: 0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15.0,
-                      right: 15.0,
-                      top: 15,
-                      bottom: 0,
-                    ),
-                    child: TextField(
-                      cursorColor: Colors.blue,
-                      controller: toolNameController,
-                      decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 0.0),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Tool name',
-                        hintText: 'Enter tool name',
+                  child: TextField(
+                    cursorColor: Colors.blue,
+                    controller: toolNameController,
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
                       ),
+                      border: OutlineInputBorder(),
+                      labelText: "Tool name",
+                      hintText: "Enter tool name",
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 15, bottom: 0),
-                    child: TextField(
-                      cursorColor: Colors.blue,
-                      controller: toolDescriptionController,
-                      decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 0.0),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Tool description',
-                        hintText: 'Enter detailed description of the tool',
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  child: TextField(
+                    cursorColor: Colors.blue,
+                    controller: toolDescriptionController,
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
                       ),
+                      border: OutlineInputBorder(),
+                      labelText: "Tool description",
+                      hintText: "Enter detailed description of the tool",
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 15, bottom: 0),
-                    child: TextField(
-                      cursorColor: Colors.blue,
-                      controller: priceController,
-                      decoration: const InputDecoration(
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 0.0),
-                        ),
-                        border: OutlineInputBorder(),
-                        labelText: 'Price',
-                        hintText: 'Enter price',
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  child: TextField(
+                    cursorColor: Colors.blue,
+                    controller: priceController,
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 0.0),
                       ),
+                      border: OutlineInputBorder(),
+                      labelText: "Price",
+                      hintText: "Enter price",
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15.0,
-                      right: 15.0,
-                      top: 15,
-                      bottom: 0,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2, '0')}-${dateStart.day.toString().padLeft(2, '0')}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () => _selectDateStart(context),
-                            child: const Text('Select start date'),
-                          ),
-                        ],
-                      ),
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15.0,
+                    right: 15.0,
+                    top: 15,
+                    bottom: 0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 15, bottom: 0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        // color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "${dateFinish.year.toString()}-${dateFinish.month.toString().padLeft(2, '0')}-${dateFinish.day.toString().padLeft(2, '0')}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () => _selectDateFinish(context),
-                            child: const Text('Select end date'),
-                          ),
-                        ],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1.0,
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(26),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RawMaterialButton(
-                          onPressed: () {
-                            getFromGallery();
-                          },
-                          child: const Icon(
-                            Icons.photo_library_rounded,
-                            color: Colors.blue,
+                      children: <Widget>[
+                        Text(
+                          "${dateStart.year.toString()}-${dateStart.month.toString().padLeft(2, '0')}-${dateStart.day.toString().padLeft(2, '0')}",
+                          style: const TextStyle(
+                            fontSize: 20,
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    OfferRegistrationContactsPage(
-                                  toolName: toolNameController.value.text,
-                                  toolDescription:
-                                      toolDescriptionController.value.text,
-                                  price: priceController.value.text,
-                                  dateStart:
-                                      DateFormat("EEE, dd MMM yyyy ss:mm:hh")
-                                          .format(dateStart),
-                                  dateFinish:
-                                      DateFormat("EEE, dd MMM yyyy ss:mm:hh")
-                                          .format(dateFinish),
-                                  img: img,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                'Next step',
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                              Icon(Icons.navigate_next)
-                            ],
-                          ),
+                          onPressed: () => _selectDateStart(context),
+                          child: const Text("Select start date"),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      // color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "${dateFinish.year.toString()}-${dateFinish.month.toString().padLeft(2, '0')}-${dateFinish.day.toString().padLeft(2, '0')}",
+                          style: const TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => _selectDateFinish(context),
+                          child: const Text("Select end date"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(26),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RawMaterialButton(
+                        onPressed: () {
+                          getFromGallery();
+                        },
+                        child: const Icon(
+                          Icons.photo_library_rounded,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  OfferRegistrationContactsPage(
+                                toolName: toolNameController.value.text,
+                                toolDescription:
+                                    toolDescriptionController.value.text,
+                                price: priceController.value.text,
+                                dateStart:
+                                    DateFormat("dd/MM/yyyy")
+                                        .format(dateStart),
+                                dateFinish:
+                                    DateFormat("dd/MM/yyyy")
+                                        .format(dateFinish),
+                                img: img,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "Next step",
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                            Icon(Icons.navigate_next)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

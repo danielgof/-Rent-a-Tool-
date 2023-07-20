@@ -126,31 +126,3 @@ def save_logo() -> dict:
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
         return {"message": f"error {e}"}, 500
-
-
-# @offer.route("/logo", methods=["POST", "GET"])
-# def get_offer_logo() -> dict:
-#     try:
-#         home_path = os.getcwd()
-#         logo = request.get_json()["img"]
-#         data = {}
-#         os.chdir(f"./images/offers/")
-#         unames = os.listdir()
-#         for user in unames:
-#             os.chdir(f"./{user}/")
-#             tmp_files = os.listdir()
-#             data[user] = tmp_files
-#             os.chdir("..")
-#         for f in data:
-#             for _ in data[f]:
-#                 if (_ == logo):
-#                     user = f
-#                     avatar = _
-#         os.chdir(f"./{user}/")
-#         file = open(avatar, "rb")
-#         encoded_string = base64.b64encode(file.read())
-#         os.chdir(home_path)
-#         return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
-#     except Exception as e:
-#         current_app.logger.info(f"exeption {e}")
-#         return {"message": f"error {e}"}, 500

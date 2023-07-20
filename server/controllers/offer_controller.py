@@ -129,6 +129,7 @@ def offers_by_query(query: str) -> list:
                 "date_finish": offer.date_finish,
                 "owner_name": offer.owner_name,
                 "phone_number": offer.phone_number,
+                "img": offer.img,
             }
         )
     return res

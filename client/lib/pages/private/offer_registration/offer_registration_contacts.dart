@@ -74,12 +74,16 @@ class _OfferRegistrationContactsPageState
       "phone_number": phoneNumber,
       "img": img,
     };
+    // print(credits["date_start"]);
     var bodyData = json.encode(credits);
-    final response = await http.post(Uri.parse(url),
-        headers: {
-          HttpHeaders.authorizationHeader: Utils.TOKEN,
-        },
-        body: bodyData);
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
+      },
+      body: bodyData,
+    );
+    print(response.statusCode);
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
       showDialog(

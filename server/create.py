@@ -35,20 +35,20 @@ Base.metadata.create_all(engine)
 session = Session()
 
 
-user1.offers = [offer1, offer3]
-user2.offers = [offer2, offer4, offer5, offer6]
-user1.inbox = [inbox1, inbox2]
-user2.inbox = [inbox3]
-# # user2.requests = [request1, request2]
+# user1.offers = [offer1, offer3]
+# user2.offers = [offer2, offer4, offer5, offer6]
+# user1.inbox = [inbox1, inbox2]
+# user2.inbox = [inbox3]
+# # # user2.requests = [request1, request2]
 
-# user1.messages = [message1, message2]
+# # user1.messages = [message1, message2]
 
-session = Session()
-session.add_all(messages)
+# session = Session()
+# session.add_all(messages)
 
-session.add(user1)
-session.add(user2)
-session.add(user3)
+# session.add(user1)
+# session.add(user2)
+# session.add(user3)
 
-session.commit()
-session.close()
+# session.commit()
+# session.close()
