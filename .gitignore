@@ -11,3 +11,6 @@ rt_client
 maps
 tmp
 __pycache__
+models/__pycache__
+api/__pycache__
+controllers/__pycache__

@@ -19,6 +19,7 @@ class OfferRegistrationContactsPage extends StatefulWidget {
   String price;
   String dateStart;
   String dateFinish;
+  String img;
 
   OfferRegistrationContactsPage({
     super.key,
@@ -27,6 +28,7 @@ class OfferRegistrationContactsPage extends StatefulWidget {
     required this.price,
     required this.dateStart,
     required this.dateFinish,
+    required this.img,
   });
 
   @override
@@ -58,7 +60,7 @@ class _OfferRegistrationContactsPageState
   );
 
   Future<int> _registrationRequest(toolName, toolDescription, price, dateStart,
-      dateFinish, lat, lng, ownerName, phoneNumber) async {
+      dateFinish, lat, lng, ownerName, phoneNumber, img) async {
     String url = "$URL/api/v1/offer/save";
     Map<String, String> credits = {
       "tool_name": toolName,
@@ -70,6 +72,7 @@ class _OfferRegistrationContactsPageState
       "lng": lng,
       "owner_name": ownerName,
       "phone_number": phoneNumber,
+      "img": img,
     };
     var bodyData = json.encode(credits);
     final response = await http.post(Uri.parse(url),
@@ -100,7 +103,7 @@ class _OfferRegistrationContactsPageState
           title: "I am a marker",
         ),
         icon:
-          BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
       ));
     });
   }
@@ -124,7 +127,7 @@ class _OfferRegistrationContactsPageState
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("Choose location.",
-                  style: Theme.of(context).textTheme.headlineMedium),
+                    style: Theme.of(context).textTheme.headlineMedium),
                 Container(
                   alignment: Alignment.center,
                   child: SizedBox(
@@ -173,6 +176,7 @@ class _OfferRegistrationContactsPageState
                       _markers.elementAt(0).position.longitude.toString(),
                       username,
                       phoneNumber,
+                      widget.img,
                     );
                     Navigator.push(
                       context,

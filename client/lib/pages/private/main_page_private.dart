@@ -51,18 +51,6 @@ class _PrivateMainScreenState extends State<PrivateMain> {
     const OfferRegistrationDescriptionPage()
   ];
 
-  Future<String> fetchImageBytes() async {
-    Map<String, String> head = new Map<String, String>();
-    head['Authorization'] = Utils.TOKEN;
-    final response =
-        await http.get(Uri.parse('$URL/api/v1/auth/avatar'), headers: head);
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      throw Exception("Failed to load image");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     if (isAuth == true) {
@@ -91,30 +79,33 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                     ),
                   );
                 },
-                child: FutureBuilder<String>(
-                  future: fetchImageBytes(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircleAvatar(
-                        child: Image.asset("assets/placeholders/user.png"),
-                      );
-                    } else if (snapshot.hasError) {
-                      return CircleAvatar(
-                        child: Image.asset("assets/placeholders/user.png"),
-                      );
-                    } else if (snapshot.hasData) {
-                      Uint8List bytesImage =
-                          const Base64Decoder().convert(snapshot.data!);
-                      // print(bytesImage);
-                      return CircleAvatar(
-                        backgroundImage: MemoryImage(bytesImage),
-                      );
-                    } else {
-                      return Text('No image data');
-                    }
-                  },
+                child: CircleAvatar(
+                  child: Image.asset("assets/placeholders/user.png"),
                 ),
+                // FutureBuilder<String>(
+                //   future: fetchImageBytes(),
+                //   builder:
+                //       (BuildContext context, AsyncSnapshot<String> snapshot) {
+                //     if (snapshot.connectionState == ConnectionState.waiting) {
+                //       return CircleAvatar(
+                //         child: Image.asset("assets/placeholders/user.png"),
+                //       );
+                //     } else if (snapshot.hasError) {
+                //       return CircleAvatar(
+                //         child: Image.asset("assets/placeholders/user.png"),
+                //       );
+                //     } else if (snapshot.hasData) {
+                //       Uint8List bytesImage =
+                //           const Base64Decoder().convert(snapshot.data!);
+                //       // print(bytesImage);
+                //       return CircleAvatar(
+                //         backgroundImage: MemoryImage(bytesImage),
+                //       );
+                //     } else {
+                //       return Text('No image data');
+                //     }
+                //   },
+                // ),
               ),
             ),
             Padding(

@@ -106,49 +106,51 @@ def query_offer() -> dict:
         return {"message": f"error {e}"}, 500
 
 
-@offer.route("/save_logo", methods=["POST"])
+@offer.route("/save_logo", methods=["PUT"])
 def save_logo() -> dict:
     try:
-        home_dir = os.getcwd()
-        token = request.headers["Authorization"]
-        img = request.files["logo"]
-        uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
-            "HS256"])["username"]
-        if not os.path.exists(f"images/offers/{uname}/"):
-            os.mkdir(f"images/offers/{uname}/")
-        os.chdir(f"images/offers/{uname}/")
-        filename = secure_filename(img.filename)
-        img.save(filename)
-        os.chdir(home_dir)
+        if not request.get_json(force=True):
+            abort(400)
+        data = request.get_json()
+        offer: Offer = session.query(Offer).filter(
+            Offer.id == data["id"]).first()
+        if offer:
+            session.query(Offer).filter(Offer.id == data["id"]).update(
+                {
+                    Offer.img: data["img"],
+                },
+                synchronize_session=False,
+            )
+            session.commit()
         return {"message": "saved"}, 200
     except Exception as e:
         current_app.logger.info(f"exeption {e}")
         return {"message": f"error {e}"}, 500
 
 
-@offer.route("/logo", methods=["POST", "GET"])
-def get_offer_logo() -> dict:
-    try:
-        home_path = os.getcwd()
-        logo = request.get_json()["img"]
-        data = {}
-        os.chdir(f"./images/offers/")
-        unames = os.listdir()
-        for user in unames:
-            os.chdir(f"./{user}/")
-            tmp_files = os.listdir()
-            data[user] = tmp_files
-            os.chdir("..")
-        for f in data:
-            for _ in data[f]:
-                if (_ == logo):
-                    user = f
-                    avatar = _
-        os.chdir(f"./{user}/")
-        file = open(avatar, "rb")
-        encoded_string = base64.b64encode(file.read())
-        os.chdir(home_path)
-        return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
-    except Exception as e:
-        current_app.logger.info(f"exeption {e}")
-        return {"message": f"error {e}"}, 500
+# @offer.route("/logo", methods=["POST", "GET"])
+# def get_offer_logo() -> dict:
+#     try:
+#         home_path = os.getcwd()
+#         logo = request.get_json()["img"]
+#         data = {}
+#         os.chdir(f"./images/offers/")
+#         unames = os.listdir()
+#         for user in unames:
+#             os.chdir(f"./{user}/")
+#             tmp_files = os.listdir()
+#             data[user] = tmp_files
+#             os.chdir("..")
+#         for f in data:
+#             for _ in data[f]:
+#                 if (_ == logo):
+#                     user = f
+#                     avatar = _
+#         os.chdir(f"./{user}/")
+#         file = open(avatar, "rb")
+#         encoded_string = base64.b64encode(file.read())
+#         os.chdir(home_path)
+#         return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
+#     except Exception as e:
+#         current_app.logger.info(f"exeption {e}")
+#         return {"message": f"error {e}"}, 500

@@ -88,18 +88,14 @@ def upd_passwd(uname: str, passwd: str) -> bool:
     return res
 
 
-def save_avatar(img, username: str) -> bool:
+def save_avatar(img: str, username: str) -> bool:
     """Saves avatar to folder with the same name as user's name"""
-    res: bool = False
-    home_dir: str = os.getcwd()
-    if not os.path.exists(f"images/users/{username}"):
-        os.mkdir(f"images/users/{username}")
-    os.chdir(f"images/users/{username}")
-    files = os.listdir()
-    for file in files:
-        os.remove(file)
-    filename = secure_filename(img.filename)
-    img.save(f"{len(os.listdir())+1}_"+filename)
-    res = True
-    os.chdir(home_dir)
-    return res
+    user: User = session.query(User).filter(User.username == username).first()
+    if user:
+        session.query(User).filter(User.username == username).update(
+            {
+                User.img: img,
+            },
+            synchronize_session=False,
+        )
+        session.commit()

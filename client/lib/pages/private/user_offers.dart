@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jiffy/jiffy.dart';
@@ -153,6 +154,8 @@ class _AllOffersPageState extends State<UserOffersPage> {
                       itemCount: posts.length,
                       itemBuilder: (context, index) {
                         final post = posts[index];
+                        Uint8List bytesImage =
+                            const Base64Decoder().convert(post.img);
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -194,12 +197,11 @@ class _AllOffersPageState extends State<UserOffersPage> {
                                       child: const Icon(Icons.delete),
                                     ),
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 200.0,
                                     width: 400.0,
                                     child: Image(
-                                      image: NetworkImage(
-                                          "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
+                                      image: MemoryImage(bytesImage),
                                     ),
                                   ),
                                 ],
@@ -233,6 +235,7 @@ class PostDetailsPagePrivate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Uint8List bytesImage = const Base64Decoder().convert(post.img);
     return Scaffold(
       appBar: AppBar(
         title: Text(post.toolName),
@@ -258,10 +261,12 @@ class PostDetailsPagePrivate extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://www.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"),
-                      maxRadius: 60,
+                    SizedBox(
+                      height: 200.0,
+                      width: 400.0,
+                      child: Image(
+                        image: MemoryImage(bytesImage),
+                      ),
                     ),
                     Column(
                       children: [

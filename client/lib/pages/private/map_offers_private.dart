@@ -33,8 +33,8 @@ class _SimpleMapState extends State<MyMapPrivate> {
       // print(response.statusCode);
       return tmp.map((markerData) {
         final point = LatLng(
-          double.parse(markerData['lat'].toString()),
-          double.parse(markerData['lng'].toString()),
+          double.parse(markerData["lat"].toString()),
+          double.parse(markerData["lng"].toString()),
         );
         return Marker(
           markerId: MarkerId(markerData["tool_name"]),
@@ -42,7 +42,7 @@ class _SimpleMapState extends State<MyMapPrivate> {
         );
       }).toList();
     } else {
-      throw Exception('Failed to load posts');
+      throw Exception("Failed to load offers");
     }
   }
 

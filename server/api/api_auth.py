@@ -56,7 +56,7 @@ def register_user() -> dict:
     try:
         data = request.get_json(force=True)
         add_user(user_name=data["username"], phone=data["phone"],
-                email=data["email"], paswd=data["password"])
+                 email=data["email"], paswd=data["password"])
         # msg = Message("Subject", sender="daniilgofman1701@gmail.com", recipients=["daniilgofman1701@gmail.com"])
         # msg.body = "Veryfication link must be here"
         # mail.send(msg)
@@ -90,14 +90,15 @@ def upd_username() -> dict:
         return {"message": f"error {e}"}, 500
 
 
-@auth.route("/save_avatar", methods=["POST"])
+@auth.route("/save_avatar", methods=["PUT"])
 def save_avtr() -> dict:
     try:
-        token = request.headers["Authorization"]
-        img = request.files["logo"]
+        token: str = request.headers["Authorization"]
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
-        save_avatar(img=img, username=uname)
+        # print(request.get_json(force=True))
+        data: str = request.get_json(force=True)["img"]
+        save_avatar(img=data, username=uname)
         return {"message": "saved"}, 200
     except Exception as e:
         return {"message": f"error {e}"}, 500
@@ -106,16 +107,10 @@ def save_avtr() -> dict:
 @auth.route("/avatar", methods=["GET"])
 def get_avtr() -> dict:
     try:
-        home_path = os.getcwd()
-        token = request.headers["Authorization"]
+        token: str = request.headers["Authorization"]
         uname: str = jwt.decode(token, SECRET_KEY, algorithms=[
             "HS256"])["username"]
-        os.chdir(f"./images/users/{uname}")
-        files = os.listdir()
-        avatar: str = files[-1]
-        file = open(avatar, "rb")
-        encoded_string = base64.b64encode(file.read())
-        os.chdir(home_path)
-        return Response(encoded_string, direct_passthrough=True, mimetype="text/plain")
+        user: User = session.query(User).filter(User.username == uname).first()
+        return {"message": user.img}, 200
     except Exception as e:
         return {"message": f"error {e}"}, 500

@@ -32,11 +32,10 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(
       Uri.parse(url),
-      headers: {
-        HttpHeaders.authorizationHeader: Utils.TOKEN,
-      },
+      // headers: {
+      //   HttpHeaders.authorizationHeader: Utils.TOKEN,
+      // },
     );
-
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = json.decode(response.body)["data"];
       return jsonList.map((json) => Offer.fromJson(json)).toList();
@@ -59,25 +58,6 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load offers');
-    }
-  }
-
-  Future<String> fetchOfferBytes(String img) async {
-    Map<String, String> head = new Map<String, String>();
-    head['Content-Length'] = '111227';
-    head['Content-Type'] = 'application/json';
-    var data = {"img": img};
-    var bodyData = json.encode(data);
-    final response = await http.post(
-      Uri.parse("$URL/api/v1/offer/logo"),
-      headers: head,
-      body: bodyData,
-    );
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      throw Exception("Failed to load image");
     }
   }
 
@@ -141,6 +121,8 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                       itemCount: posts.length,
                       itemBuilder: (context, index) {
                         final post = posts[index];
+                        Uint8List bytesImage =
+                            const Base64Decoder().convert(post.img);
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -167,41 +149,12 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
                                         "Available from ${Jiffy.parse(post.dateStart, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")} to ${Jiffy.parse(post.dateFinish, pattern: "EEE, dd MMM yyyy ss:mm:hh").format(pattern: "dd/MM/yyyy")}"),
                                     // trailing: Icon(Icons.favorite_outline),
                                   ),
-                                  FutureBuilder<String>(
-                                    future: fetchOfferBytes(post.img),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<String> snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return SizedBox(
-                                          height: 200.0,
-                                          width: 400.0,
-                                          child: Image.asset(
-                                              "assets/placeholders/no_image.png"),
-                                        );
-                                      } else if (snapshot.hasError) {
-                                        return SizedBox(
-                                          height: 200.0,
-                                          width: 400.0,
-                                          child: Image.asset(
-                                              "assets/placeholders/no_image.png"),
-                                        );
-                                      } else if (snapshot.hasData) {
-                                        Uint8List bytesImage =
-                                            const Base64Decoder()
-                                                .convert(snapshot.data!);
-                                        // print(bytesImage);
-                                        return SizedBox(
-                                          height: 200.0,
-                                          width: 400.0,
-                                          child: Image(
-                                            image: MemoryImage(bytesImage),
-                                          ),
-                                        );
-                                      } else {
-                                        return Text('No image data');
-                                      }
-                                    },
+                                  SizedBox(
+                                    height: 200.0,
+                                    width: 400.0,
+                                    child: Image(
+                                      image: MemoryImage(bytesImage),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -231,28 +184,9 @@ class PostDetailsPagePrivate extends StatelessWidget {
 
   const PostDetailsPagePrivate({Key? key, required this.post})
       : super(key: key);
-
-  Future<String> fetchOfferBytes(String img) async {
-    Map<String, String> head = new Map<String, String>();
-    head['Content-Length'] = '111227';
-    head['Content-Type'] = 'application/json';
-    var data = {"img": img};
-    var bodyData = json.encode(data);
-    final response = await http.post(
-      Uri.parse("$URL/api/v1/offer/logo"),
-      headers: head,
-      body: bodyData,
-    );
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      throw Exception("Failed to load image");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    Uint8List bytesImage = const Base64Decoder().convert(post.img);
     return Scaffold(
       appBar: AppBar(
         title: Text(post.toolName),
@@ -278,40 +212,12 @@ class PostDetailsPagePrivate extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    FutureBuilder<String>(
-                      future: fetchOfferBytes(post.img),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return SizedBox(
-                            height: 200.0,
-                            width: 400.0,
-                            child:
-                                Image.asset("assets/placeholders/no_image.png"),
-                          );
-                        } else if (snapshot.hasError) {
-                          return SizedBox(
-                            height: 200.0,
-                            width: 400.0,
-                            child:
-                                Image.asset("assets/placeholders/no_image.png"),
-                          );
-                        } else if (snapshot.hasData) {
-                          Uint8List bytesImage =
-                              const Base64Decoder().convert(snapshot.data!);
-                          // print(bytesImage);
-                          return SizedBox(
-                            height: 200.0,
-                            width: 400.0,
-                            child: Image(
-                              image: MemoryImage(bytesImage),
-                            ),
-                          );
-                        } else {
-                          return Text('No image data');
-                        }
-                      },
+                    SizedBox(
+                      height: 200.0,
+                      width: 400.0,
+                      child: Image(
+                        image: MemoryImage(bytesImage),
+                      ),
                     ),
                     Column(
                       children: [

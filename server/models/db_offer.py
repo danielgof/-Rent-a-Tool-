@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, String, Integer, Date, Table
+from sqlalchemy import Column, ForeignKey, String, Integer, Date, Table, TEXT
 from base import *
 
 """Offer table"""
@@ -16,7 +16,7 @@ class Offer(Base):
     date_finish = Column(Date, nullable=False)
     owner_name = Column(String(256), nullable=False)
     phone_number = Column(String(256), nullable=False)
-    img = Column(String(256), nullable=False)
+    img = Column(TEXT(4294967295), nullable=False)
 
 
 people_offers_association = Table(

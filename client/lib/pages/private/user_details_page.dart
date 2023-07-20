@@ -111,24 +111,21 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     }
   }
 
-  Future<void> sendFileToApi(Uint8List fileBytes, String fileName) async {
+  Future<void> sendFileToApi(String file) async {
     String url = "$URL/api/v1/auth/save_avatar";
-    // Create a POST request with the file content as the request body
     var headers = {
       "Authorization": Utils.TOKEN,
     };
-    var request = http.MultipartRequest("POST", Uri.parse(url));
-    request.files.add(
-      await http.MultipartFile.fromBytes(
-        "logo",
-        fileBytes,
-        filename: fileName,
-      ),
+    // print(file);
+    var data = {
+      "img": file,
+    };
+    final response = await http.put(
+      Uri.parse(url),
+      headers: headers,
+      body: json.encode(data),
     );
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       // print(await response.stream.bytesToString());
       Navigator.push(
@@ -173,7 +170,10 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       if (fileBytes != null) {
         // Process the file further as per your requirement
         // For example, you can upload the file to a server using the sendImageToServer function mentioned in the previous response
-        await sendFileToApi(fileBytes, fileName);
+        // print(result.files.single.toString());
+        String file = base64Encode(fileBytes);
+        // new String.fromCharCodes(fileBytes);
+        await sendFileToApi(file);
         // Print the file size
         print('Selected file size: ${fileBytes.lengthInBytes} bytes');
       } else {
@@ -189,12 +189,11 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   Future<String> fetchImageBytes() async {
     Map<String, String> head = new Map<String, String>();
     head['Authorization'] = Utils.TOKEN;
-    // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6ImVtYWlsIiwicGhvbmUiOiJ0ZXN0IiwicGFzcyI6InRlc3QiLCJleHAiOjE3MTg3NTc2MDF9.cWbNIygoq-lmLYtA6x2n5Z3tlKiuTt_JTLWNRNyorns';
     final response =
-        await http.get(Uri.parse('$URL/api/v1/auth/avatar'), headers: head);
+        await http.get(Uri.parse("$URL/api/v1/auth/avatar"), headers: head);
     if (response.statusCode == 200) {
-      // print(response.body);
-      return response.body;
+      // print(json.decode(response.body));
+      return json.decode(response.body)["message"];
     } else {
       // return "Failed";
       throw Exception('Failed to load image');
