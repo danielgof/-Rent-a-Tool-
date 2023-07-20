@@ -43,4 +43,3 @@ CORS(app)
 if __name__ == "__main__":
     # app.run()
     socketio.run(app, port=3444)
-    # socketio.run(app)

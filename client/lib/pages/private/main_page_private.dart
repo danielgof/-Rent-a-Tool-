@@ -43,6 +43,20 @@ class _PrivateMainScreenState extends State<PrivateMain> {
     });
   }
 
+  Future<String> fetchImageBytes() async {
+    Map<String, String> head = new Map<String, String>();
+    head['Authorization'] = Utils.TOKEN;
+    final response =
+        await http.get(Uri.parse("$URL/api/v1/auth/avatar"), headers: head);
+    if (response.statusCode == 200) {
+      // print(json.decode(response.body));
+      return json.decode(response.body)["message"];
+    } else {
+      // return "Failed";
+      throw Exception('Failed to load image');
+    }
+  }
+
   static final List<Widget> _pages = <Widget>[
     const AllOffersPrivatePage(),
     MyMapPrivate(),
@@ -79,33 +93,34 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                     ),
                   );
                 },
-                child: CircleAvatar(
-                  child: Image.asset("assets/placeholders/user.png"),
-                ),
-                // FutureBuilder<String>(
-                //   future: fetchImageBytes(),
-                //   builder:
-                //       (BuildContext context, AsyncSnapshot<String> snapshot) {
-                //     if (snapshot.connectionState == ConnectionState.waiting) {
-                //       return CircleAvatar(
-                //         child: Image.asset("assets/placeholders/user.png"),
-                //       );
-                //     } else if (snapshot.hasError) {
-                //       return CircleAvatar(
-                //         child: Image.asset("assets/placeholders/user.png"),
-                //       );
-                //     } else if (snapshot.hasData) {
-                //       Uint8List bytesImage =
-                //           const Base64Decoder().convert(snapshot.data!);
-                //       // print(bytesImage);
-                //       return CircleAvatar(
-                //         backgroundImage: MemoryImage(bytesImage),
-                //       );
-                //     } else {
-                //       return Text('No image data');
-                //     }
-                //   },
+                // child: CircleAvatar(
+                //   backgroundImage: MemoryImage(bytesImage),
+                //   // child: Image.asset("assets/placeholders/user.png"),
                 // ),
+                child: FutureBuilder<String>(
+                  future: fetchImageBytes(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircleAvatar(
+                        child: Image.asset("assets/placeholders/user.png"),
+                      );
+                    } else if (snapshot.hasError) {
+                      return CircleAvatar(
+                        child: Image.asset("assets/placeholders/user.png"),
+                      );
+                    } else if (snapshot.hasData) {
+                      Uint8List bytesImage =
+                          const Base64Decoder().convert(snapshot.data!);
+                      // print(bytesImage);
+                      return CircleAvatar(
+                        backgroundImage: MemoryImage(bytesImage),
+                      );
+                    } else {
+                      return Text('No image data');
+                    }
+                  },
+                ),
               ),
             ),
             Padding(

@@ -16,7 +16,8 @@ class Offer(Base):
     date_finish = Column(Date, nullable=False)
     owner_name = Column(String(256), nullable=False)
     phone_number = Column(String(256), nullable=False)
-    img = Column(TEXT(4294967295), nullable=False)
+    img = Column(TEXT, nullable=False)
+    # img = Column(TEXT(4294967295), nullable=False)
 
 
 people_offers_association = Table(
