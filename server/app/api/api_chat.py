@@ -1,42 +1,15 @@
 from flask import current_app, request, Blueprint
 import jwt
-from flask_socketio import join_room, leave_room, send
 
 from controllers.message_controller import *
 from controllers.inbox_controller import *
 from setup import *
-from main import socketio
 
 
 chat = Blueprint("chat", __name__, url_prefix="/api/v1/chat")
 """
 api chat
 """
-
-
-@socketio.on('message')
-def handle_message(data):
-    print('received message: ' + data["message"])
-
-
-@socketio.on('join')
-def on_join(data):
-    username = data['username']
-    room = data['room']
-    join_room(room)
-    send(username + ' has entered the room.', to=room)
-
-
-@socketio.on('leave')
-def on_leave(data):
-    try:
-        username = data['username']
-        room = data['room']
-        leave_room(room)
-        send(username + ' has left the room.', to=room)
-    except Exception as e:
-        current_app.logger.info("failed to load messages")
-        return {"message": "error"}, 500
 
 
 @chat.route("/inbox", methods=["GET"])

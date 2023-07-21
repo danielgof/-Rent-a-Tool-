@@ -4,12 +4,12 @@ import os
 import logging
 from datetime import date
 import click
-from flask_socketio import SocketIO, emit
+# from flask_socketio import SocketIO, emit
 
 from api.api_auth import auth
 from api.api_offer import offer
 from api.api_chat import chat
-from main import app, socketio
+from main import app
 
 
 if not os.path.isdir("./log"):
@@ -41,5 +41,5 @@ CORS(app)
 
 
 if __name__ == "__main__":
-    # app.run()
-    socketio.run(app, port=3444)
+    app.run(port=3444)
+    # socketio.run(app, port=3444)
