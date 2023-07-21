@@ -5,6 +5,7 @@ from models.db_message import *
 from models.db_inbox import *
 from base import *
 from config import *
+from images import *
 
 """Users table"""
 

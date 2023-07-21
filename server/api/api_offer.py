@@ -13,7 +13,7 @@ offer = Blueprint("offer", __name__, url_prefix="/api/v1/offer")
 
 
 """
-api offer
+Endpoints to interact with "offer"
 """
 
 
@@ -21,6 +21,7 @@ api offer
 # @token_required
 # def get_all_offers(current_user):
 def get_all_offers() -> dict:
+    """Returns all available offers"""
     try:
         responce = all_offers()
         return {"status": "success", "data": responce}, 200
@@ -32,6 +33,7 @@ def get_all_offers() -> dict:
 @offer.route("/save", methods=["POST"])
 @token_required
 def save_offer(current_user) -> dict:
+    """Saves new offer to a user based on {@code} Offer.username from JWT"""
     try:
         if not request.get_json(force=True):
             abort(400)
@@ -49,10 +51,14 @@ def save_offer(current_user) -> dict:
 @offer.route("/all", methods=["GET"])
 @token_required
 def get_all_user_offers(current_user) -> dict:
+    """Returns all offers that has a user"""
     try:
+        "Receive info from header"
         token = request.headers["Authorization"]
+        "Decode token to get username"
         user_info = jwt.decode(token, SECRET_KEY, algorithms=[
                                "HS256"])["username"]
+        "Call controller to get all user's offers based on provided username"
         responce = all_offers_user(user_info=user_info)
         return {"data": responce}
     except Exception as e:
@@ -63,6 +69,7 @@ def get_all_user_offers(current_user) -> dict:
 @offer.route("/delete", methods=["DELETE"])
 @token_required
 def delete_offer(current_user) -> dict:
+    """Deletes offer based on provided id"""
     try:
         if not request.get_json(force=True):
             abort(400)
@@ -80,6 +87,7 @@ def delete_offer(current_user) -> dict:
 @offer.route("/upd", methods=["PUT"])
 @token_required
 def update_offer(current_user) -> dict:
+    """Updated an offer based on provided data"""
     try:
         if not request.get_json(force=True):
             abort(400)
@@ -93,6 +101,7 @@ def update_offer(current_user) -> dict:
 
 @offer.route("/query", methods=["POST"])
 def query_offer() -> dict:
+    """Queries all offers which match provided offer's title"""
     try:
         if not request.get_json(force=True):
             abort(400)
@@ -108,6 +117,7 @@ def query_offer() -> dict:
 
 @offer.route("/save_logo", methods=["PUT"])
 def save_logo() -> dict:
+    """Updates logo of a particual offer"""
     try:
         if not request.get_json(force=True):
             abort(400)

@@ -3,6 +3,7 @@ from models.db_auth import *
 from models.db_offer import *
 from models.db_message import *
 from models.db_inbox import *
+from images import *
 
 user1 = User(
     username="JL",
