@@ -1,38 +1,45 @@
-// main.go
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
-	socketio "github.com/googollee/go-socket.io"
+	"path/filepath"
+	"sync"
+	"text/template"
 )
 
+// templ represents a single template
+type templateHandler struct {
+	once     sync.Once
+	filename string
+	templ    *template.Template
+}
+
+// ServeHTTP handles the HTTP request.
+func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	t.once.Do(func() {
+		t.templ = template.Must(template.ParseFiles(filepath.Join("templates", t.filename)))
+	})
+	t.templ.Execute(w, r)
+}
+
 func main() {
-	r := gin.Default()
+	var addr = flag.String("addr", ":8080", "The addr of the application.")
+	flag.Parse() // parse the flags
 
-	// Create a new Socket.IO server
-	server := socketio.NewServer(nil)
+	r := newRoom()
 
-	// Define the connection event handler
-	server.OnConnect("/", func(so socketio.Conn) error {
-		log.Println("New user connected")
-		return nil
-	})
+	http.Handle("/", &templateHandler{filename: "chat.html"})
+	http.Handle("/room", r)
 
-	// Define the disconnection event handler
-	server.OnDisconnect("/", func(so socketio.Conn, reason string) {
-		log.Println("User disconnected:", reason)
-	})
+	// get the room going
+	go r.run()
 
-	// Mount the Socket.IO server on the route "/socket.io/"
-	r.GET("/socket.io/*any", gin.WrapH(server))
+	// start the web server
+	log.Println("Starting web server on", *addr)
+	if err := http.ListenAndServe(*addr, nil); err != nil {
+		log.Fatal("ListenAndServe:", err)
+	}
 
-	// Serve the frontend or static files (Optional if you have a frontend)
-	r.StaticFile("/", "./index.html")
-
-	// Start the server on localhost:8080
-	log.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
 }
