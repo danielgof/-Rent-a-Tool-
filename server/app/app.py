@@ -1,14 +1,13 @@
-from flask import Flask
-from flask_cors import CORS
-import os
+"""Import installed or standart modules"""
 import logging
+import os
 from datetime import date
-import click
-# from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 
 from api.api_auth import auth
 from api.api_offer import offer
 from api.api_chat import chat
+from setup import RemoveColorFilter
 from main import app
 
 
@@ -20,20 +19,9 @@ logging.basicConfig(
     format="%(asctime)-15s %(name)-5s %(levelname)-8s %(message)s",
 )
 
-
-class RemoveColorFilter(logging.Filter):
-    def filter(self, record):
-        if record and record.msg and isinstance(record.msg, str):
-            record.msg = click.unstyle(record.msg)
-        return True
-
-
 remove_color_filter = RemoveColorFilter()
 logging.getLogger("werkzeug").addFilter(remove_color_filter)
 
-
-# socketio = SocketIO()
-# socketio.init_app(app)
 app.register_blueprint(auth)
 app.register_blueprint(offer)
 app.register_blueprint(chat)
