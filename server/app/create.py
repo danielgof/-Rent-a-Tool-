@@ -1,6 +1,5 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from datetime import date
 from models.db_auth import *
 from models.db_offer import *
 from models.db_message import *

@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // const String URL = "https://brodon.pythonanywhere.com";
 const String URL = "http://localhost:3444";
+const String URL_chat = "http://localhost:8080";
 
 class Utils {
   static String TOKEN = "";

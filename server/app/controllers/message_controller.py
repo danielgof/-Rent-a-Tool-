@@ -46,7 +46,7 @@ def user_messages(username: str) -> list:
 
 
 def messages_by_room(room_id: int, u_name: str) -> list:
-    """return all messages by given id"""
+    """Return all messages by given id"""
     return [{
             "id": message.id,
             "room_id": message.room_id,
