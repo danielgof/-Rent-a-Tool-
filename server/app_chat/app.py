@@ -8,7 +8,8 @@ from config import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
-socketio = SocketIO(app)
+# socketio = socketio.Server()
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 # In-memory data store for chat messages
 chat_history = []
@@ -37,24 +38,26 @@ def get_chat_history():
 def on_join(data):
     u_name = data['username']
     room_id = data['room']
+    # print(u_name)
+    # print(room_id)
     join_room(room_id)
     messages = [{
         "id": message.id,
         "room_id": message.room_id,
         "messageType": "sender",
-        "date": message.date,
+        "date": message.date.strftime("%m/%d/%Y"),
         "messageContent": message.message,
     }
         if message.user_name == u_name else {
         "id": message.id,
             "room_id": message.room_id,
             "messageType": "receiver",
-            "date": message.date,
+            "date": message.date.strftime("%m/%d/%Y"),
             "messageContent": message.message,
     }
         for message in session.query(Message).filter(Message.room_id == room_id).all()]
     print(messages)
-    emit(messages)
+    emit('response', messages)
 
 
 @socketio.on('leave')

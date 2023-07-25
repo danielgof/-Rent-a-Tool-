@@ -158,6 +158,10 @@ lints
 2.17
 file:///home/daniel/.pub-cache/hosted/pub.dev/lints-2.0.1/
 file:///home/daniel/.pub-cache/hosted/pub.dev/lints-2.0.1/lib/
+logging
+2.19
+file:///home/daniel/.pub-cache/hosted/pub.dev/logging-1.2.0/
+file:///home/daniel/.pub-cache/hosted/pub.dev/logging-1.2.0/lib/
 matcher
 2.18
 file:///home/daniel/.pub-cache/hosted/pub.dev/matcher-0.12.13/
@@ -234,6 +238,14 @@ shared_preferences_windows
 2.18
 file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.3.0/
 file:///home/daniel/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.3.0/lib/
+socket_io_client
+2.12
+file:///home/daniel/.pub-cache/hosted/pub.dev/socket_io_client-2.0.2/
+file:///home/daniel/.pub-cache/hosted/pub.dev/socket_io_client-2.0.2/lib/
+socket_io_common
+2.12
+file:///home/daniel/.pub-cache/hosted/pub.dev/socket_io_common-2.0.3/
+file:///home/daniel/.pub-cache/hosted/pub.dev/socket_io_common-2.0.3/lib/
 source_span
 2.14
 file:///home/daniel/.pub-cache/hosted/pub.dev/source_span-1.9.1/

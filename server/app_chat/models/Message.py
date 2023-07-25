@@ -6,7 +6,7 @@ from base import *
 
 class Message(Base):
     """Class to represent 'Message' entity"""
-    __tablename__ = "Message"
+    __tablename__ = "message"
     id = Column(Integer, primary_key=True)
     room_id = Column(Integer, nullable=False)
     user_name = Column(String(256), nullable=False)

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -248,11 +249,26 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     required this.roomId,
   });
 
+  late IO.Socket socket;
+  List<Map<String, String>> messages = [];
+
   TextEditingController myController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    socket = IO.io('http://127.0.0.1:8080', <String, dynamic>{
+      'transports': ['websocket'],
+    });
+    socket.onConnect((_) {
+      print('Connected to Socket.IO server');
+    });
+    socket.on('join', (data) {
+      print('Received message: $data');
+      setState(() {
+        messages = List.from(data); // Update the list of messages
+      });
+    });
     _messages = _getMessages();
   }
 

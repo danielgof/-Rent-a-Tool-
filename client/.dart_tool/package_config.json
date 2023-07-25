@@ -260,6 +260,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "logging",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/logging-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/matcher-0.12.13",
       "packageUri": "lib/",
@@ -380,6 +386,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "socket_io_client",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/socket_io_client-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "socket_io_common",
+      "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/socket_io_common-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///home/daniel/.pub-cache/hosted/pub.dev/source_span-1.9.1",
       "packageUri": "lib/",
@@ -464,7 +482,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-07-17T17:56:50.943275Z",
+  "generated": "2023-07-25T13:13:32.197245Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
