@@ -262,12 +262,16 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     });
     socket.onConnect((_) {
       print('Connected to Socket.IO server');
+      socket.emit('join', {'room': 2, 'username': 'JL'});
+      // print('Received message: $data');
     });
     socket.on('join', (data) {
+      // Map<String, dynamic> msg = {"username": "JL", "room": 2};
+      // socket.emit(json.encode(msg));
       print('Received message: $data');
-      setState(() {
-        messages = List.from(data); // Update the list of messages
-      });
+      // setState(() {
+      //   messages = List.from(data); // Update the list of messages
+      // });
     });
     _messages = _getMessages();
   }

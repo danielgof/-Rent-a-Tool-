@@ -36,10 +36,11 @@ def get_chat_history():
 
 @socketio.on('join')
 def on_join(data):
+    print(data)
     u_name = data['username']
     room_id = data['room']
-    # print(u_name)
-    # print(room_id)
+    # # print(u_name)
+    # # print(room_id)
     join_room(room_id)
     messages = [{
         "id": message.id,
@@ -56,8 +57,9 @@ def on_join(data):
             "messageContent": message.message,
     }
         for message in session.query(Message).filter(Message.room_id == room_id).all()]
-    print(messages)
-    emit('response', messages)
+    # print(messages)
+    emit("join", messages)
+    # emit('response', messages)
 
 
 @socketio.on('leave')
