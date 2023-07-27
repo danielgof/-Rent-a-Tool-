@@ -242,7 +242,7 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> {
   String username;
   int roomId;
-  late Future<List<ChatMessage>> _messages;
+  late List<dynamic> _messages;
 
   _ChatDetailPageState({
     required this.username,
@@ -250,7 +250,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   });
 
   late IO.Socket socket;
-  List<Map<String, String>> messages = [];
+  List<ChatMessage> messages = [];
 
   TextEditingController myController = TextEditingController();
 
@@ -263,21 +263,22 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     socket.onConnect((_) {
       print('Connected to Socket.IO server');
       socket.emit('join', {'room': 2, 'username': 'JL'});
-      // print('Received message: $data');
     });
     socket.on('join', (data) {
       // Map<String, dynamic> msg = {"username": "JL", "room": 2};
       // socket.emit(json.encode(msg));
-      print('Received message: $data');
-      // setState(() {
-      //   messages = List.from(data); // Update the list of messages
-      // });
+      // print('Received message: $data');
+      final messages =
+          data.map((message) => ChatMessage.fromJson(message)).toList();
+      setState(() {
+        _messages =
+            data.map((message) => ChatMessage.fromJson(message)).toList();
+      });
     });
     _messages = _getMessages();
   }
 
   Future<int> _sendMessage(Map data) async {
-    print(data);
     final response = await http.post(
       Uri.parse("$URL/api/v1/chat/save_msg/$roomId/"),
       headers: {
@@ -285,26 +286,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       },
       body: json.encode(data),
     );
-    // print(response.statusCode);
     return response.statusCode;
   }
 
-  Future<List<ChatMessage>> _getMessages() async {
-    final response = await http.get(
-      Uri.parse("$URL/api/v1/chat/room/$roomId/"),
-      headers: {
-        HttpHeaders.authorizationHeader: Utils.TOKEN,
-      },
-    );
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body)["data"];
-      // print(jsonResponse);
-      final messages =
-          jsonResponse.map((message) => ChatMessage.fromJson(message)).toList();
-      return messages;
-    } else {
-      throw Exception("Failed to load chats");
-    }
+  List<ChatMessage> _getMessages() {
+    var data = [];
+    socket.on('join', (data) {
+      return data;
+    });
+    return data.map((message) => ChatMessage.fromJson(message)).toList();
   }
 
   @override
@@ -371,48 +361,83 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       ),
       body: Stack(
         children: <Widget>[
-          FutureBuilder(
-              future: _messages,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final List<ChatMessage> messages = snapshot.data!;
-                  return ListView.builder(
-                    itemCount: messages.length,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(top: 10, bottom: 60),
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.only(
-                            left: 14, right: 14, top: 10, bottom: 10),
-                        child: Align(
-                          alignment: (messages[index].messageType == "receiver"
-                              ? Alignment.topLeft
-                              : Alignment.topRight),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: (messages[index].messageType == "receiver"
-                                  ? Colors.grey.shade200
-                                  : Colors.blue[200]),
-                            ),
-                            padding: const EdgeInsets.all(16),
-                            child: Text(
-                              messages[index].messageContent,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  // If an error occurred while fetching the posts, display an error message
-                  return Text('${snapshot.error}');
-                }
-                // By default, show a loading spinner
+          ListView.builder(
+            itemCount: _messages.length,
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(top: 10, bottom: 60),
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              if (_messages.length == 0) {
                 return const CircularProgressIndicator();
-              }),
+              } else {
+                return Container(
+                  padding: const EdgeInsets.only(
+                      left: 14, right: 14, top: 10, bottom: 10),
+                  child: Align(
+                    alignment: (_messages[index].messageType == "receiver"
+                        ? Alignment.topLeft
+                        : Alignment.topRight),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: (_messages[index].messageType == "receiver"
+                            ? Colors.grey.shade200
+                            : Colors.blue[200]),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        _messages[index].messageContent,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+          // FutureBuilder(
+          //   future: _messages,
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       final List<ChatMessage> messages = snapshot.data!;
+          //       return ListView.builder(
+          //         itemCount: messages.length,
+          //         shrinkWrap: true,
+          //         padding: const EdgeInsets.only(top: 10, bottom: 60),
+          //         physics: const BouncingScrollPhysics(),
+          //         itemBuilder: (context, index) {
+          //           return Container(
+          //             padding: const EdgeInsets.only(
+          //                 left: 14, right: 14, top: 10, bottom: 10),
+          //             child: Align(
+          //               alignment: (messages[index].messageType == "receiver"
+          //                   ? Alignment.topLeft
+          //                   : Alignment.topRight),
+          //               child: Container(
+          //                 decoration: BoxDecoration(
+          //                   borderRadius: BorderRadius.circular(20),
+          //                   color: (messages[index].messageType == "receiver"
+          //                       ? Colors.grey.shade200
+          //                       : Colors.blue[200]),
+          //                 ),
+          //                 padding: const EdgeInsets.all(16),
+          //                 child: Text(
+          //                   messages[index].messageContent,
+          //                   style: const TextStyle(fontSize: 15),
+          //                 ),
+          //               ),
+          //             ),
+          //           );
+          //         },
+          //       );
+          //     } else if (snapshot.hasError) {
+          //       // If an error occurred while fetching the posts, display an error message
+          //       return Text('${snapshot.error}');
+          //     }
+          //     // By default, show a loading spinner
+          //     return const CircularProgressIndicator();
+          //   },
+          // ),
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(

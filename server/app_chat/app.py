@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from datetime import datetime
 
 from models.Message import *
 from config import *
@@ -74,8 +75,39 @@ def on_leave(data):
 def handle_message(message):
     chat_history.append(message)  # Store the message in the chat history
     # Broadcast the message to all connected clients
-    print("chat history:", chat_history)
-    emit('message', message, broadcast=True)
+    session.add(
+        Message(
+            user_name=message["user_name"],
+            room_id=message["room_id"],
+            date=datetime.strptime(message["date"], "%d/%m/%Y"),
+            message=message["message"],
+        )
+    )
+    # @socketio.on('join')
+    # def on_join(data):
+    #     print(data)
+    #     u_name = data['username']
+    #     room_id = data['room']
+    #     # # print(u_name)
+    #     # # print(room_id)
+    #     join_room(room_id)
+    #     messages = [{
+    #         "id": message.id,
+    #         "room_id": message.room_id,
+    #         "messageType": "sender",
+    #         "date": message.date.strftime("%m/%d/%Y"),
+    #         "messageContent": message.message,
+    #     }
+    #         if message.user_name == u_name else {
+    #         "id": message.id,
+    #             "room_id": message.room_id,
+    #             "messageType": "receiver",
+    #             "date": message.date.strftime("%m/%d/%Y"),
+    #             "messageContent": message.message,
+    #     }
+    #         for message in session.query(Message).filter(Message.room_id == room_id).all()]
+    #     # print(messages)
+    #     emit("join", messages)
 
 
 if __name__ == '__main__':
