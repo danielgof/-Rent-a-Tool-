@@ -35,7 +35,7 @@ def get_chat_history():
 # WebSocket event to handle incoming messages and broadcast them to all clients
 
 
-@socketio.on('join')
+@socketio.on("join")
 def on_join(data):
     print(data)
     u_name = data['username']
@@ -60,21 +60,14 @@ def on_join(data):
         for message in session.query(Message).filter(Message.room_id == room_id).all()]
     # print(messages)
     emit("join", messages)
-    # emit('response', messages)
-
-
-@socketio.on('leave')
-def on_leave(data):
-    username = data['username']
-    room = data['room']
-    leave_room(room)
-    emit(username + ' has left the room.', to=room)
 
 
 @socketio.on('message')
 def handle_message(message):
-    chat_history.append(message)  # Store the message in the chat history
+    # chat_history.append(message)  # Store the message in the chat history
     # Broadcast the message to all connected clients
+    print(message)
+    print(datetime.strptime(message["date"], "%d/%m/%Y"))
     session.add(
         Message(
             user_name=message["user_name"],
@@ -83,31 +76,23 @@ def handle_message(message):
             message=message["message"],
         )
     )
-    # @socketio.on('join')
-    # def on_join(data):
-    #     print(data)
-    #     u_name = data['username']
-    #     room_id = data['room']
-    #     # # print(u_name)
-    #     # # print(room_id)
-    #     join_room(room_id)
-    #     messages = [{
-    #         "id": message.id,
-    #         "room_id": message.room_id,
-    #         "messageType": "sender",
-    #         "date": message.date.strftime("%m/%d/%Y"),
-    #         "messageContent": message.message,
-    #     }
-    #         if message.user_name == u_name else {
-    #         "id": message.id,
-    #             "room_id": message.room_id,
-    #             "messageType": "receiver",
-    #             "date": message.date.strftime("%m/%d/%Y"),
-    #             "messageContent": message.message,
-    #     }
-    #         for message in session.query(Message).filter(Message.room_id == room_id).all()]
-    #     # print(messages)
-    #     emit("join", messages)
+    session.commit()
+    print("data added succesfully to database")
+    msg: dict = {
+        "user_name": message["user_name"],
+        "room_id": message["room_id"],
+        "date": message["date"],
+        "message": message["message"],
+    }
+    emit("message", msg)
+
+
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    emit(username + ' has left the room.', to=room)
 
 
 if __name__ == '__main__':
