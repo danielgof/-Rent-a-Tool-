@@ -894,3 +894,6 @@
 2023-07-27 21:05:25,629 werkzeug INFO     127.0.0.1 - - [27/Jul/2023 21:05:25] "GET /api/v1/chat/inbox HTTP/1.1" 200 -
 2023-07-27 21:05:25,692 werkzeug INFO     127.0.0.1 - - [27/Jul/2023 21:05:25] "GET /api/v1/auth/avatar HTTP/1.1" 200 -
 2023-07-27 21:05:25,737 werkzeug INFO     127.0.0.1 - - [27/Jul/2023 21:05:25] "GET /api/v1/chat/inbox HTTP/1.1" 200 -
+2023-07-27 22:56:42,085 werkzeug INFO     WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:3444
+2023-07-27 22:56:42,085 werkzeug INFO     Press CTRL+C to quit
