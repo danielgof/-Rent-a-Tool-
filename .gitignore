@@ -10,7 +10,7 @@ server_hosting
 rt_client
 maps
 tmp
-__pycache__
+server/app_chat/__pycache__
 # server/app/__pycache__
 # server/app/models/__pycache__
 # server/app/api/__pycache__
