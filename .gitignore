@@ -1,5 +1,5 @@
-server/app/venv
-server/app/log
+# server/app/venv
+# server/app/log
 .vscode
 .idea
 config.yaml
@@ -10,7 +10,8 @@ server_hosting
 rt_client
 maps
 tmp
-server/app/__pycache__
-server/app/models/__pycache__
-server/app/api/__pycache__
-server/app/controllers/__pycache__
+**/__pycache__/**
+# server/app/__pycache__
+# server/app/models/__pycache__
+# server/app/api/__pycache__
+# server/app/controllers/__pycache__
