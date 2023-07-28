@@ -1,0 +1,11 @@
+database:
+  username:
+    daniel
+  password:
+    admin
+  dbname:
+    rt
+
+auth:
+  secret_key:
+    key
