@@ -1,0 +1,17 @@
+# server/app/venv
+# server/app/log
+.vscode
+.idea
+config.yaml
+config_local.yaml
+data
+data.txt
+server_hosting
+rt_client
+maps
+tmp
+server/app_chat/__pycache__
+# server/app/__pycache__
+# server/app/models/__pycache__
+# server/app/api/__pycache__
+# server/app/controllers/__pycache__
