@@ -66,8 +66,6 @@ def on_join(data):
 def handle_message(message):
     # chat_history.append(message)  # Store the message in the chat history
     # Broadcast the message to all connected clients
-    print(message)
-    print(datetime.strptime(message["date"], "%d/%m/%Y"))
     session.add(
         Message(
             user_name=message["user_name"],

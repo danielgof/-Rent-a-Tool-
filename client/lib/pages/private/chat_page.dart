@@ -211,6 +211,7 @@ class _ConversationListState extends State<ConversationList> {
   }
 }
 
+/// Class to present message entity
 class ChatMessage {
   String messageContent;
   String messageType;
@@ -250,22 +251,21 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   });
 
   late IO.Socket socket;
-  // List<ChatMessage> messages = [];
-
+  ScrollController _scrollController = ScrollController();
   TextEditingController myController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     socket = IO.io('http://127.0.0.1:8080', <String, dynamic>{
       'transports': ['websocket'],
     });
     socket.onConnect((_) {
       print('Connected to Socket.IO server');
-      socket.emit('join', {'room': 2, 'username': 'JL'});
+      socket.emit('join', {'room': 2, 'username': 'test'});
     });
     socket.on('join', (data) {
-      // print('Received message: $data');
       setState(() {
         _messages =
             data.map((message) => ChatMessage.fromJson(message)).toList();
@@ -273,34 +273,21 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     });
     socket.on('message', (data) {
       String msgType = (data["user_name"] == "test") ? "sender" : "receiver";
-      print(ChatMessage(messageContent: data["message"], messageType: msgType));
       setState(() {
         _messages.add(
             ChatMessage(messageContent: data["message"], messageType: msgType));
-        // data.map((message) => ChatMessage.fromJson(message)).toList();
       });
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     });
-    // _messages = _getMessages();
   }
 
+  /// Method used to send [Map] with data on server
   _sendMessage(Map data) {
     socket.emit('message', data);
-    // final response = await http.post(
-    //   Uri.parse("$URL/api/v1/chat/save_msg/$roomId/"),
-    //   headers: {
-    //     HttpHeaders.authorizationHeader: Utils.TOKEN,
-    //   },
-    //   body: json.encode(data),
-    // );
-    // return response.statusCode;
-  }
-
-  List<ChatMessage> _getMessages() {
-    var data = [];
-    socket.on('join', (data) {
-      return data;
-    });
-    return data.map((message) => ChatMessage.fromJson(message)).toList();
   }
 
   @override
@@ -370,7 +357,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           ListView.builder(
             itemCount: _messages.length,
             shrinkWrap: true,
-            padding: const EdgeInsets.only(top: 10, bottom: 60),
+            controller: _scrollController,
+            padding: const EdgeInsets.only(top: 10, bottom: 120),
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               if (_messages.length == 0) {
@@ -378,7 +366,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
               } else {
                 return Container(
                   padding: const EdgeInsets.only(
-                      left: 14, right: 14, top: 10, bottom: 10),
+                      left: 14, right: 14, top: 10, bottom: 17),
                   child: Align(
                     alignment: (_messages[index].messageType == "receiver"
                         ? Alignment.topLeft
@@ -404,7 +392,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
+              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 0),
               height: 60,
               width: double.infinity,
               color: Colors.white,
@@ -452,13 +440,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                         "room_id": 2,
                       };
                       _sendMessage(data);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) {
-                      //   return ChatDetailPage(
-                      //     username: JWT.decode(Utils.TOKEN).payload["username"],
-                      //     roomId: roomId,
-                      //   );
-                      // }));
+                      setState(() {
+                        myController.clear();
+                      });
                     },
                     backgroundColor: Colors.blue,
                     elevation: 0,
@@ -475,5 +459,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    print("Dispose");
+    _scrollController.dispose();
+    super.dispose();
+    socket.disconnect();
   }
 }
