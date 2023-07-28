@@ -1,7 +1,11 @@
-# server/app/venv
-# server/app/log
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# IDEs files
 .vscode
 .idea
+
+# Configs
 config.yaml
 config_local.yaml
 data
