@@ -162,8 +162,9 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                         },
                       );
                     } else if (snapshot.hasError) {
+                      return const Icon(Icons.wifi_off);
                       // If an error occurred while fetching the posts, display an error message
-                      return Text('${snapshot.error}');
+                      // return Text('${snapshot.error}');
                     }
                     // By default, show a loading spinner
                     return const CircularProgressIndicator();

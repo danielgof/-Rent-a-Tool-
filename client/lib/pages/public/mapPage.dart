@@ -23,14 +23,14 @@ class _SimpleMapState extends State<SimpleMap> {
     super.initState();
     _markers = fetchMarkers();
   }
-  
+
   Future<List<Marker>> fetchMarkers() async {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(Uri.parse(url));
+    print(response);
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       final List<dynamic> tmp = data["data"];
-      // print(response.statusCode);
       return tmp.map((markerData) {
         final point = LatLng(
           double.parse(markerData['lat'].toString()),
@@ -42,25 +42,26 @@ class _SimpleMapState extends State<SimpleMap> {
         );
       }).toList();
     } else {
+      // return const Center(child: CircularProgressIndicator());
       throw Exception('Failed to load posts');
     }
   }
+
 // on below line we are specifying our camera position
   static const CameraPosition _kGoogle = CameraPosition(
     target: LatLng(40.0, -82.99),
     zoom: 14.4746,
   );
- 
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Marker>>(
-        future: _markers,
-        builder: (context, snapshot) {
-        if(snapshot.hasData) {
+        body: FutureBuilder<List<Marker>>(
+      future: _markers,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
           return GoogleMap(
-            markers: snapshot.data!.toSet(), 
+            markers: snapshot.data!.toSet(),
             // on below line setting camera position
             initialCameraPosition: _kGoogle,
             // on below line specifying map type.
@@ -70,17 +71,16 @@ class _SimpleMapState extends State<SimpleMap> {
             // on below line setting compass enabled.
             compassEnabled: true,
             // on below line specifying controller on map complete.
-            onMapCreated: (GoogleMapController controller){
+            onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
           );
         } else if (snapshot.hasError) {
-          return Text("Failed to load markers");
+          return const Center(child: Icon(Icons.wifi_off));
         } else {
           return const Center(child: CircularProgressIndicator());
         }
-        },
-      )
-    );
+      },
+    ));
   }
 }
