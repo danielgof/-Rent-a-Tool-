@@ -15,6 +15,7 @@ server_hosting
 rt_client
 maps
 tmp
+venv
 server/app_chat/__pycache__
 # server/app/__pycache__
 # server/app/models/__pycache__
