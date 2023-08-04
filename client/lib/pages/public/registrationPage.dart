@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:client/api/ApiAuth.dart';
 
-
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
 
@@ -10,7 +9,6 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-
   String dropdownvalue = '+1, US';
 
   // List of items in our dropdown menu
@@ -20,19 +18,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     '+90 TUR',
   ];
 
-  // Future<int> registrationRequest(username, pass, phone, email) async {
-  //   String url = "$URL/api/v1/auth/register";
-  //   Map credits = {
-  //     "username": username,
-  //     "phone": phone,
-  //     "email":email,
-  //     "password":pass,
-  //   };
-  //   var bodyData = json.encode(credits);
-  //   final response = await http.post(Uri.parse(url), body: bodyData);
-  //   var data = response.statusCode;
-  //   return data;
-  // }
+  /// Controllers for text fields
   TextEditingController usernameController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -55,11 +41,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text("Registration",
-                  style: Theme.of(context).textTheme.headlineMedium),
+                    style: Theme.of(context).textTheme.headlineMedium),
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0
-                  ),
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: usernameController,
@@ -76,8 +61,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0
-                  ),
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: passController,
@@ -95,18 +79,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0
-                  ),
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: emailController,
-                    // onChanged: (String val) async {
-                    //   String curEmail = emailController.value.text;
-                    //   // print(emailController.value.text);
-                    //   bool emailValid =
-                    //   RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    //       .hasMatch(curEmail);
-                    // },
                     decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.blue),
                       focusedBorder: OutlineInputBorder(
@@ -140,7 +116,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15, bottom: 0),
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
                     cursorColor: Colors.blue,
                     controller: phoneController,
@@ -155,38 +131,45 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: const Text(
+                const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text(
                     "By clicking REGISTER, you agree to our Terms and Privacy Policy.",
                     style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15,
-                      ),
+                      color: Colors.blue,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: TextButton(
                     onPressed: () async {
-                      var username = usernameController.text;
-                      var pass = passController.text;
-                      var phone = dropdownvalue + phoneController.text;
-                      var email = emailController.text;
-                      bool phoneValid =
-                      RegExp(r'(^(?:[+0]9)?[0-9]{10}$)')
+                      /// Variables for data
+                      String username = usernameController.text;
+                      String pass = passController.text;
+                      String phone = dropdownvalue + phoneController.text;
+                      String email = emailController.text;
+                      bool phoneValid = RegExp(r'(^(?:[+0]9)?[0-9]{10}$)')
                           .hasMatch(phoneController.text);
-                      bool emailValid =
-                      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(email);
-                      if (username != "" && pass != "" && phone != "" && email != "" && emailValid && phoneValid) {
-                        var status = await ApiAuth().registrationRequest(username, pass, phone, email);
+                      if (username != "" &&
+                          pass != "" &&
+                          phone != "" &&
+                          email != "" &&
+                          emailValid &&
+                          phoneValid) {
+                        var status = await ApiAuth()
+                            .registrationRequest(username, pass, phone, email);
                         if (200 == status) {
                           showDialog<String>(
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text("Success!"),
-                              content: const Text("The user was registered successfully."),
+                              content: const Text(
+                                  "The user was registered successfully."),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context, "OK"),
@@ -200,11 +183,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text("Error!"),
-                              content: const Text("The error occurred when register a user."),
+                              content: const Text(
+                                  "The error occurred when register a user."),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context, "OK"),
-                                  child: const Text("OK",
+                                  child: const Text(
+                                    "OK",
                                     style: TextStyle(color: Colors.blue),
                                   ),
                                 ),
@@ -215,25 +200,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       } else {
                         showDialog<String>(
                           context: context,
-                          builder: (context) =>
-                            AlertDialog(
-                              title: const Text("Error!"),
-                              content: const Text(
-                                  "All fields should be filled in order to register."),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, "OK"),
-                                  child: const Text("OK",
-                                    style: TextStyle(color: Colors.blue),
-                                  ),
+                          builder: (context) => AlertDialog(
+                            title: const Text("Error!"),
+                            content: const Text(
+                                "All fields should be filled in order to register."),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, "OK"),
+                                child: const Text(
+                                  "OK",
+                                  style: TextStyle(color: Colors.blue),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
                         );
                       }
                     },
-                    child: const Text("REGISTER",
+                    child: const Text(
+                      "REGISTER",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 35,
@@ -245,11 +230,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      // height: 26,
-                      // width: 26,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        // color: Colors.green,
                       ),
                       child: const Icon(
                         Icons.facebook,
@@ -258,11 +240,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     Container(
-                      // height: 26,
-                      // width: 26,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        // color: Colors.green,
                       ),
                       child: const Icon(
                         Icons.reddit,
@@ -271,11 +250,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     Container(
-                      // height: 26,
-                      // width: 26,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        // color: Colors.green,
                       ),
                       child: const Icon(
                         Icons.alternate_email_sharp,
@@ -283,10 +259,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         size: 75,
                       ),
                     ),
-                  ].map((widget) => Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: widget,
-                  )).toList(),
+                  ]
+                      .map((widget) => Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: widget,
+                          ))
+                      .toList(),
                 ),
               ],
             ),

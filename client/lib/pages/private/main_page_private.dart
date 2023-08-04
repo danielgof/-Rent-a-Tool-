@@ -7,7 +7,7 @@ import 'package:client/pages/private/user_details_page.dart';
 import 'package:client/pages/private/user_offers.dart';
 
 import '../../api/utils.dart';
-import '../public/main_page_public.dart';
+import '../public/mainPagePublic.dart';
 import 'all_offers_page.dart';
 import 'chat_page.dart';
 import 'map_offers_private.dart';

@@ -1,3 +1,4 @@
+// Imported libraries
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -6,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:http/http.dart' as http;
 import 'package:client/api/ApiAuth.dart';
-
+// Local libraries
 import '../../models/offer.dart';
 import '../../api/utils.dart';
 
@@ -26,6 +27,11 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
     _futurePosts = fetchOffers();
   }
 
+  /// Query all offers by given name
+  /// [@param query]
+  ///         string - name of offers to query
+  /// [@retruns Future<List<Offer>>]
+  ///         list of offers that are exist in data base
   Future<List<Offer>> queryOffer(query) async {
     String url = "$URL/api/v1/offer/query";
     Map credits = {
@@ -48,9 +54,9 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
 
     final response = await ApiAuth().get(url);
     if (response.statusCode == 200) {
-      // print(json.decode(response.body)["data"]);
+      // Get body of a responce
       final List<dynamic> jsonList = json.decode(response.body)["data"];
-      // print(jsonList.map((json) => Offer.fromJson(json)).toList());
+      // Convert response to a {@code List} of object 'Offer'
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load posts');
@@ -119,7 +125,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
                           final post = posts[index];
-                          // print(post.img);
+                          // Decode string to byte Image
                           Uint8List bytesImage =
                               const Base64Decoder().convert(post.img);
                           return GestureDetector(
@@ -162,9 +168,8 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
                         },
                       );
                     } else if (snapshot.hasError) {
+                      // If an error occured
                       return const Icon(Icons.wifi_off);
-                      // If an error occurred while fetching the posts, display an error message
-                      // return Text('${snapshot.error}');
                     }
                     // By default, show a loading spinner
                     return const CircularProgressIndicator();

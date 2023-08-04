@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+// Local libraries
 import '../../models/credentials.dart';
 import 'loginPage.dart';
 import 'mapPage.dart';
-import 'offers_page.dart';
+import 'offersPage.dart';
 
 class PublicMain extends StatefulWidget {
   const PublicMain({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'main_page_public.dart';
+import 'mainPagePublic.dart';
 
 class UnauthorizedScreen extends StatefulWidget {
   const UnauthorizedScreen({super.key});
