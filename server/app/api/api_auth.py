@@ -114,3 +114,13 @@ def get_avtr() -> dict:
         return {"message": user.img}, 200
     except Exception as e:
         return {"message": f"error {e}"}, 500
+
+
+@auth.route("/user_avtr/<uname>/", methods=["GET"])
+def get_user_avatar(uname) -> dict:
+    """Returns {@code str} user's avatar in base64 formant"""
+    try:
+        user: User = session.query(User).filter(User.username == uname).first()
+        return {"message": user.img}, 200
+    except Exception as e:
+        return {"message": f"error {e}"}, 500

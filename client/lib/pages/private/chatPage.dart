@@ -9,6 +9,7 @@ import 'dart:convert';
 import '../../models/chats.dart';
 import '../../api/utils.dart';
 import '../../models/inbox.dart';
+import '../../models/message.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -25,10 +26,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    _futureListChats = _geChats();
+    _futureListChats = _getChats();
   }
 
-  Future<List<Inbox>> _geChats() async {
+  Future<List<Inbox>> _getChats() async {
     final response = await http.get(
       Uri.parse("$URL/api/v1/chat/inbox"),
       headers: {
@@ -37,7 +38,7 @@ class _ChatPageState extends State<ChatPage> {
     );
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
-      print(jsonResponse);
+      // print(jsonResponse);
       final messages =
           jsonResponse.map((message) => Inbox.fromJson(message)).toList();
       return messages;
@@ -89,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
             FutureBuilder(
-              future: _geChats(),
+              future: _getChats(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -103,7 +104,7 @@ class _ChatPageState extends State<ChatPage> {
                         messageText: snapshot.data![index].lastMessage,
                         imageUrl: snapshot.data![index].imageURL,
                         time: snapshot.data![index].date,
-                        room_id: snapshot.data![index].roomId,
+                        roomId: snapshot.data![index].roomId,
                         isMessageRead:
                             (index == 0 || index == 3) ? true : false,
                       );
@@ -128,7 +129,7 @@ class ConversationList extends StatefulWidget {
   String imageUrl;
   String time;
   bool isMessageRead;
-  int room_id;
+  int roomId;
 
   ConversationList({
     super.key,
@@ -137,7 +138,7 @@ class ConversationList extends StatefulWidget {
     required this.imageUrl,
     required this.time,
     required this.isMessageRead,
-    required this.room_id,
+    required this.roomId,
   });
 
   @override
@@ -153,7 +154,7 @@ class _ConversationListState extends State<ConversationList> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ChatDetailPage(
             username: widget.name,
-            roomId: widget.room_id,
+            roomId: widget.roomId,
           );
         }));
       },
@@ -217,20 +218,6 @@ class _ConversationListState extends State<ConversationList> {
   }
 }
 
-/// Class to present message entity
-class ChatMessage {
-  String messageContent;
-  String messageType;
-  ChatMessage({required this.messageContent, required this.messageType});
-
-  factory ChatMessage.fromJson(Map<dynamic, dynamic> json) {
-    return ChatMessage(
-      messageContent: json["messageContent"],
-      messageType: json["messageType"],
-    );
-  }
-}
-
 class ChatDetailPage extends StatefulWidget {
   String username;
   int roomId;
@@ -266,6 +253,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     _scrollController = ScrollController();
     socket = IO.io('http://127.0.0.1:8080', <String, dynamic>{
       'transports': ['websocket'],
+      'force new connection': true,
     });
     socket.onConnect((_) {
       print('Connected to Socket.IO server');
@@ -288,6 +276,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         duration: Duration(milliseconds: 300),
         curve: Curves.easeOut,
       );
+    });
+    socket.on('disconnect', (_) {
+      print('Disconnected from Socket.IO server');
     });
   }
 

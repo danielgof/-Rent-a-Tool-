@@ -29,8 +29,7 @@ class _AllOffersPageState extends State<OffersPrivatePage> {
     final response = await http.get(
       Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader:
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IkpMIiwiZXhwIjoxNzM3MzA2NTE4fQ.D7PYSvlImUFUuFs-nBfJobQrq7tg-mUQ9kiQj83pY5M',
+        HttpHeaders.authorizationHeader: Utils.TOKEN,
       },
     );
 

@@ -4,15 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:client/pages/private/settings_page.dart';
 import 'package:client/pages/private/user_details_page.dart';
-import 'package:client/pages/private/user_offers.dart';
+import 'package:client/pages/private/userOffers.dart';
 
 import '../../api/utils.dart';
 import '../public/mainPagePublic.dart';
 import 'all_offers_page.dart';
-import 'chat_page.dart';
+import 'chatPage.dart';
 import 'map_offers_private.dart';
 import 'offer_registration/offer_registration_description.dart';
 
+// ignore: must_be_immutable
 class PrivateMain extends StatefulWidget {
   int selectedIndex;
   bool isAuth;
@@ -23,9 +24,10 @@ class PrivateMain extends StatefulWidget {
   });
 
   @override
+  // ignore: no_logic_in_create_state
   State<PrivateMain> createState() => _PrivateMainScreenState(
-        selectedIndex: this.selectedIndex,
-        isAuth: this.isAuth,
+        selectedIndex: selectedIndex,
+        isAuth: isAuth,
       );
 }
 
@@ -44,12 +46,11 @@ class _PrivateMainScreenState extends State<PrivateMain> {
   }
 
   Future<String> fetchImageBytes() async {
-    Map<String, String> head = new Map<String, String>();
-    head['Authorization'] = Utils.TOKEN;
+    Map<String, String> head = <String, String>{};
+    head["Authorization"] = Utils.TOKEN;
     final response =
         await http.get(Uri.parse("$URL/api/v1/auth/avatar"), headers: head);
     if (response.statusCode == 200) {
-      // print(json.decode(response.body));
       return json.decode(response.body)["message"];
     } else {
       // return "Failed";
@@ -87,16 +88,10 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          // UserPage(),
-                          UserDetailsPage(),
+                      builder: (context) => const UserDetailsPage(),
                     ),
                   );
                 },
-                // child: CircleAvatar(
-                //   backgroundImage: MemoryImage(bytesImage),
-                //   // child: Image.asset("assets/placeholders/user.png"),
-                // ),
                 child: FutureBuilder<String>(
                   future: fetchImageBytes(),
                   builder:
@@ -117,7 +112,7 @@ class _PrivateMainScreenState extends State<PrivateMain> {
                         backgroundImage: MemoryImage(bytesImage),
                       );
                     } else {
-                      return Text('No image data');
+                      return const Text('No image data');
                     }
                   },
                 ),
