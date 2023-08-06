@@ -11,7 +11,7 @@ class Inbox(Base):
     room_id = Column(Integer, nullable=False)
     date = Column(Date, nullable=False)
     last_message = Column(String(256), nullable=False)
-    img = Column(String(256), nullable=False)
+    # img = Column(String(256), nullable=False)
 
 
 people_inbox_association = Table(

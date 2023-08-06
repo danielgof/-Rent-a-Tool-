@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:intl/intl.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -102,7 +104,6 @@ class _ChatPageState extends State<ChatPage> {
                       return ConversationList(
                         name: snapshot.data![index].opponent,
                         messageText: snapshot.data![index].lastMessage,
-                        imageUrl: snapshot.data![index].imageURL,
                         time: snapshot.data![index].date,
                         roomId: snapshot.data![index].roomId,
                         isMessageRead:
@@ -126,7 +127,6 @@ class _ChatPageState extends State<ChatPage> {
 class ConversationList extends StatefulWidget {
   String name;
   String messageText;
-  String imageUrl;
   String time;
   bool isMessageRead;
   int roomId;
@@ -135,7 +135,6 @@ class ConversationList extends StatefulWidget {
     super.key,
     required this.name,
     required this.messageText,
-    required this.imageUrl,
     required this.time,
     required this.isMessageRead,
     required this.roomId,
@@ -147,6 +146,20 @@ class ConversationList extends StatefulWidget {
 }
 
 class _ConversationListState extends State<ConversationList> {
+  // Method to get message for a chat
+  Future<String> _fetchAvatarBytes(String username) async {
+    Map<String, String> head = <String, String>{};
+    head["Authorization"] = Utils.TOKEN;
+    final response =
+        await http.get(Uri.parse("$URL/api/v1/auth/user_avtr/$username/"));
+    if (response.statusCode == 200) {
+      return json.decode(response.body)["message"];
+    } else {
+      // return "Failed";
+      throw Exception('Failed to load image');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -166,10 +179,29 @@ class _ConversationListState extends State<ConversationList> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"),
-                    maxRadius: 30,
+                  FutureBuilder<String>(
+                    future: _fetchAvatarBytes(widget.name),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircleAvatar(
+                          child: Image.asset("assets/placeholders/user.png"),
+                        );
+                      } else if (snapshot.hasError) {
+                        return CircleAvatar(
+                          child: Image.asset("assets/placeholders/user.png"),
+                        );
+                      } else if (snapshot.hasData) {
+                        Uint8List bytesImage =
+                            const Base64Decoder().convert(snapshot.data!);
+                        // print(bytesImage);
+                        return CircleAvatar(
+                          backgroundImage: MemoryImage(bytesImage),
+                        );
+                      } else {
+                        return const Text('No image data');
+                      }
+                    },
                   ),
                   const SizedBox(
                     width: 16,
@@ -204,7 +236,8 @@ class _ConversationListState extends State<ConversationList> {
               ),
             ),
             Text(
-              widget.time,
+              Jiffy.parse(widget.time, pattern: "EEE, dd MMM yyyy ss:mm:hh")
+                  .format(pattern: "dd/MM/yyyy"),
               style: TextStyle(
                   fontSize: 12,
                   fontWeight: widget.isMessageRead
@@ -246,6 +279,19 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   late IO.Socket socket;
   ScrollController _scrollController = ScrollController();
   TextEditingController myController = TextEditingController();
+
+  // Method to get message for a chat
+  Future<String> fetchAvatarBytes(String username) async {
+    Map<String, String> head = <String, String>{};
+    head["Authorization"] = Utils.TOKEN;
+    final response =
+        await http.get(Uri.parse("$URL/api/v1/auth/user_avtr/$username/"));
+    if (response.statusCode == 200) {
+      return json.decode(response.body)["message"];
+    } else {
+      throw Exception('Failed to load image');
+    }
+  }
 
   @override
   void initState() {
@@ -311,10 +357,29 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 const SizedBox(
                   width: 2,
                 ),
-                const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"),
-                  maxRadius: 20,
+                FutureBuilder<String>(
+                  future: fetchAvatarBytes(widget.username),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircleAvatar(
+                        child: Image.asset("assets/placeholders/user.png"),
+                      );
+                    } else if (snapshot.hasError) {
+                      return CircleAvatar(
+                        child: Image.asset("assets/placeholders/user.png"),
+                      );
+                    } else if (snapshot.hasData) {
+                      Uint8List bytesImage =
+                          const Base64Decoder().convert(snapshot.data!);
+                      // print(bytesImage);
+                      return CircleAvatar(
+                        backgroundImage: MemoryImage(bytesImage),
+                      );
+                    } else {
+                      return const Text('No image data');
+                    }
+                  },
                 ),
                 const SizedBox(
                   width: 12,
@@ -358,7 +423,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
             padding: const EdgeInsets.only(top: 10, bottom: 120),
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
-              if (_messages.length == 0) {
+              if (_messages.isEmpty) {
                 return const CircularProgressIndicator();
               } else {
                 return Container(
@@ -434,7 +499,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                             JWT.decode(Utils.TOKEN).payload["username"],
                         "date": DateFormat("dd/MM/yyyy").format(DateTime.now()),
                         "message": myController.value.text,
-                        "room_id": 2,
+                        "room_id": widget.roomId,
                       };
                       _sendMessage(data);
                       setState(() {
@@ -460,9 +525,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 
   @override
   void dispose() {
-    print("Dispose");
+    // print("Dispose");
     _scrollController.dispose();
-    super.dispose();
     socket.disconnect();
+    super.dispose();
   }
 }

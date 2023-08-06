@@ -6,14 +6,12 @@ class Inbox {
   int roomId;
   String date;
   String lastMessage;
-  String imageURL;
   Inbox({
     required this.id,
     required this.opponent,
     required this.roomId,
     required this.date,
     required this.lastMessage,
-    required this.imageURL,
   });
 
   factory Inbox.fromJson(Map<dynamic, dynamic> json) {
@@ -23,7 +21,6 @@ class Inbox {
       roomId: json['room_id'],
       date: json['date'],
       lastMessage: json['last_message'],
-      imageURL: json['img'],
     );
   }
 }

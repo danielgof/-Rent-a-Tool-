@@ -15,6 +15,7 @@ class AllOffersPublicPage extends StatefulWidget {
   const AllOffersPublicPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AllOffersPageState createState() => _AllOffersPageState();
 }
 
@@ -59,7 +60,7 @@ class _AllOffersPageState extends State<AllOffersPublicPage> {
       // Convert response to a {@code List} of object 'Offer'
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load posts');
+      throw Exception("Failed to load posts");
     }
   }
 
