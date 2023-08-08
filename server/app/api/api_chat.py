@@ -40,10 +40,10 @@ def get_inbox_by_query():
                     "opponent": chat.opponent,
                     "room_id": chat.room_id,
                     "date": chat.date,
-                    "last_msg": chat.last_message,
+                    "last_message": chat.last_message,
                 }
             )
-        return {"message": result}, 200
+        return {"status": "success", "data": result}, 200
     except Exception as e:
         return {"message": f"error {e}"}, 500
 

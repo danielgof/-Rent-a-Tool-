@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../api/utils.dart';
 import '../../models/credentials.dart';
 // import '../../api/ApiAuth.dart';
-import '../private/main_page_private.dart';
+import '../private/mainPagePrivate.dart';
 // import 'mainPagePublic.dart';
 import 'registrationPage.dart';
 import 'unauthorizedPage.dart';

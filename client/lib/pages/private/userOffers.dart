@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 import '../../models/offer.dart';
 import '../../api/utils.dart';
-import 'main_page_private.dart';
+import 'mainPagePrivate.dart';
 
 class UserOffersPage extends StatefulWidget {
   const UserOffersPage({Key? key}) : super(key: key);

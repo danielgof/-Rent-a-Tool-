@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 
 import '../../api/utils.dart';
-import 'main_page_private.dart';
+import 'mainPagePrivate.dart';
 
 class UserDetailsPage extends StatefulWidget {
   const UserDetailsPage({

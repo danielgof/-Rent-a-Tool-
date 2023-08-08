@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'main_page_private.dart';
+import 'mainPagePrivate.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({

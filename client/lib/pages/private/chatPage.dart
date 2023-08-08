@@ -17,21 +17,19 @@ class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _ChatPageState createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
-  // ignore: unused_field
   late Future<List<Inbox>> _futureListChats;
 
   @override
   void initState() {
     super.initState();
-    _futureListChats = _getChats();
+    _futureListChats = getChats();
   }
 
-  Future<List<Inbox>> _getChats() async {
+  Future<List<Inbox>> getChats() async {
     final response = await http.get(
       Uri.parse("$URL/api/v1/chat/inbox"),
       headers: {
@@ -57,7 +55,8 @@ class _ChatPageState extends State<ChatPage> {
     var bodyData = json.encode(credits);
     final response = await http.post(Uri.parse(url), body: bodyData);
     if (response.statusCode == 200) {
-      final List<dynamic> jsonList = json.decode(response.body)["message"];
+      final List<dynamic> jsonList = json.decode(response.body)["data"];
+      // print(json.decode(response.body)["data"]);
       return jsonList.map((json) => Inbox.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load offers');
@@ -79,18 +78,20 @@ class _ChatPageState extends State<ChatPage> {
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
                 child: TextField(
                   cursorColor: Colors.blue,
+                  controller: searchController,
                   onChanged: (String val) async {
                     setState(() {
-                      _futureListChats =
-                          queryInbox(searchController.value.text);
+                      print(searchController.value.text);
+                      _futureListChats = new Future<List<Inbox>>.value([]);
+                      // queryInbox(searchController.value.text);
                       if (searchController.value.text == "") {
-                        _futureListChats = _getChats();
+                        _futureListChats = getChats();
                       }
                     });
                   },
@@ -106,7 +107,7 @@ class _ChatPageState extends State<ChatPage> {
                       icon: const Icon(Icons.clear),
                       onPressed: () => setState(() {
                         searchController.clear();
-                        _futureListChats = _getChats();
+                        _futureListChats = getChats();
                       }),
                     ),
                     filled: true,
@@ -125,7 +126,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
             FutureBuilder(
-              future: _getChats(),
+              future: getChats(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
