@@ -1,10 +1,9 @@
 from sqlalchemy import Column, ForeignKey, String, Integer, Date, Table
 from base import *
 
-"""Offer table"""
-
 
 class Message(Base):
+    """Message table"""
     __tablename__ = "message"
     id = Column(Integer, primary_key=True)
     room_id = Column(Integer, nullable=False)

@@ -17,7 +17,6 @@ def user_inbox(user_info: str) -> list:
                 "room_id": chat.room_id,
                 "date": chat.date,
                 "last_message": messages[-1]["messageContent"],
-                "username": chat.username,
             }
         )
     return responce

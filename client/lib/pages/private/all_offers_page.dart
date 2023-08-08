@@ -32,9 +32,6 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     String url = "$URL/api/v1/offer/all_all";
     final response = await http.get(
       Uri.parse(url),
-      // headers: {
-      //   HttpHeaders.authorizationHeader: Utils.TOKEN,
-      // },
     );
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = json.decode(response.body)["data"];
@@ -52,9 +49,7 @@ class _AllOffersPageState extends State<AllOffersPrivatePage> {
     var bodyData = json.encode(credits);
     final response = await http.post(Uri.parse(url), body: bodyData);
     if (response.statusCode == 200) {
-      // print(json.decode(response.body)["data"]);
       final List<dynamic> jsonList = json.decode(response.body)["data"];
-      // print(jsonList.map((json) => Offer.fromJson(json)).toList());
       return jsonList.map((json) => Offer.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load offers');
@@ -345,70 +340,6 @@ class PostDetailsPagePrivate extends StatelessWidget {
                                 Jiffy.parse(post.dateFinish,
                                         pattern: "EEE, dd MMM yyyy ss:mm:hh")
                                     .format(pattern: "dd/MM/yyyy"),
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  backgroundColor:
-                                      Color.fromARGB(25, 23, 2, 12),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          margin:
-                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Owner Name: ",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontStyle: FontStyle.italic,
-                                  shadows: <Shadow>[
-                                    Shadow(
-                                      offset: Offset(1.0, 2.0),
-                                      blurRadius: 3.0,
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Text(
-                                post.ownerName,
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  backgroundColor:
-                                      Color.fromARGB(25, 23, 2, 12),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          margin:
-                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Phone Number: ",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontStyle: FontStyle.italic,
-                                  shadows: <Shadow>[
-                                    Shadow(
-                                      offset: Offset(1.0, 2.0),
-                                      blurRadius: 3.0,
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Text(
-                                post.phoneNumber,
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                   backgroundColor:

@@ -26,6 +26,28 @@ def get_all_chats():
         return {"message": f"error {e}"}, 500
 
 
+@chat.route("/search", methods=["POST"])
+def get_inbox_by_query():
+    try:
+        result = list()
+        query: str = request.get_json(force=True)["query"]
+        inbox: Inbox = session.query(Inbox).filter(
+            Inbox.opponent.like(f"%{query}%")).all()
+        for chat in inbox:
+            result.append(
+                {
+                    "id": chat.id,
+                    "opponent": chat.opponent,
+                    "room_id": chat.room_id,
+                    "date": chat.date,
+                    "last_msg": chat.last_message,
+                }
+            )
+        return {"message": result}, 200
+    except Exception as e:
+        return {"message": f"error {e}"}, 500
+
+
 @chat.route("/room/<room_id>/", methods=["GET"])
 def get_chat_messages(room_id) -> dict:
     """Endpoint to get all messages for particular room"""

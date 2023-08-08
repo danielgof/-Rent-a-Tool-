@@ -157,7 +157,6 @@ inbox1 = Inbox(
     room_id=1,
     date=date(2023, 2, 14),
     last_message="how are you?",
-    img="https://randomuser.me/api/portraits/men/5.jpg",
 )
 
 inbox2 = Inbox(
@@ -165,7 +164,6 @@ inbox2 = Inbox(
     room_id=2,
     date=date(2263, 2, 14),
     last_message="meet you at shuttle bay",
-    img="https://randomuser.me/api/portraits/men/4.jpg",
 )
 
 inbox3 = Inbox(
@@ -173,7 +171,6 @@ inbox3 = Inbox(
     room_id=2,
     date=date(2263, 2, 14),
     last_message="meet you at shuttle bay",
-    img="https://randomuser.me/api/portraits/men/4.jpg",
 )
 
 messages = [

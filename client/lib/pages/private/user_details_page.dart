@@ -22,10 +22,10 @@ class UserDetailsPage extends StatefulWidget {
 
 class _UserDetailsPageState extends State<UserDetailsPage> {
   static var token = Utils.TOKEN;
-  String username = JWT.decode(token).payload["phone"];
-  String email = JWT.decode(token).payload["phone"];
+  String username = JWT.decode(token).payload["username"];
+  String email = JWT.decode(token).payload["email"];
   String phone = JWT.decode(token).payload["phone"];
-  String pass = JWT.decode(token).payload["phone"];
+  String pass = JWT.decode(token).payload["pass"];
 
   @override
   void initState() {

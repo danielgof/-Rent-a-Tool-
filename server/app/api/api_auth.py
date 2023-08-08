@@ -124,3 +124,26 @@ def get_user_avatar(uname) -> dict:
         return {"message": user.img}, 200
     except Exception as e:
         return {"message": f"error {e}"}, 500
+
+
+@auth.route("/users", methods=["POST"])
+def find_users_by_query() -> dict:
+    """Returns {@code list} of uses from database whose username {@code %query%}"""
+    try:
+        result = list()
+        query: str = request.get_json(force=True)["query"]
+        users: User = session.query(User).filter(
+            User.username.like(f"%{query}%")).all()
+        for user in users:
+            result.append(
+                {
+                    "id": user.id,
+                    "username": user.username,
+                    "phone": user.phone,
+                    "email": user.email,
+                    "img": user.img,
+                }
+            )
+        return {"message": result}, 200
+    except Exception as e:
+        return {"message": f"error {e}"}, 500

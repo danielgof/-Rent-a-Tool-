@@ -49,6 +49,23 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
+  Future<List<Inbox>> queryInbox(query) async {
+    String url = "$URL/api/v1/chat/search";
+    Map credits = {
+      "query": query,
+    };
+    var bodyData = json.encode(credits);
+    final response = await http.post(Uri.parse(url), body: bodyData);
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonList = json.decode(response.body)["message"];
+      return jsonList.map((json) => Inbox.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load offers');
+    }
+  }
+
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +85,15 @@ class _ChatPageState extends State<ChatPage> {
                 padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
                 child: TextField(
                   cursorColor: Colors.blue,
+                  onChanged: (String val) async {
+                    setState(() {
+                      _futureListChats =
+                          queryInbox(searchController.value.text);
+                      if (searchController.value.text == "") {
+                        _futureListChats = _getChats();
+                      }
+                    });
+                  },
                   decoration: InputDecoration(
                     hintText: "Search...",
                     hintStyle: TextStyle(color: Colors.grey.shade600),
@@ -75,6 +101,13 @@ class _ChatPageState extends State<ChatPage> {
                       Icons.search,
                       color: Colors.grey.shade600,
                       size: 20,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: () => setState(() {
+                        searchController.clear();
+                        _futureListChats = _getChats();
+                      }),
                     ),
                     filled: true,
                     fillColor: Colors.grey.shade100,
@@ -303,7 +336,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     });
     socket.onConnect((_) {
       print('Connected to Socket.IO server');
-      socket.emit('join', {'room': 2, 'username': 'test'});
+      socket.emit('join',
+          {'room': 2, 'username': JWT.decode(Utils.TOKEN).payload["username"]});
     });
     socket.on('join', (data) {
       setState(() {
@@ -312,7 +346,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       });
     });
     socket.on('message', (data) {
-      String msgType = (data["user_name"] == "test") ? "sender" : "receiver";
+      String msgType =
+          (data["user_name"] == JWT.decode(Utils.TOKEN).payload["username"])
+              ? "sender"
+              : "receiver";
       setState(() {
         _messages.add(
             ChatMessage(messageContent: data["message"], messageType: msgType));

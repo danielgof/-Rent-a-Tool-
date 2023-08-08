@@ -1,10 +1,10 @@
 from sqlalchemy import Column, ForeignKey, String, Integer, Date, Table, TEXT
 from base import *
 
-"""Offer table"""
 
 
 class Offer(Base):
+    """Offer table"""
     __tablename__ = "offer"
     id = Column(Integer, primary_key=True)
     tool_name = Column(String(256), nullable=False)
