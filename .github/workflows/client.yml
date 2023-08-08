@@ -33,7 +33,7 @@ jobs:
     #   - uses: subosito/flutter-action@v2
     #     with:
     #       flutter-version: $
-      - run: echo ls 
+      - run: ls 
       - name: chose folder
         
         working-directory: client
