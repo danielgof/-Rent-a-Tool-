@@ -34,7 +34,7 @@ jobs:
     #     with:
     #       flutter-version: $
       - name: chose folder
-        working-directory: ./client
+        working-directory: client
         run: flutter pub get
       - run: flutter analyze
       - run: flutter test
