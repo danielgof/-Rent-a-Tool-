@@ -5,11 +5,11 @@ name: client
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [master]
+    branches: main
     paths-ignore:
       - '**/README.md'
   pull_request:
-    branches: '*'
+    branches: main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -30,9 +30,9 @@ jobs:
     #   - uses: actions/setup-java@v1
     #     with:
     #       java-version: $
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: $
+    #   - uses: subosito/flutter-action@v2
+    #     with:
+    #       flutter-version: $
       - name: chose folder
         working-directory: ./client
         run: flutter pub get
