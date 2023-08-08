@@ -33,7 +33,9 @@ jobs:
     #   - uses: subosito/flutter-action@v2
     #     with:
     #       flutter-version: $
+      - run: echo ls 
       - name: chose folder
+        
         working-directory: client
         run: flutter pub get
       - run: flutter analyze
