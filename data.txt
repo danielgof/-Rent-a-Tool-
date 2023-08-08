@@ -1,3 +1,0 @@
-gevent
-gevent-websocket
-run process in background - "&" at the end
