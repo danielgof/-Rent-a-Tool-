@@ -8,7 +8,7 @@ import 'package:client/api/ApiOffer.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:http/http.dart' as http;
-import '../mainPagePrivate.dart';
+import '../main_page.dart';
 import '../../../api/utils.dart';
 import 'offer_registration_description.dart';
 

@@ -4,13 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:client/pages/private/settings_page.dart';
 import 'package:client/pages/private/user_details_page.dart';
-import 'package:client/pages/private/userOffers.dart';
+import 'package:client/pages/private/user_offers.dart';
 
 import '../../api/utils.dart';
 import '../public/mainPagePublic.dart';
-import 'allOffersPage.dart';
+import 'all_offers_page.dart';
 import 'chatPage.dart';
-import 'map_offers_private.dart';
+import 'map_offers.dart';
 import 'offer_registration/offer_registration_description.dart';
 
 // ignore: must_be_immutable
